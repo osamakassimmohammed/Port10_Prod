@@ -1,0 +1,43 @@
+[10-Mar-2020 07:12:04 UTC] PHP Warning:  Unterminated comment starting line 51 in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/application/config/constants.php on line 51
+[31-Mar-2020 12:01:06 UTC] PHP Notice:  Undefined variable: redirectUrl in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 44
+[31-Mar-2020 12:01:09 UTC] PHP Notice:  Undefined variable: redirectUrl in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 44
+[31-Mar-2020 12:01:19 UTC] PHP Notice:  Undefined variable: redirectUrl in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 44
+[31-Mar-2020 12:01:19 UTC] PHP Notice:  Undefined variable: result in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 64
+[31-Mar-2020 12:01:20 UTC] PHP Notice:  Undefined variable: redirectUrl in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 44
+[31-Mar-2020 12:01:20 UTC] PHP Notice:  Undefined variable: result in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 64
+[31-Mar-2020 12:01:37 UTC] PHP Notice:  Undefined variable: redirectUrl in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 44
+[31-Mar-2020 12:01:37 UTC] PHP Notice:  Undefined variable: result in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 64
+[31-Mar-2020 12:07:19 UTC] PHP Parse error:  syntax error, unexpected '$arrData' (T_VARIABLE) in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 34
+[31-Mar-2020 12:07:20 UTC] PHP Parse error:  syntax error, unexpected '$arrData' (T_VARIABLE) in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 34
+[31-Mar-2020 12:07:22 UTC] PHP Parse error:  syntax error, unexpected '$arrData' (T_VARIABLE) in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 34
+[02-Apr-2020 06:18:23 UTC] PHP Warning:  file_get_contents(https://sbpaymentservices.payfort.com/FortAPI/paymentApi): failed to open stream: HTTP request failed! HTTP/1.1 405 Method Not Allowed
+ in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/girish.php on line 42
+[03-Apr-2020 19:14:31 Asia/Calcutta] PHP Fatal error:  require_once(): Failed opening required 'PayfortIntegration.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/application/views/payment/payment.php on line 21
+[22-Apr-2020 20:32:32 Asia/Calcutta] PHP Fatal error:  require_once(): Failed opening required 'HTTP/Request2.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/application/controllers/Home.php on line 1959
+[03-May-2020 08:37:48 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 10502144 bytes) in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/assets/grocery_crud/themes/datatables/views/list.php on line 18
+[08-May-2020 11:16:16 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:17 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:26 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:36 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:37 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:42 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:45 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:47 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:56 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:16:58 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:17:01 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:17:18 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[08-May-2020 11:17:24 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/system/core/CodeIgniter.php on line 40
+[10-May-2020 10:55:47 UTC] PHP Fatal error:  Cannot redeclare Api_cron::is_stock_update1() in /home/tjidumgofy2v/public_html/brandsboutique.persausive.in/application/controllers/Api_cron.php on line 4145
+[07-Jun-2020 17:16:10 UTC] PHP Fatal error:  Maximum execution time of 3600 seconds exceeded in /home/engfaris/public_html/system/libraries/Session/drivers/Session_files_driver.php on line 210
+[07-Jun-2020 18:16:49 UTC] PHP Fatal error:  Maximum execution time of 3600 seconds exceeded in /home/engfaris/public_html/system/libraries/Session/drivers/Session_files_driver.php on line 210
+[07-Jun-2020 19:17:39 UTC] PHP Fatal error:  Maximum execution time of 3600 seconds exceeded in /home/engfaris/public_html/system/libraries/Session/drivers/Session_files_driver.php on line 210
+[04-Mar-2021 10:03:58 UTC] PHP Fatal error:  Illegal offset type in /home/tjidumgofy2v/public_html/port10.persausive.in/application/controllers/Ajax.php on line 834
+[04-Mar-2021 10:04:25 UTC] PHP Fatal error:  Illegal offset type in /home/tjidumgofy2v/public_html/port10.persausive.in/application/controllers/Ajax.php on line 836
+[04-Mar-2021 10:04:27 UTC] PHP Fatal error:  Illegal offset type in /home/tjidumgofy2v/public_html/port10.persausive.in/application/controllers/Ajax.php on line 836
+[04-Mar-2021 10:04:28 UTC] PHP Fatal error:  Illegal offset type in /home/tjidumgofy2v/public_html/port10.persausive.in/application/controllers/Ajax.php on line 836
+[04-Mar-2021 10:05:06 UTC] PHP Fatal error:  Illegal offset type in /home/tjidumgofy2v/public_html/port10.persausive.in/application/controllers/Ajax.php on line 836
+[04-May-2022 07:56:21 UTC] PHP Fatal error:  Trait 'setasign\Fpdi\FpdiTrait' not found in /home/tjidumgofy2v/public_html/port10.sa/application/libraries/vendor/mpdf/mpdf/src/FpdiTrait.php on line 25
+[04-May-2022 13:27:53 Asia/Kolkata] PHP Fatal error:  Trait 'setasign\Fpdi\FpdiTrait' not found in /home/tjidumgofy2v/public_html/port10.sa/application/libraries/vendor/mpdf/mpdf/src/FpdiTrait.php on line 25
+[04-May-2022 08:03:22 UTC] PHP Fatal error:  Trait 'setasign\Fpdi\FpdiTrait' not found in /home/tjidumgofy2v/public_html/port10.sa/application/libraries/vendor/mpdf/mpdf/src/FpdiTrait.php on line 25
+[04-May-2022 08:03:25 UTC] PHP Fatal error:  Trait 'setasign\Fpdi\FpdiTrait' not found in /home/tjidumgofy2v/public_html/port10.sa/application/libraries/vendor/mpdf/mpdf/src/FpdiTrait.php on line 25
