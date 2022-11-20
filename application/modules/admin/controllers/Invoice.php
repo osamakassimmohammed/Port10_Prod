@@ -17,7 +17,7 @@ class Invoice extends Admin_Controller {
 	public function pdf($order_id)
 	{	
 	   $this->load->library('pdf_create');
-	    $response = $this->pdf_create->get_print_pdf_list($order_id);	
+	   $response = $this->pdf_create->get_print_pdf_list($order_id);	
         
 	}
 

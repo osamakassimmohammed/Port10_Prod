@@ -70,7 +70,7 @@
             <td><?php echo $currency; echo " "; echo $value['net_total']-$value['coupon_price']; ?></td>           
             <td><?php echo $value['payment_status']; ?></td>           
             <td><?php echo $value['payment_mode']; ?></td>           
-            <td><?php echo $value['ori_order_status']; ?></td>
+            <td><?php echo $value['order_status']; ?></td>
                      
            <td style="width: 10%">
                 <a href="orders/view/<?php echo @$value['order_master_id'] ?>"   class="width100 btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button"><i class="material-icons">remove_red_eye</i></a>
@@ -250,7 +250,7 @@
            trHTML+='<td>'+v.currency+' '+total+'</td>';
            trHTML+='<td>'+v.payment_status+'</td>';
            trHTML+='<td>'+v.payment_mode+'</td>';           
-           trHTML+='<td>'+v.ori_order_status+'</td>';                       
+           trHTML+='<td>'+v.order_status+'</td>';                       
        
           trHTML+='<td style="width:10%"><a href="<?php echo base_url();?>admin/orders/view/'+v.order_master_id+'" class="width100 btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button"><i class="material-icons">remove_red_eye</i></a>';
 

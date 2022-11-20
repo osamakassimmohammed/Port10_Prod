@@ -28,11 +28,11 @@ class Dashbord extends Admin_Controller {
 			$count_user = $this->custom_model->get_data_array("SELECT COUNT(id) as count_user FROM admin_users WHERE `id`!='1'");
 
 			$product_count = $this->custom_model->get_data_array("SELECT COUNT(id) as product_count FROM product WHERE `product_delete`='0'");
-
-			
-
+			// var_dump($count_customer);
 			// $profit_total = $this->custom_model->get_data_array("SELECT SUM(net_total) as total FROM order_master WHERE order_status!='Cancelled'   ");
 			$profit_total = $this->custom_model->get_data_array("SELECT order_master_id,net_total,coupon_price  FROM order_master WHERE payment_status='Paid' AND is_show='1' order by order_master_id desc ");
+
+			$total_sale = $this->custom_model->get_data_array("SELECT order_master_id,sum(net_total-coupon_price) as sale  FROM order_master WHERE payment_status='Paid' AND is_show='1' AND order_status != 'Canceled'");
 			// echo "<pre>";
 			// print_r($profit_total);
 			// die;
@@ -238,21 +238,25 @@ class Dashbord extends Admin_Controller {
 			$this_month_buyer = $this->custom_model->get_data_array("SELECT COUNT(id) as buyer_count FROM admin_users WHERE type='buyer' AND `created_on` BETWEEN '$first_day_this_month' AND '$last_day_this_month' ");
 
 			$this_month_newsletter = $this->custom_model->get_data_array("SELECT COUNT(id) as newsletter_count FROM newsletter WHERE `created_date` BETWEEN '$first_day_this_month2' AND '$last_day_this_month2' ");
-
+			$this_count_customer = $this->custom_model->get_data_array("SELECT COUNT(id) as count_customer FROM admin_users WHERE type='buyer' AND active='1'");
 			// echo "<pre>";
 			// print_r($this_month_suppler);
-			// print_r($this_month_buyer);
+			// print_r($this_month_buyer);	
 			// print_r($this_month_newsletter);
 			// die;
-			
+			// var_dump = 
+			$this->mViewData['month_suppler_count'] = $this_month_suppler[0]['suppler_count'];
+			$this->mViewData['month_buyer_count'] = $this_month_buyer[0]['buyer_count'];
 			$this->mViewData['suppler_count'] = $this_month_suppler[0]['suppler_count'];
 			$this->mViewData['buyer_count'] = $this_month_buyer[0]['buyer_count'];
 			$this->mViewData['newsletter_count'] = $this_month_newsletter[0]['newsletter_count'];
 			
 			$this->mViewData['count_user'] = $count_user[0]['count_user'];
+			$this->mViewData['count_customer'] = $this_count_customer[0]['count_customer'];
 			$this->mViewData['product_count'] = $product_count[0]['product_count'];
 			
-			$this->mViewData['profit_total'] = $profit_total;								
+			$this->mViewData['profit_total'] = $profit_total;	
+			$this->mViewData['total_sale'] = $total_sale;								
 			$this->mViewData['Cancelled_order'] = $Cancelled_order;			
 					
 				

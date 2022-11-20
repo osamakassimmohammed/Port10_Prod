@@ -588,6 +588,7 @@ setInputFilter(document.getElementById("in_price"), function(value) {
     $(document).on("keyup","#in_price",function(){      
     // var serach=$(this).val(); 
     var in_price = parseFloat($("#in_price").val());
+    var in_qty = parseFloat($("#in_qty").val());
     // alert(in_price);
     // if(isNaN(in_price))
     // {
@@ -601,9 +602,10 @@ setInputFilter(document.getElementById("in_price"), function(value) {
     var vat=<?php echo $tax_data[0]['vat']; ?>;
     var vat_calulate=(in_price*vat)/100;
     var vat_commission=(in_price*commission)/100;
+    var net_total = (in_price*in_qty);
 
     in_price=numberWithCommas(in_price);
-    $("#in_net_total").val(in_price);
+    $("#in_net_total").val(net_total);
     // $("#in_vat").val(vat_calulate);
     // vat_commission=numberWithCommas(vat_commission);
     // $("#in_port_fees").val(vat_commission);

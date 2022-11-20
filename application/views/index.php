@@ -170,10 +170,10 @@
                                     <span class="wish_l wishlist<?php echo $product_value['id']; ?>">
                                       <?php if($product_value['wish_list']==1){  ?>
                                       <a  href="javascript:void(0)" onclick="remove_cart(<?php echo $product_value['id']; ?>)" ><i
-                                               class="ti-heart" aria-hidden="true"></i></a> 
+                                               class="ti-heart-broken" aria-hidden="true"></i></a> 
                                       <?php }else{ ?>
                                       <a href="javascript:void(0)" onclick="move_to_wish_list(<?php echo $product_value['id']; ?>)" >
-                                        <i class="ti-heart" aria-hidden="true"></i></a> 
+                                        <i class="ti-heart-broken" aria-hidden="true"></i></a> 
                                       <?php } ?>  
                                      </span>
 

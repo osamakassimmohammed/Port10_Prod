@@ -143,12 +143,12 @@
 
 
                 <div class="col-xs-3">
-                  <a href="users">
+                  <a href="users/active_customers">
                     <div class="card two">
                         <i class="fa fa-users"></i>
                         <div class="card-content">
                             <p class="title">Total Active Customers</p>
-                            <p class="count"><?php echo @$count_user; ?></p>
+                            <p class="count"><?php echo $count_customer; ?></p>
                         </div>
                     </div>
                     </a>
@@ -168,7 +168,7 @@
                 
                 <div class="col-xs-3">
                   <?php if(!empty($profit_total)){ ?>
-                    <a href="orders/view/<?php echo $profit_total[0]['order_master_id']; ?>">
+                    <a href="orders/paid_order">
                   <?php }else{ ?>
                     <a href="javascript:void(0)">
                   <?php } ?>
@@ -176,14 +176,14 @@
                       <i class="fa fa-building"></i>
                       <div class="card-content">
                          <p class="title">Total Sale</p>
-                         <p class="count"><?php echo @$profit_total[0]['net_total']-@$profit_total[0]['coupon_price']; ?></p>
+                         <p class="count"><?php echo $total_sale[0]['sale'] ?></p>
                       </div>
                    </div>
                   </a> 
-                </div><!-- col-xs-2 -->
+                </div><!-- col-->
 
                  <div class="col-xs-3">
-                  <a href="<?php echo base_url('admin/dashbord/all_topsold'); ?>">
+                  <a href="dashbord/all_topsold">
                     <div class="card four">
                       <i class="fa fa-money"></i>
                       <div class="card-content">
@@ -236,7 +236,7 @@
                 </div><!-- col-xs-2 -->
 
                 <div class="col-xs-3">
-                <a href="<?php echo base_url('admin/product/list1'); ?>">
+                <a href="product/list1">
                   <div class="card four">
                     <i class="fa fa-money"></i>
                     <div class="card-content">
@@ -253,24 +253,24 @@
             <div class="row card_main">                                   
                 
                 <div class="col-xs-3">
-                  <a href="javascript:void(0)">
+                  <a href="users">
                     <div class="card two">
                         <i class="fa fa-users"></i>
                         <div class="card-content">
                             <p class="title">Total New Buyers</p>
-                            <p class="count"><?php echo $buyer_count; ?></p>
+                            <p class="count"><?php echo $month_buyer_count;?></p>
                         </div>
                     </div>
                     </a>
                 </div><!-- col-xs-3 -->
 
                 <div class="col-xs-3">                 
-                    <a href="javascript:void(0)"> 
+                    <a href="users/supplier_list"> 
                     <div class="card one">                 
                       <i class="fa fa-shopping-cart"></i>
                       <div class="card-content">
                          <p class="title">Total New Supplier</p>
-                         <p class="count"><?php echo $suppler_count; ?></p>
+                         <p class="count"><?php echo $month_suppler_count; ?></p>
                       </div>
                    </div>
                  </a>

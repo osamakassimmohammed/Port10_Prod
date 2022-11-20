@@ -1608,6 +1608,51 @@ class Product extends Admin_Controller {
     	}
     }
 
+	public function top_sold_csv_download()
+	{
+		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'buyer', 'active' =>1),array(),"id","ASC");		
+		
+		$file_name='Active_Customer_info'.date("d-m-Y").'.csv';
+		
+
+		 if (!empty($data))
+		 {
+		 header('Content-Type:text/csv');
+		 header("Content-Disposition: attachment; filename=\"$file_name\";");
+		 // header("Content-Disposition: attachment; filename=" );
+
+		 
+		 $str = 'Id,Username,Mobile No,Email,Date';
+		 
+		 $fp = fopen('php://output', 'wb');
+
+
+		 $i = 0;
+		 $header = explode(",", $str);
+		 fputcsv($fp, $header);
+
+		 foreach ($data as $key => $value)
+		 {
+		 	$username  =  @$value['first_name'].' , '.$value['last_name'];
+		 	$date=date('M-d-Y' ,strtotime($value['created_on']));
+		 $DATACSV[] = $value['id'];
+		 $DATACSV[] = $username;
+		 $DATACSV[] = $value['phone'];
+		 $DATACSV[] = $value['email'];
+		 $DATACSV[] = $date;
+		  
+			fputcsv($fp, $DATACSV);
+			$DATACSV = array();
+		 }
+		 }
+		 else
+		 {
+		 $lang['ALERT'] =" No data found";
+		 echo "<script>alert('" . $lang['ALERT'] . "')</script>";
+		 }		 
+		 die;
+	}
+
     public function get_subcategory_data()
 	{
 		$post_data = $this->input->post();			

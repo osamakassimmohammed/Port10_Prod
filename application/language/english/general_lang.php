@@ -275,7 +275,7 @@
 	$lang['Quotations'] = "Quotations";	
 	$lang['No'] = "No.";	
 	$lang['SKU'] = "SKU";	
-	$lang['Incoive_Statu'] = "Incoive Status";	
+	$lang['Incoive_Statu'] = "Invoice Status";	
 	$lang['No_record_found'] = "No record found";	
 	$lang['Ref_Number'] = "Ref Number";	
 	$lang['Supplier_Name'] = "Supplier Name";			
@@ -314,6 +314,7 @@
 	$lang['Please_select_enter_vendor_name'] = "Please select/enter vendor name";		
 	$lang['Please_select_purchase_cycle'] = "Please select purchase cycle";				
 	$lang['Please_enter_deadline_for_submission'] = "Please enter deadline for submission";
+	$lang['Please_enter_a_future_date'] = "Please enter a future date";
 	$lang['Please_select_product_No_SKU'] = "Please select product No./ SKU";			
 	$lang['Please_enter_quantity'] = "Please enter quantity";				
 	$lang['Please_enter_destination'] = "Please enter destination";				
@@ -615,6 +616,7 @@
 	$lang['aPlease_Select_Access_Permission2'] = "Please Select Valid Access Permission";	
 	$lang['aSub_supplier_List'] = "Sub Supplier List";	
 	$lang['aAdd_Sub_Supplier'] = "Add Sub Supplier";
+	$lang['Compare'] = "Compare";
 	$lang['Your_compare_product_is_empty'] = "Your compare product is empty";
 	$lang['Add_To_Compare'] = "Add To Compare";
 	$lang['Please_enter_product_id'] = "Please enter product id";

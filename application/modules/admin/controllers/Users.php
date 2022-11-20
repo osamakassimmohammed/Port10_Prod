@@ -206,6 +206,100 @@ class Users extends Admin_Controller {
 		$this->render('users/supplier_list');
 	}
 
+	public function active_customers()
+	{
+		$rowno=0;
+		$ajax='call';
+		$serach='';
+		// $users_data = $this->custom_model->my_where('admin_users','*',array('id!=' =>'1'));		
+
+		$this->load->library('pagination');  
+
+   		$post_data = $this->input->post();
+
+		if (!empty($post_data))
+		{
+			$rowno = $post_data['pagno'];
+			$ajax 	= $post_data['ajax'];
+			$serach = $post_data['serach'];
+		}		
+		 // Row per page
+    	$rowperpage = 25;
+    	$page_no=0;
+
+    	$query=" id!='1' AND type='buyer' AND active='1' ";
+   
+    	// Row position
+    	if($rowno != 0){
+    		$page_no=$rowno;
+      		$rowno = ($rowno-1) * $rowperpage;
+    	}
+    	if($ajax=='call')
+		{
+   			$users_data = $this->custom_model->get_data_array("SELECT id,first_name,created_on,last_name,phone,username,address,email FROM admin_users WHERE $query   Order BY id ASC limit $rowno,$rowperpage ");   			
+   			$users_count = $this->custom_model->get_data_array("SELECT id FROM admin_users WHERE $query  Order BY id ASC ");   			
+
+   		}else 
+   		{
+			if(empty($serach))
+			{
+				$users_data = $this->custom_model->get_data_array("SELECT id,first_name,created_on,last_name,phone,username,address,email FROM admin_users WHERE  $query  Order BY id ASC limit $rowno,$rowperpage ");   			
+   				$users_count = $this->custom_model->get_data_array("SELECT id  FROM admin_users WHERE $query  Order BY id ASC ");  
+			}
+			else {				
+				
+				$users_data = $this->custom_model->get_data_array("SELECT id,first_name,created_on,last_name,phone,username,address,email FROM admin_users WHERE (first_name LIKE '%$serach%' OR `created_on` LIKE '%$serach%' OR last_name LIKE '%$serach%' OR phone LIKE '%$serach%' OR username LIKE '%$serach%' OR address LIKE '%$serach%' OR email LIKE '%$serach%' OR subs_status LIKE '%$serach%' ) AND $query ORDER BY `id` ASC LIMIT $rowno,$rowperpage ");
+
+				$users_count = $this->custom_model->get_data_array("SELECT id FROM admin_users WHERE (first_name LIKE '%$serach%'  OR created_on LIKE '%$serach%' OR last_name LIKE '%$serach%' OR phone LIKE '%$serach%' OR username LIKE '%$serach%' OR address LIKE '%$serach%' OR email LIKE '%$serach%') AND  $query  ORDER BY `id` ASC ");			
+			}
+		}
+		if(!empty($users_data))
+		{
+			foreach ($users_data as $ud_key => $ud_val) 
+			{
+				$user_id=$ud_val['id'];
+				$users_data[$ud_key]['created_on']=date("Y/m/d", strtotime($ud_val['created_on']));
+				$order_count = $this->custom_model->get_data_array("SELECT COUNT(order_master_id) as order_count FROM order_master WHERE user_id='$user_id' ");
+				$users_data[$ud_key]['order_count']=$order_count[0]['order_count'];
+
+			}
+		}
+
+		$config['base_url'] = base_url().'admin/users/active_customers';
+	    $config['use_page_numbers'] = TRUE;
+	    $config['total_rows'] = count($users_count);
+	    $config['per_page'] = $rowperpage;   
+	    $config['page_query_string'] = FALSE;             
+	    $config['enable_query_strings'] = FALSE;             
+	    $config['reuse_query_string']  = FALSE;             
+	    $config['cur_page'] = $page_no;  
+	    
+	     // Initialize
+	    $this->pagination->initialize($config);
+	     // Initialize $data Array
+	    $data['pagination'] = $this->pagination->create_links();
+	    $data['result'] = $users_data;
+	    $data['row'] = $rowno;
+	    $data['total_rows'] = count($users_count);
+	    // $this->mViewData['pagination'] = $this->pagination->create_links();	
+	    // this for when page load	     				
+	    if($ajax =='call' && $rowno==0 && empty($post_data)){			    	
+	    	$this->mViewData['pagination'] = $this->pagination->create_links();		     				
+		}elseif($serach !='') {  // this for search button pagination
+			echo json_encode($data);
+ 			exit;    				 
+		}else { // this for pagination-
+ 			echo json_encode($data);
+ 			exit; 	
+		}
+		// $users_data = $this->custom_model->get_data_array("SELECT * FROM admin_users WHERE id!='1' ORDER BY id ASC ");	
+		// echo "<pre>";
+		// print_r($users_data);
+		// die;	
+		$this->mPageTitle = 'Active Customers' ;		
+		$this->mViewData['users_data'] = $users_data;
+		$this->render('users/active_customers');
+	}
 	public function supplier_detail($user_id,$flag='')
 	{
 
@@ -347,7 +441,6 @@ class Users extends Admin_Controller {
 
 	public function csv_dwonload()
 	{
-		
 		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'buyer'),array(),"id","ASC");		
 		
 		 // echo "<pre>";
@@ -395,6 +488,107 @@ class Users extends Admin_Controller {
 		 }		 
 		 die;
 	}
+
+	public function suppl_csv_dwonload()
+	{
+		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'suppler'),array(),"id","ASC");		
+		
+		 // echo "<pre>";
+		 // print_r($data);
+		 // die;
+		
+		
+		$file_name='Supplier_info'.date("d-m-Y").'.csv';
+		
+
+		 if (!empty($data))
+		 {
+		 header('Content-Type:text/csv');
+		 header("Content-Disposition: attachment; filename=\"$file_name\";");
+		 // header("Content-Disposition: attachment; filename=" );
+
+		 
+		 $str = 'Id,Username,Mobile No,Email,Date';
+		 
+		 $fp = fopen('php://output', 'wb');
+
+
+		 $i = 0;
+		 $header = explode(",", $str);
+		 fputcsv($fp, $header);
+
+		 foreach ($data as $key => $value)
+		 {
+		 	$username  =  @$value['first_name'].' , '.$value['last_name'];
+		 	$date=date('M-d-Y' ,strtotime($value['created_on']));
+		 $DATACSV[] = $value['id'];
+		 $DATACSV[] = $username;
+		 $DATACSV[] = $value['phone'];
+		 $DATACSV[] = $value['email'];
+		 $DATACSV[] = $date;
+		  
+			fputcsv($fp, $DATACSV);
+			$DATACSV = array();
+		 }
+		 }
+		 else
+		 {
+		 $lang['ALERT'] =" No data found";
+		 echo "<script>alert('" . $lang['ALERT'] . "')</script>";
+		 }		 
+		 die;
+	}
+
+	public function active_cus_csv_dwonload()
+	{
+		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'buyer', 'active' =>1),array(),"id","ASC");		
+		
+		 // echo "<pre>";
+		 // print_r($data);
+		 // die;
+		
+		
+		$file_name='Active_Customer_info'.date("d-m-Y").'.csv';
+		
+
+		 if (!empty($data))
+		 {
+		 header('Content-Type:text/csv');
+		 header("Content-Disposition: attachment; filename=\"$file_name\";");
+		 // header("Content-Disposition: attachment; filename=" );
+
+		 
+		 $str = 'Id,Username,Mobile No,Email,Date';
+		 
+		 $fp = fopen('php://output', 'wb');
+
+
+		 $i = 0;
+		 $header = explode(",", $str);
+		 fputcsv($fp, $header);
+
+		 foreach ($data as $key => $value)
+		 {
+		 	$username  =  @$value['first_name'].' , '.$value['last_name'];
+		 	$date=date('M-d-Y' ,strtotime($value['created_on']));
+		 $DATACSV[] = $value['id'];
+		 $DATACSV[] = $username;
+		 $DATACSV[] = $value['phone'];
+		 $DATACSV[] = $value['email'];
+		 $DATACSV[] = $date;
+		  
+			fputcsv($fp, $DATACSV);
+			$DATACSV = array();
+		 }
+		 }
+		 else
+		 {
+		 $lang['ALERT'] =" No data found";
+		 echo "<script>alert('" . $lang['ALERT'] . "')</script>";
+		 }		 
+		 die;
+	}
+
 
 	public function supplier_excel()
 	{

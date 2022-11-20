@@ -96,7 +96,7 @@
                                 <ul class="chat-msg-info">
                                   <li>
                                     <div class="chat-time">
-                                      <span><?php echo  date('h:i A' ,strtotime($chd_val['created_date'])); ?> </span>
+                                      <span><?php date_default_timezone_set("Asia/Riyadh"); echo  date('h:i' ,strtotime($chd_val['created_date'])); ?> </span>
                                     </div>
                                   </li>
                                 </ul>
@@ -121,7 +121,7 @@
                                 <ul class="chat-msg-info">
                                   <li>
                                     <div class="chat-time">
-                                      <span><?php echo  date('h:i A' ,strtotime($chd_val['created_date'])); ?></span>
+                                      <span><?php echo date_default_timezone_set("Asia/Riyadh"); date('h:i' ,strtotime($chd_val['created_date'])); ?></span>
                                     </div>
                                   </li>
                                 </ul>

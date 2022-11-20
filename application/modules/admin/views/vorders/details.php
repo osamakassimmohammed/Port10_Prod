@@ -263,7 +263,7 @@ $currency = $data[0]['currency'];
                       <?php }else if(isset($order_status) && $order_status == "Delivered"){ ?>
                         <option value="Delivered" <?php if( isset($order_status) && $order_status == "Delivered" ) echo "Selected"; ?> ><?php echo lang('aCompleted'); ?></option>
                       <?php }else if(isset($order_status) && $order_status == "canceled"){ ?>
-                       <option value="canceled" <?php if( isset($order_status) && $order_status == "canceled" ) echo "Selected"; ?> ><?php echo lang('aCompleted'); ?></option> 
+                       <option value="canceled" <?php if( isset($order_status) && $order_status == "canceled" ) echo "Selected"; ?> ><?php echo lang('aCancelled'); ?></option> 
                       <?php }  ?>
                    </select>
                 </div>
@@ -288,7 +288,7 @@ $currency = $data[0]['currency'];
              </div> -->
              <div class="form-group" style="margin-top: 10px;">
                 <div class="col-sm-12">
-                   <input type="submit" value="<?php echo lang('Update'); ?>" name="submit" class="btn btn-success pull-right">
+                   <input type="submit" value="<?php  echo lang('Update'); ?>" <?php if( isset($order_status) && $order_status == "canceled" ) { ?> disabled <?php } ?> name="submit" class="btn btn-success pull-right">
                 </div>
              </div>
           </div>

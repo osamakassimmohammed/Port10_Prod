@@ -94,6 +94,7 @@
 	$lang['Orders1'] = "طلبات ";
 	$lang['Quotation1'] = "تسعيرة";
 	$lang['Messaging'] = "رسائل";
+	$lang['Compare'] = "قارن";
 	$lang['Admin'] = "مشرف";
 	$lang['Frontend'] = "الواجهة";
 	$lang['blog_not_found'] = "المدونة غير موجودة. سيتم التحديث قريبا.";
@@ -315,6 +316,7 @@
 	$lang['Please_select_purchase_cycle'] = "الرجاء اختيار دورة الشراء";
 	$lang['Please_select_customization'] = "الرجاء اختيار طلب التخصيص";
 	$lang['Please_enter_deadline_for_submission'] = "الرجاء إدخال الموعد النهائي للتقديم";
+	$lang['Please_enter_a_future_date'] = "الرجاء إدخال التاريخ في المستقبل";
 	$lang['Please_select_product_No_SKU'] = "الرجاء اختيار رقم المنتج / وحدة حفظ المخزون";
 	$lang['Please_enter_quantity'] = "الرجاء ادخال الكمية";	
 	$lang['Please_enter_destination'] = "الرجاء ادخال موقع التسليم";
