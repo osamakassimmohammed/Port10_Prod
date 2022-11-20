@@ -237,12 +237,18 @@ class Orders extends Admin_Controller {
 		$payment_status_arr=array();
 		$payment_status_arr[0]="Paid";
 		$payment_status_arr[1]="Unpaid";
+
+		$order_status_arr = array();
+		$order_status_arr[0] ="Pending";
+		$order_status_arr[1]="Canceled";
+		$order_status_arr[2]="Delivered";
 		// $this->mViewData['data_insur'] = @$data_insur;
 		// $this->mViewData['data_pre'] = @$data_pre;
 		$this->mViewData['data_items'] = $data_items;
 		$this->mViewData['user_detail'] = $user_detail;		
 		$this->mViewData['trans_history'] = $trans_history;		
-		$this->mViewData['payment_status_arr'] = $payment_status_arr;		
+		$this->mViewData['payment_status_arr'] = $payment_status_arr;
+		$this->mViewData['order_status_arr'] = $order_status_arr;		
 		// $this->mViewData['signatures'] = $signatures;
 		$this->render('order/details');
 	}
@@ -255,12 +261,48 @@ class Orders extends Admin_Controller {
 			$is_order = $this->custom_model->my_where("order_master","order_master_id,payment_status",array("order_master_id" => $post_data['order_master_id'] ));
 			if(!empty($is_order))
 			{
+				if($is_order[0]['payment_status']=='Paid') {
+					echo json_encode(array("status"=>false,"message"=>"Paid orders cannot be changed to unpaid again.")); die;
+				} 
+
 				if($post_data['payment_status']=='Paid' || $post_data['payment_status']=='Unpaid')
 				{
 				 $response = $this->custom_model->my_update(array('payment_status'=>$post_data['payment_status']),array('order_master_id' =>$post_data['order_master_id']),'order_master');
 				 echo json_encode(array("status"=>true,"message"=>"Payment Status Change Successfully")); die;					
 				}else{
 					echo json_encode(array("status"=>false,"message"=>"Invalid Payment Status Passed")); die;
+				}
+			}else{
+				echo json_encode(array("status"=>false,"message"=>"Something Went Wrong")); die;
+			}
+		}else{
+			echo json_encode(array("status"=>false,"message"=>"Something Went Wrong")); die;
+		}
+	}
+
+	public function change_order_status()
+	{
+		$post_data=$this->input->post();
+
+		if(!empty($post_data) && isset($post_data['order_status']) && isset($post_data['order_master_id']) )
+		{
+			$current_status = $this->custom_model->my_where("order_master","order_master_id,order_status",array("order_master_id" => $post_data['order_master_id'] ));
+			if (($post_data['order_status'] == 'Delivered' || $post_data['order_status'] == 'Canceled' || $post_data['order_status'] == 'Pending')  && ($current_status[0]['order_status']== 'Delivered' || $current_status[0]['order_status']== 'Canceled')) {
+				
+				echo json_encode(array("status"=>false,"message"=>"Invalid Order Status Passed")); die;
+			}
+		}	
+		if(!empty($post_data) && isset($post_data['order_status']) && isset($post_data['order_master_id']) )
+		{
+			$is_order = $this->custom_model->my_where("order_master","order_master_id,order_status",array("order_master_id" => $post_data['order_master_id'] ));
+			if(!empty($is_order))
+			{
+				if($post_data['order_status']=='Pending'  || $post_data['order_status'] =='Canceled' || $post_data['order_status'] =='Delivered')
+				{
+				 $response = $this->custom_model->my_update(array('order_status'=>$post_data['order_status']),array('order_master_id' =>$post_data['order_master_id']),'order_master');
+				 echo json_encode(array("status"=>true,"message"=>"Order Status Change Successfully")); die;					
+				}else{
+					echo json_encode(array("status"=>false,"message"=>"Invalid Order Status Passed")); die;
 				}
 			}else{
 				echo json_encode(array("status"=>false,"message"=>"Something Went Wrong")); die;

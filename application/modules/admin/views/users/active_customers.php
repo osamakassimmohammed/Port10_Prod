@@ -44,7 +44,7 @@
 <!-- <script src='<?php //echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/extensions/buttons.html5.min.js'></script> -->
 <!-- <script src='<?php //echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/extensions/buttons.print.min.js'></script> -->
 <div class="form-group">
-  <a style="" href="<?php echo base_url('admin/users/suppl_csv_dwonload') ?>" class="btn bg-light-green waves-effect"><span>Download</span></a>
+  <a style="" href="<?php echo base_url('admin/users/active_cus_csv_dwonload') ?>" class="btn bg-light-green waves-effect"><span>Download</span></a>
 </div>
 <div class="sraech">
   <label for="usr">Search:</label>
@@ -58,8 +58,7 @@
   <th>Full Name</th>
   <th>Phone</th>
   <th>Email</th>    
-  <th>Product sold</th>    
-  <th>Subs Status</th>    
+  <th>Order Count</th>    
   <th>Date</th>  
   <th>Action</th>  
   
@@ -77,25 +76,15 @@
 <td><?php echo $row['first_name'].' '.$row['last_name']?></td>
 <td><?php echo $row['phone']?></td>
 <td><?php echo $row['email']?></td>
-<td><?php echo $row['order_count']?></td> 
-<td>
-  <?php if($row['subs_status']=='active')
-  { ?>
-    <button class="btn btn-info" >Active</button>
-  <?php }else if($row['subs_status']=='trial'){ ?>
-    <button class="btn btn-success" >Trial</button>
-  <?php }else{ ?>
-    <button class="btn btn-danger" >Expired</button>
-  <?php } ?>    
-</td>
-
+<!-- <td><?php //echo $row['address']?></td> -->
+<td><?php echo $row['order_count']?></td>
 <td><?php echo $row['created_on'];?></td>
 <td>
-  <a style="width: auto; padding: 0px 12px;" href="users/supplier_detail/<?php echo $row['id'].'/'.$subs_status; ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons">remove_red_eye</i><span style="margin-top: 0px; float: right; margin-left: 4px;" >View</span></a>
+  <a style="width: auto; padding: 0px 12px;" href="users/order_history/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons">remove_red_eye</i> <span style="margin-top: 0px; float: right; margin-left: 4px;" >View</span> </a>
 </td>
 </tr>
 <?php } } else { ?>
-  <tr class="text-center text-danger"><td colspan="8" >No Record Found</td></tr>
+  <tr class="text-center text-danger"><td colspan="5" >No Record Found</td></tr>
 <?php } ?>
 </tbody>
 </table>
@@ -132,8 +121,8 @@
     $('#loading').show();     
       $.ajax({
            type: 'POST',
-           url: "<?php echo base_url("admin/users/supplier_list"); ?>",
-           data: {serach:serach,pagno:'0',ajax:'serach',"subs_status":"<?php echo $subs_status; ?>"},   
+           url: "<?php echo base_url("admin/users/active_customers"); ?>",
+           data: {serach:serach,pagno:'0',ajax:'serach'},   
            dataType: 'json',           
            success: function(response)
            {            
@@ -141,6 +130,7 @@
               $('#loading').hide();
               var tabledata=response.result; 
               var flag_row=response.row;
+
               if(tabledata=='')
               {
                 $('#table_body').html("<tr><td colspan='11'>No record found</td></tr>");
@@ -211,9 +201,9 @@
   // }      
     $('#loading').show();
      $.ajax({        
-       url: "<?php echo base_url("admin/users/supplier_list") ?>",
+       url: "<?php echo base_url("admin/users/active_customers") ?>",
         type: 'post',
-        data:{pagno:pagno,ajax:ajax,serach:serach,"subs_status":"<?php echo $subs_status; ?>"},
+        data:{pagno:pagno,ajax:ajax,serach:serach},
        dataType: 'json',       
        success: function(response){  
        $('#loading').hide(); 
@@ -241,7 +231,7 @@
 </script>
 <script type="text/javascript">
      function creatTable(tabledata,flag_row) {
-      flag_row=parseInt(flag_row);
+       flag_row=parseInt(flag_row);
       flag_row=flag_row+1;
       if(tabledata!=''){
         var trHTML='';
@@ -252,26 +242,17 @@
            trHTML+='<td>'+full_name+'</td>';
            trHTML+='<td>'+v.phone+'</td>';
            trHTML+='<td>'+v.email+'</td>';
+           // trHTML+='<td>'+v.address+'</td>';
            trHTML+='<td>'+v.order_count+'</td>';
-           trHTML+='<td>';
-           if(v.subs_status=="active")
-           {
-            trHTML+='<button class="btn btn-info" >Active</button>';
-           }else if(v.subs_status=="trial"){
-            trHTML+='<button class="btn btn-success" >Trial</button>';
-           }else{
-            trHTML+='<button class="btn btn-danger" >Expired</button>';
-           }
-           trHTML+='</td>';
            // trHTML+='<td><img class="img_sa" width="100px" height="100px" src="<?php //echo base_url('assets/admin/products/') ?>'+v.product_image+' "></td>';
            // trHTML+='<td>'+v.country_name+'</td>';
            trHTML+='<td>'+v.created_on+'</td>'; 
 
        
-          trHTML+='<td><a style="width: auto; padding: 0px 12px;" href="<?php echo base_url($language);?>/admin/users/supplier_detail/'+v.id+'/<?php echo $subs_status; ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float" role="button"><i class="material-icons">remove_red_eye</i><span style="margin-top: 0px; float: right; margin-left: 4px;" >View</span></a></td>';     
+          trHTML+='<td><a href="<?php echo base_url($language);?>/admin/users/order_history/'+v.id+'" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float" role="button"><i class="material-icons">remove_red_eye</i></a></td>';     
           
-      trHTML+='</tr>';         
-      flag_row++;                       
+      trHTML+='</tr>'; 
+      flag_row++;                                
       });  
       return trHTML;    
      }

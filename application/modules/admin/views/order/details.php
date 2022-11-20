@@ -1,5 +1,5 @@
 <div class="col-md-12" style="float: right;    margin-bottom: 0px;    height: 10px; margin-top: -10px;">
-      <a href="<?php echo base_url('') ?>/admin/orders" class="back_button">Back to list</a>
+      <a href= "orders" class="back_button">Back to list</a>
 </div>
 
 <br>
@@ -85,12 +85,30 @@ $currency = @$data['currency'];
 
             <tr>
               <th>Order Status:</th>
-              <td><?php echo $data['order_status'];?></td>
+              <td><?php if($data['order_status'] == 'Pending' || $data['order_status'] == 'Delivered' || $data['order_status'] == 'Canceled'){ ?><?php if($data['payment_mode']=='cash-on-del'){ ?>
+                <select id="chage_order_status">
+                  <?php foreach ($order_status_arr as $psa_key => $psa_val) { 
+                          $Selected='';
+                          if($psa_val==$data['order_status'])
+                          {
+                            $Selected='Selected';
+                          }
+                    ?>
+                    <option value="<?php echo $psa_val; ?>" <?php echo $Selected; ?>><?php echo $psa_val; ?></option>          
+                  <?php } ?>                  
+                </select>
+                <button id="btn_status" class="btn btn-success">Submit</button>
+              <?php }else{
+                echo $data['order_status'];
+              }?>
+              <?php }else{
+                echo $data['order_status'];
+              }?></td>
             </tr>
 
             <tr>
               <th>Payment Status</th>
-              <td><?php if($data['payment_mode']=='cash-on-del'){ ?>
+              <td><?php if($data['payment_status'] !=='Paid' && $data['order_status'] !== 'Canceled'){ ?><?php if($data['payment_mode']=='cash-on-del'){ ?>
                 <select id="chage_payment_status">
                   <?php foreach ($payment_status_arr as $psa_key => $psa_val) { 
                           $Selected='';
@@ -105,9 +123,11 @@ $currency = @$data['currency'];
                 <button id="btn_payment" class="btn btn-success">Submit</button>
               <?php }else{
                 echo $data['payment_status'];
+              }?>
+              <?php }else{
+                echo $data['payment_status'];
               }?></td>
             </tr> 
-
             <?php } ?>
           </tbody>
         </table>
@@ -447,6 +467,10 @@ $currency = @$data['currency'];
                   </tr>
                 <?php  } ?>
                 <tr>
+                  <td colspan="6">Shipping Cost</td>
+                  <td colspan=""><?php echo $currency; echo " "; echo $data['shipping_charge']; ?></td>
+                </tr>
+                <tr>
                   <td colspan="6">Grand Total</td>
                   <td colspan=""><?php echo $currency; echo " "; echo $data['net_total']-$data['coupon_price']; ?></td>
                 </tr>
@@ -521,6 +545,36 @@ $currency = @$data['currency'];
         });      
     }else{
       swal("","Invalid Payment status Selected","warning");
+    }
+  });
+</script>
+
+<script type="text/javascript">
+  $(".alert-success").fadeOut(10000);
+  $(document).on("click","#btn_status",function(){
+    var order_status=$("#chage_order_status").val();
+    if(order_status =='Pending' || order_status =='Canceled' || order_status =='Delivered')
+    {
+      $('#loading').show(); 
+        $.ajax({
+           type: 'POST',
+           url: "<?php echo base_url('admin/orders/change_order_status'); ?>",
+           data: {'order_status':order_status,'order_master_id':'<?php echo @$data['order_master_id']; ?>'},    
+           success: function(response)
+           {       
+              $('#loading').hide();  
+              response=$.trim(response);
+               var response = $.parseJSON(response);
+              if (response.status==true)
+              {                                     
+                swal("",response.message,'success');                                
+              }else{
+                swal("",response.message,'warning');
+              }
+           }
+        });      
+    }else{
+      swal("","Invalid Order status Selected","warning");
     }
   });
 </script>

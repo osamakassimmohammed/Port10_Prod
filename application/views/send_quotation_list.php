@@ -658,6 +658,19 @@
           return false;
       } 
 
+      if(qdeadline != '')
+      {
+        var dDate = new Date(qdeadline.split("-").reverse().join("-"));
+        var tDate = new Date();
+
+        if(dDate < tDate)
+        {
+          error=0;
+          swal("","<?php echo lang('Please_enter_a_future_date'); ?>","warning");
+          return false;
+        }  
+      }
+
       if(qdeadline=='')
       {
          error=0;

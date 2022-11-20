@@ -1,5 +1,5 @@
 <div class="row">
- <!--  <a style="" href="<?php //echo base_url('admin/dashbord/all_topsold/yes') ?>" class="btn bg-light-green waves-effect"><span>Download</span></a> -->
+  <a style="" href="<?php echo base_url('admin/all_topsold/yes') ?>" class="btn bg-light-green waves-effect"><span>Download</span></a>
    <h3 class="abu">Top Sold Products</h3>
    <?php if(!empty(@$top_selled))
    {      
@@ -14,7 +14,7 @@
          $image_url=$top_selled[$i]['product_image'];  
         }
         
-          $pro_url='admin/product/edit/';
+          $pro_url='en/admin/product/edit/';
 
          ?>
 
@@ -25,7 +25,7 @@
                <p class="p_name"><?php echo $top_selled[$i]['product_name']; ?></p>
                <div class="clear"></div>
             </div>            
-            <a href="<?Php echo base_url().$pro_url.$top_selled[$i]['product_id']; ?>"><img class="images top_seling_img" src="<?php echo $image_url; ?>"></a>
+            <a href="<?php echo base_url().$pro_url.$top_selled[$i]['product_id']; ?>"><img class="images top_seling_img" src="<?php echo $image_url; ?>"></a>
          </div>
       </div>
    <?php } }else{

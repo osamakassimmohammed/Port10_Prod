@@ -18,6 +18,10 @@
   body{
    background:#f8fbfd;
   }
+
+  .tab1 {
+            tab-size: 2;
+        }
 </style>
 <?php
  if(!empty($product_data)){
@@ -48,10 +52,7 @@
                         foreach ($product_data as $product_key => $product_value){ ?>
                      <tr class="remove_pro<?php echo $product_value['id']; ?> row_count">
                         <td class="th_crt2">
-                           <div class="img_sec_lft">                              
-
-                              <a data-toggle="tooltip" title="" href="javascript:void(0)" class="icon delete_pro"onclick="remove_cart(<?php echo $product_value['id']; ?>,'wishlist')"  data-original-title="Remove"><i class="fa fa-times-circle"></i></a>
-
+                           <div class="img_sec_lft">                         
                               <a href="<?php echo base_url($language.'/home/detail/').$product_value['id']; ?>"><img src="<?php echo base_url("assets/admin/products/").$product_value['product_image']; ?>" alt=""></a>   
                               <div class="clear"></div>
                               
@@ -97,8 +98,9 @@
                               <?php if($product_value['price_select']=='1') { ?>
                            		<a href="javascript:void(0)" class="ad_to_cart add_to_cart2" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $i; ?>" data-detislqty="detislqty<?php echo $i ?>" class="add_to_cart2" > <?php echo lang('Add_to_cart'); ?> </a>
                               <?php }else{ ?>
-                                 <a href="javascript:void(0)" class="ad_to_cart" data-class="get_size<?php echo $i; ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $i; ?>" data-detislqty="detislqty<?php echo $i ?>"> <?php echo lang('Add_to_cart'); ?> </a>
-                              <?php } ?>   
+                                 <a href="javascript:void(0)" class="ad_to_cart" data-class="get_size<?php echo $i; ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $i; ?>" data-detislqty="detislqty<?php echo $i ?>"> <?php echo lang('Add_to_cart'); ?></a>
+                              <?php } ?> 
+                              <a data-toggle="tooltip" title="" href="javascript:void(0)" class="icon delete_pro"onclick="remove_cart(<?php echo $product_value['id']; ?>,'wishlist')"  data-original-title="Remove"><i class="fa fa-times-circle" style="font-size:24px;color:red"></i></a>         
                            </h2>
                         </td>  
                      </tr>

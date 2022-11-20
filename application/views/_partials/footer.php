@@ -578,7 +578,7 @@ $( function() {
                        if(flag=='')
                        {
                          // app2='<a href="javascript:void(0)" id="add_wishlist" class="icon flaticon-favorite-heart-button" style="color:#ceaa4e;" onclick="remove_cart('+pid+')" ></a>';  
-                          app2='<a href="javascript:void(0)" onclick="remove_cart('+pid+')" ><i class="ti-heart" aria-hidden="true"></i></a>';
+                          app2='<a style="background:#fd3a58 !important",href="javascript:void(0)" onclick="remove_cart('+pid+')" ><i class="ti-heart" aria-hidden="true"></i></a>';
                                                           
                        }else{
                         if(flag=='view_cart')
@@ -612,7 +612,7 @@ $( function() {
             if(flag=='')
             {
               $(".wishlist"+pid).empty();   
-             app='<a style="background:#343a40 !important"  href="javascript:void(0)" onclick="move_to_wish_list('+pid+')" ><i class="ti-heart" aria-hidden="true"></i></a>';
+             app='<a href="javascript:void(0)" onclick="move_to_wish_list('+pid+')" ><i class="ti-heart" aria-hidden="true"></i></a>';
              $(".wishlist"+pid).append(app);
             }else if(flag=='detail'){
               $(".wishlist"+pid).empty();

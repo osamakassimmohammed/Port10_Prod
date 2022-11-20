@@ -257,7 +257,9 @@ class Chat extends Admin_Controller {
 							if($seller_id!=$post_data['user_id'])
 							{
 
-								$created_date=date("Y-m-d h:i:s");
+								date_default_timezone_set('Asia/Riyadh');
+								
+								$created_date = date('m/d/Y h:i:s a', time());
 								$insert_data['cuser_id']=$seller_id;
 								$insert_data['csender_id']=$seller_id;
 								$insert_data['creceiver_id']=$post_data['user_id'];
@@ -284,7 +286,7 @@ class Chat extends Admin_Controller {
 									$noti_data=array();
 									$noti_data['noti_type']='chat';
 									$noti_data['message']=$post_data['subject'].'<br>'.trim($post_data['message']);
-									$noti_data['created_date']=date("Y-m-d h:i:s");
+									$noti_data['created_date']=date('Y-m-d h:i:s', time());
 									$noti_data['qut_msg_id']=$compose_id;
 
 									if($post_data['user_id']==1)

@@ -20,6 +20,7 @@ class Chat extends MY_Controller {
 			redirect("home");
 		}
 		$user_data=$this->custom_model->get_data_array("SELECT id,active,logo,is_terminate FROM `admin_users` WHERE `id`='$uid'  ");
+		// date('Y-m-d h:i:s A', time(), date('Y-m-d h:i:s A', time());
 		if(!empty($user_data))
 		{
 
@@ -218,7 +219,9 @@ class Chat extends MY_Controller {
 							$insert_data=array();							
 							if($uid!=$post_data['seller_id'])
 							{
-								$created_date=date("Y-m-d h:i:s");
+								date_default_timezone_set('Asia/Riyadh');
+								
+								$created_date = date('Y-m-d h:i:s A', time());
 								$insert_data['cuser_id']=$uid;
 								$insert_data['csender_id']=$uid;
 								$insert_data['creceiver_id']=$post_data['seller_id'];
@@ -255,7 +258,8 @@ class Chat extends MY_Controller {
 									}else{
 										$noti_data['send_to']='seller';
 									}
-									$noti_data['created_date']=date("Y-m-d h:i:s");
+									date_default_timezone_set('Asia/Riyadh');
+									$noti_data['created_date']=date('Y-m-d h:i:s A', time());
 									$this->custom_model->my_insert($noti_data,'inv_mesg_notification');	
 
 									echo json_encode(array("status"=>true,"message"=>($language == 'ar'? 'تم إرسال الرسالة بنجاح':'Message sent successfully'),'data'=>$html_tag)); die;
@@ -352,8 +356,10 @@ class Chat extends MY_Controller {
 					}else{
 						echo json_encode(array("status"=>false,"message"=>($language == 'ar'? 'يرجى تحديد صورة صالحة':'Please Select Valid Image'))); die;
 					}
-				}		
-				$insert_data['created_date']=date("Y-m-d h:i:s");
+				}
+				
+				
+				$insert_data['created_date']=date('Y-m-d h:i:s A', time());
 				$insert_data['message_type']=$post_data['message_type'];
 				$last_chat_id=$this->custom_model->my_insert($insert_data,'chat');
 				$last_chat_data = $this->custom_model->my_where('chat','id,message,created_date,message_type',array('user_id' => $uid,'id'=>$last_chat_id));
@@ -371,7 +377,7 @@ class Chat extends MY_Controller {
 				}else{
 					$noti_data['send_to']='seller';
 				}
-				$noti_data['created_date']=date("Y-m-d h:i:s");
+				$noti_data['created_date']=date('Y-m-d h:i:s A', time());
 				$this->custom_model->my_insert($noti_data,'inv_mesg_notification');	
 
 				if(!empty($last_chat_data))

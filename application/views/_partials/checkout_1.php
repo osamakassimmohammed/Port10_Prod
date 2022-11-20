@@ -110,7 +110,7 @@
                                  </li> -->
                            </ul>
                            <ul class="total">
-                              <li>Subtotal <span class="count"><?php echo $currency_symbol ?> <?php echo number_format($grand_total,2); ?> </span></li>
+                              <li>Subtotal <span class="count"><?php echo $currency_symbol ?> <?php echo number_format($grand_total,3); ?> </span></li>
                            </ul>
                         </div>
                         <div class="payment-box">

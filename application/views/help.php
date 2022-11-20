@@ -28,8 +28,8 @@
                <?php foreach ($faq_data as $fad_key => $fad_val) { ?>
                <div class="card">
                   <div class="card-header" id="heading<?php echo $fad_val['id']; ?>">
-                     <h5 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse"
-                        data-target="#collapse<?php echo $fad_val['id']; ?>" aria-expanded="true" aria-controls="collapse<?php echo $fad_val['id']; ?>"><?php echo $fad_val['question']; ?></button>
+                     <h5 class="mb-0"><button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapse<?php echo $fad_val['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $fad_val['id']; ?>"><?php echo $fad_val['question']; ?></button>
                      </h5>
                   </div>                     
                   <div id="collapse<?php echo $fad_val['id']; ?>" class="collapse" aria-labelledby="heading<?php echo $fad_val['id']; ?>"

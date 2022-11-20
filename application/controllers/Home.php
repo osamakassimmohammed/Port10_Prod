@@ -1540,9 +1540,9 @@ class Home extends MY_Controller {
               				$html_tag.='<span class="wish_l wishlist'.$product_value['id'].'">';
               					if($product_value['wish_list']==1)
               					{
-              						$html_tag.='<a href="javascript:void(0)" onclick="remove_cart('.$product_value['id'].')" ><i class="ti-heart" aria-hidden="true"></i></a>';
+              						$html_tag.='<a href="javascript:void(0)" onclick="remove_cart('.$product_value['id'].')" ><i class="ti-ti-heart-broken" aria-hidden="true"></i></a>';
               					}else{
-              						$html_tag.='<a href="javascript:void(0)" onclick="move_to_wish_list('.$product_value['id'].')" ><i class="ti-heart" aria-hidden="true"></i></a>';
+              						$html_tag.='<a href="javascript:void(0)" onclick="move_to_wish_list('.$product_value['id'].')" ><i class="ti-ti-heart-broken" aria-hidden="true"></i></a>';
               					}
               				$html_tag.='</span>';
 

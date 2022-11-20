@@ -11,6 +11,12 @@ $config['protocol'] = 'smtp';
 // $config['smtp_host'] = 'sg3plcpnl0180.prod.sin3.secureserver.net';
 // $config['smtp_port'] = '465';
 
+// $config['smtp_host'] = 'mail.persausive.in';
+// $config['smtp_port'] = '587';
+// $config['smtp_timeout'] = '80';
+// $config['smtp_user'] = 'info@persausive.in';
+// $config['smtp_pass'] = 'info@8899';
+
 $config['smtp_host'] = 'mail.persausive.in';
 $config['smtp_port'] = '587';
 $config['smtp_timeout'] = '80';

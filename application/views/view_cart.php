@@ -46,7 +46,7 @@
   }
 
   .cart_pg_titl h2{
-        font-weight: 600;
+        font-weight: 800 !important;
     text-transform: uppercase;
   }
 

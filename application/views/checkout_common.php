@@ -23,9 +23,10 @@
                      {
                         $("#shipping_rate").attr("disabled", true);
                         $("#ship_li").show();
-                        var sale_price = parseFloat($("#total_cost").text());
+                        var sale_price = parseFloat($("#total_cost").text().replaceAll(',', ''));
                         $("#ship_cost").text(response.TotalAmount);
-                        $("#total_cost").text(sale_price+response.TotalAmount);
+                     
+                        $("#total_cost").text((sale_price + response.TotalAmount).toLocaleString("en-US"));
                         shippting_api_call++;             
                      }else{
                         $('#shipping_rate').prop('checked', false);
