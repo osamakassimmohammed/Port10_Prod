@@ -23,8 +23,9 @@ date_default_timezone_set('Asia/Riyadh');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = defined('BASE_URL') ? BASE_URL : 'index.php';
-
+//$config['base_url'] = defined('BASE_URL') ? BASE_URL : 'index.php';
+$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
+$config['base_url'] .= preg_replace('@/+$@', '', dirname($_SERVER['SCRIPT_NAME'])).'/';
 /*
 |--------------------------------------------------------------------------
 | Index File
