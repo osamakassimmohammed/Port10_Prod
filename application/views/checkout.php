@@ -12,6 +12,10 @@
    position: static;
    box-shadow: 0px 0px 0px #fff;
    }
+   .required {
+    color: red !important;
+    padding:2px
+  }
    <?php  $disabled='';
 
    if($is_calculate_rate==0){ ?>
@@ -19,8 +23,6 @@
          display: none;
       }
    <?php $disabled='disabled';  } ?>
-
-   
 </style>
 <?php
   $first_name = $last_name = $mobile_no = $email = $country = $city = $state = $pincode = $address_1 = $address_2 =$google_address=$lat=$lng='';
@@ -87,44 +89,44 @@
                      </div>
                      <div class="row check-out">
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('First_Name'); ?></div>
+                           <div class="field-label"><?php echo lang('First_Name'); ?><span class="required">*</span></div>
                            <input class="space" type="text" id="ck_first_name" name="first_name" value="<?php echo $first_name; ?>" placeholder="<?php echo lang('Enter_Your_First_Name'); ?>">
                            <input type="hidden" id="payment_mode" name="payment_mode" value="<?php echo $payment_option; ?>">
                         </div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Last_Name'); ?></div>
+                           <div class="field-label"><?php echo lang('Last_Name'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_last_name" name="last_name" value="<?php echo $last_name; ?>" placeholder="<?php echo lang('Enter_Your_Last_Name'); ?>">
                         </div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Phone'); ?></div>
-                           <input type="text" id="ck_phone" name="mobile_no" value="<?php echo $mobile_no; ?>" placeholder="<?php echo lang('Please_Enter_Phone'); ?>">
+                           <div class="field-label"><?php echo lang('Phone'); ?><span class="required">*</span></div>
+                           <input maxlength="14" type="text" id="ck_phone" name="mobile_no" value="<?php echo $mobile_no; ?>" placeholder="<?php echo lang('Please_Enter_Phone'); ?>">
                         </div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Email'); ?></div>
+                           <div class="field-label"><?php echo lang('Email'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_email" name="email" value="<?php echo $email; ?>" placeholder="<?php echo lang('Please_enter_your_email'); ?>">
                         </div>
                         <div class="form-group col-md-12 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Address'); ?></div>
+                           <div class="field-label"><?php echo lang('Address'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_address_1" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo lang('Enter_Your_Address'); ?>">
                         </div>
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                           <div class="field-label"><?php echo lang('Country'); ?></div>
+                           <div class="field-label"><?php echo lang('Country'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_country" name="country" value="<?php echo $country; ?>" placeholder="Enter Country Name" readonly>
                         </div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Town_City'); ?></div>
+                           <div class="field-label"><?php echo lang('Town_City'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_city" name="city" value="<?php echo $city; ?>" placeholder="<?php echo lang('Enter_Town_City_Name'); ?>">
                         </div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('State'); ?></div>
+                           <div class="field-label"><?php echo lang('State'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_state" name="state" value="<?php echo $state; ?>" placeholder="<?php echo lang('Enter_State_Name'); ?>">
                         </div>
                         <div class="form-group col-md-12 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Postal_Code'); ?></div>
+                           <div class="field-label"><?php echo lang('Postal_Code'); ?><span class="required">*</span></div>
                            <input type="text" id="ck_pincode" name="pincode" value="<?php echo $pincode; ?>" placeholder="<?php echo lang('Enter_Postal_Code'); ?>">
                         </div>
                          <div class="form-group col-md-12 col-sm-6 col-xs-12">
-                           <div class="field-label"><?php echo lang('Googe_address'); ?> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<?php echo lang('Googe_title'); ?>"></i></div>
+                           <div class="field-label"><?php echo lang('Googe_address'); ?> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<?php echo lang('Googe_title'); ?>"></i><span class="required">*</span></div>
                            <input type="text" id="searchInput" name="google_address" value="<?php echo $google_address; ?>" placeholder="<?php echo lang('Googe_address'); ?>">
                         </div> 
                         <div style="width: 80%;padding: 10%;border: 3px solid black;display:none"  id="map"></div>
@@ -229,7 +231,7 @@
                            <div class="text-right">
                               <!-- <button id="shipping_rate" type="button" class="btn-solid btn pl_ordr_chckbtn"><?php //echo lang('Calculate_Shipping_Rate'); ?></button> -->
                               
-                              <button type="submit" class="btn-solid btn pl_ordr_chckbtn"><?php echo lang('Place_Order'); ?></button>
+                              <button type="submit" class="pl_ordr_chckbtn btn btn-solid"><?php echo lang('Place_Order'); ?></button>
                            </div>
                         </div>
                         <div id="shipping_error" class="text-danger" style="display: none;"></div>

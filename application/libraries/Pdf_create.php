@@ -638,12 +638,11 @@ class Pdf_create {
 		               <div style="float: left;width: 45%; text-align: left;  " >
 		                  <div style="width: 100%;">
 		                     <div style="float: left; width:100%; text-align: left; font-weight: 600; line-height: 20px; " >
-		                        <?php echo lang('aDelivery_Term'); ?>
+		                        <?php echo lang('aPayment_Terms'); ?>
 		                        <br>
-		                        <!-- شروط الشحن -->
 		                     </div>
 		                     <div style="float: left; width: 100%; text-align:left; padding-left: 00px; line-height:18px; " > 
-		                        <?php echo lang('aDelivery_Term_desc'); ?> 
+							 	<div style="float: left; width: 60%; text-align:left; padding-left: 00px; line-height:18px; font-weight: 600; " ><?php echo $orders_invoice[0]['payment_mode']; ?> </div>
 		                     </div>
 		                  </div>
 		               </div>
@@ -658,18 +657,18 @@ class Pdf_create {
 		               <div style="clear: both;"></div>
 		            </div>
 		            <div style="margin-top: 20px; margin-bottom: 40px; " >
-		               <div style="float: left;width: 45%; text-align: left;  " >
+		               <!-- <div style="float: left;width: 45%; text-align: left;  " >
 		                  <div style="width: 100%;">
 		                     <div style="float: left; width:100%; text-align: left; font-weight: 600; line-height: 20px; " >
 		                        <?php echo lang('aPayment_Terms'); ?>
 		                        <br>
-		                        <!-- شروط الدفع -->
+		                        شروط الدفع
 		                     </div>
 		                     <div style="float: left; width: 100%; text-align:left; padding-left: 00px; line-height:18px; " > 
 		                        <?php echo lang('aPayment_Terms_desc'); ?> 
 		                     </div>
 		                  </div>
-		               </div>
+		               </div> -->
 		               
 		               <div style="clear: both;"></div>
 		               <?php if(!empty($order))

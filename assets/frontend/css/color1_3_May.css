@@ -25289,7 +25289,7 @@ body.ar .main-nav ul.menu{
 }
 
 body.ar .num_con_a {
-    float: right;
+    float: left;
     width: 17px;
     margin-top: 1px;
     margin-left: 7px;

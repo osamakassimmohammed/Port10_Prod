@@ -24,7 +24,11 @@ table.table.table-striped {
     padding-left: 30px!important;
     border-radius: 100px;
 }
-
+.row.middle_divv {
+    width: 100%;
+    margin: 0px auto;
+    margin-bottom: 20px;
+}
 
 </style>
 <script type="text/javascript">
@@ -72,6 +76,13 @@ table.table.table-striped {
     .header {
     display: none;
     }
+    ::-webkit-input-placeholder { /* Edge */
+  color: #333;
+}
+.search-position{
+  display:flex;
+  justify-content:end
+}
 </style>
 
 
@@ -94,10 +105,19 @@ table.table.table-striped {
         </form>
     </div>
     
-    <div class="col-sm-4">
+    <!-- <div class="col-sm-4">
         <i class="search_material material-icons"><?php echo lang('asearch'); ?></i>
         <input type="text" class="vorder_search" id="search_val" style="padding: 3px">
-    </div>
+    </div> -->
+    <div class="col-sm-4 d-flex justify-content-end">
+    <div class="search-position">
+      <div>
+      <label for="usr"><?php echo lang('asearch'); ?>:</label>
+      <input type="text" placeholder="<?php echo lang('aOrderId/customer_Info'); ?>" class="" id="search_val" style="padding: 3px">
+  <!-- <button class="btn btn-info" id="search_btn">Search</button> -->
+</div>
+</div>
+</div>
 </div>
 
 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
@@ -130,10 +150,32 @@ table.table.table-striped {
             <!-- <td><?php //echo $currency; echo " "; echo @$value['net_total']-$value['coupon_price']; ?></td> -->
             <td><?php echo $currency; echo " "; echo @$value['in_sub_total']; ?></td>           
             <td>
-                <span class="vorder_<?php echo @$value['payment_status']; ?>"><?php echo @$value['payment_status']; ?></span>   
+                <span class="vorder_<?php echo @$value['payment_status']; ?>"><?php 
+                $language= $this->uri->segment(1);
+                  if(@$value['payment_status'] == 'Pending'){
+                      echo lang('Pending');
+                    } else if(@$value['payment_status'] == 'Canceled'){
+                      echo lang('Canceled');
+                    } else if(@$value['payment_status'] == 'Delivered'){
+                      echo lang('Delivered');
+                    } else if(@$value['payment_status'] == 'Completed'){
+                      echo lang('Completed');   
+                    }    
+  ?></span>   
             </td>
             <td>
-                <span class="vorder_<?php echo @$value['order_status']; ?>"><?php echo @$value['order_status']; ?></span>
+                <span class="vorder_<?php echo @$value['order_status']; ?>"><?php 
+                $language= $this->uri->segment(1);
+                  if(@$value['order_status'] == 'Pending'){
+                      echo lang('Pending');
+                    } else if(@$value['order_status'] == 'Canceled'){
+                      echo lang('Canceled');
+                    } else if(@$value['order_status'] == 'Delivered'){
+                      echo lang('Delivered');
+                    } else if(@$value['order_status'] == 'Completed'){
+                      echo lang('Completed');   
+                    }    
+  ?></span>
             </td>
                
             <td style="width: 10%">

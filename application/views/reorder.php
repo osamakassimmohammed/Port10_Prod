@@ -208,7 +208,7 @@
                               
                               <li id="shipping_rate_li">
                                  <label for="shipping_rate"><?php echo lang('Calculate_Shipping_Rate'); ?>:</label>
-                                 <input type="checkbox" class="" id="shipping_rate" <?php echo $disabled; ?> >
+                                 <input type="checkbox" class="" id="shipping_rate">
                               </li>
                            </ul>
                            

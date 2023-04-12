@@ -45,16 +45,25 @@ class Receive_quotation extends Admin_Controller {
 		$tax_data = $this->custom_model->get_data_array("SELECT * FROM tax WHERE id='1' ");
 		$post_data=$this->input->post();
 		if(!empty($post_data))
-		{
+		{	
+			// echo "<pre>";
+			// print_r($this->nmUser_id);
+			// exit();
 			// $is_request = $this->custom_model->get_data_array("SELECT id,quotation_status FROM `send_quotation` WHERE seller_id='$seller_id'  AND id='$id'");
-
+			// $seller_id = str_replace('<pre>', '', $seller_id);
 			$is_request = $this->custom_model->get_data_array("SELECT squ.id,squ.quotation_status,qoin.invoice_status,squ.uid FROM send_quotation as squ INNER JOIN quotation_invoice as qoin ON squ.id=qoin.quotaion_id  WHERE qoin.seller_id='$seller_id' AND qoin.quotaion_id='$id' ");
 			if($is_request[0]['quotation_status']=='Cancelled')
 			{
 				echo json_encode(array('status'=>false,"message"=>($language == 'ar'? 'تم إلغاء الطلب من قبل المستخدم':'Request Cancelled By user'))); die;
 			}
 			$in_sku=$post_data['in_sku'];
-			$is_product= $this->custom_model->get_data_array("SELECT id FROM `product` WHERE seller_id='$seller_id'  AND id='$in_sku'");
+			// echo "<pre>";
+			// print_r($post_data['in_sku']);
+			// exit();
+			// $is_product= $this->custom_model->get_data_array("SELECT id FROM `product` WHERE seller_id='$seller_id'  AND id='$in_sku'");
+			$is_product= $this->db->get_where('product', array('id'=>$in_sku,'seller_id'=>$seller_id))->result_array();
+			// print_r($is_product);
+			// exit();
 			if(empty($is_product))
 			{
 				echo json_encode(array('status'=>false,"message"=>($language == 'ar'? 'معرف المنتج غير صحيح أو هذا المنتج لا ينتمي لك':'Invalid product id or this product not belongs to you'))); die;	

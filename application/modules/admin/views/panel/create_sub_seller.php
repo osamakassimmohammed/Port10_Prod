@@ -70,6 +70,10 @@ button.btn.btn-primary {
 .col-md-8asas .col-sm-4{
         padding: 0px 10px;
 }
+.required:after {
+    content:" *";
+    color: red;
+  }
 
 </style>
 
@@ -117,31 +121,31 @@ if(!empty($subsupplier_data)){
                     
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('First_Name'); ?></label>
+                            <label class="required"><?php echo lang('First_Name'); ?></label>
                             <input type="text" name="first_name" value="<?php echo $first_name ?>" placeholder="<?php echo lang('First_Name'); ?>" id="sfirst_name" class="form-control ">
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('CR_Number'); ?></label>
-                            <input type="text" name="username" value="<?php echo $username ?>" placeholder="<?php echo lang('CR_Number'); ?>" id="scr_number" class="form-control " onkeypress="return isNumberKey(event)"> 
+                            <label class="required"><?php echo lang('CR_Number'); ?></label>
+                            <input type="text" maxlength="7" name="username" value="<?php echo $username ?>" placeholder="<?php echo lang('CR_Number'); ?>" id="scr_number" class="form-control " onkeypress="return isNumberKey(event)"> 
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('Street_Name'); ?></label>
-                            <input type="text" name="street_name" value="<?php echo $street_name ?>" placeholder="<?php echo lang('Street_Name'); ?>" id="sstreet_name" class="form-control ">
+                            <label class="required"><?php echo lang('Street_Name'); ?></label>
+                            <input maxlength="46" type="text" name="street_name" value="<?php echo $street_name ?>" placeholder="<?php echo lang('Street_Name'); ?>" id="sstreet_name" class="form-control ">
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('Building_Num'); ?></label>
+                            <label class="required"><?php echo lang('Building_Num'); ?></label>
                             <input type="text" name="building_no" value="<?php echo $building_no ?>" placeholder="<?php echo lang('Building_Num'); ?>" id="sbuilding_no" class="form-control ">
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('Select_City'); ?></label>
+                            <label class="required"><?php echo lang('Select_City'); ?></label>
                             <select id="scity" name="city">
                                 <option value=""><?php echo lang('Select_City'); ?></option>
                                 <?php if(!empty($city_list)){
@@ -161,7 +165,7 @@ if(!empty($subsupplier_data)){
 
                     <div class="col-sm-4">
                         <div class="form-line focused">
-                            <label><?php echo lang('Select_State_Province_Region'); ?></label>
+                            <label class="required"><?php echo lang('Select_State_Province_Region'); ?></label>
                             <select  id="sstate" name="state">
                             <option value=""><?php echo lang('Select_State_Province_Region'); ?></option>
                             <?php if(!empty($state_list)){
@@ -181,37 +185,37 @@ if(!empty($subsupplier_data)){
                     <div class="clear"></div>
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('Select_Zip_Or_Postal_Code'); ?></label>
+                            <label class="required"><?php echo lang('Select_Zip_Or_Postal_Code'); ?></label>
 
-                            <input type="text" name="postal_code" value="<?php echo $postal_code ?>" placeholder="<?php echo lang('Enter_Postal_Code'); ?>" id="spostal_code" class="form-control " onkeypress="return isNumberKey(event)">         
+                            <input type="text" name="postal_code" maxlength="5" value="<?php echo $postal_code ?>" placeholder="<?php echo lang('Enter_Postal_Code'); ?>" id="spostal_code" class="form-control " onkeypress="return isNumberKey(event)">         
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('Country'); ?></label>
+                            <label class="required"><?php echo lang('Country'); ?></label>
                             <input type="text" name="country" value="<?php echo $country ?>" placeholder="<?php echo lang('Country'); ?>" id="scountry" class="form-control " readonly>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('Phone'); ?></label>
-                            <input type="text" name="phone" value="<?php echo $phone ?>" placeholder="<?php echo lang('Phone'); ?>" id="sphone" class="form-control " onkeypress="return isNumberKey(event)">
+                            <label class="required"><?php echo lang('Phone'); ?></label>
+                            <input type="text" name="phone" maxlength="14" value="<?php echo $phone ?>" placeholder="<?php echo lang('Phone'); ?>" id="sphone" class="form-control " onkeypress="return isNumberKey(event)">
                         </div>
                     </div>
 
                     <div class="col-sm-3">
-                       <label for="groups">Status</label>
+                       <label for="groups" class="required"><?php echo lang('aStatus'); ?></label>
                         <div>              
                           <input type="radio" name="active" value="1" id="Accept" class="with-gap radio-col-green" <?php echo $active ?> >
-                          <label for="Accept">Active</label> 
+                          <label for="Accept"><?php echo lang('aActive'); ?></label> 
                           <input type="radio" name="active" value="0" id="Reject" class="with-gap radio-col-green" <?php echo $deactive ?>>
-                          <label for="Reject">Deactive</label>         
+                          <label for="Reject"><?php echo lang('aDeactive'); ?></label>         
                         </div>  
                     </div>
                     <div class="clear"></div>
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('aAccess_Permission'); ?></label>
+                            <label class="required"><?php echo lang('aAccess_Permission'); ?></label>
                             <select class="form-control " id="saccess_permission" name="access_permission[]" multiple>
                             <!-- <option value=""><?php //echo lang('aSelect_Access_Permission'); ?></option> -->
                             <?php if(!empty($permission_arr)){
@@ -230,22 +234,22 @@ if(!empty($subsupplier_data)){
 
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('Email'); ?></label>
-                            <input type="text" name="email" value="<?php echo $email ?>" placeholder="<?php echo lang('Email'); ?>" id="semail" class="form-control ">
+                            <label class="required"><?php echo lang('Email'); ?></label>
+                            <input maxlength="64" type="text" name="email" value="<?php echo $email ?>" placeholder="<?php echo lang('Email'); ?>" id="semail" class="form-control ">
                         </div>
                     </div>                                  
 
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('New_Password'); ?></label>
-                            <input type="password" id="pro_new_password" name="new_password" value="" placeholder="<?php echo lang('New_Password'); ?>" class="form-control " >
+                            <label class="required"><?php echo lang('New_Password'); ?></label>
+                            <input maxlength="10" type="password" id="pro_new_password" name="new_password" value="" placeholder="<?php echo lang('New_Password'); ?>" class="form-control " >
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <div class="form-line focused">
-                            <label><?php echo lang('aRetype_Password'); ?></label>
-                            <input type="password" id="pro_retype_password" name="retype_password" value="" placeholder="<?php echo lang('aRetype_Password'); ?>" class="form-control " >
+                            <label class="required"><?php echo lang('aRetype_Password'); ?></label>
+                            <input maxlength="10" type="password" id="pro_retype_password" name="retype_password" value="" placeholder="<?php echo lang('aRetype_Password'); ?>" class="form-control " >
                         </div>
                     </div>
 
@@ -255,12 +259,14 @@ if(!empty($subsupplier_data)){
 
                     <div class="col-sm-4">
                         <div class="form-line">
+                            <label for="imagefile"><?php echo lang('choose_profile_image'); ?></label>
                             <input type="file" name="logo" value=""  autocomplete="off" class="form-control image_check" accept="image/*" />
                         </div>
-                        <img id="blah" class="blah" width="200px" height="200px" src="<?php echo base_url('assets/admin/usersdata/').$logo; ?>" alt="your image" />
+                        <?php if(!empty($subsupplier_data[0]['logo'])){ ?>
+                        <img id="blah" class="blah" width="200px" height="200px" src="<?php echo base_url('assets/admin/usersdata/').$subsupplier_data[0]['logo']; ?>" alt="your image" />
                         <div class="clear"></div>                    
                     </div>
-                    
+                    <?php }?>
                     <div class="clear"></div>
                     <div class="col-sm-4">
                         <button type="submit" class="btn btn-primary"><?php echo lang('Update'); ?></button>

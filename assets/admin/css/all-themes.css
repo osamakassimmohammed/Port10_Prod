@@ -572,7 +572,13 @@
     color: #fff;
 }
 .theme-light-green .nav > li > a:hover {
-    background-color: transparent;
+    background-color: #ff375e;
+}
+/* .theme-light-green .nav > li.bg-not > a  {
+    color: transparent !important;
+} */
+.theme-light-green .nav > li.bg-not > a:hover {
+    background-color: transparent !important;
 }
 .theme-light-green .nav > li > a:focus {
     background-color: transparent;

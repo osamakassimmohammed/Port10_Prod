@@ -55,16 +55,16 @@
 <thead>
 <tr>
   <th>SN</th>
-  <th>Full Name</th>
-  <th>Cr Number</th>
-  <th>Phone</th>
-  <th>Email</th>      
-  <th>Status</th>    
-  <th>Order</th>    
-  <th>Quotation Send</th>    
-  <th>Permission</th>    
-  <th>Date</th>  
-  <th>Action</th>  
+  <th><?php echo lang('aFull_Name'); ?></th>
+  <th><?php echo lang('aCr_Number'); ?></th>
+  <th><?php echo lang('aPhone'); ?></th>
+  <th><?php echo lang('aEmail'); ?></th>      
+  <th><?php echo lang('aStatus'); ?></th>    
+  <th><?php echo lang('aOrder'); ?></th>    
+  <th><?php echo lang('aQuotation_Send'); ?></th>    
+  <th><?php echo lang('aPermission'); ?></th>    
+  <th><?php echo lang('aDate'); ?></th>  
+  <th><?php echo lang('aAction'); ?></th>  
   
 </tr>
 </thead>

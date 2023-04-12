@@ -9,7 +9,7 @@ class My_cart extends MY_Controller {
 	public function __construct()
 	{
 		$this->load->model('default_model');
-		$this->load->model('admin/Custom_model','custom_model');		
+		$this->load->model('admin/Custom_model','custom_model');
 	}
 
 	public function not_found()
@@ -24,33 +24,65 @@ class My_cart extends MY_Controller {
 		$qty = $this->input->post('qty');
 		$unit = $this->input->post('unit');
 		$metadata = @$this->input->post('metadata');
-		$pcxdata_arr = @$this->input->post('pcxdata');				
-		$type='add';		
+		$pcxdata_arr = @$this->input->post('pcxdata');
+		$type='add';
+
+		if(empty($uid))
+		{
+			echo json_encode(array('status'=>false,'message'=>'login_message'));
+			die;
+		}
+
+		$latest_pid = $this->db->select('*')
+					->from('product')
+					->where('id',$pid)
+					->get()
+					->row_array();
+
 		// echo $qty;
 		// echo "<br>".$qty;
 		// echo "<pre>";
 		// print_r($metadata);
 		// print_r($pcxdata_arr);
 		// die;
-		if(empty($uid))
-		{
-			echo json_encode(array('status'=>false,'message'=>'login_message'));
+		// echo($uid);die;
+		$query = $this->db->select('*')
+                          ->from('my_cart')
+						  ->where('user_id',$uid)
+						  ->where('meta_key','cart')
+						  ->get()
+                          ->row_array();
+
+		foreach(unserialize($query['content']) as $val){
+			$id = $val['pid'];
+			$pids = $this->db->select('*')
+                          ->from('product')
+						  ->where('product.id',$id)
+						  ->get()
+                          ->row_array();
+			if($pids['seller_id'] != $latest_pid['seller_id']){
+			echo json_encode(array('status'=>false,'message'=>'select_same_seller'));
 			die;
 		}
-		$country=$this->return_currency_name();	
+		}
 
-		$this->load->library('user_account');	
+
+
+	
+		$country=$this->return_currency_name();
+
+		$this->load->library('user_account');
 
 		$response = $this->user_account->add_remove_cart($pid,$uid,$type,$qty,$metadata,$pcxdata_arr,$append='',$unit,$country);
-		
+
 		$response=json_decode($response,true);
 		if($response['status']==1 && is_array($response['message']))
-		{			
+		{
 			$this->session->set_userdata('content', serialize($response['message']));
 			$response['message']='success';
 		}
 		echo json_encode($response);
-		die;		
+		die;
 	}
 
 	public function updat_cart()
@@ -63,7 +95,7 @@ class My_cart extends MY_Controller {
 		$type = 'update';
 		$pcxdata='';
 		$metadata='';
-		
+
 		// $new_arr=explode("m",$append);
 		// echo "<pre>";
 		// print_r($new_arr);
@@ -80,15 +112,16 @@ class My_cart extends MY_Controller {
 		// echo $append.'<br>';
 		// echo $unit.'<br>';
 		// die;
+
 		$this->load->library('user_account');
 		$response = $this->user_account->add_remove_cart($pid,$uid,$type,$qty,$metadata,$pcxdata,$append,$unit);
-		$response=json_decode($response,true);		
+		$response=json_decode($response,true);
 		if($response['status']==true)
 		{
-			$response['cart_sub_total']=$this->return_cart_price();	
+			$response['cart_sub_total']=$this->return_cart_price();
 		}
 		$response=json_encode($response);
-		echo $response;		
+		echo $response;
 	}
 
 	public function add_to_wish_list($echo=true)
@@ -119,37 +152,37 @@ class My_cart extends MY_Controller {
 
 				if(!empty($is_data) )
 				{
-					
+
 					$wish_list=unserialize($is_data[0]['content']);
 					$cnt[$append] = array('pid' => $pid, 'add_date' => $date);
 
 					if(!empty($wish_list))
-					{						
-	            		$cnt=array_merge($wish_list,$cnt);							
+					{
+	            		$cnt=array_merge($wish_list,$cnt);
 					}
 					// echo "<pre>";
 					// print_r($cnt);
 					// die;
             		$this->custom_model->my_update(array('content' => serialize($cnt)),array('id' => $is_data[0]['id']),'my_cart',true,true);
-					
+
 				}else{
 					$cnt[$append] = array('pid' => $pid, 'add_date' => $date);
 					$data['user_id'] = $uid;
 					$data['meta_key'] = 'wish_list';
 					$data['content'] = serialize($cnt);
 					$this->custom_model->my_insert($data,'my_cart');
-				}				
+				}
 			}else{
 				$wish_list=unserialize($is_data[0]['content']);
 				// $my_wish = array_diff($wish_list, array($pid));
 				if (array_key_exists($append, $wish_list))
 				{
 					unset($wish_list[$append]);
-					$wish_list = array_filter($wish_list);	
-					$this->custom_model->my_update(array('content' => serialize($wish_list)),array('id' => $is_data[0]['id']),'my_cart',true,true);				
-				}	
+					$wish_list = array_filter($wish_list);
+					$this->custom_model->my_update(array('content' => serialize($wish_list)),array('id' => $is_data[0]['id']),'my_cart',true,true);
+				}
 			}
-		}		
+		}
 		if ($echo)
 		{
 			echo "1";
@@ -173,11 +206,11 @@ class My_cart extends MY_Controller {
 				{
 					$append='m'.$pid;
 				}
-				
+
 				if (!empty($uid))
 				{
 					$is_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'compare'));
-					
+
 					if(!empty($is_data) && !empty($is_data[0]['content']))
 					{
 						$cnt=unserialize($is_data[0]['content']);
@@ -189,43 +222,43 @@ class My_cart extends MY_Controller {
 				}
 
 				if (!empty($this->session->userdata('compare')) )
-				{			
+				{
 					$compare = unserialize($this->session->userdata('compare'));
-					
-					if (!empty($compare)) 
+
+					if (!empty($compare))
 					{
 						// $compare=unserialize($is_data[0]['content']);
 						if($type=='add')
 						{
-							$cnt[$append] = array('pid' => $pid);												
+							$cnt[$append] = array('pid' => $pid);
 		            		$cnt=array_merge($compare,$cnt);
 							if(count($cnt)>3)
 							{
-								echo json_encode( array("status" => false, "message" => ($language == 'ar'? "You can't add more than 3":"You can't add more than 3") ) );die;	
+								echo json_encode( array("status" => false, "message" => ($language == 'ar'? "لا يمكن إضافة أكثر من 3 عناصر للمقارنة":"cannot add more than 3 items to compare") ) );die;
 							}
 							$compare_count=count($cnt);
-		            		$cnt=serialize($cnt);							
-														
+		            		$cnt=serialize($cnt);
+
 							$this->session->set_userdata('compare',$cnt);
 							if(!empty($uid))
 							{
-			        			$this->custom_model->my_update(array('content' => $cnt),array('id' => $is_data[0]['id']),'my_cart',true,true);					
+			        			$this->custom_model->my_update(array('content' => $cnt),array('id' => $is_data[0]['id']),'my_cart',true,true);
 							}
-							echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Added to compare successfully':'Added to compare successfully'),"compare_count"=>$compare_count ) );die;	
+							echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Added to compare successfully':'Added to compare successfully'),"compare_count"=>$compare_count ) );die;
 						}else{
 							$compare_count=0;
 							if (array_key_exists($append, $compare))
 							{
 								unset($compare[$append]);
-								$compare = array_filter($compare);	
+								$compare = array_filter($compare);
 								$compare_count=count($compare);
-								$this->session->set_userdata('compare',serialize($compare));		
+								$this->session->set_userdata('compare',serialize($compare));
 								if(!empty($uid))
 								{
 									$this->custom_model->my_update(array('content' => serialize($compare)),array('id' => $is_data[0]['id']),'my_cart',true,true);
-								}	
+								}
 							}
-							echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Removed from compare successfully':'Removed from compare successfully'),"compare_count"=>$compare_count ) );die;	
+							echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Removed from compare successfully':'Removed from compare successfully'),"compare_count"=>$compare_count ) );die;
 						}
 					}else{
 						$cnt[$append] = array('pid' => $pid);
@@ -259,12 +292,12 @@ class My_cart extends MY_Controller {
 							$this->custom_model->my_update(array('content' => serialize($cnt)),array('id' => $is_data[0]['id']),'my_cart',true,true);
 						}else{
 							$this->custom_model->my_insert($data,'my_cart');
-						}						
+						}
 					}
-					echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Added to compare successfully':'Added to compare successfully'),"compare_count"=>$compare_count ) );die;	
-				}				
+					echo json_encode( array("status" => true, "message" => ($language == 'ar'? 'Added to compare successfully':'Added to compare successfully'),"compare_count"=>$compare_count ) );die;
+				}
 			}else{
-				echo json_encode( array("status" => false, "message" => ($language == 'ar'? 'Something went wrong':'Something went wrong') ) );die;	
+				echo json_encode( array("status" => false, "message" => ($language == 'ar'? 'Something went wrong':'Something went wrong') ) );die;
 			}
 		}else{
 			echo json_encode( array("status" => false, "message" => ($language == 'ar'? 'Something went wrong':'Something went wrong') ) );die;
@@ -340,20 +373,20 @@ class My_cart extends MY_Controller {
 	}
 
 	public function view_cart_count() {
-	
+
 		$uid = $this->session->userdata('uid');
 		if(!empty($uid)) {
 			$is_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'cart'));
 			if(!empty($is_data)) {
 				$content=$is_data[0]['content'];
-				$content=unserialize($content);				
+				$content=unserialize($content);
 				$count= count($content);
 				$cart_total=$this->return_cart_price();
 				echo json_encode(array('cart_count'=>$count,'cart_total'=>$cart_total));
 				// echo "$count";
 				exit;
 			}
-			else {				
+			else {
 				// echo "1";
 				echo json_encode(array('cart_count'=>1,'cart_total'=>0.00));
 				exit;
@@ -373,7 +406,7 @@ class My_cart extends MY_Controller {
 					// echo "1";
 					echo json_encode(array('cart_count'=>1,'cart_total'=>0.00));
 					exit;
-				}	
+				}
 		}
 	}
 
@@ -381,10 +414,10 @@ class My_cart extends MY_Controller {
 	{
 		$pid = $this->input->post('pid');
 		$uid = $this->session->userdata('uid');
-		
+
 		$this->load->library('user_account');
 		$response = $this->user_account->add_remove_cart($pid,$uid,'remove');
-		
+
 		if ($echo)
 		{
 			if ($response != '-1')
@@ -426,13 +459,13 @@ class My_cart extends MY_Controller {
 	{
 		// $pid = $this->input->post('pid');
 		$uid = $this->session->userdata('uid');
-		
+
 		if(!empty($uid))
 		{
 			$this->custom_model->my_update(array('content' =>''),array('user_id' => $uid,"meta_key"=>"cart"),'my_cart');
 			$this->session->set_userdata('content','');
 		}else{
-			$this->session->set_userdata('content','');	
+			$this->session->set_userdata('content','');
 		}
 		echo 1;
 		die;
@@ -440,18 +473,18 @@ class My_cart extends MY_Controller {
 
 	public function product_comment()
 	{
-		$uid=$this->session->userdata('uid');		
+		$uid=$this->session->userdata('uid');
 		$post_data=$this->input->post();
 		if(!empty($post_data))
 		{
 			if(!empty($uid))
 			{
 				$is_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'cart'));
-				$content=unserialize($is_data[0]['content']);								
+				$content=unserialize($is_data[0]['content']);
 			}else {
 				$content=$this->session->userdata('content');
 				$content=unserialize($content);
-			}				
+			}
 			if(!empty($content))
 			{
 				if (array_key_exists($post_data['pid'],$content))
@@ -459,8 +492,8 @@ class My_cart extends MY_Controller {
 					$pid=$post_data['pid'];
 					$content[$pid]['comment']=$post_data['comment'];
 					if(!empty($uid))
-					{					
-						$this->custom_model->my_update(array('content' => serialize($content)),array('user_id' => $uid),'my_cart',true,true);	
+					{
+						$this->custom_model->my_update(array('content' => serialize($content)),array('user_id' => $uid),'my_cart',true,true);
 					}
 					$this->session->set_userdata('content',serialize($content));
 					echo "update";
@@ -468,7 +501,7 @@ class My_cart extends MY_Controller {
 				}else {
 					echo "no_record";
 					die;
-				}				
+				}
 			}else {
 				echo "no_record";
 				die;
@@ -480,9 +513,9 @@ class My_cart extends MY_Controller {
 	}
 
 	public function check_hotel_time()
-	{		
+	{
 		$date=date('d-m-Y'); //Thu  Sun Fri ,Sat
-		$day= date("D",strtotime($date));	
+		$day= date("D",strtotime($date));
 
 		if($day=='Fri' ||$day=='Sat' )
 		{
@@ -494,13 +527,13 @@ class My_cart extends MY_Controller {
 			}
 			else{
 			  return 'no';
-			}			
-		} else {			
+			}
+		} else {
 			$shop_timing = $this->custom_model->my_where('shop_timing','*',array('id' =>'1'));
 				$open_time=$shop_timing[0]['open_time'];
-				$close_time=$shop_timing[0]['close_time'];		
+				$close_time=$shop_timing[0]['close_time'];
 			if(strtotime(date('H:i:s')) > strtotime(date($open_time)) && strtotime(date('H:i:s')) < strtotime(date($close_time)))
-			{	
+			{
 			  return 'yes';
 			}
 			else
@@ -508,8 +541,8 @@ class My_cart extends MY_Controller {
 			  return 'no';
 			}
 		}
-		
-	}	
+
+	}
 
 	public function get_customize()
 	{
@@ -520,18 +553,18 @@ class My_cart extends MY_Controller {
 			$is_product = $this->custom_model->my_where('product','id,customize,product_name',array('id' =>$pid));
 			if(!empty($is_product))
 			{
-				$customize=explode(',',$is_product[0]['customize']); 
+				$customize=explode(',',$is_product[0]['customize']);
 				if(!empty($customize))
 				{
-					foreach ($customize as $cust_key => $cust_val) 
+					foreach ($customize as $cust_key => $cust_val)
 					{
 						$pcustomize_title = $this->custom_model->my_where('pcustomize_title','*',array('id' =>$cust_val,'delete_status'=>'0','status'=>'1'));
 						if(!empty($pcustomize_title))
-						{							
+						{
 							if($cust_key==0)
 							{
 								$is_product[0]['customize_detail']=$pcustomize_title;
-								
+
 							}else{
 								// $pcustomize_title
 								$is_product[0]['customize_detail'][$cust_key]['id']=$pcustomize_title[0]['id'];
@@ -552,21 +585,21 @@ class My_cart extends MY_Controller {
 							$is_product[0]['customize_detail']='no_record';
 						}
 					}
-					echo json_encode(array('status'=>true,'message'=>$is_product));		
-					die;			
+					echo json_encode(array('status'=>true,'message'=>$is_product));
+					die;
 				}else{
 					// procut don't have customize
 					echo json_encode(array('status'=>false,'message'=>'not_customize'));
 					die;
-				}				
+				}
 			}else{
 				// procut not exist
-				echo json_encode(array('status'=>false,'message'=>'not_exist'));		
-				die;			
+				echo json_encode(array('status'=>false,'message'=>'not_exist'));
+				die;
 			}
 		}else{
 			// pass prodcut id
-			echo json_encode(array('status'=>false,'message'=>'invlid_request'));		
+			echo json_encode(array('status'=>false,'message'=>'invlid_request'));
 			die;
 		}
 	}
@@ -581,10 +614,10 @@ class My_cart extends MY_Controller {
 			$pid=$post_data['pid'];
 			$is_product = $this->custom_model->my_where('product','id,customize,product_name,price',array('id' =>$pid));
 			if(!empty($is_product))
-			{				
+			{
 				if($country=='Abu Dhabi'){	$is_product[0]['currancy']='AED'; } else { $is_product[0]['currancy']='BHD'; }
 				$pc_detatils = $this->custom_model->get_data_array(" SELECT `pcustomize_title_id` FROM product_custimze_details WHERE pid='$pid' GROUP BY `pcustomize_title_id` ");
-				
+
 				// echo "<pre>";
 				// print_r($pc_detatils);
 				// die;
@@ -593,7 +626,7 @@ class My_cart extends MY_Controller {
 				{
 
 					$is_product[0]['pc_detatils']=$pc_detatils;
-					foreach ($is_product[0]['pc_detatils'] as $pcd_key => $pcd_val) 
+					foreach ($is_product[0]['pc_detatils'] as $pcd_key => $pcd_val)
 					{
 
 						$pcustomize_title = $this->custom_model->my_where('pcustomize_title`','*',array('id' =>$pcd_val['pcustomize_title_id'],'delete_status'=>'0','status'=>'1'));
@@ -611,7 +644,7 @@ class My_cart extends MY_Controller {
 
 							if(!empty($is_product[0]['pc_detatils'][$pcd_key]['pcus_attr']))
 							{
-								foreach ($is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'] as $pcus_key => $pcus_val) 
+								foreach ($is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'] as $pcus_key => $pcus_val)
 								{
 
 
@@ -620,7 +653,7 @@ class My_cart extends MY_Controller {
 									{
 
 									$is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'][$pcus_key]['name']=$pcustomize_attribute[0]['name'];
-																	
+
 									if($country=='Abu Dhabi')
 									{
 										$is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'][$pcus_key]['price']=$pcustomize_attribute[0]['price_ad'];
@@ -629,7 +662,7 @@ class My_cart extends MY_Controller {
 
 									$is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'][$pcus_key]['price']=$pcustomize_attribute[0]['price_bh'];
 									$is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'][$pcus_key]['currancy']='BHD';
-									}									
+									}
 
 									$is_product[0]['pc_detatils'][$pcd_key]['pcus_attr'][$pcus_key]['delete_status']=$pcustomize_attribute[0]['delete_status'];
 									}else{
@@ -638,10 +671,10 @@ class My_cart extends MY_Controller {
 
 									if(empty($is_product[0]['pc_detatils'][$pcd_key]['pcus_attr']))
 									{
-										// admin delete pcustomize_attribute 
-										echo json_encode(array('status'=>false,'message'=>'not_customize_found'));	
+										// admin delete pcustomize_attribute
+										echo json_encode(array('status'=>false,'message'=>'not_customize_found'));
 										die;
-									}									
+									}
 								}
 							}
 						}else{
@@ -651,31 +684,31 @@ class My_cart extends MY_Controller {
 
 						}
 					}
-						// this conditon for when admin deactive customize and deleted attribue	
+						// this conditon for when admin deactive customize and deleted attribue
 					if(empty($is_product[0]['pc_detatils']))
 					{
 						// $is_product[0]['pc_detatils']='not_customize_found';
-						echo json_encode(array('status'=>false,'message'=>'not_customize_found'));	
+						echo json_encode(array('status'=>false,'message'=>'not_customize_found'));
 						die;
 					}
 				}
 				// echo "<pre>";
 				// print_r($is_product);
-				echo json_encode(array('status'=>true,'message'=>$is_product));	
-				die;	
+				echo json_encode(array('status'=>true,'message'=>$is_product));
+				die;
 
 			}else{
 				// prodcut not exsit
-				echo json_encode(array('status'=>false,'message'=>'record_found'));	
+				echo json_encode(array('status'=>false,'message'=>'record_found'));
 				die;
 			}
 			// echo "<pre>";
 			// print_r($is_product);
 			die;
-			
+
 		}else{
 			// pass prodcut id
-			echo json_encode(array('status'=>false,'message'=>'invlid_request'));		
+			echo json_encode(array('status'=>false,'message'=>'invlid_request'));
 			die;
 		}
 	}

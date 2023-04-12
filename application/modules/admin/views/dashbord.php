@@ -466,7 +466,7 @@
              <td class="actions">
 
 
-             <a href="<?php echo base_url();?>admin/orders/view/<?php echo $row['order_master_id']?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button">
+             <a href="<?php echo base_url();?>en/admin/orders/view/<?php echo $row['order_master_id']?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button">
                <i class="glyphicon glyphicon-eye-open"></i>
               </a>
              </td>

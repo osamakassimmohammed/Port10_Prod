@@ -99,6 +99,7 @@ class Ajax extends MY_Controller {
 		}		
 	}
 
+
 	public function get_sub_cat()
 	{
 		$post_data = $this->input->post();
@@ -382,10 +383,13 @@ class Ajax extends MY_Controller {
 
 	public function get_subcategory_data()
 	{
-		$post_data = $this->input->post();			
+		$post_data = $this->input->post();
+		// print_r($post_data);
+		// exit();			
 		if(!empty($post_data))
 		{			
 			$category = $this->custom_model->my_where('category','id,display_name',array('parent'=>$post_data['cat_id']));
+
 			if(!empty($category))
 			{
 				echo json_encode($category);			
@@ -647,7 +651,9 @@ class Ajax extends MY_Controller {
 		$post_data=$this->input->post();
 		$uid = $this->session->userdata('uid'); 
 		$user_name = $this->session->userdata('user_name'); 
-		
+		// echo "<pre>";
+		// print_r($_POST);
+		// exit();
 		if(empty($uid))
 		{
 			echo "login"; die;			
@@ -1072,7 +1078,7 @@ class Ajax extends MY_Controller {
 		$lat = $post_data['lat'];
 		$long = $post_data['lng'];
 
-	    $geocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false&key=AIzaSyAat9nw12i9GrQx0T7AJaiQ1Po-GzS7mlA";
+	    $geocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false&key=AIzaSyA9mWL4oi6bPvm5ptam1K115N7_aprs9mU";
 	    $ch = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $geocode);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1167,6 +1173,13 @@ class Ajax extends MY_Controller {
 		// redirect('admin/product/list1');
 
     }
+
+	public function get_vendor_product_name()
+	{
+		$post_data = $this->input->post(); 
+		$products = $this->db->get_where('product', array('seller_id'=>$post_data['seller'], 'status'=>1))->result_array();
+		echo json_encode($products);
+	}
 }
 
 ?>

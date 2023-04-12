@@ -11,11 +11,11 @@ class My_account extends MY_Controller {
 	protected $uid = '';
 
 	public function __construct()
-	{	
+	{
 		$language = $this->uri->segments[1];
 		$this->uid = $this->session->userdata('uid');
 		if (empty($this->uid)) {
-			$this->session->set_flashdata('login_message', 'Please Login Or Create Account!!');			
+			$this->session->set_flashdata('login_message', 'Please Login Or Create Account!!');
 			redirect($language);
 		}
 		parent::__construct();
@@ -32,7 +32,7 @@ class My_account extends MY_Controller {
 		$data = $this->custom_model->my_where("admin_users","*",array("id" => $uid),array(),"","","","", array(), "",array(),false  );
 
 		$post_data = $this->input->post();
-		
+
 		if (!empty($post_data))
 		{
 			// echo "<pre>";
@@ -61,7 +61,7 @@ class My_account extends MY_Controller {
 					echo 'phone';
 					die;
 				}
-				
+
 			}
 
 			if ( empty($phone_check) && empty($email_check))
@@ -72,7 +72,7 @@ class My_account extends MY_Controller {
 					'address'				=> $this->input->post('address'),
 					'username' 				=> $this->input->post('email'),
 					'email'					=> $this->input->post('email'),
-					'phone'					=> $this->input->post('phone'),				
+					'phone'					=> $this->input->post('phone'),
 				);
 
 				$users_check = $this->custom_model->my_where("admin_users","*",array("id" => $uid),array(),"","","","", array(), "",array(),false  );
@@ -92,7 +92,7 @@ class My_account extends MY_Controller {
 		// echo "<pre>";
 		// print_r($data);
 		// die;
-		
+
 		$data = $this->custom_model->my_where("admin_users","*",array("id" => $uid),array(),"","","","", array(), "",array(),false  );
 
 		$this->mViewData['data']= $data[0];
@@ -107,7 +107,7 @@ class My_account extends MY_Controller {
 	}
 
 	public function cng_pass()
-	{	
+	{
 		$language= $this->uri->segment(1);
 		$uid = $this->session->userdata('uid');
 
@@ -128,7 +128,7 @@ class My_account extends MY_Controller {
 				if($password == $confirm_password )
 				{
 					$updata["password"] = $hpassword;
-					$this->custom_model->my_update($updata,array('id' => $uid),'admin_users');	
+					$this->custom_model->my_update($updata,array('id' => $uid),'admin_users');
 					if($language=='en')
 					{
 						$this->session->set_flashdata('success','Password Updated successfully !');
@@ -143,11 +143,11 @@ class My_account extends MY_Controller {
 						$this->session->set_flashdata('error','Password & Confirm Password Not Matched');
 					}else{
 						$this->session->set_flashdata('error','كلمة المرور وتأكيد كلمة المرور غير متطابقتين ');
-					}	
-				}				
+					}
+				}
 			}else{
 				$this->session->set_flashdata('error','Invalid old password');
-			}			
+			}
 		}
 
 		// $user_data = $this->custom_model->my_where('admin_users',"*",array('id' =>$this->uid));
@@ -161,26 +161,26 @@ class My_account extends MY_Controller {
 		$this->mViewData['city_list']= $city_list;
 		$this->mViewData['state_list']= $state_list;
 		$this->mViewData['postal_code_list']= $postal_code_list;
-		
+
 
 		// print_r($data);
 		// $this->Urender('cng-pw', 'udefault',"",$data);
 		$this->Urender('account-info', 'udefault');
 	}
-	
+
 
 	public function newsletter()
 	{
 		$uid = $this->session->userdata('uid');
 
 		$post_data = $this->input->post();
-					
+
 		if ( !empty($post_data) )
 		{
 			//print_r($post_data);die;
 			if (empty($uid))
 			{
-				$uid =0;	
+				$uid =0;
 			}
 
 			$additional_data = array(
@@ -212,7 +212,7 @@ class My_account extends MY_Controller {
 	}
 
 	public function wishlist()
-	{	
+	{
 		$language= $this->uri->segment(1);
 		$product_data = array();
 		$uid=$this->session->userdata('uid');
@@ -235,9 +235,9 @@ class My_account extends MY_Controller {
 			$brand = "brand";
 			$unit_list = "unit_list_trans";
 		}
-		$my_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'wish_list'));		
+		$my_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'wish_list'));
 		if (!empty($my_data))
-		{			
+		{
 			// $this->session->set_userdata('my_wish',unserialize($my_data[0]['content']));
 			$my_wish=unserialize($my_data[0]['content']);
 			// echo "<pre>";
@@ -246,12 +246,12 @@ class My_account extends MY_Controller {
 			if (!empty($my_wish)) {
 				foreach ($my_wish as $key => $value)
 				{
-					$curr = $this->custom_model->my_where($product,'id,product_name,brand,category,subcategory,description,short_description,price,sale_price,stock_status,stock,product_image,status,price_select,unite',array('id'=>$value['pid'],'status'=>'1'));	
+					$curr = $this->custom_model->my_where($product,'id,product_name,brand,category,subcategory,description,short_description,price,sale_price,stock_status,stock,product_image,status,min_order_quantity,price_select,unite',array('id'=>$value['pid'],'status'=>'1'));
 					if (!empty($curr))
-					{	
-						$curr[0]['add_date']=$value['add_date'];					
-						$product_data[$key] = $curr[0];						 
-					}					
+					{
+						$curr[0]['add_date']=$value['add_date'];
+						$product_data[$key] = $curr[0];
+					}
 				}
 			}
 		}
@@ -264,24 +264,24 @@ class My_account extends MY_Controller {
 				$columns = array_column($product_data, 'add_date');
 				array_multisort($columns, SORT_DESC, $product_data);
 
-			}			
+			}
 		}
 		$product_data=$this->related_menu($product_data,$language);
 		// echo "<pre>";
 		// print_r($product_data);
 		// die;
 		$unit_list_data = $this->custom_model->get_data_array("SELECT * FROM $unit_list ORDER BY unit_name ASC ");
-		
-		// $country=$this->return_country_name();	
+
+		// $country=$this->return_country_name();
 
 
 		$currency=$this->return_currency_name();
 	    $currency_symbol=$this->return_currency_symbol($currency,$language);
-		
-		$this->mViewData['product_data'] = $product_data;		
-		$this->mViewData['unit_list_data'] = $unit_list_data;		
-		$this->mViewData['currency_symbol'] = $currency_symbol;		
-		// $this->mViewData['country'] = $country;		
+
+		$this->mViewData['product_data'] = $product_data;
+		$this->mViewData['unit_list_data'] = $unit_list_data;
+		$this->mViewData['currency_symbol'] = $currency_symbol;
+		// $this->mViewData['country'] = $country;
 		// $this -> Urender('wishlist','udefault');
 		$this -> Urender('wishlist','udefault');
 	}
@@ -311,12 +311,12 @@ class My_account extends MY_Controller {
 
 			if(!empty($order_items))
 			{
-				foreach ($order_items as $oi_key => $oi_val) 
+				foreach ($order_items as $oi_key => $oi_val)
 				{
-					$product_data = $this->custom_model->my_where($product,'id,product_image',array('id' => $oi_val['product_id']));	
+					$product_data = $this->custom_model->my_where($product,'id,product_image',array('id' => $oi_val['product_id']));
 					if(!empty($product_data))
 					{
-						$order_items[$oi_key]['product_image']=$product_data[0]['product_image'];	
+						$order_items[$oi_key]['product_image']=$product_data[0]['product_image'];
 					}else{
 						$order_items[$oi_key]['product_image']='';
 					}
@@ -332,13 +332,13 @@ class My_account extends MY_Controller {
 			}
 
 
-			// $sub_query $order_by limit $rowno,$rowperpage 	
+			// $sub_query $order_by limit $rowno,$rowperpage
 			// echo "<pre>";
 			// print_r($order_items);
 			// die;
 
 			$this->mViewData['order_items']= $order_items;
-			$this->Urender('order_history', 'udefault');		
+			$this->Urender('order_history', 'udefault');
 
 		}
 	}
@@ -368,12 +368,12 @@ class My_account extends MY_Controller {
 
 			if(!empty($order_items))
 			{
-				foreach ($order_items as $oi_key => $oi_val) 
+				foreach ($order_items as $oi_key => $oi_val)
 				{
-					$product_data = $this->custom_model->my_where($product,'id,product_image',array('id' => $oi_val['product_id']));	
+					$product_data = $this->custom_model->my_where($product,'id,product_image',array('id' => $oi_val['product_id']));
 					if(!empty($product_data))
 					{
-						$order_items[$oi_key]['product_image']=$product_data[0]['product_image'];	
+						$order_items[$oi_key]['product_image']=$product_data[0]['product_image'];
 					}else{
 						$order_items[$oi_key]['product_image']='';
 					}
@@ -389,13 +389,13 @@ class My_account extends MY_Controller {
 			}
 
 
-			// $sub_query $order_by limit $rowno,$rowperpage 	
+			// $sub_query $order_by limit $rowno,$rowperpage
 			// echo "<pre>";
 			// print_r($order_items);
 			// die;
 
 			$this->mViewData['order_items']= $order_items;
-			$this->Urender('orders', 'udefault');		
+			$this->Urender('orders', 'udefault');
 
 		}
 	}
@@ -406,34 +406,38 @@ class My_account extends MY_Controller {
 		$language= $this->uri->segment(1);
 		if (!empty($this->uid))
 		{
-			$data = array();			
-			$data = $this->custom_model->get_data_array("SELECT * FROM `order_master` WHERE `user_id` = '$this->uid' AND is_show='1' ORDER BY order_master_id desc ");			
+			$data = array();
+			$data = $this->custom_model->get_data_array("SELECT *, order_invoice.net_total as net FROM `order_master` join `order_invoice` on order_master.order_master_id = order_invoice.order_no WHERE `user_id` = '$this->uid' AND order_master.is_show='1' ORDER BY order_master.order_master_id desc ");
 			foreach ($data as $key => $value)
 			{
-				
+
 				$items = $this->custom_model->my_where("order_items","*",array("order_no" => $value['order_master_id']) );
 
 				foreach ($items as $k => $val)
-				{					
-					$item_info = $this->custom_model->my_where("product","product_name,product_image,seller_id,id",array("id" => $val['product_id']) );	
-
-					$unit_data = $this->custom_model->my_where('unit_list','id,unit_name',array('id' => $val['unit']));
+				{
+					$item_info = $this->custom_model->my_where("product","product_name,product_image,seller_id,id",array("id" => $val['product_id']) );
+					if($language=="en")
+					{
+						$unit_data = $this->custom_model->my_where('unit_list','id,unit_name',array('id' => $val['unit']));
+					} else{
+						$unit_data = $this->custom_model->my_where('unit_list','id,unit_name',array('id' => $val['unit']));
+					}
 					if(!empty($unit_data))
 					{
 						$item_info[0]['unit_name']=$unit_data[0]['unit_name'];
 					}else{
 						$item_info[0]['unit_name']='';
 					}
-					@$data[$key]['items'][$k] = array_merge($val,$item_info[0]);			
-					
+					@$data[$key]['items'][$k] = array_merge($val,$item_info[0]);
+
 				}
 				$trans_history = $this->custom_model->my_where("payment_details","*",array("display_order_id" => $value['display_order_id']) );
 				if(!empty($trans_history))
 				{
 					$data[$key]['transaction_id']=$trans_history[0]['display_order_id'];
-				}				
+				}
 			}
-			
+
 				// echo "<pre>";
 				// print_r($data);
 				// die;
@@ -449,7 +453,7 @@ class My_account extends MY_Controller {
 
 	public function send_quotation_list($sqid='',$noti_id='')
 	{
-		$language= $this->uri->segment(1);		
+		$language= $this->uri->segment(1);
 		$rowno=0;
 		$ajax='';
 		$order_type="Open";
@@ -468,7 +472,7 @@ class My_account extends MY_Controller {
 		}
 
 		$rowperpage=9;
-		
+
 		if($rowno != 0){
     		$page_no=$rowno;
       		$rowno = ($rowno-1) * $rowperpage;
@@ -488,7 +492,7 @@ class My_account extends MY_Controller {
 				$quotation_list = $this->custom_model->get_data_array("SELECT id,quotation_status,product_name,purchase_cycle,unit,qty,created_date,pid FROM `send_quotation` WHERE uid = '$this->uid' AND quotation_status='$order_type' ORDER BY id desc limit $rowno,$rowperpage ");
 
 				$quotation_count = $this->custom_model->get_data_array("SELECT id FROM `send_quotation` WHERE uid = '$this->uid' AND quotation_status='$order_type' ORDER BY id desc ");
-	    	}    		
+	    	}
     	}else{
     		$quotation_list = $this->custom_model->get_data_array("SELECT id,quotation_status,product_name,purchase_cycle,unit,qty,created_date,pid FROM `send_quotation` WHERE uid = '$this->uid' AND id='$sqid' ORDER BY id desc limit $rowno,$rowperpage ");
 
@@ -496,12 +500,12 @@ class My_account extends MY_Controller {
 
 			$this->custom_model->my_update(array('is_seen'=>1),array('id'=>$noti_id,'is_seen'=>'0'),'inv_mesg_notification');
     	}
-		 
+
 		if(!empty($quotation_list))
 		{
 			$quotation_list=$this->get_quotaion_data($quotation_list);
 
-			foreach ($quotation_list as $ql_key => $val) 
+			foreach ($quotation_list as $ql_key => $val)
 			{
 				$is_data = $this->custom_model->my_where('product',"product_image",array('id' =>$val['pid']));
 				if(!empty($is_data))
@@ -510,27 +514,27 @@ class My_account extends MY_Controller {
 				}else{
 					$quotation_list[$ql_key]['product_image']=base_url('assets/frontend/images/icon/logo-04.png');
 				}
-				
+
 			}
 		}
 
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url('my_account/send_quotation_list');					
+		$config['base_url'] = base_url('my_account/send_quotation_list');
 	    $config['total_rows'] = count($quotation_count);
-	    $config['per_page'] = $rowperpage;   
-	    $config['page_query_string'] = FALSE;             
-	    $config['enable_query_strings'] = FALSE;             
-	    $config['reuse_query_string']  = FALSE;             
-	    $config['cur_page'] = $page_no;  
+	    $config['per_page'] = $rowperpage;
+	    $config['page_query_string'] = FALSE;
+	    $config['enable_query_strings'] = FALSE;
+	    $config['reuse_query_string']  = FALSE;
+	    $config['cur_page'] = $page_no;
 
 	    $this->pagination->initialize($config);
 
 	    if(!empty($ajax))
 	    {
-	    	$data['pagination'] = $this->pagination->create_links();	    	
-	    	// $data['result'] = $this->return_html($add_car_data);	    	
-	    	$data['result'] =$quotation_list;	    	
+	    	$data['pagination'] = $this->pagination->create_links();
+	    	// $data['result'] = $this->return_html($add_car_data);
+	    	$data['result'] =$quotation_list;
 	    	$data['row'] = $rowno;
 	    	$data['total_rows'] = count($quotation_count);
 	    	echo json_encode($data);
@@ -544,23 +548,23 @@ class My_account extends MY_Controller {
 	    if($language=='en')
 		{
 			$unit_list = "unit_list";
-		}else{			
+		}else{
 			$unit_list = "unit_list_trans";
-		}	
-	    $funit_list_data = $this->custom_model->get_data_array("SELECT * FROM $unit_list ORDER BY unit_name ASC ");		
+		}
+	    $funit_list_data = $this->custom_model->get_data_array("SELECT * FROM $unit_list ORDER BY unit_name ASC ");
 		// echo "<pre>";
-		// print_r($quotation_list);		
+		// print_r($quotation_list);
 		// die;
-		
-		$this->mViewData['quotation_list']= $quotation_list;		
-		$this->mViewData['funit_list_data']= $funit_list_data;		
+
+		$this->mViewData['quotation_list']= $quotation_list;
+		$this->mViewData['funit_list_data']= $funit_list_data;
 		$this->Urender('send_quotation_list', 'udefault');
 	}
 
 	public function quotation_detail($qid='')
 	{
-		$language= $this->uri->segment(1);		
-			
+		$language= $this->uri->segment(1);
+
 		$quotation_detail = $this->custom_model->get_data_array("SELECT * FROM `send_quotation` WHERE uid = '$this->uid'  AND id='$qid'");
 
 		// echo "<pre>";
@@ -570,19 +574,19 @@ class My_account extends MY_Controller {
 		{
 			$quotation_detail=$this->get_quotaion_data($quotation_detail,$is_vender=true);
 		}
-		$this->mViewData['quotation_detail']= $quotation_detail;				
+		$this->mViewData['quotation_detail']= $quotation_detail;
 		$this->Urender('quotation_detail', 'udefault');
 	}
 
 	public function received_invoice_list($qid='')
 	{
-		$language= $this->uri->segment(1);		
-			
+		$language= $this->uri->segment(1);
+
 		// $invlice_list = $this->custom_model->get_data_array("SELECT * FROM `quotation_invoice` WHERE uid = '$this->uid' AND quotaion_id='$qid' ORDER BY in_id desc ");
 
 		$invlice_list = $this->custom_model->get_data_array("SELECT quo_i.* FROM send_quotation as send_q RIGHT JOIN quotation_invoice as quo_i ON send_q.id=quo_i.quotaion_id WHERE send_q.uid='$this->uid' AND send_q.quotation_status!='Cancelled' AND quo_i.invoice_status!='' AND quo_i.quotaion_id='$qid' ORDER BY quo_i.in_id DESC ");
 
-		$tax = $this->custom_model->my_where('tax',"*",array('id' =>1));	
+		$tax = $this->custom_model->my_where('tax',"*",array('id' =>1));
 		// echo "<pre>";
 		// print_r($invlice_list);
 		// print_r($tax);
@@ -598,18 +602,18 @@ class My_account extends MY_Controller {
 
 	public function received_invoice($id='')
 	{
-		$language= $this->uri->segment(1);		
-			
+		$language= $this->uri->segment(1);
+
 		$invlice_list = $this->custom_model->get_data_array("SELECT * FROM `quotation_invoice` WHERE uid = '$this->uid' AND in_id='$id' ");
 		// $invlice_list = $this->custom_model->get_data_array("SELECT quo_i.* FROM send_quotation as send_q RIGHT JOIN quotation_invoice as quo_i ON send_q.id=quo_i.quotaion_id WHERE send_q.uid='$this->uid'  AND quo_i.quotaion_id='$qid' ORDER BY quo_i.in_id DESC ");
 
 		if(!empty($invlice_list))
 		{
-			$seller_info = $this->custom_model->my_where('admin_users',"first_name",array('id' =>$invlice_list[0]['seller_id']));	
-			$invlice_list[0]['seller_name']=$seller_info[0]['first_name'];		
+			$seller_info = $this->custom_model->my_where('admin_users',"first_name",array('id' =>$invlice_list[0]['seller_id']));
+			$invlice_list[0]['seller_name']=$seller_info[0]['first_name'];
 		}
 
-		$tax = $this->custom_model->my_where('tax',"*",array('id' =>1));	
+		$tax = $this->custom_model->my_where('tax',"*",array('id' =>1));
 		// echo "<pre>";
 		// print_r($invlice_list);
 		// print_r($tax);
@@ -631,7 +635,7 @@ class My_account extends MY_Controller {
 		if(!empty($post_data))
 		{
 			$update_data=array();
-			
+
 			$is_phone=$this->custom_model->my_where('admin_users',"*",array("phone"=>$post_data['phone'],'id!='=>$this->uid));
 			if(!empty($is_phone))
 			{
@@ -713,10 +717,10 @@ class My_account extends MY_Controller {
 				$unit_list='unit_list_trans';
 				$category='category_trans';
 			}
-			
-			foreach ($quotation_list as $ql_key => $qd_val) 
+
+			foreach ($quotation_list as $ql_key => $qd_val)
 			{
-				
+
 				$unit_data = $this->custom_model->my_where($unit_list,"id,unit_name",array('id' =>$qd_val['unit']));
 				$quotation_list[$ql_key]['unit_name']=$unit_data[0]['unit_name'];
 
@@ -731,7 +735,7 @@ class My_account extends MY_Controller {
 					$is_seller = $this->custom_model->my_where('admin_users',"id,first_name",array('id' =>$quotation_list[$ql_key]['seller_id']));
 					$quotation_list[$ql_key]['seller_name']=$is_seller[0]['first_name'];
 
-					$category_data = $this->custom_model->my_where($category,"id,display_name",array('id' =>$qd_val['category_id']));	
+					$category_data = $this->custom_model->my_where($category,"id,display_name",array('id' =>$qd_val['category_id']));
 					if(!empty($category_data))
 					{
 						$quotation_list[$ql_key]['category_name']=$category_data[0]['display_name'];
@@ -748,11 +752,11 @@ class My_account extends MY_Controller {
 	public function upload_logo()
 	{
 		$post_data=$this->input->post();
-		// echo "<pre>";		
+		// echo "<pre>";
 		// print_r($_FILES['name']);
-		// die;		
+		// die;
 		if(isset($_FILES['name']['name']) && $_FILES['name']['name']!='')
-		{			
+		{
 			$folder_name='admin/usersdata/';
 			$logo = $this->uploads($_FILES['name'],$folder_name);
 			if($logo!=false)
@@ -760,8 +764,8 @@ class My_account extends MY_Controller {
 				 $this->custom_model->my_update(array('logo'=>$logo),array('id' => $this->uid),'admin_users');
 				echo json_encode(array("status"=>true,"message"=>"Image Upload Successfully","logo"=>$logo)); die;
 			}else{
-				echo json_encode(array("status"=>false,"message"=>"Please Select Valid Image")); die;	
-			}			
+				echo json_encode(array("status"=>false,"message"=>"Please Select Valid Image")); die;
+			}
 		}else{
 			echo json_encode(array("status"=>false,"message"=>"Please Select Valid Image")); die;
 		}

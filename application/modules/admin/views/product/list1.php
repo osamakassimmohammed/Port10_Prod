@@ -52,9 +52,9 @@
 <div class="row" style="margin-top: 20px;">
   <div class="col-sm-4">
      <form method="post" action="<?php echo base_url($language.'/admin/product/csv_upload'); ?>" enctype="multipart/form-data">
-      <label>Select CSV File with image name </label>
+      <label><?php echo lang('select csv file with image name'); ?></label>
       <input type="file" name="file" accept=".csv"/>
-      <input type="submit" class="uploada" name="import" class="btn btn-info" value="Import" />
+      <input type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('import'); ?>" style="margin-top:9px"/>
      </form>
      <br />
      <br />
@@ -62,23 +62,25 @@
 
   <div class="col-sm-4">
      <form method="post" action="<?php echo base_url($language.'/admin/product/upload_multiple_images'); ?>" enctype="multipart/form-data">
-      <label>Upload multiple images for product </label>
+      <label><?php echo lang('upload multiple images for product'); ?> </label>
       <input type="file" name="file[]" multiple="" required accept="image/png, image/gif, image/jpeg" />
-      <input type="submit" class="uploada" name="import" class="btn btn-info" value="Import" />
-      <a target="_blank" class="btn btn-info" href="product/uploaded_image">See Your uploaded Image</a>
+      <input style="margin: 9px 0px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('import'); ?>" />
+      <a target="_blank" style="display:table-cell" class="btn btn-info" href="product/uploaded_image"><?php echo lang('see your uploaded Image'); ?></a>
      </form>
      <br />
      <br />
   </div>
 
   <div class="col-sm-4">
-      <label>Download sample CSV file to upload product </label>
+      <label><?php echo lang('download sample CSV file to upload product'); ?></label>
+      <div>
       <a target="_blank" href="<?php echo base_url('/assets/admin/port10-csv-sample.csv'); ?>" class="a_download">
-        <input style="    width: 40%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="Click To Download" />
+        <input style="    width: 40%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('click to download'); ?>" />
       </a>
      <a target="_blank" href="<?php echo base_url('admin/product/cat_data'); ?>" class="a_download">
-        <input style="    width: 50%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="Click To see category ids" />
+        <input style="    width: 50%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('click to see category ids'); ?>" />
       </a>
+</div>
      <br />
   </div>
 </div>
@@ -121,9 +123,9 @@
       <td><?php echo $row['created_date']?></td>
       <td><?php if($row['status'] == '1'){  echo "Active";  }  else{    echo "De-active";    } ?></td>
       <td>
-         <a href="product/edit/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button"><i class="material-icons">edit</i><span class="material_label">Edit</span></a>         
+         <a href="product/edit/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button"><i class="material-icons">edit</i><span class="material_label"><?php echo lang('aEdit'); ?></</span></a>         
          <div class="clear"></div>
-         <a style="    background: #44871b !important;" href="product/tedit/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button">تعديل  <i class="material-icons">translate</i><span class="material_label"><!-- <?php echo lang('aEdit'); ?> --></span></a>         
+         <a style="    background: #44871b !important;" href="product/tedit/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float fist_a" role="button"><i class="material-icons"></i><span class="material_label"><?php echo lang('aTranslate'); ?></span></a>         
          <div class="clear"></div>
          <a href="javascript:void(0)" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float  detete_pro second_a" data-id="<?php echo $row['id']; ?>" role="button" ><i class="material-icons">delete</i><span class="material_label"><?php echo lang('aDelete'); ?></span></a>
       </td>

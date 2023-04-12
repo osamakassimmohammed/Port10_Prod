@@ -176,7 +176,30 @@ $config['ci_bootstrap'] = array(
         	'name'		=> 'Orders',
         	'url'		=> 'vorders',
         	'icon'		=> 'shopping_cart',
-            	),
+				),
+		
+		'Logistics' => array(
+        	'name'		=> 'logistics',
+        	'url'		=> 'logistics',
+			'icon'		=> 'shopping_cart',
+			'children'  => array(
+				'Shipments' => 'shipments',
+				// 'Labels' => 'shipments/shipmentLabelIndex',
+				'Pickups' => 'shipments/shipmentPickupIndex',
+				)
+		),
+		'Virtual Accounts' => array(
+        	'name'		=> 'Virtual Account',
+        	'url'		=> 'vorders/vaccount',
+			'icon'		=> 'group',
+			// 'children'  => array(
+			// 	'Account Dashboard' => 'virtualAccount/dashboard',
+			// 	// 'Labels' => 'shipments/shipmentLabelIndex',
+			// 	'Virtual Account list' => 'virtualAccount/index',
+			// 	'Account Invoices' => 'virtualAccount/invoices-list'
+			// 	)
+		),		
+				
 
 		// 'vorders' => array(
 		// 	'name'		=> 'Supplier Order',

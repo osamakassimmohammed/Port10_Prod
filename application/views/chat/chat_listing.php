@@ -158,7 +158,7 @@
               </div>
             </div>
             <?php }else{ ?>
-              <button type="button" id="com_btn" class="btn msg-send-btn"><?php echo lang('aCompose'); ?></button>
+              <button type="button" id="com_btn" class="btn msg-send-btn" style="margin: 1rem 0rem 0rem 1rem;padding: 10px 20px;border-radius: 5px;"><?php echo lang('aCompose'); ?></button>
               <h2 style="padding:30px;" class="chat_list text-center text-danger" id="hsc_error"> <?php echo lang('No_message_found'); ?></h2>
             
             <?php } }else{ if($user_data[0]['active']==0){

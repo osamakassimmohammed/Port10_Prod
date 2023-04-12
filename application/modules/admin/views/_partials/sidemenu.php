@@ -1,8 +1,8 @@
-<?php //echo "<pre>"; print_r($menu); echo "</pre>";  ?>
+<?php // echo "<pre>"; print_r($menu); exit(); "</pre>";  ?>
 <?php //echo "<pre>"; print_r($sub_seller_menu); echo "</pre>";  ?>
 <div class="menu">
 <ul class="list">
-	<?php 
+	<?php
 		if($user->type!='subsupplier'){
 		foreach ($menu as $parent => $parent_params): ?>
 
@@ -12,7 +12,7 @@
 				<?php $active = ($current_uri==$parent_params['url'] || $ctrler==$parent); ?>
 				<li class='<?php if ($active) echo 'active'; ?>'>
 					<a href='<?php echo $parent_params['url']; ?>'>
-						<i class='material-icons'><?php echo $parent_params['icon']; ?></i> 
+						<i class='material-icons'><?php echo $parent_params['icon']; ?></i>
 						<span><?php echo lang($parent_params['name']) ; ?></span>
 					</a>
 				</li>
@@ -23,7 +23,7 @@
 				<li class='<?php if ($parent_active) echo 'active'; ?>'>
 					<a href='javascript:void(0);' class="menu-toggle">
 						<i class='material-icons'><?php echo $parent_params['icon']; ?></i>
-						<span><?php echo $parent_params['name']; ?></span>
+						<span><?php echo lang($parent_params['name']); ?></span>
 					</a>
 					<ul class='ml-menu'>
 						<?php foreach ($parent_params['children'] as $name => $url): ?>
@@ -46,17 +46,17 @@
 			<?php endif; ?>
 
 		<?php endforeach; ?>
-		<?php }else{ 
+		<?php }else{
 			$is_access=array();
 			$access_permission=$user->access_permission;
 			if(!empty($access_permission))
 			{
-				$is_access=explode(",",$access_permission);								
+				$is_access=explode(",",$access_permission);
 			}
 			array_push($is_access,"panel","dashbord");
 			foreach ($sub_seller_menu as $parent => $parent_params): ?>
 
-			<?php 
+			<?php
 				if(in_array($parent_params['flag'], $is_access))
 				{
 				if ( empty($parent_params['children']) ){ ?>
@@ -64,13 +64,13 @@
 				<?php $active = ($current_uri==$parent_params['url'] || $ctrler==$parent); ?>
 				<li class='<?php if ($active) echo 'active'; ?>'>
 					<a href='<?php echo $parent_params['url']; ?>'>
-						<i class='material-icons'><?php echo $parent_params['icon']; ?></i> 
+						<i class='material-icons'><?php echo $parent_params['icon']; ?></i>
 						<span><?php echo lang($parent_params['name']) ; ?></span>
 					</a>
 				</li>
 
 			<?php } } ?>
-		<?php endforeach;  
+		<?php endforeach;
 		} ?>
 	           <br>
                <br>
@@ -78,12 +78,12 @@
 		<!-- <li class="header"></li> -->
 			<li>
 				<a style=" color: white;" href="<?php echo base_url($language.'/admin/panel/logout') ?>" >
-					<i class="material-icons">input</i> <i style="margin-left: 10px;margin-top: 7px;" class="material-icons-o text-aqua"><?php echo lang('Sign_Out'); ?></i> 
+					<i class="material-icons">input</i> <i style="margin-left: 10px;margin-top: 7px;" class="material-icons-o text-aqua"><?php echo lang('Sign_Out'); ?></i>
 				</a>
 			</li>
             <li style="">
                 <a style="    color: white;" href="<?php echo base_url($language) ?>" target='_blank'>
-                    <i class="material-icons">web</i> <i style="   margin-top: 7px; margin-left: 10px;" class="material-icons-o text-aqua"><?php echo lang('Back_To_Website'); ?></i> 
+                    <i class="material-icons">web</i> <i style="   margin-top: 7px; margin-left: 10px;" class="material-icons-o text-aqua"><?php echo lang('Back_To_Website'); ?></i>
                 </a>
             </li>
 

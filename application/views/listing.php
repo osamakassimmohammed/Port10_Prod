@@ -269,11 +269,11 @@ header{
                                                 <li class="bg-light2"></li>
                                             </ul>
                                             <?php if($product_value['price_select']=='1') { ?>
-                                            <button title="<?php echo lang('Add_to_cart'); ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $product_key; ?>" data-detislqty="<?php echo $product_value['min_order_quantity']; ?>" class="add_to_cart2">
+                                            <button title="<?php echo lang('Add_to_cart'); ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $product_key; ?>" data-detislqty="<?php echo $product_value['min_order_quantity']; ?>" class="add_to_cart2 btn-width">
                                             <i class="ti-shopping-cart"></i> <?php echo lang('Add_to_cart'); ?>
                                             </button>
                                             <?php }else{ ?>
-                                            <button title="<?php echo lang('Add_to_cart'); ?>"data-class="get_size<?php echo $product_key; ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $product_key; ?>" data-detislqty="<?php echo $product_value['min_order_quantity']; ?>" class="add_to_cart2">
+                                            <button title="<?php echo lang('Add_to_cart'); ?>"data-class="get_size<?php echo $product_key; ?>" data-id="<?php echo $product_value['id']; ?>" data-unit="get_unit<?php echo $product_key; ?>" data-detislqty="<?php echo $product_value['min_order_quantity']; ?>" class="add_to_cart2 btn-width">
                                             <i class="ti-shopping-cart"></i> <?php echo lang('Add_to_cart'); ?>
                                             </button>
                                             <?php } ?>
@@ -282,7 +282,7 @@ header{
                                              <label>
                                                 <input type="checkbox"  class="add_check2 compare_ck" value="<?php echo $product_value['id']; ?>" <?php echo $product_value['is_compare']; ?> >
                                                 <div class="ad_cmpr_tex2">
-                                                <?php echo lang('Add_To_Compare'); ?> 
+                                                <?php echo lang('add_To_Compare'); ?> 
                                                 </div>
                                              </label>
                                             </div>
@@ -601,7 +601,6 @@ $(document).ready(function(){
 .add_check2{
    margin-left: -5px;
 }
-
 .ad_cmpr_tex2 {
     display: inline-block;
     font-size: 14px;
@@ -609,5 +608,8 @@ $(document).ready(function(){
     font-weight: 500;
     color: #3f006f;
 }
-
+.btn-width{
+   width:90% !important;
+   margin-left:4% !important
+}
 </style>

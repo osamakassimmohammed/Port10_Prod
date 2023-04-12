@@ -16,11 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Form_builder {
 
 	protected $mFormCount = 0;
-	
+
 	public function __construct()
 	{
 		$CI =& get_instance();
-		
+
 		$CI->load->helper('form');
 		$CI->load->library('form_validation');
 		$CI->load->config('form_validation');
@@ -67,7 +67,7 @@ class Form {
 		$this->mMultipart = $multipart;
 		$this->mAttributes = $attributes;
 	}
-	
+
 	// Update form ID and according data from session (to support multiple forms on one page)
 	public function set_id($id)
 	{
@@ -119,10 +119,22 @@ class Form {
 	 * Basic fields
 	 */
 	// Input field (type = text)
-	public function field_text($name, $value = NULL, $extra = array(), $label = '',$type = 'text')
+	public function field_text($name, $value = NULL, $extra = array(), $label = '',$type = 'text',$length = "",$pattern="")
 	{
-		$data = array('type' => $type, 'id' => $name, 'name' => $name, 'placeholder' => $label);
+		$data = array(
+			'type' => $type, 'id' => $name, 'name' => $name, 'placeholder' => $label
+		);
+
+		if(!empty($pattern)){
+			$data['pattern'] = $pattern;
+		}
+
+		if(!empty($length)){
+			$data['maxlength'] = $length;
+		}
+
 		$value = ($value===NULL) ? $this->get_field_value($name) : $value;
+
 		return form_input($data, $value, $extra, $label);
 	}
 
@@ -164,7 +176,7 @@ class Form {
 		$value = ($value===NULL) ? $this->get_field_value($name) : $value;
 		return form_textarea($data, $value, $extra);
 	}
-	
+
 	// Upload field
 	public function field_upload($name, $value = NULL, $extra = array())
 	{
@@ -172,7 +184,7 @@ class Form {
 		$value = ($value===NULL) ? $this->get_field_value($name) : $value;
 		return form_upload($data, $value, $extra);
 	}
-	
+
 	// Hidden field
 	public function field_hidden($name, $value = NULL, $extra = array())
 	{
@@ -196,7 +208,7 @@ class Form {
 		$site_key = $config['site_key'];
 		return '<div class="g-recaptcha" data-sitekey="'.$site_key.'"></div>';
 	}
-	
+
 	/**
 	 * Buttons
 	 */
@@ -217,13 +229,15 @@ class Form {
 	/**
 	 * Bootstrap 3 functions
 	 */
-	public function bs3_text($label, $name, $value = NULL, $extra = array(), $type = 'text')
+	public function bs3_text($label, $name, $value = NULL, $extra = array(), $type = 'text',$length='',$pattern='')
 	{
+
 		if (!isset($extra['class'])) {
 			$extra['class'] = '';
 		}
 		$extra['class'] = 'form-control '.$extra['class'];
-		return '<div class="form-group form-float form-group-lg"><div class="form-line">'.$this->field_text($name, $value, $extra, $label, $type).'</div></div>';
+
+		return '<div class="form-group form-float form-group-lg"><div class="form-line">'.$this->field_text($name, $value, $extra, $label, $type, $length,$pattern).'</div></div>';
 	}
 
 	public function bs3_phone($label, $name, $value = NULL, $extra = array(), $type = 'text')
@@ -268,7 +282,7 @@ class Form {
 		$extra['class'] = $class;
 		return $this->btn_submit($label, $extra);
 	}
-	
+
 	/**
 	 * Success / Error messages
 	 */
@@ -294,7 +308,7 @@ class Form {
 				$secret_key = $config['secret_key'];
 				$recaptcha = new \ReCaptcha\ReCaptcha($secret_key);
 				$resp = $recaptcha->verify($recaptcha_response, $_SERVER['REMOTE_ADDR']);
-				
+
 				if (!$resp->isSuccess())
 				{
 					// save POST data to flashdata

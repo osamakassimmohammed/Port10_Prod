@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="review"><?php echo lang('Phone_number'); ?></label>
-                                <input type="text" class="form-control" id="cphone" name="phone" placeholder="<?php echo lang('Enter_your_number'); ?>" onkeypress="return isNumberKey(event)">
+                                <input maxlength="14"  type="text" class="form-control" id="cphone" name="phone" placeholder="<?php echo lang('Enter_your_number'); ?>" onkeypress="return isNumberKey(event)">
                             </div>
                             <div class="col-md-6">
                                 <label for="email"><?php echo lang('Email'); ?></label>

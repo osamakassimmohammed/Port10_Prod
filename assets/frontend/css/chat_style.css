@@ -285,6 +285,7 @@
 
 .chat-cont-right .chat-body ul.list-unstyled {
     margin: 0 auto;
+    height: 40px;
     padding: 15px;
     width: 100%
 }

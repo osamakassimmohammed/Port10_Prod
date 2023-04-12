@@ -7,7 +7,7 @@
 
 <article  class="container theme-container">
    <div class="row">
-      <!-- Posts Start -->      
+      <!-- Posts Start -->
       <aside class="col-md-12 col-sm-12 space-bottom-20 ">
          <?php if(!empty($quotation_detail)) { ?>
          <div class="account-details-wrap ">
@@ -30,7 +30,7 @@
                               <?php echo $quotation_detail[0]['user_name']; ?>
                            </div>
                         </div>
-                     </div>                     
+                     </div>
                      <div class="col-md-6 col-sm-6 smal_3">
                         <div class="form-group">
                            <div class="label_new"> <?php echo lang('product_name'); ?> </div>
@@ -75,7 +75,7 @@
                         <div class="form-group">
                            <div class="label_new"> <?php echo lang('Deadline_for_Submission'); ?> </div>
                            <div class="ref_num_label">
-                              <?php echo $quotation_detail[0]['deadline']; ?>
+                              <?php echo date('M-d-Y' ,strtotime($quotation_detail[0]['deadline'])); ?>
                            </div>
                         </div>
                      </div>
@@ -124,7 +124,7 @@
                         <div class="form-group">
                            <div class="label_new"> <?php echo lang('Delivery_Date'); ?> </div>
                            <div class="ref_num_label">
-                              <?php echo $quotation_detail[0]['delivery_date']; ?>
+                              <?php echo date('M-d-Y' ,strtotime($quotation_detail[0]['delivery_date'])); ?>
                            </div>
                         </div>
                      </div>
@@ -159,7 +159,7 @@
                                <?php echo $quotation_detail[0]['information']; ?>
                            </div>
                         </div>
-                     </div>  
+                     </div>
                      <div class="col-md-6 col-sm-6 smal_3">
                         <div class="form-group">
                            <div class="label_new"> <?php echo lang('Address'); ?>  </div>
@@ -167,8 +167,8 @@
                                <?php echo $quotation_detail[0]['address']; ?>
                            </div>
                         </div>
-                     </div>  
-                     
+                     </div>
+
                      <div class="clear"></div>
                   </div>
                </form>
@@ -178,6 +178,6 @@
          <h2><?php echo lang('No_record_found'); ?></h2>
          <?php } ?>
       </aside>
-      <!-- Posts Ends --> 
+      <!-- Posts Ends -->
    </div>
 </article>

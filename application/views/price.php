@@ -105,7 +105,7 @@
                       <h3><?php echo $subs_plans[0]['plan_title']; ?></h3>
                       <div class="theme-card authentication-right registr_form_main">
                          <h2 class="sub_price"><?php echo $currency_symbol; ?> </span><?php echo number_format($subs_plans[0]['amount'],2); ?></h2>
-                         <h4 class="sub_year">PER YEAR</h4>
+                         <h4 class="sub_year"><?php echo lang('PER_YEAR'); ?></h4>
                       </div>
                       <?php if(!empty($subs_plans[0]['sub_more_data'])){ 
                             foreach ($subs_plans[0]['sub_more_data'] as $sup_key => $sup_val) { ?>

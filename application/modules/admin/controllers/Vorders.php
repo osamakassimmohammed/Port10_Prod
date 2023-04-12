@@ -720,7 +720,11 @@ class Vorders extends Admin_Controller {
 			redirect($language.'/admin/vorders');
 		}		 
 	}
-
+	public function vaccount()
+	{
+		
+		$this->render('vorders/vaccount_demo');
+	}
 
 	// three join
 	// $orders = $this->custom_model->get_data_array("SELECT oitems.item_id,oitems.order_no,oitems.product_id,oitems.product_name,oitems.quantity,oitems.price,oitems.order_status as item_order_status,invoice.invoice_id,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1 FROM order_items as oitems INNER JOIN order_invoice as invoice ON   oitems.order_no=invoice.order_no  INNER JOIN  order_master as master ON oitems.order_no = master.order_master_id WHERE oitems.seller_id='$seller_id' AND invoice.seller_id='$seller_id' ORDER BY invoice.invoice_id DESC ");

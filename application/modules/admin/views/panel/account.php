@@ -109,7 +109,7 @@ button.btn.btn-primary {
 						<div class="col-sm-4">
 							<div class="form-line focused">
                                 <label><?php echo lang('CR_Number'); ?></label>
-								<input type="text" name="username" value="<?php echo $user->username ?>" placeholder="<?php echo lang('CR_Number'); ?>" id="scr_number" class="form-control " onkeypress="return isNumberKey(event)">
+								<input type="text" maxlength="7" name="username" value="<?php echo $user->username ?>" placeholder="<?php echo lang('CR_Number'); ?>" id="scr_number" class="form-control " onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -167,7 +167,7 @@ button.btn.btn-primary {
 						<div class="col-sm-4">
 							<div class="form-line focused">
                                 <label><?php echo lang('Select_Zip_Or_Postal_Code'); ?></label>
-								<input type="text" name="postal_code" value="<?php echo $user->postal_code ?>" placeholder="<?php echo lang('Enter_Postal_Code'); ?>" id="spostal_code" class="form-control " onkeypress="return isNumberKey(event)"> 
+								<input maxlength="5" type="text" name="postal_code" value="<?php echo $user->postal_code ?>" placeholder="<?php echo lang('Enter_Postal_Code'); ?>" id="spostal_code" class="form-control " onkeypress="return isNumberKey(event)"> 
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -179,7 +179,7 @@ button.btn.btn-primary {
 						<div class="col-sm-4">
 							<div class="form-line focused">
                                 <label><?php echo lang('Phone'); ?></label>
-								<input type="text" name="phone" value="<?php echo $user->phone ?>" placeholder="<?php echo lang('Phone'); ?>" id="sphone" class="form-control " onkeypress="return isNumberKey(event)">
+								<input maxlength="14" type="text" name="phone" value="<?php echo $user->phone ?>" placeholder="<?php echo lang('Phone'); ?>" id="sphone" class="form-control " onkeypress="return isNumberKey(event)">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -363,7 +363,8 @@ button.btn.btn-primary {
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-line">
-                        <input type="file" name="logo" value=""  required="" autocomplete="off" class="form-control image_check" >
+                        <label for="imagefile"><?php echo lang('choose_profile_image'); ?></label>
+                        <input type="file" name="logo" value=""  required=""  autocomplete="off" id="imagefile" class="form-control image_check" >
                     </div>
                     <img id="blah" class="blah" width="200px" height="200px" src="<?php echo base_url('assets/admin/usersdata/').@$user->logo; ?>" alt="your image" />
                     <div class="clear"></div>
@@ -388,14 +389,14 @@ button.btn.btn-primary {
                         <div class="col-sm-12">
                             <div class="form-line focused">
                                 <label><?php echo lang('New_Password'); ?></label>
-                                <input type="text" id="pro_new_password" name="new_password" value="" placeholder="<?php echo lang('New_Password'); ?>" class="form-control " >
+                                <input  maxlength="10" type="text" id="pro_new_password" name="new_password" value="" placeholder="<?php echo lang('New_Password'); ?>" class="form-control " >
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-line focused">
                                 <label><?php echo lang('aRetype_Password'); ?></label>
-                                <input type="text" id="pro_retype_password" name="retype_password" value="" placeholder="<?php echo lang('aRetype_Password'); ?>" class="form-control " >
+                                <input  maxlength="10" type="text" id="pro_retype_password" name="retype_password" value="" placeholder="<?php echo lang('aRetype_Password'); ?>" class="form-control " >
                             </div>
                         </div>
                         <div class="clear"></div>

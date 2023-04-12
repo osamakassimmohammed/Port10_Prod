@@ -135,7 +135,7 @@
                            </div> -->
                            <div class="text-right">
                             <div class="col-6" style="display: none"><a id="vc_addlink" href="<?php echo base_url($language.'/home/checkout'); ?>" class="btn btn-solid">check out</a></div>
-                              <button type="button" class="btn-solid btn pl_ordr_chckbtn">Place Order</button>
+                              <button type="button" class="btn btn-solid pl_ordr_chckbtn">Place Order</button>
                            </div>
                         </div>
                      </div>

@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Product extends Admin_Controller {	
+class Product extends Admin_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('form_builder');
-		$this->load->model('custom_model');	
-		$this->get_access_id();		
+		$this->load->model('custom_model');
+		$this->get_access_id();
 	}
 
 
@@ -19,18 +19,18 @@ class Product extends Admin_Controller {
 		if($language=='en')
 		{
 			$err_msg1='Product List';
-		}else{			
+		}else{
 			$err_msg1='قائمة المنتجات';
 		}
 
 	    // $udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
-	    
+
 	    //if( $udata[0]['group_id'] == 5 )
 	    //{
-    		//$product = $this->custom_model->my_where('product','*',array('seller_id' => $this->mUser->id ),"","id","desc");   		    			
+    		//$product = $this->custom_model->my_where('product','*',array('seller_id' => $this->mUser->id ),"","id","desc");
 		//}else{
-				
-		$this->load->library('pagination');  
+
+		$this->load->library('pagination');
 
    		$post_data = $this->input->post();
 
@@ -39,7 +39,7 @@ class Product extends Admin_Controller {
 			$rowno = $post_data['pagno'];
 			$ajax 	= $post_data['ajax'];
 			$serach = $post_data['serach'];
-		}		
+		}
 		 // Row per page
     	$rowperpage = 10;
     	$page_no=0;
@@ -63,29 +63,29 @@ class Product extends Admin_Controller {
 
 			$product = $this->custom_model->get_data_array("SELECT pro.id,pro.product_name,pro.product_image,pro.status,pro.created_date,pro.sale_price,admin.first_name,cat.display_name FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id ASC limit $rowno,$rowperpage ");
 
-			$product_count = $this->custom_model->get_data_array("SELECT  COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id  ASC "); 			
+			$product_count = $this->custom_model->get_data_array("SELECT  COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id  ASC ");
 
-   		}else 
+   		}else
    		{
 			if(empty($serach))
 			{
 				$product = $this->custom_model->get_data_array("SELECT pro.id,pro.product_name,pro.product_image,pro.status,pro.created_date,pro.sale_price,admin.first_name,cat.display_name FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id  ASC limit $rowno,$rowperpage ");
 
-				$product_count = $this->custom_model->get_data_array("SELECT  COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id  ASC "); 		
+				$product_count = $this->custom_model->get_data_array("SELECT  COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE  pro.product_delete='0' $sub_query  Order BY pro.id  ASC ");
 			}
-			else {				
-				
+			else {
+
 				// $product = $this->custom_model->get_data_array("SELECT * FROM product WHERE (product_name LIKE '%$serach%' OR `created_date` LIKE '%$serach%' OR status LIKE '%$serach%' OR id LIKE '%$serach%') AND `product_delete`='0' $sub_query  ORDER BY `id` DESC LIMIT $rowno,$rowperpage ");
 
 				$product = $this->custom_model->get_data_array("SELECT pro.id,pro.product_name,pro.product_image,pro.status,pro.created_date,pro.sale_price,admin.first_name,cat.display_name FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE (pro.product_name LIKE '%$serach%' OR pro.created_date LIKE '%$serach%' OR pro.status LIKE '%$serach%' OR pro.id LIKE '%$serach%' OR cat.display_name LIKE '%$serach%' OR admin.first_name LIKE '%$serach%') AND  pro.product_delete='0' $sub_query  Order BY pro.id  ASC limit $rowno,$rowperpage ");
 
-				$product_count = $this->custom_model->get_data_array("SELECT COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE (pro.product_name LIKE '%$serach%' OR pro.created_date LIKE '%$serach%' OR pro.status LIKE '%$serach%' OR pro.id LIKE '%$serach%' OR cat.display_name LIKE '%$serach%' OR admin.first_name LIKE '%$serach%') AND pro.product_delete='0' $sub_query  Order BY pro.id  ASC ");			
+				$product_count = $this->custom_model->get_data_array("SELECT COUNT(pro.id) as product_count FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id  INNER JOIN category as cat ON pro.category=cat.id  WHERE (pro.product_name LIKE '%$serach%' OR pro.created_date LIKE '%$serach%' OR pro.status LIKE '%$serach%' OR pro.id LIKE '%$serach%' OR cat.display_name LIKE '%$serach%' OR admin.first_name LIKE '%$serach%') AND pro.product_delete='0' $sub_query  Order BY pro.id  ASC ");
 			}
 		}
 
 		if(!empty($product))
 		{
-			foreach ($product as $product_key => $product_val) 
+			foreach ($product as $product_key => $product_val)
 			{
 				$pid=$product_val['id'];
 				$product_attrs = $this->custom_model->get_data_array("SELECT `item_id`,`price`,`sale_price` FROM product_attribute WHERE `p_id` = '$pid'");
@@ -94,21 +94,21 @@ class Product extends Admin_Controller {
 				if(!empty($product_attrs))
 				{
 					$product[$product_key]['meta_data']=$product_attrs;
-					foreach ($product[$product_key]['meta_data'] as $key2 => $meta_data) 
+					foreach ($product[$product_key]['meta_data'] as $key2 => $meta_data)
 					{
 							$item_id=$meta_data['item_id'];
 						$attribute_item = $this->custom_model->get_data_array("SELECT `item_name` FROM attribute_item WHERE `id` = '$item_id'");
-						$product[$product_key]['meta_data'][$key2]['size']=$attribute_item[0]['item_name'];					
-					}					
+						$product[$product_key]['meta_data'][$key2]['size']=$attribute_item[0]['item_name'];
+					}
 				}
-				
+
 				$product_image=explode("/",$product_val['product_image']);
 				$product_image=count($product_image);
-				if ($product_image==1) 
+				if ($product_image==1)
 				{
 					$image_url=base_url("assets/admin/products/").$product_val['product_image'];
 				}else{
-					$image_url=$product_val['product_image'];  
+					$image_url=$product_val['product_image'];
 				}
 				$product[$product_key]['image_url']=$image_url;
 				$product[$product_key]['created_date']=date("d-m-Y", strtotime($product_val['created_date']));
@@ -119,12 +119,12 @@ class Product extends Admin_Controller {
 		$config['base_url'] = base_url().'admin/product/list1';
 	    $config['use_page_numbers'] = TRUE;
 	    $config['total_rows'] = $product_count[0]['product_count'];
-	    $config['per_page'] = $rowperpage;   
-	    $config['page_query_string'] = FALSE;             
-	    $config['enable_query_strings'] = FALSE;             
-	    $config['reuse_query_string']  = FALSE;             
-	    $config['cur_page'] = $page_no;  
-	    
+	    $config['per_page'] = $rowperpage;
+	    $config['page_query_string'] = FALSE;
+	    $config['enable_query_strings'] = FALSE;
+	    $config['reuse_query_string']  = FALSE;
+	    $config['cur_page'] = $page_no;
+
 	     // Initialize
 	    $this->pagination->initialize($config);
 	     // Initialize $data Array
@@ -132,64 +132,64 @@ class Product extends Admin_Controller {
 	    $data['result'] = $product;
 	    $data['row'] = $rowno;
 	    $data['total_rows'] = $product_count[0]['product_count'];
-	    // $this->mViewData['pagination'] = $this->pagination->create_links();	
-	    // this for when page load	     				
-	    if($ajax =='call' && $rowno==0 && empty($post_data)){			    	
-	    	$this->mViewData['pagination'] = $this->pagination->create_links();		     				
+	    // $this->mViewData['pagination'] = $this->pagination->create_links();
+	    // this for when page load
+	    if($ajax =='call' && $rowno==0 && empty($post_data)){
+	    	$this->mViewData['pagination'] = $this->pagination->create_links();
 		}elseif($serach !='') {  // this for search button pagination
 			echo json_encode($data);
- 			exit;    				 
+ 			exit;
 		}else { // this for pagination-
  			echo json_encode($data);
- 			exit; 	
-		}	    
-	
+ 			exit;
+		}
+
         $this->mPageTitle = $err_msg1;
 		$this->mViewData['product'] = $product;
 		$this->render('product/list1');
 	}
 
- 
-	
-	
+
+
+
 	// Create Product
 	public function create()
-	{	
-
+	{
+		// print_r("hi");
 		$language= $this->uri->segment(1);
 		if($language=='en')
 		{
 			$err_msg1='Product created successfully';
 			$err_msg2='Something went wrong';
 			$err_msg3='Add Product';
-		}else{			
+		}else{
 			$err_msg1='تم إنشاء المنتج بنجاح';
 			$err_msg2='هناك خطأ ما';
 			$err_msg3='أضف منتج';
 		}
 
 		$udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
-	    
+
 	     $user_details = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","","",array(),"",false);
 
 		// echo "<pre>";
 		$this->mViewData['udata'] = $udata;
 		$this->mViewData['user_details'] = $user_details;
-		
+
 
 		$form = $this->form_builder->create_form('','','id="wizard_with_validation" class="wizard clearfix"');
-		$post_data = $this->input->post();		
+		$post_data = $this->input->post();
 
 
 		if (!empty($post_data))
-		{		
+		{
 			if($this->mUser->id!=1)
 			{
-				$post_data['seller_id'] = $this->mUser->id;			
+				$post_data['seller_id'] = $this->mUser->id;
 			}
-			$post_data['price_select'] = 1;			
+			$post_data['price_select'] = 1;
 			$post_data['update_date'] = date('Y-m-d');
-			// Customize start  
+			// Customize start
 
 			// echo "<pre>";
 			// print_r($post_data);
@@ -202,8 +202,8 @@ class Product extends Admin_Controller {
 			// 	$this->system_message->set_error('Product Already present<br>Unable to Create Product.');
 			// }
 			// else
-			// {	
-				
+			// {
+
 				if(!empty($post_data['seller_id']))
 				{
 					// $attribute = @$post_data['attribute'];
@@ -211,15 +211,15 @@ class Product extends Admin_Controller {
 					if(!empty($attribute))
 					{
 						$attribute=explode(",",$attribute);
-					}						
+					}
 					$attribute_price = @$post_data['attribute_price'];
 					$attribute_sale_price = @$post_data['attribute_sale_price'];
 					$attribute_qty = @$post_data['attribute_qty'];
 					unset($post_data['attribute']);
 					unset($post_data['attribute_price']);
 					unset($post_data['attribute_sale_price']);
-					unset($post_data['attribute2']);					
-					unset($post_data['attribute_id_size']);					
+					unset($post_data['attribute2']);
+					unset($post_data['attribute_id_size']);
 					unset($post_data['attribute_qty']);
 					if(isset($post_data['is_delivery_available']))
 					{
@@ -233,7 +233,7 @@ class Product extends Admin_Controller {
 						$post_data['is_sample_order']=1;
 					}else{
 						$post_data['is_sample_order']=0;
-					}					
+					}
 					// if($post_data['price_select']==2)
 					// {
 					// 	unset($post_data['price']);
@@ -248,38 +248,38 @@ class Product extends Admin_Controller {
 					}
 					// echo "<pre>";
 					// print_r($post_data);
-					// die;	
+					// die;
 
 					$response = $this->custom_model->my_insert($post_data,'product');
 					// echo $this->db->last_query();
 					// die;
 					$this->custom_model->my_insert($post_data,'product_trans');
 
-					if (!empty($customize_att)) 
+					if (!empty($customize_att))
 					{
 						foreach ($customize_att as $askey => $asvalue)
 						{
 							$myArray = explode(',', $asvalue);
 
 							foreach ($myArray as $asdkey => $asdvalue)
-							{				
+							{
 								if ($asdkey == 0)
 								{
 									$pcustomize_title_id = $asdvalue;
 									unset($asdvalue);
 								}
 								else
-								{									
+								{
 									$c_data['pcustomize_title_id'] = $pcustomize_title_id;
 									$c_data['pcustomize_attribute_id'] = $asdvalue;
 									$c_data['pid'] = $response;
 									// print_r($c_data);
 									$this->custom_model->my_insert($c_data,'product_custimze_details');
 								}
-							}					
+							}
 						}
 					}
-					
+
 					//update attribute
 					if($post_data['price_select']==2){
 						if (!empty($attribute))
@@ -298,6 +298,7 @@ class Product extends Admin_Controller {
 					if ($response)
 					{
 						$this->system_message->set_success($err_msg1);
+						redirect($language.'/admin/product/list1');
 					}
 					else
 					{
@@ -307,11 +308,11 @@ class Product extends Admin_Controller {
 				else{
 					$this->system_message->set_error($err_msg2);
 				}
-			// }
-			refresh();
-		}
 
-		// multi vender comment 
+				refresh();
+			}
+
+		// multi vender comment
 		// if( $udata[0]['group_id'] == 5 ){
 		// 	$usrdata = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","",array(),"",false);
 		// 	$catdslug = $usrdata[0]['category'];
@@ -331,11 +332,14 @@ class Product extends Admin_Controller {
 		// 			unset($acatp[0][$ckey]);
 		// 		}
 		// 	}
-		// }	
+		// }
 
 		// $this->mViewData['acatp'] = $acatp;
-
+		if($language=='en'){	
 		$category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
+		} else {
+		$category = $this->custom_model->my_where('category_trans','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
+		}	
 		$this->mViewData['category'] = $category;
 		// $sub_cat = $this->custom_model->get_data_array("SELECT * FROM category WHERE `parent` = '1'  ");
 		// $this->mViewData['sub_cat'] = $sub_cat;
@@ -376,9 +380,17 @@ class Product extends Admin_Controller {
 
 		// 	}
 		// }
-		$brand_data = $this->custom_model->my_where('brand','*',array(),array());
+		if($language=='en'){
+			$brand_data = $this->custom_model->my_where('brand','*',array('seller_id'=>$this->mUser->id),array());
+		} else {
+			$brand_data = $this->custom_model->my_where('brand_trans','*',array('seller_id'=>$this->mUser->id),array());
+		}
+		
+		if($language=='en'){
 		$unit_list = $this->custom_model->get_data_array("SELECT * FROM unit_list ORDER BY unit_name ASC ");
-
+		} else {
+		$unit_list = $this->custom_model->get_data_array("SELECT * FROM unit_list_trans ORDER BY unit_name ASC ");
+		}	
 		$supplier_data = $this->custom_model->get_data_array("SELECT id,first_name FROM admin_users WHERE type='suppler' AND is_terminate='0' AND active='1' AND subs_status!='expired' AND is_email_verify='1' ORDER BY id ASC ");
 
 		$city_list = $this->custom_model->get_data_array("SELECT * FROM city_list ORDER BY city_name ASC ");
@@ -407,42 +419,42 @@ class Product extends Admin_Controller {
 	public function get_packaging_type()
 	{
 		$pack_arr=array();
-		$pack_arr[0]="Boxes";
-		$pack_arr[1]="Pallets";
-		$pack_arr[2]="Others";
+		$pack_arr[0]=lang('Boxes');
+		$pack_arr[1]=lang('Pallets');
+		$pack_arr[2]=lang('Others');
 		return $pack_arr;
 	}
 
 	public function get_req_loading()
 	{
 		$req_loading_arr=array();
-		$req_loading_arr[0]="Liftgate";
-		$req_loading_arr[1]="Ramps";		
+		$req_loading_arr[0]=lang('Liftgate');
+		$req_loading_arr[1]=lang('Ramps');
 		return $req_loading_arr;
 	}
 
 	public function get_hazardous()
 	{
 		$hazardous_arr=array();
-		$hazardous_arr[0]="Yes";
-		$hazardous_arr[1]="No";		
+		$hazardous_arr[0] = lang('Yes');;
+		$hazardous_arr[1]= lang('No1');;
 		return $hazardous_arr;
 	}
 
 	public function vehical_requirement()
 	{
 		$vehical_arr=array();
-		$vehical_arr[0]="Truck";
-		$vehical_arr[1]="Refrigerator Truck";		
+		$vehical_arr[0]=lang('Truck');
+		$vehical_arr[1]=lang('Refrigerator Truck');
 		return $vehical_arr;
 	}
 
 	public function get_weight_unit()
 	{
 		$weight_unit_arr=array();
-		$weight_unit_arr['T']="Tonne";		
-		$weight_unit_arr['KG']="Kilogram";
-		$weight_unit_arr['G']="Gram";		
+		$weight_unit_arr['T']=lang('Tonne');
+		$weight_unit_arr['KG']=lang('Kilogram');
+		$weight_unit_arr['G']=lang('Gram');
 		return $weight_unit_arr;
 	}
 
@@ -455,7 +467,7 @@ class Product extends Admin_Controller {
 			$err_msg1='Product updated successfully';
 			$err_msg2='Something went wrong';
 			$err_msg3='Edit Product';
-		}else{			
+		}else{
 			$err_msg1='تم تحديث المنتج بنجاح';
 			$err_msg2='هناك خطأ ما';
 			$err_msg3='تعديل منتج';
@@ -466,7 +478,7 @@ class Product extends Admin_Controller {
 			$this->mViewData['vendor'] = 1;
 		}
 		$form = $this->form_builder->create_form('','','id="wizard_with_validation" class="wizard clearfix"');
-		$post_data = $this->input->post();	
+		$post_data = $this->input->post();
 
 
          $user_details = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","","",array(),"",false);
@@ -474,13 +486,13 @@ class Product extends Admin_Controller {
 		// echo "<pre>";
 		$this->mViewData['udata'] = $udata;
 		$this->mViewData['user_details'] = $user_details;
-		
-		
 
-		if ( !empty($post_data) )
-		{		
+
+
+		if (!empty($post_data))
+		{
 			// echo 	"<pre>";
-			// print_r($post_data);
+			// print_r($post_data['is_delivery_available']);
 			// die;
 			$post_data['update_date'] = date('Y-m-d');
 			$post_data['price_select'] = 1;
@@ -493,21 +505,21 @@ class Product extends Admin_Controller {
 			{
 				unset($post_data['attribute2']);
 			}
-			if (!empty($post_data['attribute']))
-			{
-				$attribute2=$post_data['attribute2'];
-				$attribute_price=$post_data['attribute_price'];
-				$attribute_sale_price=$post_data['attribute_sale_price'];
-				$attribute_id_size=$post_data['attribute_id_size'];
-				$attribute_qty=$post_data['attribute_qty'];
-				$attribute2=explode(",",$attribute2);
-				unset($post_data['attribute2']);
-				unset($post_data['attribute_price']);
-				unset($post_data['attribute_sale_price']);
-				unset($post_data['attribute_id_size']);
-				unset($post_data['attribute_qty']);
+			// if (!empty($post_data['attribute']))
+			// {
+				// $attribute2=$post_data['attribute2'];
+				// $attribute_price=$post_data['attribute_price'];
+				// $attribute_sale_price=$post_data['attribute_sale_price'];
+				// $attribute_id_size=$post_data['attribute_id_size'];
+				// $attribute_qty=$post_data['attribute_qty'];
+				// $attribute2=explode(",",$attribute2);
+				// unset($post_data['attribute2']);
+				// unset($post_data['attribute_price']);
+				// unset($post_data['attribute_sale_price']);
+				// unset($post_data['attribute_id_size']);
+				// unset($post_data['attribute_qty']);
 				if(isset($post_data['is_delivery_available']))
-				{					
+				{
 					$post_data['is_delivery_available']=1;
 				}else{
 					$post_data['is_delivery_available']=0;
@@ -518,30 +530,34 @@ class Product extends Admin_Controller {
 				}else{
 					$post_data['is_sample_order']=0;
 				}
-				foreach ($attribute2 as $ak1 => $aval1)
-				{
-					//print_r($colorr);
-					///$this->custom_model->my_insert(['p_id' => $product_id, 'item_id' => $aval1], 'product_attribute');
 
-					$colorr = $this->custom_model->my_where('attribute_item','item_name',array('id' => $aval1,'a_id' => '19'));
-					foreach ($colorr as $ekey => $evalue) {
-						$tags[] = implode(',', $evalue);
-						// echo $tags;
 
-					}					
-				}
+				// foreach ($attribute2 as $ak1 => $aval1)
+				// {
+				// 	//print_r($colorr);
+				// 	///$this->custom_model->my_insert(['p_id' => $product_id, 'item_id' => $aval1], 'product_attribute');
+
+				// 	$colorr = $this->custom_model->my_where('attribute_item','item_name',array('id' => $aval1,'a_id' => '19'));
+				// 	foreach ($colorr as $ekey => $evalue) {
+				// 		$tags[] = implode(',', $evalue);
+				// 		// echo $tags;
+
+				// 	}
+				// }
+
+
 				// if (!empty($tags))
 				// {
 				// 	$string = implode(', ', $tags);
 				// 	$color = $this->custom_model->my_update(array("color" => $string),array('id' => $product_id),'product');
 				// }
-			}
+			// }
 			// else{
 			// 	$color = $this->custom_model->my_update(array("color" => ''),array('id' => $product_id),'product');
 			// }
 
 			$product_data = $this->custom_model->my_where('product','*',array('id' => $product_id),array(),"","","","",array(),"object");
-			
+
 			if( $udata[0]['group_id'] == 5 ){
 			 // $post_data['seller_id'] = $this->mUser->id;
 			}
@@ -565,7 +581,7 @@ class Product extends Admin_Controller {
 				if(!empty($attribute2))
 				{
 					$attribute=$attribute2;
-				}				
+				}
 				if(isset($post_data['attribute'])) unset($post_data['attribute']);
 				if(isset($post_data['customize_att']) && !empty($post_data['customize_att']))
 				{
@@ -616,31 +632,31 @@ class Product extends Admin_Controller {
 
 
 				$this->custom_model->my_delete(['pid' => $product_id], 'product_custimze_details');
-				if (!empty($customize_att)) 
-				{					
+				if (!empty($customize_att))
+				{
 					foreach ($customize_att as $askey => $asvalue)
 					{
 						$myArray = explode(',', $asvalue);
 
 						foreach ($myArray as $asdkey => $asdvalue)
-						{				
+						{
 							if ($asdkey == 0)
 							{
 								$pcustomize_title_id = $asdvalue;
 								unset($asdvalue);
 							}
 							else
-							{									
+							{
 								$c_data['pcustomize_title_id'] = $pcustomize_title_id;
 								$c_data['pcustomize_attribute_id'] = $asdvalue;
 								$c_data['pid'] = $product_id;
 								// print_r($c_data);
 								$this->custom_model->my_insert($c_data,'product_custimze_details');
 							}
-						}					
+						}
 					}
 				}
-									
+
 				$this->custom_model->my_delete(['p_id' => $product_id], 'product_attribute');
 				if($post_data['price_select']==2)
 				{
@@ -652,7 +668,7 @@ class Product extends Admin_Controller {
 						$this->custom_model->my_insert(['attribute_id' => $size_id[0]['a_id'], 'p_id' => $product_id, 'item_id' => $aval,'price'=>$attribute_price[$ak],'sale_price'=>$attribute_sale_price[$ak],'id_size'=>$attribute_id_size[$ak],'qty'=>$attribute_qty[$ak]], 'product_attribute');
 						// $this->custom_model->my_insert(['attribute_id' => $size_id[0]['a_id'], 'p_id' => $product_id, 'item_id' => $aval], 'product_attribute');
 					}
-				}	
+				}
 
 				if ($response)
 				{
@@ -674,6 +690,9 @@ class Product extends Admin_Controller {
 		// $acategories = $this->custom_model->my_where('category','*',array('status' => 'active'),array(),"parent","asc","","",array(),"object");
 		// $acatp = array();
 		// $ieq = $jeq = "";
+		// echo 	"<pre>";
+		// print_r($post_data);
+		// die;
 		if($this->mUser->type=='')
 		{
 			$product_data = $this->custom_model->my_where('product','*',array('id' => $product_id),array(),"","","","",array(),"object");
@@ -708,8 +727,8 @@ class Product extends Admin_Controller {
 		// 			$jeq = $cvalue->parent;
 		// 		}
 		// 	}
-		// }		
-		
+		// }
+
 		// $this->mViewData['jeq'] = $jeq;
 		// $this->mViewData['ieq'] = $ieq;
 		// //print_r($this->mViewData);die;
@@ -739,7 +758,7 @@ class Product extends Admin_Controller {
 		{
 			$attribute_item2 = $this->custom_model->get_data_array("SELECT * FROM attribute_item WHERE id = ".$pavalue2['item_id']);
 			$p_attr[$pakey2]['item_name']=$attribute_item2[0]['item_name'];
-			
+
 		}
 		$this->mViewData['product_attribute'] = $patr;
 
@@ -761,15 +780,22 @@ class Product extends Admin_Controller {
 		// echo "<pre>";
 		// print_r($p_attr);
 		// die;
-
-		$category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
+		if($language=='en'){	
+			$category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
+			} else {
+			$category = $this->custom_model->my_where('category_trans','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
+			}	
+		// $category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>'0'),array(),"parent","asc","","",array(),"");
 		$this->mViewData['category'] = $category;
 		// $sub_cat = $this->custom_model->get_data_array("SELECT * FROM category WHERE `parent` != '0'  ");
-		$sub_category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>$product_data[0]->category),array(),"id","asc","","",array(),"");
-
+		if($language=='en'){	
+			$sub_category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>$product_data[0]->category),array(),"id","asc","","",array(),"");
+		} else {
+			$sub_category = $this->custom_model->my_where('category_trans','*',array('status' => 'active','parent'=>$product_data[0]->category),array(),"id","asc","","",array(),"");
+		}	
 		// $sub_sub_category = $this->custom_model->my_where('category','*',array('status' => 'active','parent'=>$product_data[0]->subcategory),array(),"id","asc","","",array(),"");
-
-		$brand_data = $this->custom_model->my_where('brand','*',array(),array());
+        //    print_r($this->mUser->id);die;
+		$brand_data = $this->custom_model->my_where('brand','*',array('seller_id' =>$this->mUser->id),array());
 		// echo "<pre>";
 		// print_r($brand_data);
 		// die;
@@ -782,15 +808,15 @@ class Product extends Admin_Controller {
 		// 		$pcustomize_list[$dkey]['sub_attri'] = $cus_attribute;
 		// 	}
 		// }
-		$sled_cus_list=array();	
-		$pcu_slced_list=array();	
+		$sled_cus_list=array();
+		$pcu_slced_list=array();
 
 		//imp $pcu_slced_list = $this->custom_model->get_data_array("SELECT `pcustomize_title_id`,`pcustomize_attribute_id` FROM `product_custimze_details` WHERE `pid` = '$product_id'");
 		// if(!empty($pcu_slced_list)){
-		// 	foreach ($pcu_slced_list as $psl_key => $psl_val) 
+		// 	foreach ($pcu_slced_list as $psl_key => $psl_val)
 		// 	{
 		// 		array_push($sled_cus_list,$psl_val['pcustomize_attribute_id']);
-		// 	}			
+		// 	}
 		// }
 
 		$unit_list = $this->custom_model->get_data_array("SELECT * FROM unit_list ORDER BY unit_name ASC ");
@@ -798,14 +824,14 @@ class Product extends Admin_Controller {
 		$supplier_data = $this->custom_model->get_data_array("SELECT id,first_name FROM admin_users WHERE type='suppler' AND is_email_verify='1' ORDER BY id ASC ");
 
 		$city_list = $this->custom_model->get_data_array("SELECT * FROM city_list ORDER BY city_name ASC ");
-		
+
 
 		// 	$selcted_subcategory="";
 		// if(!empty($sub_category))
 		// {
 		// 	foreach ($sub_category as $sel_catkey => $sub_category) {
-			
-		// 	$selcted_subcategory = $sub_category['id'].','.$selcted_subcategory;			
+
+		// 	$selcted_subcategory = $sub_category['id'].','.$selcted_subcategory;
 		// 	}
 		// 	$selcted_subcategory = rtrim($selcted_subcategory,',');
 		// }
@@ -823,11 +849,11 @@ class Product extends Admin_Controller {
 		$this->mViewData['brand_data'] = $brand_data;
 		$this->mViewData['unit_list'] = $unit_list;
 
-			
+
 		$this->mViewData['edit'] = $product_data[0];
 
 		$this->mViewData['groups'] = $groups;
-		$this->mViewData['pcustomize_list'] = $pcustomize_list;		
+		$this->mViewData['pcustomize_list'] = $pcustomize_list;
 		$this->mViewData['sled_cus_list'] = $sled_cus_list;
 		$this->mViewData['supplier_data'] = $supplier_data;
 		$this->mViewData['seller_id'] = $this->mUser->id;
@@ -846,7 +872,8 @@ class Product extends Admin_Controller {
 	}
 
 
-	
+
+
 	public function tedit($product_id)
 	{
 
@@ -856,7 +883,7 @@ class Product extends Admin_Controller {
 			$err_msg1='Product updated successfully';
 			$err_msg2='Something went wrong';
 			$err_msg3='Edit Product';
-		}else{			
+		}else{
 			$err_msg1='Product updated successfully';
 			$err_msg2='هناك خطأ ما';
 			$err_msg3='تعديل منتج';
@@ -868,7 +895,7 @@ class Product extends Admin_Controller {
 			$this->mViewData['vendor'] = 1;
 		}
 		$form = $this->form_builder->create_form('','','id="wizard_with_validation" class="wizard clearfix"');
-		$post_data = $this->input->post();	
+		$post_data = $this->input->post();
 
 
          $user_details = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","","",array(),"",false);
@@ -876,11 +903,11 @@ class Product extends Admin_Controller {
 		// echo "<pre>";
 		$this->mViewData['udata'] = $udata;
 		$this->mViewData['user_details'] = $user_details;
-		
-		
+
+
 
 		if ( !empty($post_data) )
-		{		
+		{
 			// echo 	"<pre>";
 			// print_r($post_data);
 			// die;
@@ -930,7 +957,7 @@ class Product extends Admin_Controller {
 						$tags[] = implode(',', $evalue);
 						// echo $tags;
 
-					}					
+					}
 				}
 				// if (!empty($tags))
 				// {
@@ -943,7 +970,7 @@ class Product extends Admin_Controller {
 			// }
 
 			$product_data = $this->custom_model->my_where('product_trans','*',array('id' => $product_id),array(),"","","","",array(),"object");
-			
+
 			if( $udata[0]['group_id'] == 5 ){
 			 // $post_data['seller_id'] = $this->mUser->id;
 			}
@@ -967,7 +994,7 @@ class Product extends Admin_Controller {
 				if(!empty($attribute2))
 				{
 					$attribute=$attribute2;
-				}				
+				}
 				if(isset($post_data['attribute'])) unset($post_data['attribute']);
 				if(isset($post_data['customize_att']) && !empty($post_data['customize_att']))
 				{
@@ -1004,36 +1031,36 @@ class Product extends Admin_Controller {
 				{
 					$update_into_product['special_menu']=$post_data['special_menu'];
 				}
-				
+
 				$this->custom_model->my_update($update_into_product,array('id' => $product_id),'product');
 
 
 				$this->custom_model->my_delete(['pid' => $product_id], 'product_custimze_details');
-				if (!empty($customize_att)) 
-				{					
+				if (!empty($customize_att))
+				{
 					foreach ($customize_att as $askey => $asvalue)
 					{
 						$myArray = explode(',', $asvalue);
 
 						foreach ($myArray as $asdkey => $asdvalue)
-						{				
+						{
 							if ($asdkey == 0)
 							{
 								$pcustomize_title_id = $asdvalue;
 								unset($asdvalue);
 							}
 							else
-							{									
+							{
 								$c_data['pcustomize_title_id'] = $pcustomize_title_id;
 								$c_data['pcustomize_attribute_id'] = $asdvalue;
 								$c_data['pid'] = $product_id;
 								// print_r($c_data);
 								$this->custom_model->my_insert($c_data,'product_custimze_details');
 							}
-						}					
+						}
 					}
 				}
-									
+
 				$this->custom_model->my_delete(['p_id' => $product_id], 'product_attribute');
 				if($post_data['price_select']==2)
 				{
@@ -1044,7 +1071,7 @@ class Product extends Admin_Controller {
 						$this->custom_model->my_insert(['attribute_id' => $size_id[0]['a_id'], 'p_id' => $product_id, 'item_id' => $aval,'price'=>$attribute_price[$ak],'sale_price'=>$attribute_sale_price[$ak],'id_size'=>$attribute_id_size[$ak],'qty'=>$attribute_qty[$ak]], 'product_attribute');
 						// $this->custom_model->my_insert(['attribute_id' => $size_id[0]['a_id'], 'p_id' => $product_id, 'item_id' => $aval], 'product_attribute');
 					}
-				}	
+				}
 
 				if ($response)
 				{
@@ -1079,13 +1106,13 @@ class Product extends Admin_Controller {
 			{
 				redirect('admin/product/list1');
 			}
-		}		
-		
+		}
+
 		// echo "<pre>";
 		// print_r($product_data);
 		// die;
-		
-	
+
+
 		// multi vender comment
 		// $category = $product_data[0]->category;
 		// if(!empty($acategories)){
@@ -1105,8 +1132,8 @@ class Product extends Admin_Controller {
 		// 			$jeq = $cvalue->parent;
 		// 		}
 		// 	}
-		// }	
-		
+		// }
+
 		// $this->mViewData['jeq'] = $jeq;
 		// $this->mViewData['ieq'] = $ieq;
 		// //print_r($this->mViewData);die;
@@ -1136,7 +1163,7 @@ class Product extends Admin_Controller {
 		{
 			$attribute_item2 = $this->custom_model->get_data_array("SELECT * FROM attribute_item WHERE id = ".$pavalue2['item_id']);
 			$p_attr[$pakey2]['item_name']=$attribute_item2[0]['item_name'];
-			
+
 		}
 		$this->mViewData['product_attribute'] = $patr;
 
@@ -1177,13 +1204,13 @@ class Product extends Admin_Controller {
 
 			}
 		}
-		$sled_cus_list=array();		
+		$sled_cus_list=array();
 		$pcu_slced_list = $this->custom_model->get_data_array("SELECT `pcustomize_title_id`,`pcustomize_attribute_id` FROM `product_custimze_details` WHERE `pid` = '$product_id'");
 		if(!empty($pcu_slced_list)){
-			foreach ($pcu_slced_list as $psl_key => $psl_val) 
+			foreach ($pcu_slced_list as $psl_key => $psl_val)
 			{
 				array_push($sled_cus_list,$psl_val['pcustomize_attribute_id']);
-			}			
+			}
 		}
 
 		$unit_list = $this->custom_model->get_data_array("SELECT * FROM unit_list_trans ORDER BY unit_name ASC ");
@@ -1191,14 +1218,14 @@ class Product extends Admin_Controller {
 		$supplier_data = $this->custom_model->get_data_array("SELECT id,first_name FROM admin_users WHERE type='suppler' AND is_email_verify='1' ORDER BY id ASC ");
 
 		$city_list = $this->custom_model->get_data_array("SELECT * FROM city_list ORDER BY city_name ASC ");
-		
+
 
 		// 	$selcted_subcategory="";
 		// if(!empty($sub_category))
 		// {
 		// 	foreach ($sub_category as $sel_catkey => $sub_category) {
-			
-		// 	$selcted_subcategory = $sub_category['id'].','.$selcted_subcategory;			
+
+		// 	$selcted_subcategory = $sub_category['id'].','.$selcted_subcategory;
 		// 	}
 		// 	$selcted_subcategory = rtrim($selcted_subcategory,',');
 		// }
@@ -1216,11 +1243,11 @@ class Product extends Admin_Controller {
 		$this->mViewData['brand_data'] = $brand_data;
 		$this->mViewData['unit_list'] = $unit_list;
 
-			
+
 		$this->mViewData['edit'] = $product_data[0];
 
 		$this->mViewData['groups'] = $groups;
-		$this->mViewData['pcustomize_list'] = $pcustomize_list;		
+		$this->mViewData['pcustomize_list'] = $pcustomize_list;
 		$this->mViewData['sled_cus_list'] = $sled_cus_list;
 		$this->mViewData['supplier_data'] = $supplier_data;
 		$this->mViewData['seller_id'] = $this->mUser->id;
@@ -1240,7 +1267,7 @@ class Product extends Admin_Controller {
 
 
 	public function csv_upload($user_id = "",$language = "")
-	{	 
+	{
 		$language= $this->uri->segment(1);
 		$query = array();
 		$seller_id=$this->mUser->id;
@@ -1248,20 +1275,20 @@ class Product extends Admin_Controller {
 		{
 			redirect($language.'/admin/login');
 		}
-		
+
 	    $csvMimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
 	    // echo "<pre>";
 	    // print_r($_FILES);
 	    // die;
 	    if (!empty($_FILES))
-	    {	    
+	    {
 		    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'],$csvMimes))
 		    {
 		        if(is_uploaded_file($_FILES['file']['tmp_name']))
 		        {
 		            //open uploaded csv file with read only mode
 		            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-		        
+
 					// skip first line
 					// if your csv file have no heading, just comment the next line
 
@@ -1311,7 +1338,7 @@ class Product extends Admin_Controller {
 			        	$inc_data = $is_cat = $is_sub = array();
 
 						if(!empty($seller_id)) $inc_data['seller_id'] = $seller_id;
-						
+
 						if(!empty($product_name)) $inc_data['product_name'] = $product_name;
 
 						if(!empty($tags)) $inc_data['tags'] 		  = $tags;
@@ -1323,12 +1350,12 @@ class Product extends Admin_Controller {
 							$is_brand = $this->custom_model->my_where('brand','id',array('id' => $brand));
 							if(!empty($is_brand))
 							{
-								$inc_data['brand'] 			= $brand;	
+								$inc_data['brand'] 			= $brand;
 							}
-						} 
+						}
 
 						if(!empty($category))
-						{							
+						{
 							$is_cat = $this->custom_model->my_where('category','id',array('id' => $category));
 
 							if(!empty($is_cat))
@@ -1338,7 +1365,7 @@ class Product extends Admin_Controller {
 						}
 
 						if(!empty($category) && !empty($subcategory) )
-						{							
+						{
 							$is_sub = $this->custom_model->my_where('category','id',array('id' => $subcategory,'parent'=>$category));
 
 							if(!empty($is_sub))
@@ -1346,7 +1373,7 @@ class Product extends Admin_Controller {
 								$inc_data['subcategory'] 	= $subcategory;
 							}
 						}
-						
+
 						if(!empty($description)) $inc_data['description'] = $description;
 						if(!empty($specification)) $inc_data['specification'] = $specification;
 
@@ -1356,13 +1383,13 @@ class Product extends Admin_Controller {
 							if(!empty($is_unite))
 							{
 								$inc_data['unite'] = $unite;
-							}				        		
-				        } 
+							}
+				        }
 
 
 				        if(!empty($price)) $inc_data['price'] = $price;
-				        if(!empty($sale_price)) $inc_data['sale_price'] = $sale_price;        
-				        
+				        if(!empty($sale_price)) $inc_data['sale_price'] = $sale_price;
+
 				        if(!empty($min_order_quantity)) $inc_data['min_order_quantity']= $min_order_quantity;
 				        if(!empty($stock)) $inc_data['stock'] 				= $stock;
 
@@ -1379,11 +1406,11 @@ class Product extends Admin_Controller {
 
 				        if(!empty($is_sample_order)) $inc_data['is_sample_order'] = $is_sample_order;
 
-				        if(!empty($packaging_type)) 
+				        if(!empty($packaging_type))
 				        {
 					        if (in_array($packaging_type, $this->get_packaging_type()))
 							{
-					        	$inc_data['packaging_type'] = $packaging_type;					  	
+					        	$inc_data['packaging_type'] = $packaging_type;
 							}
 				        }
 
@@ -1402,41 +1429,41 @@ class Product extends Admin_Controller {
 							if(!empty($is_city))
 							{
 								$inc_data['city'] = $city;
-							}				        		
-				        }    
-
-				        
-
-				        if(!empty($req_loading)) 
-				        {
-					        if (in_array($req_loading, $this->get_req_loading()))
-							{
-					        	$inc_data['req_loading'] = $req_loading;					  	
 							}
 				        }
 
-				        if(!empty($vehical_requirement)) 
+
+
+				        if(!empty($req_loading))
+				        {
+					        if (in_array($req_loading, $this->get_req_loading()))
+							{
+					        	$inc_data['req_loading'] = $req_loading;
+							}
+				        }
+
+				        if(!empty($vehical_requirement))
 				        {
 					        if (in_array($vehical_requirement, $this->vehical_requirement()))
 							{
-					        	$inc_data['vehical_requirement'] = $vehical_requirement;			
+					        	$inc_data['vehical_requirement'] = $vehical_requirement;
 							}
-				        }				        
+				        }
 
-				        if(!empty($is_hazardous)) 
+				        if(!empty($is_hazardous))
 				        {
 					        if (in_array($is_hazardous, $this->get_hazardous()))
 							{
-					        	$inc_data['is_hazardous'] = $is_hazardous;					  	
+					        	$inc_data['is_hazardous'] = $is_hazardous;
 							}
-				        }		
+				        }
 
 				        $inc_data['is_csv'] = 1;
 				        $inc_data['status'] = 1;
-				        $inc_data['update_date'] = date('Y-m-d');		        
+				        $inc_data['update_date'] = date('Y-m-d');
 
 				        if(!empty($product_image) )
-						{							
+						{
 							$is_image = $this->custom_model->my_where('upload_images','id',array('image' => $product_image));
 
 							if(!empty($is_image))
@@ -1444,10 +1471,10 @@ class Product extends Admin_Controller {
 								$inc_data['product_image'] = $product_image;
 							}
 						}
-				        
+
 
 				        if(!empty($image_gallery) )
-						{		
+						{
 							$multiple_image = explode(',', $image_gallery);
 							if (!empty($multiple_image))
 							{
@@ -1475,12 +1502,12 @@ class Product extends Admin_Controller {
 
 				        //if (!empty($product_image))
 				        //{
-				        	//$content = file_get_contents($product_image);				       	
+				        	//$content = file_get_contents($product_image);
 							//$image_name  = 	date('YmdHis').'.jpeg';
 							//$fp = fopen(UPLOAD_BLOG_POST1.$image_name, "w");
 							//fwrite($fp, $content);
 							//fclose($fp);
-				        //}	      
+				        //}
 
 
 				        // if (!empty($image_gallery))
@@ -1494,27 +1521,27 @@ class Product extends Admin_Controller {
 									// $multiple_image = $mvalue;
 									// $content = file_get_contents($multiple_image);
 
-									// $random_no = mt_rand(100000,999999); 
+									// $random_no = mt_rand(100000,999999);
 
 								    // $multiple_image_name  = $random_no.date('YmdHis').'.jpeg';
 									// $fp = fopen(UPLOAD_BLOG_POST1.$multiple_image_name, "w");
 									// fwrite($fp, $content);
 									//fclose($fp);
-									// $get_imags[] = $multiple_image_name; 
+									// $get_imags[] = $multiple_image_name;
 									// $a =  implode(', ', $multiple_image_name);
 								// }
-								// $mul_imgs = implode(',', $get_imags);							
+								// $mul_imgs = implode(',', $get_imags);
 								// if(!empty($mul_imgs)) $additional_data['image_gallery'] 	= $mul_imgs;
 							// }
 				        // }
 
-				        // if(!empty($image_name)) $inc_data['product_image'] 	= $image_name;	    
+				        // if(!empty($image_name)) $inc_data['product_image'] 	= $image_name;
 				       	// echo "<pre>";
 				       	// print_r($is_cat);
 				       	// print_r($is_sub);
 				       	// die;
 				       	if(!empty($is_cat) && !empty($is_sub))
-				       	{				       		
+				       	{
 					        $is_product = $this->custom_model->my_where('product','id',array('product_name' => $product_name,'seller_id'=>$seller_id));
 					        if(empty($is_product))
 					        {
@@ -1527,7 +1554,7 @@ class Product extends Admin_Controller {
 					        	$error[$i]['error']='For '.$product_name.' Invalid category or sub caetgory id passsed';
 					        }
 
-				        $i++;				        
+				        $i++;
 					}
 		            //close opened csv file
 		            fclose($csvFile);
@@ -1565,16 +1592,16 @@ class Product extends Admin_Controller {
 		if(empty($seller_id))
 		{
 			redirect($language.'/admin/login');
-		}		
-		
-		if (!empty($_FILES)) 
-		{				    
+		}
+
+		if (!empty($_FILES))
+		{
 			$folder_name='admin/products/';
 
 		    foreach($_FILES['file']['name'] as $key => $value)
 		    {
 	            if(isset($_FILES['file']['name'][$key]) && $_FILES['file']['name'][$key]!='')
-				{				
+				{
 					$file_name = $_FILES["file"]['name'][$key];
 					$file_temp = $_FILES["file"]['tmp_name'][$key];
 					$image_name = $this->uploads_new($file_name,$file_temp,$folder_name);
@@ -1585,9 +1612,9 @@ class Product extends Admin_Controller {
 						$inc_data['image']=$image_name;
 						$response = $this->custom_model->my_insert( $inc_data,'upload_images');
 					}
-				}		    				    
+				}
 		    }
-		}		
+		}
 		$this->session->set_flashdata('csv_insert', 'Images upload  successfully');
 		redirect($language.'/admin/product/list1');
     }
@@ -1610,10 +1637,10 @@ class Product extends Admin_Controller {
 
 	public function top_sold_csv_download()
 	{
-		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'buyer', 'active' =>1),array(),"id","ASC");		
-		
+		$data = $this->custom_model->my_where("admin_users","id,username,email,created_on,phone,first_name,last_name",array('id!='=>1,'type'=>'buyer', 'active' =>1),array(),"id","ASC");
+
 		$file_name='Active_Customer_info'.date("d-m-Y").'.csv';
-		
+
 
 		 if (!empty($data))
 		 {
@@ -1621,9 +1648,9 @@ class Product extends Admin_Controller {
 		 header("Content-Disposition: attachment; filename=\"$file_name\";");
 		 // header("Content-Disposition: attachment; filename=" );
 
-		 
+
 		 $str = 'Id,Username,Mobile No,Email,Date';
-		 
+
 		 $fp = fopen('php://output', 'wb');
 
 
@@ -1640,7 +1667,7 @@ class Product extends Admin_Controller {
 		 $DATACSV[] = $value['phone'];
 		 $DATACSV[] = $value['email'];
 		 $DATACSV[] = $date;
-		  
+
 			fputcsv($fp, $DATACSV);
 			$DATACSV = array();
 		 }
@@ -1649,33 +1676,39 @@ class Product extends Admin_Controller {
 		 {
 		 $lang['ALERT'] =" No data found";
 		 echo "<script>alert('" . $lang['ALERT'] . "')</script>";
-		 }		 
+		 }
 		 die;
 	}
 
     public function get_subcategory_data()
 	{
-		$post_data = $this->input->post();			
+		$language= $this->uri->segment(1);
+		
+		$post_data = $this->input->post();
 		if(!empty($post_data))
-		{			
+		{
 			// echo "<pre>";
-			// print_r($post_data);die;	
+			// print_r($language);die;
+			if($language=='en'){
 			$category = $this->custom_model->my_where('category','id,display_name',array('parent'=>$post_data['cat_id'],'status'=>'active'));
+			} else {
+			$category = $this->custom_model->my_where('category_trans','id,display_name',array('parent'=>$post_data['cat_id'],'status'=>'active'));	
+			}
 			if(!empty($category))
 			{
-				echo json_encode($category);			
+				echo json_encode($category);
 				die;
 			}else {
 				echo "not_found";
 				die;
-			}	
+			}
 			// echo "<pre>";
 			// print_r($category);
-			// die;								
+			// die;
 		}else {
 			echo 0;
 			die;
-		}			
+		}
 	}
 
 	// this for show most user view product
@@ -1707,8 +1740,8 @@ class Product extends Admin_Controller {
 		}
 		 // echo "<pre>";
 		 // print_r($data);
-		 // die;		
-	
+		 // die;
+
 
 		if (!empty($data))
 		{
@@ -1716,9 +1749,9 @@ class Product extends Admin_Controller {
 			 header("Content-Disposition: attachment; filename=\"$file_name\";");
 			 // header("Content-Disposition: attachment; filename=" );
 
-			 
+
 			 $str = 'Product id,Product Name,Product Image,Price';
-			 
+
 			 $fp = fopen('php://output', 'wb');
 
 
@@ -1728,13 +1761,13 @@ class Product extends Admin_Controller {
 
 			 foreach ($data as $key => $value)
 			 {
-			 	
+
 			 	// $date=date('M-d-Y' ,strtotime($value['order_datetime']));
-			 $DATACSV[] = $value['id'];			 
+			 $DATACSV[] = $value['id'];
 			 $DATACSV[] = $value['product_name'];
 			 $DATACSV[] = $value['product_image'];
 			 $DATACSV[] = $value['sale_price'];
-			 	 
+
 				fputcsv($fp, $DATACSV);
 				$DATACSV = array();
 			 }
@@ -1742,39 +1775,39 @@ class Product extends Admin_Controller {
 		else
 		{ ?>
 		 <script>
-		 	alert("No data found")		
+		 	alert("No data found")
 		 url="<?php echo $url ?>";
 		 setTimeout(function(){ window.location=url; }, 2000);
 		 </script>
 
-		<?php }		 
+		<?php }
 		 die;
 		 // $lang['ALERT'] =" No data found";
 	}
 
-	
+
 
     public function cat_data()
    	{
         $category_listing = $this->custom_model->my_where("category","id,display_name",array("parent" => '0'  ) );
 
         if ($category_listing)
-        {        	
-        	foreach ($category_listing as $key => $value) 
+        {
+        	foreach ($category_listing as $key => $value)
         	{
         		echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>";
         		$data = 'Main --> '.$value['id'].' . '.$value['display_name'];
         		echo $data;
 
         		$main_id = $value['id'];
-        		if (!empty($main_id)) 
+        		if (!empty($main_id))
         		{
         			$s_listing = $this->custom_model->my_where("category","id,display_name",array("parent" => $main_id  ) );
-        			if (!empty($s_listing)) 
+        			if (!empty($s_listing))
         			{
-        				
+
         				echo "<p class='asdasd' style='margin-left: 4%;'>";
-        				foreach ($s_listing as $skey => $vsalue) 
+        				foreach ($s_listing as $skey => $vsalue)
         				{
         					$sub_id = $vsalue['id'];
         					// $sdata = $vsalue['id'].' :- '.$vsalue['display_name'];
@@ -1789,10 +1822,10 @@ class Product extends Admin_Controller {
         					// print_r($ss_listing);
         					// die;
 
-        					if (!empty($ss_listing)) 
+        					if (!empty($ss_listing))
         					{
         						echo "<span class='subbbb' style='margin-left: 7%;display: block;'>";
-        						foreach ($ss_listing as $sskey => $ssvalue) 
+        						foreach ($ss_listing as $sskey => $ssvalue)
         						{
         							// $sss = $ssvalue['id'].' :- '.$ssvalue['display_name'];
         							$sss = 'Sub Sub --> '.$ssvalue['id'].' . '.$ssvalue['display_name'];
@@ -1807,21 +1840,21 @@ class Product extends Admin_Controller {
         			}
         		}
         		echo "</span>";
-        	}        	
+        	}
         }
 
-        
+
         $unit_list = $this->custom_model->get_data_array(" SELECT * FROM unit_list ORDER BY id ASC ");
 
         if(!empty($unit_list))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Unit List -->";
-        	foreach ($unit_list as $key => $val) 
+        	foreach ($unit_list as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val['id']." . ".$val['unit_name']."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
 
         $city_list = $this->custom_model->get_data_array(" SELECT * FROM city_list ORDER BY id ASC ");
@@ -1829,12 +1862,12 @@ class Product extends Admin_Controller {
         if(!empty($city_list))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> City List -->";
-        	foreach ($city_list as $key => $val) 
+        	foreach ($city_list as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val['id']." . ".$val['city_name']."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
 
         $pack_arr=$this->get_packaging_type();
@@ -1848,71 +1881,71 @@ class Product extends Admin_Controller {
         if(!empty($pack_arr))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Packaging Type -->";
-        	foreach ($pack_arr as $key => $val) 
+        	foreach ($pack_arr as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
 
         if(!empty($req_loading_arr))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Requirement for Loading -->";
-        	foreach ($req_loading_arr as $key => $val) 
+        	foreach ($req_loading_arr as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
 
         if(!empty($get_hazardous))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Is this Hazardous material -->";
-        	foreach ($get_hazardous as $key => $val) 
+        	foreach ($get_hazardous as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
 
         if(!empty($vehical_requirement))
         {
         	echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Vehicle Requirement -->";
-        	foreach ($vehical_requirement as $key => $val) 
+        	foreach ($vehical_requirement as $key => $val)
         	{
         		echo "<p class='asdasd' style='margin-left: 4%;'>".$val."</p>";
-        		
+
         	}
-        	echo "</span>";        		
+        	echo "</span>";
         }
    	}
 
 
    	public function uploads_new($file_name,$file_temp,$folder_name)
-    {    	
+    {
         if (isset($file_name)) {
             // $upload_dir = ASSETS_PATH . "/admin/usersdata/";
-            $upload_dir = ASSETS_PATH . $folder_name;            
+            $upload_dir = ASSETS_PATH . $folder_name;
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
             // $file_name    = $FILES['name'];
             // $random_digit = rand(0000, 999);
             // $random_digit = md5(time()).$random_digit;
-            
+
             $target_file  = $upload_dir . basename($file_name);
             $ext          = pathinfo($target_file, PATHINFO_EXTENSION);
-            
+
             // $new_file_name = $random_digit . "." . $ext;
             $file_name_without_ex = basename($file_name,'.'.$ext);
             $file_name_without_ex = $this->get_slug($file_name_without_ex);
-            $new_file_name=$this->is_file($upload_dir,$file_name_without_ex,$ext); 
+            $new_file_name=$this->is_file($upload_dir,$file_name_without_ex,$ext);
 
             $new_file_name = $new_file_name . "." . $ext;
-            $path          = $upload_dir . $new_file_name;                    
+            $path          = $upload_dir . $new_file_name;
             if (move_uploaded_file($file_temp, $path)) {
                 return $new_file_name;
             } else {
@@ -1920,21 +1953,21 @@ class Product extends Admin_Controller {
             }
         } else {
             return false;
-            
+
         }
     }
 
     public function is_file($upload_dir,$file_name_without_ex,$ext)
-	{	
+	{
 		// this funtion is used to check file exists if yes then genrate new file name
-		$path=$upload_dir.$file_name_without_ex.".".$ext;		
+		$path=$upload_dir.$file_name_without_ex.".".$ext;
 		if(file_exists($path))
 		{
 			$random_digit = mt_rand(2,99);
 			$file_name_without_ex=$file_name_without_ex.$random_digit;
-			$this->is_file($upload_dir,$file_name_without_ex,$ext);			
+			$this->is_file($upload_dir,$file_name_without_ex,$ext);
 		}
-		return $file_name_without_ex;		
+		return $file_name_without_ex;
 	}
 
 	public function get_slug($title)
@@ -1949,11 +1982,11 @@ class Product extends Admin_Controller {
 		if($language=='en')
 		{
 			$err_msg1='Image List';
-		}else{			
+		}else{
 			$err_msg1='Image List';
 		}
 
-		$this->load->library('pagination');  
+		$this->load->library('pagination');
 
    		$post_data = $this->input->post();
 
@@ -1962,7 +1995,7 @@ class Product extends Admin_Controller {
 			$rowno = $post_data['pagno'];
 			$ajax 	= $post_data['ajax'];
 			$serach = $post_data['serach'];
-		}		
+		}
 		 // Row per page
     	$rowperpage = 25;
     	$page_no=0;
@@ -1974,50 +2007,50 @@ class Product extends Admin_Controller {
     	}
     	if($ajax=='call')
 		{
-			$image_data = $this->custom_model->get_data_array("SELECT * FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC limit $rowno,$rowperpage ");	
+			$image_data = $this->custom_model->get_data_array("SELECT * FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC limit $rowno,$rowperpage ");
 
-			$image_count = $this->custom_model->get_data_array("SELECT COUNT(id) as image_count FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC  ");				
-			
-   		}else 
+			$image_count = $this->custom_model->get_data_array("SELECT COUNT(id) as image_count FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC  ");
+
+   		}else
    		{
 			if(empty($serach))
 			{
-				$image_data = $this->custom_model->get_data_array("SELECT * FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC limit $rowno,$rowperpage ");	
+				$image_data = $this->custom_model->get_data_array("SELECT * FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC limit $rowno,$rowperpage ");
 
-				$image_count = $this->custom_model->get_data_array("SELECT COUNT(id) as image_count FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC  ");	
+				$image_count = $this->custom_model->get_data_array("SELECT COUNT(id) as image_count FROM upload_images WHERE seller_id=".$this->mUser->id." ORDER BY id DESC  ");
 
 			}
-			else {	
+			else {
 
 				$image_data = $this->custom_model->get_data_array("SELECT * FROM upload_images WHERE (image LIKE '%$serach%' OR id LIKE '%$serach%') AND seller_id=".$this->mUser->id." ORDER BY id DESC limit $rowno,$rowperpage ");
 
 				$image_count = $this->custom_model->get_data_array("SELECT COUNT(id) as brand_count FROM upload_images WHERE (image LIKE '%$serach%' OR id LIKE '%$serach%') AND seller_id=".$this->mUser->id." ORDER BY id DESC  ");
-					
-			}	
+
+			}
 		}
 
 
 		// if(!empty($blog_data))
 		// {
-		// 	foreach ($blog_data as $bd_key => $bd_val) 
+		// 	foreach ($blog_data as $bd_key => $bd_val)
 		// 	{
 		// 		$blog_data[$bd_key]['created_date']=date('M-d-Y' ,strtotime($bd_val['created_date']));
 		// 	}
 		// }
 
-		
+
 		// echo "<pre>";
 		// print_r($image_data);
 		// die;
 		$config['base_url'] = base_url().'admin/product/index';
 	    $config['use_page_numbers'] = TRUE;
 	    $config['total_rows'] = $image_count[0]['image_count'];
-	    $config['per_page'] = $rowperpage;   
-	    $config['page_query_string'] = FALSE;             
-	    $config['enable_query_strings'] = FALSE;             
-	    $config['reuse_query_string']  = FALSE;             
-	    $config['cur_page'] = $page_no;  
-	    
+	    $config['per_page'] = $rowperpage;
+	    $config['page_query_string'] = FALSE;
+	    $config['enable_query_strings'] = FALSE;
+	    $config['reuse_query_string']  = FALSE;
+	    $config['cur_page'] = $page_no;
+
 	     // Initialize
 	    $this->pagination->initialize($config);
 	     // Initialize $data Array
@@ -2025,29 +2058,29 @@ class Product extends Admin_Controller {
 	    $data['result'] = $image_data;
 	    $data['row'] = $rowno;
 	    $data['total_rows'] = $image_count[0]['image_count'];
-	    // $this->mViewData['pagination'] = $this->pagination->create_links();	
-	    // this for when page load	     				
-	    if($ajax =='call' && $rowno==0 && empty($post_data)){			    	
-	    	$this->mViewData['pagination'] = $this->pagination->create_links();		     				
+	    // $this->mViewData['pagination'] = $this->pagination->create_links();
+	    // this for when page load
+	    if($ajax =='call' && $rowno==0 && empty($post_data)){
+	    	$this->mViewData['pagination'] = $this->pagination->create_links();
 		}elseif($serach !='') {  // this for search button pagination
 			echo json_encode($data);
- 			exit;    				 
+ 			exit;
 		}else { // this for pagination-
  			echo json_encode($data);
- 			exit; 	
+ 			exit;
 		}
-		
+
 		// echo "<Pre>";
 		// print_r($brand_data);
 		// die;
-		$this->mPageTitle = $err_msg1;		
+		$this->mPageTitle = $err_msg1;
 		$this->mViewData['image_data'] = $image_data;
 		$this->mViewData['seller_id'] = $this->mUser->id;
 		$this->render('product/uploaded_image_list');
 
 	}
 
-	
+
 
 }
 

@@ -145,7 +145,7 @@
                                 <li><?php echo lang('contact_no'); ?>: <?php echo $order_data[0]['mobile_no']; ?></li>
                             </ul>
                         </div>
-                        <div class="col-sm-12 payment-mode">
+                        <div class="col-sm-12 payment-mode" style="margin-top: 20px;" >
                             <h4><?php echo lang('Payment_Method'); ?></h4>
                             <?php if($order_data[0]['payment_mode']=='cash-on-del'){ ?>
                                 <p><?php echo lang('Virtual_Account_Transfer'); ?></p>
@@ -154,7 +154,7 @@
                             <?php } ?>
                         </div>
                         <br>
-                        <div class="col-sm-12 payment-mode" style="    margin-top: 20px;" >
+                        <div class="col-sm-12 payment-mode" style="margin-top: 20px;" >
                             <h4><?php echo lang('Payment_Status'); ?></h4>
                             <?php if($order_data[0]['payment_mode']=='cash-on-del'){ 
                                 echo lang('Unpaid');

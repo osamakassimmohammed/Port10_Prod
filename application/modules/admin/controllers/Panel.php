@@ -400,7 +400,7 @@ class Panel extends Admin_Controller {
 		}
 
 		// echo "<pre>";
-		// print_r($subsupplier_data);
+		// print_r($subsupplier_data[0]['logo']);
 		// die;
 		$this->mViewData['city_list'] = $city_list;
 		$this->mViewData['state_list'] = $state_list;

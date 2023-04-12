@@ -65,6 +65,10 @@
         position: relative;
         z-index: 2;
     }
+
+    select option {
+        border-radius: 10px !important;
+    }
 </style>
 
 
@@ -76,7 +80,8 @@
         <div class="row">
             <div class="col-lg-6 sing_in_tn_wrp">
 
-                <div class="cover_panl_login cove_panel_hide wow slideInRight" data-wow-duration="0.8s" data-wow-delay="0s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0s;">
+                <div class="cover_panl_login cove_panel_hide wow slideInRight" data-wow-duration="0.8s"
+                    data-wow-delay="0s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0s;">
                     <div class="crt_acnt_a welcm_back_title">
                         <?php echo lang('Welcome_Back'); ?>
                     </div>
@@ -85,29 +90,48 @@
                         <?php echo lang('Log_in_&_get_access_to_your_account'); ?>
                     </div>
 
-                    <div class="signin_covr_btn"> <?php echo lang('Sign_In'); ?> </div>
+                    <div class="signin_covr_btn">
+                        <?php echo lang('Sign_In'); ?>
+                    </div>
 
                 </div>
 
-                <div class="wow signin_formmn" data-wow-duration="0.7s" data-wow-delay="0.0s" style="visibility: visible; animation-duration: 0.7s; animation-delay: 0.0s;">
-                    <h3 class="log_pg_title"> <?php echo lang('Sign_In'); ?></h3>
+                <div class="wow signin_formmn" data-wow-duration="0.7s" data-wow-delay="0.0s"
+                    style="visibility: visible; animation-duration: 0.7s; animation-delay: 0.0s;">
+                    <h3 class="log_pg_title">
+                        <?php echo lang('Sign_In'); ?>
+                    </h3>
                     <div class="theme-card">
                         <form class="theme-form" method="POST" id="login_form">
                             <div class="form-group first_fld_top">
-                                <label for="lcr_number"><?php echo lang('Enter_CR'); ?></label>
-                                <input type="text" class="form-control" id="lcr_number" placeholder="<?php echo lang('Enter_CR'); ?>" name="cr_number" value="<?php echo $remember_arr['remember_user_name']; ?>">
+                                <label for="lcr_number">
+                                    <?php echo lang('Enter_CR'); ?>
+                                </label>
+                                <input type="text" class="form-control" id="lcr_number"
+                                    placeholder="<?php echo lang('Enter_CR'); ?>" name="cr_number"
+                                    value="<?php echo $remember_arr['remember_user_name']; ?>">
                             </div>
                             <div class="form-group">
-                                <label for="lpass"><?php echo lang('Enter_Your_Password'); ?></label>
-                                <input type="password" class="form-control" id="lpass" placeholder="<?php echo lang('Enter_Your_Password'); ?>" name="pass" value="<?php echo $remember_arr['remember_password']; ?>">
+                                <label for="lpass">
+                                    <?php echo lang('Enter_Your_Password'); ?>
+                                </label>
+                                <input type="password" class="form-control" id="lpass"
+                                    placeholder="<?php echo lang('Enter_Your_Password'); ?>" name="pass"
+                                    value="<?php echo $remember_arr['remember_password']; ?>">
                                 <label class="">
                                     <span toggle="#lpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     <input type="checkbox" name="remember_me" <?php echo $remember_c; ?>>
-                                    <span class="login_ck_spn"><?php echo lang('Keep_Me_Signed_In'); ?></span> </label>
+                                    <span class="login_ck_spn">
+                                        <?php echo lang('Keep_Me_Signed_In'); ?>
+                                    </span> </label>
                             </div>
-                            <button class="btn btn-solid sign_in"> <?php echo lang('Sign_In'); ?></button><br />
+                            <button class="btn btn-solid sign_in">
+                                <?php echo lang('Sign_In'); ?>
+                            </button><br />
 
-                            <a id="forget_pss_link" href="javascript:void(0)" class="forgt_pass"> <?php echo lang('Forgot_Password'); ?>? </a>
+                            <a id="forget_pss_link" href="javascript:void(0)" class="forgt_pass">
+                                <?php echo lang('Forgot_Password'); ?>?
+                            </a>
                             <div class="clear"></div>
                         </form>
                     </div>
@@ -115,20 +139,32 @@
                 </div>
 
                 <div class="forget_form" style="display: none;">
-                    <h3><?php echo lang('FORGOT_YOUR_PASSWORD'); ?></h3>
+                    <h3>
+                        <?php echo lang('FORGOT_YOUR_PASSWORD'); ?>
+                    </h3>
                     <div class="theme-card">
                         <form class="theme-form" method="POST" id="forget_form">
                             <div class="form-group first_fld_top">
-                                <label for="lcr_number"><?php echo lang('Email_Id'); ?></label>
-                                <input type="text" class="form-control" id="forget_email" placeholder="<?php echo lang('Enter_email_id'); ?>" name="username">
+                                <label for="lcr_number">
+                                    <?php echo lang('Email_Id'); ?>
+                                </label>
+                                <input type="text" class="form-control" id="forget_email"
+                                    placeholder="<?php echo lang('Enter_email_id'); ?>" name="username">
                             </div>
                             <div class="form-group first_fld_top">
-                                <label for="lcr_number"><?php echo lang('CR_Number'); ?></label>
-                                <input type="text" class="form-control" id="forget_cr_number" placeholder="<?php echo lang('Enter_CR_Number'); ?>" name="cr_number">
+                                <label for="lcr_number">
+                                    <?php echo lang('CR_Number'); ?>
+                                </label>
+                                <input type="text" class="form-control" id="forget_cr_number"
+                                    placeholder="<?php echo lang('Enter_CR_Number'); ?>" name="cr_number">
                             </div>
-                            <button class="btn btn-solid"><?php echo lang('Send'); ?></button>
+                            <button class="btn btn-solid">
+                                <?php echo lang('Send'); ?>
+                            </button>
 
-                            <a id="sign_in_link" href="javascript:void(0)" class="forgt_pass"> <?php echo lang('Sign_In'); ?> </a>
+                            <a id="sign_in_link" href="javascript:void(0)" class="forgt_pass">
+                                <?php echo lang('Sign_In'); ?>
+                            </a>
                             <div class="clear"></div>
                         </form>
                     </div>
@@ -137,7 +173,8 @@
             </div>
             <div class="col-lg-6 right-login sing_up_tn_wrp">
 
-                <div class="cover_panl_reg wow slideInLeft" data-wow-duration="0.8s" data-wow-delay="0s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0s;">
+                <div class="cover_panl_reg wow slideInLeft" data-wow-duration="0.8s" data-wow-delay="0s"
+                    style="visibility: visible; animation-duration: 0.8s; animation-delay: 0s;">
                     <div class="crt_acnt_a">
                         <?php echo lang('Join_Port10'); ?>
                     </div>
@@ -146,19 +183,28 @@
                         <?php echo lang('Become_part_of_our'); ?>
                     </div>
 
-                    <div class="signup_covr_btn"><?php echo lang('Sign_Up'); ?></div>
+                    <div class="signup_covr_btn">
+                        <?php echo lang('Sign_Up'); ?>
+                    </div>
                 </div>
 
-                <div class="wow signup_formmn" data-wow-duration="0.7s" data-wow-delay="0.0s" style="visibility: visible; animation-duration: 0.7s; animation-delay: 0.0s;">
-                    <h3><?php echo lang('Sign_Up'); ?></h3>
+                <div class="wow signup_formmn" data-wow-duration="0.7s" data-wow-delay="0.0s"
+                    style="visibility: visible; animation-duration: 0.7s; animation-delay: 0.0s;">
+                    <h3>
+                        <?php echo lang('Sign_Up'); ?>
+                    </h3>
                     <div class="theme-card authentication-right registr_form_main">
                         <form class="theme-form" id="signup_form" method="POST">
                             <div class="register_panl_1">
 
                                 <div class="form-group first_fld_top ">
-                                    <label for="stype"><?php echo lang('Select_Account_Type'); ?> <span class="strict">*</span></label>
+                                    <label for="stype">
+                                        <?php echo lang('Select_Account_Type'); ?> <span class="strict">*</span>
+                                    </label>
                                     <select class="form-control acount_typ_as" id="stype" name="type">
-                                        <option value=""><?php echo lang('Select_Account_Type'); ?></option>
+                                        <option value="">
+                                            <?php echo lang('Select_Account_Type'); ?>
+                                        </option>
                                         <option value="suppler">Supplier</option>
                                         <option value="buyer">Buyer</option>
                                     </select>
@@ -166,12 +212,22 @@
 
 
                                 <div class="form-group">
-                                    <label for="sestiblishment"><?php echo lang('Entity_Name'); ?> <span class="strict">*</span><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<?php echo lang('Name_of_the_Manufacturer_or_Wholesaler'); ?>"></i></label>
-                                    <input type="text" class="form-control space isSpecial" id="sestiblishment" placeholder="<?php echo lang('Entity_Name'); ?>" name="entity_name">
+                                    <label for="sestiblishment">
+                                        <?php echo lang('Entity_Name'); ?> <span class="strict">*</span><i
+                                            class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="<?php echo lang('Name_of_the_Manufacturer_or_Wholesaler'); ?>"></i>
+                                    </label>
+                                    <input type="text" class="form-control space isSpecial" id="sestiblishment"
+                                        placeholder="<?php echo lang('Entity_Name'); ?>" name="entity_name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="scr_number"><?php echo lang('CR_Number'); ?> <span class="strict">*</span></label>
-                                    <input type="text" class="form-control space" id="scr_number" placeholder="<?php echo lang('CR_Number'); ?>" name="cr_number" onkeypress="return isNumberKey(event)">
+                                    <label for="scr_number">
+                                        <?php echo lang('CR_Number'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input type="text" class="form-control space" id="scr_number"
+                                        placeholder="<?php echo lang('CR_Number'); ?>" name="cr_number"
+                                        onkeypress="return isNumberKey(event)">
 
                                 </div>
 
@@ -180,134 +236,202 @@
                                 <div class="clear"></div>
                                 <label class="">
                                     <input type="checkbox" name="remember_me">
-                                    <span class="login_ck_spn"><?php echo lang('Keep_Me_Signed_In'); ?></span>
+                                    <span class="login_ck_spn">
+                                        <?php echo lang('Keep_Me_Signed_In'); ?>
+                                    </span>
                                 </label>
-                                <button style="margin-right: 95px;width: 200px" id="next1" type="button" class="btn btn-solid regist_nex next_registr1"><?php echo lang('Next'); ?></button>
+                                <button style="width: 200px" id="next1" type="button"
+                                    class="btn btn-solid regist_nex next_registr1">
+                                    <?php echo lang('Next'); ?>
+                                </button>
 
                                 <div class="clear"></div>
                             </div>
 
                             <div class="register_panl_2">
                                 <div class="form-group">
-                                    <label for="sstreet_name"><?php echo lang('Street_Name'); ?> </label>
-                                    <input type="text" class="form-control space" id="sstreet_name" placeholder="<?php echo lang('Street_Name'); ?>" name="street_name">
+                                    <label for="sstreet_name">
+                                        <?php echo lang('Street_Name'); ?>
+                                    </label>
+                                    <input type="text" class="form-control space" id="sstreet_name"
+                                        placeholder="<?php echo lang('Street_Name'); ?>" name="street_name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="sbuilding_no"><?php echo lang('Building_Num'); ?> </label>
-                                    <input type="text" class="form-control space" id="sbuilding_no" placeholder="<?php echo lang('Building_Num'); ?>" name="building_no">
+                                    <label for="sbuilding_no">
+                                        <?php echo lang('Building_Num'); ?>
+                                    </label>
+                                    <input type="text" class="form-control space" id="sbuilding_no"
+                                        placeholder="<?php echo lang('Building_Num'); ?>" name="building_no">
                                 </div>
 
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="scity"><?php echo lang('City'); ?> <span class="strict">*</span></label>
+                                    <label for="scity">
+                                        <?php echo lang('City'); ?> <span class="strict">*</span>
+                                    </label>
                                     <select class="form-control " id="scity" name="city">
-                                        <option value=""><?php echo lang('Select_City'); ?></option>
+                                        <option value="">
+                                            <?php echo lang('Select_City'); ?>
+                                        </option>
                                         <?php if (!empty($city_list)) {
                                             foreach ($city_list as $cl_key => $cl_val) { ?>
                                                 <option value="<?php echo $cl_val['city_name']; ?>"><?php echo $cl_val['city_name']; ?></option>
-                                        <?php }
+                                            <?php }
                                         } ?>
                                     </select>
                                     <!-- <input type="text" class="form-control space" id="scity" placeholder="City" name="city"> -->
                                 </div>
 
                                 <div class="form-group hlf_fld_right">
-                                    <label for="sstate"><?php echo lang('State_Province_Region'); ?> <span class="strict">*</span></label>
+                                    <label for="sstate">
+                                        <?php echo lang('State_Province_Region'); ?> <span class="strict">*</span>
+                                    </label>
                                     <select class="form-control " id="sstate" name="state">
-                                        <option value=""><?php echo lang('Select_State_Province_Region'); ?></option>
+                                        <option value="">
+                                            <?php echo lang('Select_State_Province_Region'); ?>
+                                        </option>
                                         <?php if (!empty($state_list)) {
                                             foreach ($state_list as $sl_key => $sl_val) { ?>
                                                 <option value="<?php echo $sl_val['state_name']; ?>"><?php echo $sl_val['state_name']; ?></option>
-                                        <?php }
+                                            <?php }
                                         } ?>
                                     </select>
                                 </div>
 
                                 <!-- <div style="display: none;" class="form-group hlf_fld_lft">
-                                    <label for="spostal_code"><?php //echo lang('Zip_Or_Postal_Code'); 
-                                                                ?> </label>
+                                    <label for="spostal_code"><?php //echo lang('Zip_Or_Postal_Code');
+                                    ?> </label>
                                     <select class="form-control " id="spostal_code1" name="postal_code1">
-                                        <option value=""><?php //echo lang('Select_Zip_Or_Postal_Code'); 
-                                                            ?></option>
+                                        <option value=""><?php //echo lang('Select_Zip_Or_Postal_Code');
+                                        ?></option>
                                         <?php if (!empty($postal_code_list)) {
                                             foreach ($postal_code_list as $pcl_key => $pcl_val) { ?>
-                                                <option value="<?php //echo $pcl_val['postal_code']; 
-                                                                ?>"><?php// echo $pcl_val['postal_code']; ?></option>
-                                        <?php }
+                                                                <option value="<?php //echo $pcl_val['postal_code'];
+                                                                        ?>"><? php // echo $pcl_val['postal_code']; ?></option>
+                                                    <?php }
                                         } ?>
-                                    </select>                                       
+                                    </select>
                                 </div> -->
 
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="scountry"><?php echo lang('Zip_Or_Postal_Code'); ?></label>
-                                    <input type="text" class="form-control space" id="spostal_code" placeholder="<?php echo lang('Enter_Postal_Code'); ?>" value="" name="postal_code" onkeypress="return isNumberKey(event)">
+                                    <label for="scountry">
+                                        <?php echo lang('Zip_Or_Postal_Code'); ?>
+                                    </label>
+                                    <input type="text" class="form-control space" id="spostal_code"
+                                        placeholder="<?php echo lang('Enter_Postal_Code'); ?>" value=""
+                                        name="postal_code" maxlength="7" onkeypress="return isNumberKey(event)">
                                 </div>
 
                                 <div class="form-group hlf_fld_right">
-                                    <label for="scountry"><?php echo lang('Country'); ?></label>
-                                    <input type="text" class="form-control space" id="scountry" placeholder="<?php echo lang('Country'); ?>" value="Saudi Arabia" name="country" readonly>
+                                    <label for="scountry">
+                                        <?php echo lang('Country'); ?>
+                                    </label>
+                                    <input type="text" class="form-control space" id="scountry"
+                                        placeholder="<?php echo lang('Country'); ?>" value="Saudi Arabia" name="country"
+                                        readonly>
                                 </div>
 
                                 <div class="clear"></div>
 
-                                <a class="btn btn-solid regstr_new_a_bck back_reg_2"><?php echo lang('Back'); ?></a>
-                                <button type="button" id="next2" class="btn btn-solid regist_nex next_registr2"><?php echo lang('Next'); ?></button>
+                                <a class="btn btn-solid regstr_new_a_bck back_reg_2">
+                                    <?php echo lang('Back'); ?>
+                                </a>
+                                <button type="button" id="next2" class="btn btn-solid regist_nex next_registr2">
+                                    <?php echo lang('Next'); ?>
+                                </button>
 
                                 <div class="clear"></div>
                             </div>
 
                             <div class="register_panl_3">
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="sphone"><?php echo lang('Phone'); ?> <span class="strict">*</span></label>
-                                    <input type="text" class="form-control space2 ccp" id="sphone" placeholder="<?php echo lang('Phone'); ?>" name="phone" onkeypress="return isNumberKey(event)">
+                                    <label for="sphone">
+                                        <?php echo lang('Phone'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input type="text" class="form-control space2 ccp" id="sphone"
+                                        placeholder="<?php echo lang('Phone'); ?>" name="phone"
+                                        onkeypress="return isNumberKey(event)">
                                 </div>
                                 <div class="form-group hlf_fld_right">
-                                    <label for="semail"><?php echo lang('Email'); ?> <span class="strict">*</span></label>
-                                    <input type="text" class="form-control space" id="semail" placeholder="<?php echo lang('Email'); ?>" name="email">
+                                    <label for="semail">
+                                        <?php echo lang('Email'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input type="text" class="form-control space" id="semail"
+                                        placeholder="<?php echo lang('Email'); ?>" name="email">
                                 </div>
 
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="svat_number"><?php echo lang('VAT_Number'); ?> <span class="strict">*</span></label>
-                                    <input type="text" class="form-control" id="svat_number" placeholder="<?php echo lang('VAT_Number'); ?>" name="vat_number" onkeypress="return isNumberKey(event)">
+                                    <label for="svat_number">
+                                        <?php echo lang('VAT_Number'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input maxlength="15" type="text" class="form-control" id="svat_number"
+                                        placeholder="<?php echo lang('VAT_Number'); ?>" name="vat_number"
+                                        onkeypress="return isNumberKey(event)">
                                 </div>
                                 <div class="form-group hlf_fld_right">
-                                    <label for="sbank_name"><?php echo lang('Preferred_Bank_Name'); ?><span class="strict">*</span></label>
+                                    <label for="sbank_name">
+                                        <?php echo lang('Preferred_Bank_Name'); ?><span class="strict">*</span>
+                                    </label>
                                     <select class="form-control " id="sbank_name" name="bank_name">
-                                        <option value=""><?php echo lang('Select_Preferred_Bank_Name'); ?></option>
+                                        <option value="">
+                                            <?php echo lang('Select_Preferred_Bank_Name'); ?>
+                                        </option>
                                         <?php if (!empty($bank_details)) {
                                             foreach ($bank_details as $bd_key => $bd_val) { ?>
-                                                <option value="<?php echo $bd_val['id']; ?>"><?php echo $bd_val['bank_name']; ?></option>
-                                        <?php }
+                                                <option value="<?php echo $bd_val['id']; ?>"><?php echo $bd_val['bank_name']; ?>
+                                                </option>
+                                            <?php }
                                         } ?>
                                     </select>
                                 </div>
                                 <div class="clear"></div>
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="siban"><?php echo lang('IBAN'); ?> <span class="strict">*</span></label>
-                                    <input type="text" class="form-control isSpecial" id="siban" placeholder="<?php echo lang('IBAN'); ?>" name="iban">
+                                    <label for="siban">
+                                        <?php echo lang('IBAN'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input maxlength="34" type="text" class="form-control isSpecial" id="siban"
+                                        placeholder="<?php echo lang('IBAN'); ?>" name="iban">
                                 </div>
 
                                 <div class="form-group hlf_fld_right">
-                                    <label for="sbank_name"><?php echo lang('User_Name'); ?> <span class="strict">*</span><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<?php echo lang('Name_of_the_individual'); ?>"></i></label>
-                                    <input type="text" class="form-control space" id="sfirst_name" placeholder="<?php echo lang('User_Name'); ?>" name="first_name">
+                                    <label for="sbank_name">
+                                        <?php echo lang('User_Name'); ?> <span class="strict">*</span><i
+                                            class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="<?php echo lang('Name_of_the_individual'); ?>"></i>
+                                    </label>
+                                    <input type="text" class="form-control space" id="sfirst_name"
+                                        placeholder="<?php echo lang('User_Name'); ?>" name="first_name">
                                 </div>
 
                                 <div class="clear"></div>
                                 <div class="form-group hlf_fld_lft">
-                                    <label for="spass"> <?php echo lang('Password'); ?> <span class="strict">*</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<?php echo lang('password_Minimum'); ?>"></i></label>
-                                    <input type="password" class="form-control" id="spass" placeholder="<?php echo lang('Password'); ?>" name="password">
+                                    <label for="spass">
+                                        <?php echo lang('Password'); ?> <span class="strict">*</span><i
+                                            class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip"
+                                            data-placement="top" title="<?php echo lang('password_Minimum'); ?>"></i>
+                                    </label>
+                                    <input type="password" class="form-control" id="spass"
+                                        placeholder="<?php echo lang('Password'); ?>" name="password">
                                     <span toggle="#spass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
 
                                 <div class="form-group hlf_fld_right">
-                                    <label for="scpass"><?php echo lang('Confirm_Password'); ?> <span class="strict">*</span></label>
-                                    <input type="password" class="form-control" id="scpass" placeholder="<?php echo lang('Confirm_Password'); ?>" name="scpass">
+                                    <label for="scpass">
+                                        <?php echo lang('Confirm_Password'); ?> <span class="strict">*</span>
+                                    </label>
+                                    <input type="password" class="form-control" id="scpass"
+                                        placeholder="<?php echo lang('Confirm_Password'); ?>" name="scpass">
                                     <span toggle="#scpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
 
                                 <div class="clear"></div>
 
-                                <a class="btn btn-solid regstr_new_a_bck back_reg_3"><?php echo lang('Back'); ?></a>
-                                <button class="btn btn-solid regist_nex next_registr3"><?php echo lang('Sign_Up'); ?></button>
+                                <a class="btn btn-solid regstr_new_a_bck back_reg_3">
+                                    <?php echo lang('Back'); ?>
+                                </a>
+                                <button class="btn btn-solid regist_nex next_registr3">
+                                    <?php echo lang('Sign_Up'); ?>
+                                </button>
 
                                 <div class="clear"></div>
                             </div>
@@ -328,7 +452,7 @@
     // $(".register_panl_2").addClass("show_pn_reg");
     // });
 
-    $(".back_reg_2").click(function() {
+    $(".back_reg_2").click(function () {
         $(".register_panl_1").removeClass("hide_pn_reg");
         $(".register_panl_2").removeClass("show_pn_reg");
     });
@@ -338,35 +462,35 @@
     // $(".register_panl_3").addClass("show_pn_reg");
     // });
 
-    $(".back_reg_3").click(function() {
+    $(".back_reg_3").click(function () {
         $(".register_panl_2").addClass("show_pn_reg");
         $(".register_panl_3").removeClass("show_pn_reg");
     });
 
-    $(".signup_covr_btn").click(function() {
+    $(".signup_covr_btn").click(function () {
         $(".cover_panl_reg").addClass("cove_panel_hide");
         $(".cover_panl_login").addClass("cove_panel_show");
     });
 
-    $(".signin_covr_btn").click(function() {
+    $(".signin_covr_btn").click(function () {
         $(".cover_panl_reg").removeClass("cove_panel_hide");
         $(".cover_panl_login").removeClass("cove_panel_show");
     });
 
-    $(".signup_covr_btn").click(function() {
+    $(".signup_covr_btn").click(function () {
         $(".signup_formmn").addClass("fadeInLeft");
         $(".signin_formmn").addClass("fadeOut");
 
     });
 
-    $(".signin_covr_btn").click(function() {
+    $(".signin_covr_btn").click(function () {
 
         $(".signup_formmn").removeClass("fadeInLeft");
         $(".signup_formmn").addClass("fadeOut");
 
     });
 
-    $(".signup_covr_btn").click(function() {
+    $(".signup_covr_btn").click(function () {
         $(".signup_formmn").removeClass("fadeOut");
         $(".signup_formmn").addClass("fadeInLeft");
         $(".signin_formmn ").addClass("fadeOut");
@@ -375,7 +499,7 @@
     });
 
 
-    $(".signin_covr_btn").click(function() {
+    $(".signin_covr_btn").click(function () {
         $(".signin_formmn").removeClass("fadeOut");
         $(".signin_formmn").addClass("fadeInRight");
 
@@ -384,7 +508,7 @@
 </script>
 
 <script type="text/javascript">
-    $(".toggle-password").click(function() {
+    $(".toggle-password").click(function () {
 
         $(this).toggleClass("fa-eye fa-eye-slash");
         var input = $($(this).attr("toggle"));
@@ -394,10 +518,10 @@
             input.attr("type", "password");
         }
     });
-</script>   
+</script>
 
 <script type="text/javascript">
-    $(document).on("click", "#next1", function() {
+    $(document).on("click", "#next1", function () {
         var error = 1;
         var stepone = 1;
         var stype = $("#stype").val();
@@ -423,7 +547,7 @@
             return false;
         }
 
-        if (stype == "suppler" || stype == "buyer") {} else {
+        if (stype == "suppler" || stype == "buyer") { } else {
             error = 0;
             stepone = 0;
             swal("", "Please Select Valid Type", "warning");
@@ -449,7 +573,7 @@
         }
     });
 
-    $(document).on("click", "#next2", function() {
+    $(document).on("click", "#next2", function () {
         var sstreet_name = $.trim($("#sstreet_name").val());
         var sbuilding_no = $.trim($("#sbuilding_no").val());
         var scity = $.trim($("#scity").val());
@@ -494,7 +618,7 @@
         //     steptwo=0;
         //     swal("","Please Select Zip Or Postal Code","warning");
         //     return false;
-        // } 
+        // }
 
         if (scountry != 'Saudi Arabia') {
             error = 0;
@@ -512,7 +636,7 @@
 
 
 <script type="text/javascript">
-    $(document).on("submit", "#signup_form", function(e) {
+    $(document).on("submit", "#signup_form", function (e) {
         e.preventDefault();
         var error = 1;
         var stepone = 1;
@@ -633,7 +757,7 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     $("#loading").hide();
                     response = $.trim(response);
                     if (response == "email") {
@@ -645,17 +769,17 @@
                     } else if (response == "invalid_crnumber") {
                         swal('', "Please Enter Valid CR Number", 'warning');
                     } else if (response == "success") {
-                        // success for user /buyer    
+                        // success for user /buyer
                         swal('<?php echo lang('Successfully_Register'); ?>', "<?php echo lang('Please_verify_your_email'); ?>", 'success');
                         // setTimeout(function(){ },2900);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location = "<?php echo base_url($language . '/home') ?>"
                         }, 3500);
                     } else if (response == "success1") {
-                        //this for suppler and both         
+                        //this for suppler and both
                         swal('<?php echo lang('Successfully_Register'); ?>', "<?php echo lang('Please_verify_your_email'); ?>", 'success');
                         // setTimeout(function(){ },2900);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location = "<?php echo base_url($language . '/home') ?>"
                         }, 3500);
                     } else {
@@ -668,7 +792,7 @@
 </script>
 
 <script type="text/javascript">
-    $(document).on("submit", "#login_form", function(e) {
+    $(document).on("submit", "#login_form", function (e) {
         e.preventDefault();
         var lcr_number = $("#lcr_number").val();
         var lpass = $("#lpass").val();
@@ -696,7 +820,7 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     $('#loading').hide();
                     switch (response) {
                         case 'email':
@@ -720,7 +844,7 @@
                             break;
 
                         case 'logged_user':
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location = "<?php echo base_url($language) ?>"
                             }, 1500);
                             break;
@@ -728,7 +852,7 @@
                         case 'success':
                             swal('', "<?php echo lang('Login_Successfully'); ?>", 'success');
                             // setTimeout(function(){ },2900);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location = "<?php echo base_url($language . '/home') ?>"
                             }, 1500);
                             break;
@@ -736,7 +860,7 @@
                         case 'success1':
                             swal('', "<?php echo lang('Login_Successfully'); ?>", 'success');
                             // setTimeout(function(){ },2900);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location = "<?php echo base_url($language . '/admin') ?>"
                             }, 1500);
                             break;
@@ -752,17 +876,17 @@
 </script>
 
 <script type="text/javascript">
-    $(document).on("click", "#forget_pss_link", function() {
+    $(document).on("click", "#forget_pss_link", function () {
         $(".signin_formmn").hide();
         $(".forget_form").show();
     });
 
-    $(document).on("click", "#sign_in_link", function() {
+    $(document).on("click", "#sign_in_link", function () {
         $(".forget_form").hide();
         $(".signin_formmn").show();
     });
 
-    $(document).on("submit", "#forget_form", function(e) {
+    $(document).on("submit", "#forget_form", function (e) {
         e.preventDefault();
         var forget_email = $.trim($("#forget_email").val());
         var forget_cr_number = $.trim($("#forget_cr_number").val());
@@ -799,7 +923,7 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     $('#loading').hide();
                     response = $.trim(response);
                     if (response == "empty") {
@@ -824,20 +948,20 @@
 
     function plan_swal() {
         swal({
-                title: "<?php echo lang('Login_Successfully'); ?>",
-                text: "<?php echo lang('Your_plan_expired'); ?>",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ok",
-                ancelButtonText: "Cancel",
-                closeOnConfirm: true,
-                closeOnCancel: true
-            },
-            function(inputValue) {
+            title: "<?php echo lang('Login_Successfully'); ?>",
+            text: "<?php echo lang('Your_plan_expired'); ?>",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ok",
+            ancelButtonText: "Cancel",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+            function (inputValue) {
                 if (inputValue === true) {
                     window.location = "<?php echo base_url($language . '/price'); ?>";
                 } else {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location = "<?php echo base_url('admin') ?>"
                     }, 500);
                 }

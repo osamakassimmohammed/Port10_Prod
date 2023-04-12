@@ -41,13 +41,13 @@
                 }
          }else{  ?>
             <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6L3351861"></script>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3MV9XYRT7"></script>
             <script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', 'G-Y6L3351861');
+              gtag('config', 'G-P3MV9XYRT7');
             </script>
             <script type="text/javascript">
                 <?php if($language=='en'){ ?>

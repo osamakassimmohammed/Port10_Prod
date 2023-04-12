@@ -40,7 +40,7 @@ class User_account {
 		if($type == 'add')
 		{
 			$ck_sk = $this->CI->custom_model->my_where('product','*',array('id' => $pid));
-			
+
 			if(!empty($ck_sk))
 			{
 				// echo $ck_sk[0]['stock'];
@@ -56,7 +56,7 @@ class User_account {
                 	return json_encode(array('status'=>false,'message'=>'product_is_deactive'));
                 }
 
-                
+                // $qty = 1;
 				// if($ck_sk[0]['stock'] > $qty  ||  $ck_sk[0]['stock_status'] == 'instock' )
                 if($ck_sk[0]['price_select']==1 || $ck_sk[0]['price_select']==2  )
                 {
@@ -72,8 +72,8 @@ class User_account {
 			                	return json_encode(array('status'=>false,'message'=>'quantity_notinstock'));
 			                }
 			            }else{
-			            	return json_encode(array('status'=>false,'message'=>'quantity_not_avilable'));	
-			            }    
+			            	return json_encode(array('status'=>false,'message'=>'quantity_not_avilable'));
+			            }
 
                 	}
                 	if($qty>=$ck_sk[0]['min_order_quantity'])
@@ -87,10 +87,10 @@ class User_account {
                 		$is_unit = $this->CI->custom_model->my_where('unit_list','*',array('id' => $unit));
                 		if(empty($is_unit))
                 		{
-                			return json_encode(array('status'=>false,'message'=>'invalid_unit_id'));	
+                			return json_encode(array('status'=>false,'message'=>'invalid_unit_id'));
                 		}
                 	}
-                	
+
 
                 	if(empty($metadata) && empty($comment) ){
 						$append = 'm'.$pid;
@@ -104,11 +104,11 @@ class User_account {
 						if($pcxdata!='invalid_customize_id')
 						{
 							$append = 'm'.$pid;
-							$comment=$pcxdata['pcxdata'];							
-							$append=$append.$pcxdata['append'];							
+							$comment=$pcxdata['pcxdata'];
+							$append=$append.$pcxdata['append'];
 						}else{
 							return json_encode(array('status'=>false,'message'=>$pcxdata));
-						}					
+						}
 					}else if(!empty($metadata) && empty($comment)){
 						// echo "123";
 						// die;
@@ -118,7 +118,7 @@ class User_account {
 						{
 							$metadata=$return_val['metadata'];
 							$append=$return_val['append'];
-							$attribute_price=$return_val['attribute_price'];								
+							$attribute_price=$return_val['attribute_price'];
 						}else{
 							return json_encode(array('status'=>false,'message'=>$return_val));
 						}
@@ -127,7 +127,7 @@ class User_account {
 						if($return_val!='invalid_size')
 						{
 							$metadata=$return_val['metadata'];
-							$append=$return_val['append'];																				
+							$append=$return_val['append'];
 						}else{
 							return json_encode(array('status'=>false,'message'=>$return_val));
 						}
@@ -136,8 +136,8 @@ class User_account {
 						if($pcxdata!='invalid_customize_id')
 						{
 							// $append = 'm'.$pid;
-							$comment=$pcxdata['pcxdata'];							
-							$append=$append.$pcxdata['append'];							
+							$comment=$pcxdata['pcxdata'];
+							$append=$append.$pcxdata['append'];
 						}else{
 							return json_encode(array('status'=>false,'message'=>$pcxdata));
 						}
@@ -178,23 +178,23 @@ class User_account {
                 	}
                 	else
                 	{
-                		return json_encode(array('status'=>false,'message'=>$cart_check));                		
-                	}            	
+                		return json_encode(array('status'=>false,'message'=>$cart_check));
+                	}
 				}
                 else
                 {
                 	// if quantity is grather than stock
-                	return json_encode(array('status'=>false,'message'=>'quantity_not_avilable'));				
-                }                
+                	return json_encode(array('status'=>false,'message'=>'quantity_not_avilable'));
+                }
 			}
 			else{
 				return json_encode(array('status'=>false,'message'=>'product_not_found'));
-			}			
+			}
 		}else if($type=='update'){
 			$ck_sk = $this->CI->custom_model->my_where('product','*',array('id' => $pid));
 			if(!empty($ck_sk))
 			{
-				
+
 				if($ck_sk[0]['status']==1)
 				{
 					if($ck_sk[0]['price_select']==1)
@@ -202,10 +202,10 @@ class User_account {
 						if($ck_sk[0]['stock_status'] == 'notinstock' )
 		                {
 		                	return json_encode(array('status'=>false,'message'=>'quantity_notinstock'));
-		                }						
+		                }
 					}
 					$cart_check=$this->check_product_update($uid,$qty,$uncontent,$append,$ck_sk,$unit);
-					
+
 					// echo "<pre>";
 					// print_r($cart_check);
 					// die;
@@ -229,12 +229,12 @@ class User_account {
 			else
 			{
 				return json_encode(array('status'=>false,'message'=>'product_not_found'));
-			}			
-		}  //  this for remove individual prodcut form cart				
+			}
+		}  //  this for remove individual prodcut form cart
 		else if($type == 'remove')
-		{		
+		{
 			if (!empty($uncontent))
-			{	
+			{
 				$append = $pid;
 				$uncontent2 = unserialize($this->CI->session->userdata('content'));
 				// echo "<pre>";
@@ -249,7 +249,7 @@ class User_account {
 					$response2=$uncontent2;
 					$this->CI->session->set_userdata('content',serialize($response2));
 				}
-				
+
 				if (array_key_exists($append, $uncontent))
 				{
 					unset($uncontent[$append]);
@@ -280,14 +280,14 @@ class User_account {
 		// print_r($attribute_price);
 		// die;
 		if (!empty($uid))
-		{			
+		{
 			// $is_data = $this->custom_model->my_where('my_cart','*',array('user_id' => $uid,'meta_key' => 'cart'));
 			if (!empty($uncontent))
-			{	
+			{
 				// $db_content = $is_data[0]['content'];
 				// $id = $is_data[0]['id'];
-				// $uncontent = unserialize($db_content);						
-				// check product all ready added ot cart										
+				// $uncontent = unserialize($db_content);
+				// check product all ready added ot cart
 				if(array_key_exists($append,$uncontent )) {
 					//echo "123"; exit;
 					$p_qurnt=$uncontent[$append]['qty'];
@@ -297,12 +297,12 @@ class User_account {
 					{
 						if( $ck_sk[0]['stock_status'] == 'notinstock')
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
 						if($p_q_c > $ck_sk[0]['stock'] )
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
 					}else{
@@ -312,26 +312,26 @@ class User_account {
 						// die;
 						if($p_q_c > $attribute_price[0]['qty'] )
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
 					}
 
 					// if($p_q_c > $ck_sk[0]['stock'] || $ck_sk[0]['stock_status'] == 'notinstock')
-	                // {	                	
-	                    // $return_val="quantity_not_avilable";         	
+	                // {
+	                    // $return_val="quantity_not_avilable";
 	                    // return $return_val;
 	                // }
 
 					$update=$this->CI->custom_model->my_update(array('content' =>serialize($uncontent)),array('user_id' => $uid,'meta_key' => 'cart'),'my_cart');
-					$return_val="founded";         	
-	                return $return_val;								   
-				}	
+					$return_val="founded";
+	                return $return_val;
+				}
 			}
 			// prodcut not already added to cart
-		$return_val="not_added_tocart";         	
+		$return_val="not_added_tocart";
 	    return $return_val;
-		} 
+		}
 		else
 		{
 			if(!empty($uncontent))
@@ -343,17 +343,17 @@ class User_account {
 				{
 					$p_qurnt=$uncontent[$append]['qty'];
 					$uncontent[$append]['qty']=$p_qurnt+$qty;
-					$p_q_c=$p_qurnt+$qty;	
+					$p_q_c=$p_qurnt+$qty;
 					if($ck_sk[0]['price_select']==1)
 					{
 						if( $ck_sk[0]['stock_status'] == 'notinstock')
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
 						if($p_q_c > $ck_sk[0]['stock'] )
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
 					}else{
@@ -363,32 +363,32 @@ class User_account {
 						// die;
 						if($p_q_c > $attribute_price[0]['qty'] )
 						{
-							$return_val="quantity_not_avilable";         	
+							$return_val="quantity_not_avilable";
 		                    return $return_val;
 						}
-					}						
+					}
 					// if($p_q_c > $ck_sk[0]['stock'] || $ck_sk[0]['stock_status'] == 'notinstock')
-	    //             {	       
-	    //             	$return_val="quantity_not_avilable";         	
-	    //                 return $return_val;	                    
+	    //             {
+	    //             	$return_val="quantity_not_avilable";
+	    //                 return $return_val;
 	    //             }
-					$this->CI->session->set_userdata('content',serialize($uncontent));		
-						$return_val="founded";         	
-	                    return $return_val;										   
-				}								
-		  	} 
+					$this->CI->session->set_userdata('content',serialize($uncontent));
+						$return_val="founded";
+	                    return $return_val;
+				}
+		  	}
 		  	// prodcut not already added to cart
-			$return_val="not_added_tocart";         	
-		    return $return_val;	  	 		
+			$return_val="not_added_tocart";
+		    return $return_val;
 		}
 	}
 
 	public function check_product_update($uid,$qty,$uncontent,$append,$ck_sk,$unit)
 	{
 		if (!empty($uid))
-		{	
+		{
 			if (!empty($uncontent))
-			{			
+			{
 
 				if(array_key_exists($append,$uncontent )) {
 
@@ -403,20 +403,20 @@ class User_account {
 							$uncontent[$new_append] = $uncontent[$append];
 							unset($uncontent[$append]);
 							$update=$this->CI->custom_model->my_update(array('content' =>serialize($uncontent)),array('user_id' => $uid,'meta_key' => 'cart'),'my_cart');
-							$return_val="cart_updated";         	
-			                return $return_val;	
+							$return_val="cart_updated";
+			                return $return_val;
 						}else{
-							$return_val="invalid_unit_id";         	
-	                		return $return_val;	
+							$return_val="invalid_unit_id";
+	                		return $return_val;
 						}
 					}
-					
+
 					$p_qurnt = $uncontent[$append]['qty'];
 					$tcount = $qty + $p_qurnt;
 
 					if( $p_qurnt == 1 && $tcount < 1)
 	                {
-	                    $return_val="quantity_not_update_below_one";         	
+	                    $return_val="quantity_not_update_below_one";
 	                    return $return_val;
 	                }
 
@@ -433,46 +433,46 @@ class User_account {
 					if($p_q_c>=$ck_sk[0]['min_order_quantity'])
                 	{
 
-                	}else{                		
-                		$return_val="min_order_".$ck_sk[0]['min_order_quantity'];         	
+                	}else{
+                		$return_val="min_order_".$ck_sk[0]['min_order_quantity'];
 		                return $return_val;
-                	}	
+                	}
 					if($ck_sk[0]['price_select']==1)
 					{
 						if( $p_q_c > $ck_sk[0]['stock'] || $ck_sk[0]['stock_status'] == 'notinstock')
-		                {	                	
-		                    $return_val="quantity_not_avilable";         	
+		                {
+		                    $return_val="quantity_not_avilable";
 		                    return $return_val;
-		                }						
+		                }
 					}else{
 						if(isset($uncontent[$append]['metadata']))
 						{
 
-			              $attribute_price = $this->CI->custom_model->my_where('product_attribute','price,sale_price,qty',array('attribute_id' =>"20",'item_id'=>$uncontent[$append]['metadata']['attribute_item_id'],'p_id'=>$uncontent[$append]['pid']));	
-								
+			              $attribute_price = $this->CI->custom_model->my_where('product_attribute','price,sale_price,qty',array('attribute_id' =>"20",'item_id'=>$uncontent[$append]['metadata']['attribute_item_id'],'p_id'=>$uncontent[$append]['pid']));
+
 			                if($p_q_c > $attribute_price[0]['qty'])
 			                {
-			                	$return_val="quantity_not_avilable";         	
+			                	$return_val="quantity_not_avilable";
 		                    	return $return_val;
-			                }			                					
+			                }
 						}
-					}									
+					}
 
-					$update=$this->CI->custom_model->my_update(array('content' =>serialize($uncontent)),array('user_id' => $uid,'meta_key' => 'cart'),'my_cart');													   
-					$return_val="cart_updated";         	
+					$update=$this->CI->custom_model->my_update(array('content' =>serialize($uncontent)),array('user_id' => $uid,'meta_key' => 'cart'),'my_cart');
+					$return_val="cart_updated";
 	                    return $return_val;
-				}	
+				}
 			}
 			// prodcut not already added to cart
-		$return_val="not_added_tocart";         	
+		$return_val="not_added_tocart";
 	    return $return_val;
-		} 
+		}
 		else
 		{
 			// echo 111;
 			// die;
 			if(!empty($uncontent))
-			{						
+			{
 				if(array_key_exists($append,$uncontent))
 				{
 
@@ -486,12 +486,12 @@ class User_account {
 							$new_append='m'.$gpid.'m'.$unit;
 							$uncontent[$new_append] = $uncontent[$append];
 							unset($uncontent[$append]);
-							$this->CI->session->set_userdata('content',serialize($uncontent));		
-							$return_val="cart_updated";         	
-			                return $return_val;	
+							$this->CI->session->set_userdata('content',serialize($uncontent));
+							$return_val="cart_updated";
+			                return $return_val;
 						}else{
-							$return_val="invalid_unit_id";         	
-	                		return $return_val;	
+							$return_val="invalid_unit_id";
+	                		return $return_val;
 						}
 					}
 
@@ -510,46 +510,46 @@ class User_account {
                 	{
 
                 	}else{
-                		$return_val="min_order_".$ck_sk[0]['min_order_quantity'];         	
+                		$return_val="min_order_".$ck_sk[0]['min_order_quantity'];
 		                return $return_val;
                 	}
 					if($ck_sk[0]['price_select']==1)
 					{
 						if($p_q_c > $ck_sk[0]['stock'] || $ck_sk[0]['stock_status'] == 'notinstock')
-		                {	       
-		                	$return_val="quantity_not_avilable";         	
+		                {
+		                	$return_val="quantity_not_avilable";
 		                    return $return_val;
-		                    
+
 		                }
-					}else{						 
+					}else{
 						if(isset($uncontent[$append]['metadata']))
 						{
 							// echo 1;
 							// die;
-			                $attribute_price = $this->CI->custom_model->my_where('product_attribute','price,sale_price,qty',array('attribute_id' =>"20",'item_id'=>$uncontent[$append]['metadata']['attribute_item_id'],'p_id'=>$uncontent[$append]['pid']));	
-								
+			                $attribute_price = $this->CI->custom_model->my_where('product_attribute','price,sale_price,qty',array('attribute_id' =>"20",'item_id'=>$uncontent[$append]['metadata']['attribute_item_id'],'p_id'=>$uncontent[$append]['pid']));
+
 			                if($p_q_c > $attribute_price[0]['qty'])
 			                {
-			                	$return_val="quantity_not_avilable";         	
+			                	$return_val="quantity_not_avilable";
 		                    	return $return_val;
-			                }			                					
+			                }
 						}
-					}	
+					}
 
 
-					
+
 					// // $uncontent["m1m7"];
 					// echo "<pre>";
 					// print_r($uncontent);
-					// die;	
-					$this->CI->session->set_userdata('content',serialize($uncontent));		
-					$return_val="cart_updated";         	
-	                return $return_val;									   
-				}								
-		  	} 
+					// die;
+					$this->CI->session->set_userdata('content',serialize($uncontent));
+					$return_val="cart_updated";
+	                return $return_val;
+				}
+		  	}
 		  	// prodcut not already added to cart
-			$return_val="not_added_tocart";         	
-		    return $return_val;	  	 		
+			$return_val="not_added_tocart";
+		    return $return_val;
 		}
 	}
 
@@ -565,16 +565,16 @@ class User_account {
 				if (!empty($cus_att_value))
 				{
 					$pcxdata[$pcxd_val]['name'] 		= $cus_att_value[0]['name'];
-	
+
 					if($country=='Abu Dhabi') { $price = $cus_att_value[0]['price_ad']; }
 					else { $price = $cus_att_value[0]['price_bh']; }
-					
+
 		 			$pcxdata[$pcxd_val]['price'] 	 	= $price;
 		 			$append=$append.'m'.$pcxd_val;
 				}
 				else
 				{
-					$return_val="invalid_customize_id";         	
+					$return_val="invalid_customize_id";
 	                return $return_val;
 				}
 			}
@@ -588,13 +588,13 @@ class User_account {
 		// print_r($metadata);
 		// print_r($ck_sk);
 		// die;
-		foreach ($metadata as $md_key => $md_val) 
-		{			
+		foreach ($metadata as $md_key => $md_val)
+		{
 
 			$attribute_item = $this->CI->custom_model->my_where('attribute_item','item_name',array('id' => $md_val));
 			$attribute = $this->CI->custom_model->my_where('attribute','name',array('id' => $md_key));
 			$attribute_price = $this->CI->custom_model->my_where('product_attribute','price,sale_price,qty',array('attribute_id' => $md_key,'item_id'=>$md_val,'p_id'=>$pid));
-						
+
 				if(!empty($attribute_item) && !empty($attribute))
 				{
 					if($attribute_price[0]['qty'] >= $qty)
@@ -605,17 +605,17 @@ class User_account {
 						$metadata['price']=$ck_sk[0]['sale_price'];
 						$metadata['size']=$attribute_item[0]['item_name'];
 						$metadata['attribute_item_id']=$md_val;
-						return ['append'=>$append,'metadata'=>$metadata,'attribute_price'=>$attribute_price];						
+						return ['append'=>$append,'metadata'=>$metadata,'attribute_price'=>$attribute_price];
 					}else{
-						$return_val="quantity_not_avilable";         	
-	                return $return_val;	
+						$return_val="quantity_not_avilable";
+	                return $return_val;
 					}
 				}else
 				{
-					$return_val="invalid_size";         	
-	                return $return_val;					
+					$return_val="invalid_size";
+	                return $return_val;
 				}
-			
+
 			break;
 		}
 	}
@@ -623,20 +623,20 @@ class User_account {
 	// this funciton for if cart qty is grather than available prodcut qty than set avilable qty
 	public function update_catqty($content,$key,$available_qty)
 	{
-		$uid = $this->CI->session->userdata('uid');		
+		$uid = $this->CI->session->userdata('uid');
 		if (array_key_exists($key, $content))
-		{			
-			$content[$key]['qty']=$available_qty;			
+		{
+			$content[$key]['qty']=$available_qty;
 			// $uncontent = array_filter($uncontent);
 			// echo "<pre>";
 			// print_r($content);
-			// die;			
+			// die;
 			if (!empty($uid))
 			{
 				$this->CI->custom_model->my_update(array('content' => serialize($content)),array('user_id' => $uid,'meta_key'=>'cart'),'my_cart',true,true);
 			}
-			$this->CI->session->set_userdata('content',serialize($content));			
-		}		
+			$this->CI->session->set_userdata('content',serialize($content));
+		}
 	}
 
 	public function product_check($data,$flag=false,$is_other=false,$language)
@@ -665,7 +665,7 @@ class User_account {
 			if ($data[0]['stock_status'] == 'notinstock' || $data[0]['stock'] == 0 || $data[0]['stock'] <= 0  )
 			{
 				$data_res['status']=false;
-				$data_res['message']=$error_lab1;						
+				$data_res['message']=$error_lab1;
 			}else if($data[0]['quantity'] > $data[0]['stock'] && $flag==false )
 			{
 				$data_res['status']=true;
@@ -687,7 +687,7 @@ class User_account {
 					{
 						$data_res['status']=false;
 						$data_res['message']=$error_lab4;
-					}				
+					}
 				}else{
 					$data_res['status']=false;
 					$data_res['message']=$error_lab5;
@@ -695,11 +695,11 @@ class User_account {
 			}
 			$data_res['data']=$data;
 			return $data_res;
-		}else{			
+		}else{
 			$data_res['status']=false;
 			$data_res['message']=$error_lab6;
 			$data_res['data']=$data;
 			return $data_res;
 		}
-	}		
+	}
 }

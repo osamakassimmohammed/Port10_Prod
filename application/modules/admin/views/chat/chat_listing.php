@@ -86,7 +86,6 @@
     float: left;
     width: 23%;
     margin-left: 2%;
-    margin-top: 3px !important;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -259,7 +258,7 @@
             </div>
             <?php }else{ ?>
               <button type="button" id="com_btn" class="btn msg-send-btn"><?php echo lang('aCompose'); ?></button>
-              <a href="javascript:void(0)" class="chat_list text-center text-danger" id="hsc_error"> <?php echo lang('No_message_found'); ?></a>
+              <a href="javascript:void(0)" class="chat_list text-center text-danger row align-items-center pl-4" id="hsc_error"> <?php echo lang('No_message_found'); ?></a>
             
             <?php } }else{ ?>
               <a href="javascript:void(0)" class="chat_list text-center text-danger" id="hsc_error"> Your account is deactive please contact to admin</a>           
@@ -293,15 +292,16 @@
             <div class="form-row">
                
                <div class="col-md-6">
-                  <label for="name">To</label>
+                  <label for="name"><?php echo lang('to'); ?></label>
                   <!-- <input type="text" class="form-control" placeholder="To"> -->
-                  <select class="singl_input_qutn" name="user_id" id="cseller_id">
+                  <select name="user_id">
                     <option value="0"><?php echo lang('aPlease_select_vendor'); ?></option>   
                     <?php if(!empty($all_user_data))
+                      // echo lang('aPlease_select_vendor'); 
                       echo $append_option;
                     {
                       if($seller_id==1){
-                      foreach ($all_user_data as $aud_key => $aud_val) { ?>            
+                      foreach ($all_user_data as $aud_key => $aud_val) { ?>             
                       <option send_to="<?php echo $aud_val['send_to']; ?>" value="<?php echo $aud_val['id']; ?>"><?php echo $aud_val['first_name']; ?></option>
 
                       <?php } } } ?>                      

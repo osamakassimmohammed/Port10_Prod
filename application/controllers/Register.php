@@ -4,29 +4,27 @@
 * Register page
 */
 
-class Register extends MY_Controller 
+class Register extends MY_Controller
 {
-       
+
  	public function index()
  	{
  		$uid = $this->session->userdata('uid');
 
 		if (!empty($uid))
 		{
-			redirect();			
+			redirect();
 		}
 
  		$this->load->model('admin/Custom_model','custom_model');
  		$language = $this->uri->segments[1];
- 		$post_data = $this->input->post(); 		
+ 		$post_data = $this->input->post();
             $created_on = date("Y/m/d h:i:s");
- 
- 
+
+
  		if ( !empty($post_data) )
- 		{	
-                  // echo "<pre>";
-                  // print_r($post_data);
-                  // die;
+ 		{
+
                   if(!empty($post_data['type']) && !empty($post_data['entity_name']) && !empty($post_data['cr_number']) && !empty($post_data['city']) && !empty($post_data['state'])  && !empty($post_data['phone']) && !empty($post_data['email']) && !empty($post_data['vat_number']) && !empty($post_data['bank_name']) && !empty($post_data['iban']) && !empty($post_data['password']) && !empty($post_data['first_name']) )
                   {
 
@@ -88,19 +86,19 @@ class Register extends MY_Controller
                         if(!empty($iban)) $new_member_insert_data['iban']  = $iban;
 
                         if(!empty($password)) $new_member_insert_data['password']  = password_hash($password, PASSWORD_BCRYPT);
-                        
+
                         if(!empty($new_member_insert_data))
                         {
                               if($type!='buyer')
-                              {       
-                                    // comment this code becaus client said set all seller expire date to 2022-12-31 
+                              {
+                                    // comment this code becaus client said set all seller expire date to 2022-12-31
                                     // $footer_content=$this->custom_model->my_where("footer_content","default_period",array('id' => '1'));
                                     // if(!empty($footer_content))
                                     // {
-                                    //     $default_period='+'.$footer_content[0]['default_period'];  
+                                    //     $default_period='+'.$footer_content[0]['default_period'];
                                     // }else{
-                                    //     $default_period='+1 month';  
-                                    // }                            
+                                    //     $default_period='+1 month';
+                                    // }
                                     $new_member_insert_data['group_id']=5;
                                     $subs_start_date=date("Y-m-d");
                                     // $subs_end_date = date("Y-m-d", strtotime($subs_start_date.$default_period));
@@ -118,14 +116,14 @@ class Register extends MY_Controller
                               $new_member_insert_data['logo']='user_chat.png';
                               // $new_member_insert_data['username']=$email;
                               $new_member_insert_data['ip_address']=$this->return_ip_address();
-                           
-            			$this->load->model('User_model');           			    
+
+            			$this->load->model('User_model');
                               // echo "<pre>";
                               // print_r($post_data);
                               // print_r($new_member_insert_data);
                               // die;
             			$query = $this->User_model->create_member($new_member_insert_data);
-            			
+
             			if($query == 'username')
             			{
             				echo('cr_number');
@@ -156,25 +154,25 @@ class Register extends MY_Controller
                                           $data['identity']='vendor';
                                           $gorup_data['user_id']=$query;
                                           $gorup_data['group_id']=5;
-            		                $this->custom_model->my_insert($gorup_data,'admin_users_groups');   
-                                    }   
+            		                $this->custom_model->my_insert($gorup_data,'admin_users_groups');
+                                    }
 
                                     if(isset($post_data['remember_me']) && $post_data['remember_me']=='on')
                                     {
                                           $this->set_remember_me($cr_number,$password);
                                     }else{
                                           $this->set_remember_me('','');
-                                    }  
+                                    }
 
             			   // $this->session->set_userdata($data);
             			   $content = unserialize($this->session->userdata('content'));
-            		
+
                   			if (!empty($content))
                    			{
-                  				$content=serialize($content);			
+                  				$content=serialize($content);
 
                   				$cart_data= array('meta_key' => 'cart', 'content' =>$content);
-                  				$cart_data['user_id'] = $data['uid'];								
+                  				$cart_data['user_id'] = $data['uid'];
                   				$this->custom_model->my_insert($cart_data,'my_cart');
                   			}
                                     // echo 	$this->input->post('reg_first_name');
@@ -187,24 +185,25 @@ class Register extends MY_Controller
                                     {
                                           $message=$this->email_template->wecom_email_en($first_name,$link);
                                           // $message =registration_content($first_name,$link);
-                                          $subject="Welcome!";                                  
+                                          $subject="Welcome!";
                                     }else{
                                           $message=$this->email_template->wecom_email_ar($first_name,$link);
-                                          $subject="مرحبا!";                                  
+                                          $subject="مرحبا!";
                                     }
                                     $emails=$email;
                                     $this->load->library("email_cilib");
                                     $this->email_cilib->send_welcome($emails,$subject,$message);
                                     if($type!='buyer')
                                     {
-                                          //this for suppler 
+                                          //this for suppler
                   				echo "success1";
                                     }else{
                                           echo "success";
-                                    }      
+                                    }
             			}
                         }
                   }
+                  $this->virtual_account($post_data);
  		}
  		else
  		{
@@ -221,7 +220,7 @@ class Register extends MY_Controller
                   $state_list = $this->custom_model->get_data_array("SELECT * FROM state_list Order by state_name asc ");
 
                   $city_list = $this->custom_model->get_data_array("SELECT * FROM city_list Order by city_name asc ");
-                  
+
                   $bank_details = $this->custom_model->get_data_array("SELECT * FROM bank_details Order by bank_name asc ");
 
                   $this->mViewData['postal_code_list'] =$postal_code_list;
@@ -232,8 +231,42 @@ class Register extends MY_Controller
  			// $this->Urender('register', 'udefault');
                   $this->Urender('login', 'udefault');
  		}
- 		
- 	}      
+
+ 	}
+
+      public function virtual_account($post_data){
+
+            $url = "https://dpwt.alrajhibank.com.sa:19443/VARESTService/RestAPI/VaCreation";
+            $post = json_encode([
+                  "RemitterDetails" => [ json_encode([
+                        "email" => trim($post_data['email']),
+                        "invoiceNotify" => "E",
+                        "mobile" =>trim($post_data['phone']),
+                        "notifLang" => "en",
+                        "remitterId" => "2399239",
+                        "remitterName" => trim($post_data['first_name']),
+                        "operationCode" => "CREATE",
+                        "maximumAmnt" => "98888867"
+                  ]) ]
+
+              ]);
+
+              $ch = curl_init();
+              curl_setopt($ch, CURLOPT_URL, $url);
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+              curl_setopt($ch, CURLOPT_POST, 1);
+              curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+              $headers = array();
+              $headers[] = "clientId : 125011989";
+              $headers[] = "msgReference : VirtualAccount";
+              $headers[] = "msgReference : VA0125095263";
+
+              curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+              $result = curl_exec($ch);
+              $jsnDCod = json_decode( $result);
+              curl_close($ch);
+
+      }
 }
 ?>
-       

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -49,9 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
+// $route['default_controller'] = 'home';
+$route['default_controller'] = 'landing';
 $route['404_override'] = 'errors/page_missing';
 $route['translate_uri_dashes'] = FALSE;
+
+
+$route['en/manual'] = 'home/manual';
+$route['ar/manual'] = 'home/arabic_manual';
+
+// $route['en/manual'] = 'home/manual';
+// $route['ar/manual'] = 'home/manual';
 
 /*
 | -------------------------------------------------------------------------
@@ -72,15 +80,15 @@ $route['^(\w{2})$'] = $route['default_controller'];
 |	- [POST]	/api/users/1 ==> Users Controller's id_post($id)
 |	- [PUT]		/api/users/1 ==> Users Controller's id_put($id)
 |	- [DELETE]	/api/users/1 ==> Users Controller's id_delete($id)
-| 
+|
 | Examples from rule: "api/(:any)/(:num)/(:any)"
 |	- [GET]		/api/users/1/subitem ==> Users Controller's subitem_get($parent_id)
 |	- [POST]	/api/users/1/subitem ==> Users Controller's subitem_post($parent_id)
 |	- [PUT]		/api/users/1/subitem ==> Users Controller's subitem_put($parent_id)
 |	- [DELETE]	/api/users/1/subitem ==> Users Controller's subitem_delete($parent_id)
 */
-$route['api/(:any)/(:num)']				= 'api/$1/id/$2';
-$route['api/(:any)/(:num)/(:any)']		= 'api/$1/$3/$2';
+$route['api/(:any)/(:num)'] = 'api/$1/id/$2';
+$route['api/(:any)/(:num)/(:any)'] = 'api/$1/$3/$2';
 
 /*
 | -------------------------------------------------------------------------

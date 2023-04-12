@@ -234,6 +234,7 @@ class Brand extends Admin_Controller {
 					{
 						// success
 						$this->system_message->set_success($err_msg1);
+						redirect($language.'/admin/brand');
 					}
 					else
 					{

@@ -296,13 +296,13 @@ $currency = $data[0]['currency'];
        </div>
   </div>
 </div>
-    <div class="x_content row">
+    <!-- <div class="x_content row">
       <div class="col-md-6" style="">
            <div class="panel panel-default " >
             <form id="create_pickup_form"  action="" method="POST">
               <div class="panel-footer"><?php echo lang('aUpdate_Order'); ?></div>
               <div class="panel-body">                 
-                 <hr>
+                 <hr> -->
                 <!-- <div class="form-group">
                     <label for="PickupDate" class="col-sm-5 control-label">Pickup Date :</label>
                     <div class="col-sm-7">
@@ -327,7 +327,7 @@ $currency = $data[0]['currency'];
                        <input type="text" name="ClosingTime" id="ClosingTime">
                     </div>
                 </div> --> 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="ShippingDateTime" class="col-sm-5 control-label">Shipping Date Time :</label>
                     <div class="col-sm-7">
                        <input type="text" name="ShippingDateTime" id="ShippingDateTime" value="<?Php echo $invoice_data[0]['shipping_date_time']; ?>">
@@ -354,7 +354,7 @@ $currency = $data[0]['currency'];
             </form>
            </div>
       </div> 
-    </div>
+    </div> -->
 
         
 

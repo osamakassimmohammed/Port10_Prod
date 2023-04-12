@@ -10,15 +10,16 @@
            $('#loading').show(); 
            $.ajax({
               type: 'POST',
-              url: "<?php echo base_url($language.'/ajax/shipping_rate'); ?>",
+              url: "<?php echo base_url($language.'/Ajax/shipping_rate'); ?>",
               data: jsonData,    
               success: function(response)
-              {       
+              {  
+                 console.log(response);     
                  $('#loading').hide();
                  response=$.trim(response);
                  var response = $.parseJSON(response);
                  if(response.status==true)
-                 {
+                 {    
                      if(response.is_single_pro_error==false)
                      {
                         $("#shipping_rate").attr("disabled", true);
@@ -227,7 +228,7 @@
   });
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNpNhw8Qyac0n7I7gHsVWtr4uc1VNN7dg&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcf4oVp2zfW5qBYMtRD54DApyRolch_qE&libraries=places&callback=initMap" async defer></script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNpNhw8Qyac0n7I7gHsVWtr4uc1VNN7dg&libraries=places&callback=initMap" async defer></script> -->
 <script type="text/javascript">
    function initMap() {
