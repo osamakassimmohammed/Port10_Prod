@@ -24964,7 +24964,7 @@ button.add_to_cart2:hover{
     margin-top: 32px;
     width: 200px;
     left: 0;
-    margin-left: 100px;
+    margin-left: 120px;
     border-radius: 2px;
     padding: 10px 0px;
 }
@@ -25449,11 +25449,11 @@ body.ar .shop_menu_show {
     margin-bottom: 0px;
     background: #22023b;
     z-index: 9999;
-    margin-top: 32px;
+    margin-top: 55px;
     width: 200px;
     left: auto;
     right: 0;
-    margin-right: 350px;
+    margin-right: 200px;
     border-radius: 2px;
     padding: 10px 0px;
 }
@@ -26651,11 +26651,29 @@ height: 200px;
  .mobile-cart .acnt_ri_menu .not-active{
   display: inline !important;
  } */
-
+ @media only screen and (max-width: 1500px) {
+  body.ar .shop_menu_show {
+    margin-right: 180px;
+  }
+  .shop_menu_show {
+    margin-left: 120px;
+}
+ }
  @media only screen and (max-width: 1350px) {
  ul.menu li {
   margin-right: 1.5% !important;
 }
+body.ar .shop_menu_show {
+  margin-right: 140px !important;
+}
+.shop_menu_show {
+  margin-left: 110px !important;
+}
+ }
+ @media only screen and (max-width: 1230px) {
+  .shop_menu_show {
+    margin-left: 90px !important;
+  }
  }
  @media only screen and (max-width: 1024px) {
   body.ar .main-nav ul.menu {
@@ -26672,4 +26690,18 @@ height: 200px;
     padding: 0px;
     margin-top: -10px;
 }
+body.ar .shop_menu_show {
+  margin-right: 110px !important;
+  margin-top: 35px !important;
+}
+ }
+ @media only screen and (max-width: 1024px) {
+ body.ar .shop_menu_show {
+  margin-right: 160px;
+}
+ }
+ @media only screen and (max-width: 990px){
+  .shop_menu_show {
+    margin-left: 20px !important;
+  }
  }

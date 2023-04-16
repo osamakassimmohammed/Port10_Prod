@@ -362,17 +362,6 @@ $lang['Quotation_Id'] = "Quotation Id";
 $lang['No_message_found'] = "Message not found";
 $lang['Remove'] = "Remove";
 $lang['Name_of_the_Manufacturer_or_Wholesaler'] = "Name of the Manufacturer or Wholesaler as per legal registration";
-
-
-
-
-
-
-
-
-
-
-
 $lang['aTOTAL_SUMMARY'] = "TOTAL SUMMARY";
 $lang['aPending_Order'] = "Pending Order";
 $lang['aComplere_Order'] = "Completed Order";
@@ -761,3 +750,66 @@ $lang['aUnpaid'] = "Unpaid";
 $lang['aSign_in_to_start_your_session'] = "Sign in to start your session";
 $lang['aRemember_Me'] = "Remember Me";
 $lang['aUnder_construction'] = "UNDER CONSTRUCTION";
+$lang['Why_Us?'] = "Why Us?";
+$lang['Today_there'] = "Today, there are various buyers and sellers who are willing
+to
+connect with each other without any hassle. Gone are the days when it was difficult
+to
+find authentic and reliable buyers and sellers because b2b platforms have solved
+this
+platform. It is a reliable platform that connects both of them.";
+$lang['transaction_or_business'] = "Port10 is a transaction or business conducted between one
+business and another, such as a wholesaler and retailer.Port10 refers
+to business that is conducted between companies, rather than between a company and
+individual consumer";
+$lang['Your_Dream'] = "Your Dream";
+$lang['Entrepreneurship'] = "Entrepreneurship";
+$lang['We_Make_Buying/Selling'] = "We Make Buying/Selling";
+$lang['simpler'] = "simpler";
+$lang['Connect_with_Buyers/Sellers'] = "Connect with Buyers/Sellers";
+$lang['Globally'] = "Globally";
+$lang['Rapid_Increase_in_Sellers'] = "Rapid Increase in Sellers";
+$lang['Easy_way_to_grow_your'] = "Easy way to grow your";
+$lang['B2B_Business'] = "B2B Business";
+$lang['trying_to_grow'] = "If you are trying to grow your business, and who isn't, you should consider
+these easy-to-implement ideas before spending a lot of money on ads or other outbound marketing
+efforts.";
+$lang['Seller'] = "Seller";
+$lang['Buyer'] = "Buyer";
+$lang['Create_your_Account'] = "Create your Account";
+$lang['To_sign_up_for_Port10'] = "To sign up for Port10, create a
+Port10 Account. You can use the username and password to
+sign in to Port10 and now all over service are visible.";
+$lang['Business_Wi-Fi_Solution'] = "Business Wi-Fi Solution";
+$lang['Keep_your_business_connected'] = "Keep your business connected and
+secure with NETGEAR Remote Managed Access Points. Perfect
+for all scaled businesses.";
+$lang['Add_products'] = "Add products";
+$lang['Add_product_category'] = "Add a product to a category to make
+it available in a store. You can also add multiple products
+at once. Then buyers can see your products.";
+$lang['Manage_Orders'] = "Manage Orders";
+$lang['manage_your_orders'] = "we
+make it really easy for you to manage your orders. Whenever
+a customer places an order,
+Based on that we can manage our orders.";
+$lang['Select_product'] = "Select product";
+$lang['Goods_and_services'] = "Goods and services are necessary
+for satisfying the needs of society. Select your needed
+product and do purchase in our platform.";
+$lang['Place_order_content'] = "If you are interested in any of our
+products and wish to purchase it, please continue shopping
+or checkout your order.";
+$lang['Recieve_your_order'] = "Recieve your order";
+$lang['Recieve_your_order_content'] = "Once the delivery person
+delivers your order and gives proof of delivery, that
+indicate that the
+package delivery process is complete.";
+$lang['Get_Started'] = "Get Started with Port10";
+$lang['Get_Started_content'] = "Businesses in the B2B market are turning to B2B Commerce, an ecommerce
+platform specifically designed for businesses making purchases online. It enables companies to
+create exceptional ecommerce storefronts and experiences for their business customers.";
+$lang['We_helps_you'] = "We helps you to grow your business more";
+$lang['faster'] = "faster";
+$lang['and'] = "and";
+$lang['easier'] = "easier";

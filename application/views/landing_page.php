@@ -4,7 +4,7 @@
     src='<?php echo base_url(); ?>assets/grocery_crud/themes/datatables/jquery-datatable/dataTables.bootstrap.js'></script> -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-<link href='<?php echo base_url(); ?>assets/frontend/css/landing_page.css' rel='stylesheet' media="screen">
+    <link href='<?php echo base_url(); ?>assets/frontend/css/landing_page.css' rel='stylesheet' media="screen">
 <link href='<?php echo base_url(); ?>assets/frontend/css/common.css' rel='stylesheet' media="screen">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 <script>
@@ -51,14 +51,14 @@
                             <div class="row justify-content-between">
                                 <div class="col-lg-6 col-md-6 col-sm-12 row align-items-center position">
                                     <div class="wow slideInRight data-wow-delay=" 5s"">
-                                        <h3 class="text-white">Port10</h3>
-                                        <h2 class="text-white header-line-height">The Smarter Way of <br />Workflow For your
-                                            <br />Business
+                                        <h3 class="text-white">المنفذ 10</h3>
+                                        <h2 class="text-white header-line-height">الطريقة الأكثر ذكاءً لـ <br />سير العمل الخاص بك
+                                            <br />عمل
                                         </h2>
                                         <div class="align-items-center">
                                             <a href="<?php echo base_url($language . '/home') ?>"><img
                                                     class="get-started-btn"
-                                                    src="<?php echo base_url('assets/admin/images/') ?>get-started-btn.png"></a>
+                                                    src="<?php echo base_url('assets/admin/images/') ?>get_started_ar.png"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@
         <!-- Top-section -->
         <!-- Help-section -->
         <div class="d-flex justify-content-center mt-2 text-center grow-section">
-            <h2 class="grow-para">We helps you to grow your business more <br /> <span class="oragne-text">faster</span>
-                and
-                <span class="oragne-text">easier</span>
+            <h2 class="grow-para"><?php echo lang('We_helps_you'); ?> <br /> <span class="oragne-text"><?php echo lang('faster'); ?></span>
+                <?php echo lang('and'); ?>
+                <span class="oragne-text"><?php echo lang('easier'); ?></span>
             </h2>
         </div>
     </div>
@@ -127,19 +127,17 @@
                         <div class="col-md-6">
                             <div class="wow slideInRight data-wow-delay=" 5s""">
                                 <h3 class="sub-heading style=" color:#1D1D1D">
-                                    About
-                                    <span style="color:#FD3A58">Port10</span>
+                                عن
+                                    <span style="color:#FD3A58">المنفذ 10</span>
                                 </h3>
                                 <div class="purchase-bg">
-                                    <h5 class="purchase-content">we purchase and sale the products which are <br />
-                                        genuine and
-                                        of
-                                        high quality. </h5>
+                                    <h5 class="purchase-content">نحن نشتري ونبيع المنتجات التي هي <br />
+                                    حقيقية وذات جودة عالية. </h5>
                                 </div>
-                                <h6 class="mt-2 description mb-5">Port10 is an online e-commerce site that connects
-                                    sellers with buyers. It's often known as an end-to-end marketplace and all
-                                    transactions are managed by the website owner. Companies use online marketplaces to
-                                    reach customers who want to purchase their products and services.</h6>
+                                <h6 class="mt-2 description mb-5">Port10 هو موقع للتجارة الإلكترونية عبر الإنترنت متصل
+                                    البائعين مع المشترين. غالبًا ما يُعرف باسم السوق الشامل وكل شيء
+                                    تتم إدارة المعاملات من قبل مالك الموقع. تستخدم الشركات الأسواق عبر الإنترنت لـ
+                                    الوصول إلى العملاء الذين يرغبون في شراء منتجاتهم وخدماتهم.</h6>
                             </div>
                         </div>
 
@@ -166,23 +164,13 @@
                         <div class="col-lg-4 col-md-12 col-sm-12 row align-items-center">
                             <!-- <div class="row justify-content-around"> -->
                             <div>
-                                <h3 class="heading sub-heading wow fadeInUp data-wow-delay=" 5s"" style="#5A5454">Why
-                                    Us?</span>
+                                <h3 class="heading sub-heading wow fadeInUp data-wow-delay=" 5s"" style="#5A5454"><?php echo lang('Why_Us?'); ?></span>
                                 </h3>
-                                <h5>We Provide Best Quality Service </h5>
-                                <h6 class="mt-2 description">Today, there are various buyers and sellers who are willing
-                                    to
-                                    connect with each other without any hassle. Gone are the days when it was difficult
-                                    to
-                                    find authentic and reliable buyers and sellers because b2b platforms have solved
-                                    this
-                                    platform. It is a reliable platform that connects both of them.
+                                <h5><?php echo lang('We_Provide_Best_Quality_Service'); ?></h5>
+                                <h6 class="mt-2 description"><?php echo lang('Today_there'); ?>
                                 </h6>
                                 <br />
-                                <h6 class="description">Port10 is a transaction or business conducted between one
-                                    business and another, such as a wholesaler and retailer.Port10 refers
-                                    to business that is conducted between companies, rather than between a company and
-                                    individual consumer</h6>
+                                <h6 class="description"><?php echo lang('transaction_or_business'); ?></h6>
                             </div>
                             <!-- </div> -->
                         </div>
@@ -195,7 +183,7 @@
                                                 <img class="icon-specification"
                                                     src="<?php echo base_url('assets/admin/images/') ?>entrepreneurship.svg">
                                             </div>
-                                            <h5 class="mt-4 heading">Your Dream <br /> Entrepreneurship</h5>
+                                            <h5 class="mt-4 heading"><?php echo lang('Your_Dream'); ?><br /><?php echo lang('Entrepreneurship'); ?> </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +194,7 @@
                                                 <img class="icon-specification"
                                                     src="<?php echo base_url('assets/admin/images/') ?>selling-simpler.svg">
                                             </div>
-                                            <h5 class="mt-4 heading">We Make Buying/Selling <br />simpler</h5>
+                                            <h5 class="mt-4 heading"><?php echo lang('We_Make_Buying/Selling'); ?> <br /><?php echo lang('simpler'); ?></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +205,7 @@
                                                 <img class="icon-specification"
                                                     src="<?php echo base_url('assets/admin/images/') ?>sellers-globally.svg">
                                             </div>
-                                            <h5 class="mt-4 heading">Connect with Buyers/Sellers<br /> Globally</h5>
+                                            <h5 class="mt-4 heading"><?php echo lang('Connect_with_Buyers/Sellers'); ?><br /><?php echo lang('Globally'); ?></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +216,7 @@
                                                 <img class="icon-specification"
                                                     src="<?php echo base_url('assets/admin/images/') ?>increase-sales.svg">
                                             </div>
-                                            <h5 class="mt-4 heading">Rapid Increase in Sellers <br />Globally</h5>
+                                            <h5 class="mt-4 heading"><?php echo lang('Rapid_Increase_in_Sellers'); ?> <br /><?php echo lang('Globally'); ?></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -243,22 +231,19 @@
         <!-- globe-section -->
         <div class="globe-section">
             <div class="text-center pt-5 pb-5 col-lg-10 col-md-12 col-sm-12 ml-auto mr-auto">
-                <h3 class=" sub-heading wow fadeInUp data-wow-delay=" 5s"" style="font-weight:600">Easy way to grow your
-                    <span style="color:#3F006F">B2B
-                        Business</span>
+                <h3 class=" sub-heading wow fadeInUp data-wow-delay=" 5s"" style="font-weight:600"><?php echo lang('Easy_way_to_grow_your'); ?>
+                    <span style="color:#3F006F"><?php echo lang('B2B_Business'); ?></span>
                 </h3>
-                <h6 class="description"> If you are trying to grow your business, and who isn't, you should consider
-                    these easy-to-implement ideas before spending a lot of money on ads or other outbound marketing
-                    efforts.</h6>
+                <h6 class="description"><?php echo lang('trying_to_grow'); ?> </h6>
                 <div class="row justify-content-center mt-4">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item mr-5">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                                role="tab" aria-controls="pills-home" aria-selected="true">Seller</a>
+                                role="tab" aria-controls="pills-home" aria-selected="true"><?php echo lang('Seller'); ?></a>
                         </li>
                         <li class="nav-item ml-5">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-                                role="tab" aria-controls="pills-profile" aria-selected="false">Buyer</a>
+                                role="tab" aria-controls="pills-profile" aria-selected="false"><?php echo lang('Buyer'); ?></a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -277,10 +262,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>create-acount-icon.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Create your Account</h3>
-                                                        <h6 class="card-description">To sign up for Port10, create a
-                                                            Port10 Account. You can use the username and password to
-                                                            sign in to Port10 and now all over service are visible.</h6>
+                                                        <h3 class="header"><?php echo lang('Create_your_Account'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('To_sign_up_for_Port10'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,10 +279,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>business-solution-icon.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Business Wi-Fi Solution</h3>
-                                                        <h6 class="card-description">Keep your business connected and
-                                                            secure with NETGEAR Remote Managed Access Points. Perfect
-                                                            for all scaled businesses.</h6>
+                                                        <h3 class="header"><?php echo lang('Business_Wi-Fi_Solution'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('Keep_your_business_connected'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,10 +296,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>add-products-icon.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Add products</h3>
-                                                        <h6 class="card-description">Add a product to a category to make
-                                                            it available in a store. You can also add multiple products
-                                                            at once. Then buyers can see your products.</h6>
+                                                        <h3 class="header"><?php echo lang('Add_products'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('Add_product_category'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,11 +313,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>manage-orders-icon.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Manage Orders</h3>
-                                                        <h6 class="card-description">we
-                                                            make it really easy for you to manage your orders. Whenever
-                                                            a customer places an order,
-                                                            Based on that we can manage our orders.</h6>
+                                                        <h3 class="header"><?php echo lang('Manage_Orders'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('manage_your_orders'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -363,10 +339,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>create-acount-icon.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Create your Account</h3>
-                                                        <h6 class="card-description">To sign up for Port10, create a
-                                                            Port10 Account. You can use the username and password to
-                                                            sign in to Port10 and now all over service are visible.</h6>
+                                                        <h3 class="header"><?php echo lang('Create_your_Account'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('To_sign_up_for_Port10'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -382,10 +356,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>select-product.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Select product</h3>
-                                                        <h6 class="card-description">Goods and services are necessary
-                                                            for satisfying the needs of society. Select your needed
-                                                            product and do purchase in our platform.</h6>
+                                                        <h3 class="header"><?php echo lang('Select_product'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('Goods_and_services'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -401,10 +373,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>place-order.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12 texts-sm-center">
-                                                        <h3 class="header">Place order</h3>
-                                                        <h6 class="card-description">If you are interested in any of our
-                                                            products and wish to purchase it, please continue shopping
-                                                            or checkout your order</h6>
+                                                        <h3 class="header"><?php echo lang('Place_order'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('Place_order_content'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -420,11 +390,8 @@
                                                             src="<?php echo base_url('assets/admin/images/') ?>delivery-van.svg">
                                                     </div>
                                                     <div class="col-md-8 col-sm-12">
-                                                        <h3 class="header">Recieve your order</h3>
-                                                        <h6 class="card-description">Once the delivery person
-                                                            delivers your order and gives proof of delivery, that
-                                                            indicate that the
-                                                            package delivery process is complete.</h6>
+                                                        <h3 class="header"><?php echo lang('Recieve_your_order'); ?></h3>
+                                                        <h6 class="card-description"><?php echo lang('Recieve_your_order_content'); ?></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -445,16 +412,22 @@
         <div class="get-started-section">
             <div class="text-center pt-5 pb-5 col-10 ml-auto mr-auto">
                 <h2 class="sub-heading wow fadeInUp data-wow-delay=" 5s"">
-                    Get Started with Port10
+                <?php echo lang('Get_Started'); ?>
                 </h2>
-                <h6 class="mt-4 description">Businesses in the B2B market are turning to B2B Commerce, an ecommerce
-                    platform specifically designed for businesses making purchases online. It enables companies to
-                    create exceptional ecommerce storefronts and experiences for their business customers.
+                <h6 class="mt-4 description">  <?php echo lang('Get_Started_content'); ?>
                 </h6>
+                <?php if ($language == 'en') { ?>
                 <div class="row align-items-center d-flex justify-content-center">
                     <a href="<?php echo base_url($language . '/home') ?>"><img class="get-started-btn"
                             src="<?php echo base_url('assets/admin/images/') ?>get-started-btn.png"></a>
                 </div>
+                <?php } else { ?>
+                    <div class="row align-items-center d-flex justify-content-center">
+                    <a href="<?php echo base_url($language . '/home') ?>"><img
+                                                    class="get-started-btn"
+                                                    src="<?php echo base_url('assets/admin/images/') ?>get_started_ar.png"></a>
+                </div>
+                    <?php } ?>
             </div>
         </div>
         <!-- Get-started-section -->

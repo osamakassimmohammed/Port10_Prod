@@ -324,7 +324,9 @@
                                         </a>
                                     </li>
                                     <?php if (!empty($main_category)) { ?>
-                                        <li class="shop shop_menu"><a href="<?php echo base_url($language . '/home') ?>">
+                                        <li class="shop shop_menu <?php if (substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1) == 'home') {
+                                        echo 'menu_active_nav';
+                                    } ?>"><a href="<?php echo base_url($language . '/home') ?>">
                                                 <?php echo lang('Shop'); ?>
                                             </a>
                                             <div class="shop_menu_show">
