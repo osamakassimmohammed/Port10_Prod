@@ -42,8 +42,8 @@
     color: white;
 }
 .img_brand{
-  width: 40px;
-  height: 40px
+  width: 100px;
+  height: 100px
 }
 .pro_create{
     background: #4f0381;

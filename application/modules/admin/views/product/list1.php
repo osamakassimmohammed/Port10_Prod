@@ -14,6 +14,156 @@
     text-decoration: none;
     color: white;
   }
+  .bulk-spacing{
+    margin-left:3rem;
+    margin-top:0rem !important;
+    color: #ff375e;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    font-size:20px
+  }
+  hr.new4 {
+  border: 1px dashed #000000;
+}
+.mb-none{
+  margin-bottom:0rem !important
+}
+.card .body {
+    padding: 0px !important;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #58595b;
+    font-size: 15px;
+    padding-bottom: 7px;
+}
+.pro_create {
+    background: #4f0381 !important;
+}
+.card-bulk {
+    border: 0px solid #efefef;
+    background: #ffffff;
+    padding: 20px 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 2px #e7e7e7;
+    overflow: hidden !important;
+}
+.card .body {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+.card {
+    background: none !important;
+    box-shadow: none !important;
+}
+.craete-specing{
+  margin-right: 2rem;
+}
+section.content {
+    margin: 75px 15px 0 15px;
+}
+body {
+  background: rgba(228,175,11,.8);
+}
+
+::placeholder {
+  color:#fff;
+}
+
+li.step1,li.step2,li.step3 {
+  position: relative;
+}
+ul.stepper li.step1:before {
+  position: absolute;
+    top: 20px;
+    /* left: -12px; */
+    content: '1';
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 8px solid #E3F0F6;
+    background: #8e9aa0;
+    z-index: 2;
+    padding: 7px 13px;
+    color: white;
+}
+ul.stepper li.step2:before {
+  position: absolute;
+    top: 20px;
+    /* left: -12px; */
+    content: '2';
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 8px solid #E3F0F6;
+    background: #8e9aa0;
+    z-index: 2;
+    padding: 7px 13px;
+    color: white;
+}
+ul.stepper li.step3:before {
+  position: absolute;
+    top: 20px;
+    /* left: -12px; */
+    content: '3';
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 8px solid #E3F0F6;
+    background: #8e9aa0;
+    z-index: 2;
+    padding: 7px 13px;
+    color: white;
+}
+
+/* ul.stepper li.step1.done:before, ul.stepper li.step2.done:before, ul.stepper li.step3.done:before {
+  background: #A0F69E;
+  border: 0;
+} 
+ul.stepper li.step1.done:after, ul.stepper li.step2.done:after, ul.stepper li.step3.done:after {
+  background: #A0F69E;
+}  */
+
+ul.stepper li.step1:after {
+  position: absolute;
+  top: 20px;
+  /* left: 11px; */
+  content:'';
+  width: 3px;
+  height: 100%;
+  background: #8e9aa0;
+  z-index:1;
+  margin: 0rem 2.4rem;
+}
+ul.stepper li.step2:after {
+  position: absolute;
+  top: 20px;
+  /* left: 11px; */
+  content:'';
+  width: 3px;
+  height: 100%;
+  background: #8e9aa0;
+  z-index:1;
+  margin: 0rem 2.4rem;
+}
+ul.stepper li.step:last-child:after {
+  display: none;
+}
+.step-content {
+  padding: 10px 100px;
+    padding-bottom: 30px;
+}
+.step-content .input-field {
+  margin-top: 0;
+}
+ul {
+    list-style-type: none;
+}
 </style>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="">  
@@ -49,46 +199,87 @@
     <input type="submit" name="" value="upload file">
   </form> -->
 </div>
-<div class="row" style="margin-top: 20px;">
-  <div class="col-sm-4">
-     <form method="post" action="<?php echo base_url($language.'/admin/product/csv_upload'); ?>" enctype="multipart/form-data">
-      <label><?php echo lang('select csv file with image name'); ?></label>
-      <input type="file" name="file" accept=".csv"/>
-      <input type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('import'); ?>" style="margin-top:9px"/>
-     </form>
-     <br />
-     <br />
-  </div>
+<h3 class="bulk-spacing"><?php echo lang('aBulk_Upload'); ?></h3>
 
-  <div class="col-sm-4">
-     <form method="post" action="<?php echo base_url($language.'/admin/product/upload_multiple_images'); ?>" enctype="multipart/form-data">
-      <label><?php echo lang('upload multiple images for product'); ?> </label>
-      <input type="file" name="file[]" multiple="" required accept="image/png, image/gif, image/jpeg" />
-      <input style="margin: 9px 0px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('import'); ?>" />
-      <a target="_blank" style="display:table-cell" class="btn btn-info" href="product/uploaded_image"><?php echo lang('see your uploaded Image'); ?></a>
-     </form>
-     <br />
-     <br />
-  </div>
+<div class="col-md-12 card-bulk">
+  <br/>
+<div class="section">
+   <div class="">
+      <div class="row">
+         <div class="col xl4 l6 m10 s12 offset-xl4 offset-l3 offset-m1">
 
-  <div class="col-sm-4">
+                <ul class="stepper linear">
+                     <li class="step1">
+                        <div class="step-content">
+                          <div class="row">
+                              <div class="input-field">
+                              <div>
       <label><?php echo lang('download sample CSV file to upload product'); ?></label>
       <div>
       <a target="_blank" href="<?php echo base_url('/assets/admin/port10-csv-sample.csv'); ?>" class="a_download">
-        <input style="    width: 40%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('click to download'); ?>" />
+        <input style=" color:#58595b; color:white;   margin-top: 1px;" type="submit" class="btn btn-primary" name="import" class="btn btn-primary" value="<?php echo lang('click to download'); ?>" />
       </a>
-     <a target="_blank" href="<?php echo base_url('admin/product/cat_data'); ?>" class="a_download">
-        <input style="    width: 50%;    margin-top: 1px;" type="submit" class="uploada" name="import" class="btn btn-info" value="<?php echo lang('click to see category ids'); ?>" />
+     <a target="_blank" href="<?php echo base_url($language.'/admin/product/cat_data'); ?>" class="a_download">
+        <input style=" color:#58595b; color:white;  margin-top: 1px;" type="submit" class="btn btn-primary" name="import" class="btn btn-primary" value="<?php echo lang('category Lists'); ?>" />
       </a>
 </div>
-     <br />
+                              </div>
+                          </div>
+                        </div>
+                     </li>
+                     <li class="step2">
+
+                        <div class="step-content">
+                           <div class="row">
+                              <div class="input-field col s12">
+                              <div style="margin-top:2rem">
+     <form method="post" action="<?php echo base_url($language.'/admin/product/upload_multiple_images'); ?>" enctype="multipart/form-data">
+      <label><?php echo lang('upload multiple images for product'); ?> </label>
+      <input type="file" name="file[]" multiple="" required accept="image/png, image/gif, image/jpeg" />
+      <br />
+      <input type="submit" style="margin-top:-0.7rem !important" class="btn btn-primary" name="import" class="btn btn-info" value="<?php echo lang('importkp'); ?>" />
+      <br />
+      <br />
+      <a target="_blank" style="display:table-cell" class="btn btn-info" href="product/uploaded_image"><?php echo lang('see your uploaded Image'); ?></a>
+     </form>
+     <br/>
+     </div>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                     <li class="step3">
+                        <div class="step-content">
+                          <div class="row">
+                            <div class="input-field col s12">
+                            <div class=" mb-none" style="margin-bottom:0rem !important">
+   <form method="post" action="<?php echo base_url($language.'/admin/product/csv_upload'); ?>" enctype="multipart/form-data">
+    <label><?php echo lang('select csv file with image name'); ?></label>
+    <input type="file" name="file" accept=".csv"/>
+    <br />
+    <input type="submit" style="margin-top:-0.7rem !important" class="btn btn-primary" name="import" class="btn btn-info" value="<?php echo lang('importkp'); ?>"/>
+  </form>
+
+</div>
+                            </div>
+                          </div>
+                        </div>
+                     </li>
+                  </ul>
+         </div>
+      </div>
+   </div>
+</div>
+
   </div>
 </div>
+<div class="row" style="padding-left:2.5rem;padding-right:2.5rem">
 <div class="sraech">
   <!-- <label for="usr">Search:</label> -->
   <!-- <input type="text" class="" id="search_val" style="padding: 3px"> -->
-  <a class="pro_create" href="<?php echo base_url($language.'/admin/product/create') ?>"><?php echo lang('aCreate_Product'); ?></a>
+  <a class="btn btn-info craete-specing" style="background:#4f0381 !important" href="<?php echo base_url($language.'/admin/product/create') ?>"><?php echo lang('aCreate_Product'); ?></a>
 </div>
+<div class="card-bulk">
 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
 <thead>
     <tr>
@@ -138,6 +329,7 @@
     </tbody>
 
 </table>
+</div>
 <div id="pagination"><?php echo @$pagination; ?></div>
 <div id="pagination2" style="display:none"></div>
 <div id="search_pagination" style="display:none"></div>
@@ -189,7 +381,12 @@
     }
 </style>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
 
+  </script>
 <script type="text/javascript">
     $(document).on("keyup","#search_val",function(){      
     var serach=$(this).val();  

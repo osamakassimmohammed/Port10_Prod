@@ -6,6 +6,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Shipping_lib {
 
+
+
+  ///SHIPPING RATE////
+  protected $shi_UserName='armx.ruh.it@gmail.com';
+  protected $shi_Password='YUre@9982';
+  protected $shi_Version='v1';
+  protected $shi_AccountNumber='60536338';
+  protected $shi_AccountPin='543543';
+  protected $shi_AccountEntity='RUH';
+  protected $shi_AccountCountryCode='SA';
+  protected $shi_Source=24;
+  protected $shi_CountryCode='SA';
+  protected $shi_url='https://ws.aramex.net/ShippingAPI.V2/RateCalculator/Service_1_0.svc/json/CalculateRate';
 	/// thise are test key
 
   // protected $shi_UserName='reem@reem.com';
@@ -20,26 +33,29 @@ class Shipping_lib {
   // protected $shi_url='https://ws.dev.aramex.net/ShippingAPI.V2/';
 
 
-  protected $shi_UserName='armx.ruh.it@gmail.com';
-  protected $shi_Password='YUre@9982';
-  protected $shi_Version='v1';
-  protected $shi_AccountNumber='4004636';
-  protected $shi_AccountPin='442543';
-  protected $shi_AccountEntity='RUH';
-  protected $shi_AccountCountryCode='SA';
-  protected $shi_Source=24;
-  protected $shi_CountryCode='SA';
-  protected $shi_url='https://ws.aramex.net/ShippingAPI.V2/';
-  // protected $shi_UserName='testingapi@aramex.com';
-  // protected $shi_Password='R123456789$r';
+  // protected $shi_UserName='armx.ruh.it@gmail.com';
+  // protected $shi_Password='YUre@9982';
   // protected $shi_Version='v1';
-  // protected $shi_AccountNumber='60536338';
-  // protected $shi_AccountPin='543543';
+  // protected $shi_AccountNumber='4004636';
+  // protected $shi_AccountPin='442543';
   // protected $shi_AccountEntity='RUH';
   // protected $shi_AccountCountryCode='SA';
   // protected $shi_Source=24;
   // protected $shi_CountryCode='SA';
   // protected $shi_url='https://ws.aramex.net/ShippingAPI.V2/';
+
+
+  // protected $shi_UserName='testingapi@aramex.com';
+  // protected $shi_Password='R123456789$r';
+  // protected $shi_Version='v1';
+  // protected $shi_AccountNumber='4004636';
+  // protected $shi_AccountPin='432432';
+  // protected $shi_AccountEntity='RUH';
+  // protected $shi_AccountCountryCode='SA';
+  // protected $shi_Source=24;
+  // protected $shi_CountryCode='SA';
+  // protected $shi_url='https://ws.sbx.aramex.net/ShippingAPI.V2/';
+
 
   // https://ws.sbx.aramex.net/ShippingAPI.V2/Shipping/Service_1_0.svc/
 //   "UserName": "testingapi@aramex.com",
@@ -144,20 +160,24 @@ class Shipping_lib {
 
   public function get_shipping_rate($products,$send_data,$currency='SAR')
   {
+    // print_r('hi');
+    // exit();
     $send_data['postal_code'] = $send_data['pincode'];
     $total_amount=$i=0;
     $is_single_pro_error=false;
     $info_arr=array();
+  
     if(!empty($products))
     {
+      
       $DestinationAddress=$this->get_DestinationAddress($send_data);
       $ClientInfo=$this->get_ClientInfo();
-
+     
       foreach ($products as $key => $val)
       {
         $product_data = $this->CI->custom_model->get_data_array("SELECT pro.product_name,pro.price,pro.sale_price,pro.weight,pro.weight_unit,pro.city,pro.warehouse_location,pro.city,pro.lat,pro.lng,pro.weight_unit,pro.weight,pro.length,pro.width,pro.height,pro.is_delivery_available,admin.street_name,admin.building_no,admin.city as ad_city,admin.state,admin.postal_code FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id WHERE pro.id='".$val['pid']."'  ");
-        // print_r($product_data);
-
+        
+        
         if(!empty($product_data))
         {
           if($product_data[0]['is_delivery_available']==1)
@@ -203,18 +223,16 @@ class Shipping_lib {
             // echo "<pre>";
             // print_r('hi');
             // exit();
-
+          
             $shipping_arr = json_encode($shipping_arr);
-            // print_r("hi");
-
-            // echo "<pre>";  
             // print_r($shipping_arr);
             // exit();
-            // die;
+            // print_r("hi");
+          
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-              CURLOPT_URL => $this->shi_url.'RateCalculator/Service_1_0.svc/json/CalculateRate',
+              CURLOPT_URL => $this->shi_url,
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => '',
               CURLOPT_MAXREDIRS => 10,
@@ -233,8 +251,8 @@ class Shipping_lib {
             $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
 
-          //  print_r(json_decode($response,true));
-          //   exit();
+            // print_r($httpcode);
+            // exit();
 
             if($httpcode==200)
             {
@@ -306,6 +324,227 @@ class Shipping_lib {
     return $value;
   }
 
+  //test-code
+  // {
+  //   $DestinationAddress=array();
+  //   if(isset($send_data['street_name']))
+  //   {
+  //      $DestinationAddress['Line1']=$send_data['street_name']; 
+  //   }else{
+  //     $DestinationAddress['Line1']=$send_data['address_1']; 
+  //   }
+  //   if(isset($send_data['google_address']))
+  //   {
+  //     $DestinationAddress['Line2']=empty($send_data['google_address'])? null:$send_data['google_address'];     
+  //   }else{
+  //     $DestinationAddress['Line2']=null;
+  //   }   
+  //   $DestinationAddress['Line3']='';    
+  //   $DestinationAddress['City']=$send_data['city'];    
+  //   $DestinationAddress['StateOrProvinceCode']='';    
+  //   $DestinationAddress['PostCode']=$send_data['pincode'];    
+  //   $DestinationAddress['CountryCode']=$this->shi_CountryCode;
+  //   if(isset($send_data['lng']))
+  //   {
+  //     $DestinationAddress['Longitude']=empty($send_data['lng'])? 0:$send_data['lng'];    
+  //     $DestinationAddress['Latitude']=empty($send_data['lat'])? 0:$send_data['lat'];    
+  //   }else{
+  //     $DestinationAddress['Longitude']=0;
+  //     $DestinationAddress['Latitude']=0;
+  //   }    
+  //   $DestinationAddress['BuildingNumber']=null;  
+  //   if(isset($send_data['building_no']))
+  //   {
+  //     $DestinationAddress['BuildingNumber']=$send_data['building_no'];  
+  //   }  
+  //   $DestinationAddress['BuildingName']=null;    
+  //   $DestinationAddress['Floor']=null;    
+  //   $DestinationAddress['Apartment']=null;    
+  //   $DestinationAddress['POBox']=null;    
+  //   $DestinationAddress['Description']=null;    
+  //   // $DestinationAddress['Description']='Name: '.$send_data['first_name'].' '.$send_data['last_name'].' Email: '.$send_data['email'].' Mobile No: '.$send_data['mobile_no'];    
+  //   return $DestinationAddress;
+  // }
+
+  // public function get_OriginAddress($orignin_data)
+  // {
+  //   $OriginAddress=array();
+  //   $OriginAddress['Line1']=$orignin_data['street_name'];    
+  //   $OriginAddress['Line2']=empty($orignin_data['warehouse_location'])? null:$orignin_data['warehouse_location'];     
+  //   $OriginAddress['Line3']='';    
+  //   $OriginAddress['City']=$orignin_data['city'];    
+  //   $OriginAddress['StateOrProvinceCode']='';    
+  //   $OriginAddress['PostCode']=$orignin_data['postal_code'];    
+  //   $OriginAddress['CountryCode']=$this->shi_CountryCode;    
+  //   $OriginAddress['Longitude']=empty($orignin_data['lng'])? 0:$orignin_data['lng'];    
+  //   $OriginAddress['Latitude']=empty($orignin_data['lat'])? 0:$orignin_data['lat'];    
+  //   $OriginAddress['BuildingNumber']=$orignin_data['building_no'];    
+  //   $OriginAddress['BuildingName']=null;    
+  //   $OriginAddress['Floor']=null;    
+  //   $OriginAddress['Apartment']=null;    
+  //   $OriginAddress['POBox']=null;    
+  //   $OriginAddress['Description']=null;    
+  //   return $OriginAddress;
+  // }
+
+  // public function get_shipping_rate($products,$send_data,$currency='SAR')
+  // {
+  //   $total_amount=$i=0;
+  //   $is_single_pro_error=false;
+  //   $info_arr=array();
+  //   if(!empty($products))
+  //   {
+  //     $DestinationAddress=$this->get_DestinationAddress($send_data);
+  //     $ClientInfo=$this->get_ClientInfo();
+      
+  //     foreach ($products as $key => $val) 
+  //     {               
+  //       $product_data = $this->CI->custom_model->get_data_array("SELECT pro.product_name,pro.price,pro.sale_price,pro.weight,pro.weight_unit,pro.city,pro.warehouse_location,pro.city,pro.lat,pro.lng,pro.weight_unit,pro.weight,pro.length,pro.width,pro.height,pro.is_delivery_available,admin.street_name,admin.building_no,admin.city as ad_city,admin.state,admin.postal_code FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id WHERE pro.id='".$val['pid']."'  ");
+  //       if(!empty($product_data))
+  //       {
+  //         if($product_data[0]['is_delivery_available']==0)
+  //         {  
+  //           $weight_value = $this->weight_farmula($product_data[0]['weight'],$product_data[0]['weight_unit']);          
+            
+  //         	$OriginAddress=$this->get_OriginAddress($product_data[0]);
+  //         	$ShipmentDetails=$Transaction=$shipping_arr=array();
+  //         	$ShipmentDetails['Dimensions']=null;
+  //         	$ShipmentDetails['ActualWeight']=array("Unit"=>"KG","Value"=>$weight_value);
+  //         	$ShipmentDetails['ChargeableWeight']=null;
+  //         	$ShipmentDetails['DescriptionOfGoods']=$product_data[0]['product_name'];
+  //         	$ShipmentDetails['GoodsOriginCountry']=$this->shi_CountryCode;
+  //         	$ShipmentDetails['NumberOfPieces']=$val['qty'];
+  //         	$ShipmentDetails['ProductGroup']='EXP';
+  //         	$ShipmentDetails['ProductType']='PPX';
+  //           // $ShipmentDetails['ProductGroup']='DOM';
+  //           // $ShipmentDetails['ProductType']='CDS';
+  //           $ShipmentDetails['PaymentType']='P';
+  //         	$ShipmentDetails['PaymentOptions']='';
+  //         	$ShipmentDetails['CustomsValueAmount']=null;
+  //         	$ShipmentDetails['CashOnDeliveryAmount']=null;
+  //         	$ShipmentDetails['InsuranceAmount']=null;
+  //         	$ShipmentDetails['CashAdditionalAmount']=null;
+  //         	$ShipmentDetails['CashAdditionalAmountDescription']=null;
+  //         	$ShipmentDetails['CollectAmount']=null;
+  //         	$ShipmentDetails['Services']='';
+  //         	$ShipmentDetails['Items']=null;
+  //         	$ShipmentDetails['DeliveryInstructions']=null;
+
+  //           $Transaction['Reference1']='';
+  //           $Transaction['Reference2']='';
+  //           $Transaction['Reference3']='';
+  //           $Transaction['Reference4']='';
+  //           $Transaction['Reference5']='';
+
+  //           $shipping_arr['ClientInfo']=$ClientInfo;
+  //           $shipping_arr['DestinationAddress']=$DestinationAddress;
+  //           $shipping_arr['OriginAddress']=$OriginAddress;
+  //           $shipping_arr['PreferredCurrencyCode']='SAR';
+  //           $shipping_arr['ShipmentDetails']=$ShipmentDetails;
+  //           $shipping_arr['Transaction']=$Transaction;
+  //           // echo "<pre>";
+  //           // print_r($shipping_arr);
+  //           // die;
+  //           $shipping_arr = json_encode($shipping_arr); 
+  //           // echo $shipping_arr;
+  //           // echo "<br>";
+  //           // die;
+  //           $curl = curl_init();
+
+  //           curl_setopt_array($curl, array(
+  //             CURLOPT_URL => $this->shi_url.'RateCalculator/Service_1_0.svc/json/CalculateRate',
+  //             CURLOPT_RETURNTRANSFER => true,
+  //             CURLOPT_ENCODING => '',
+  //             CURLOPT_MAXREDIRS => 10,
+  //             CURLOPT_TIMEOUT => 0,
+  //             CURLOPT_FOLLOWLOCATION => true,
+  //             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  //             CURLOPT_CUSTOMREQUEST => 'POST',
+  //             CURLOPT_POSTFIELDS =>$shipping_arr,
+  //             CURLOPT_HTTPHEADER => array(
+  //               'Content-Type: application/json',
+  //               'Accept: application/json'
+  //             ),
+  //           ));
+
+  //           $response = curl_exec($curl);
+  //           $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+  //           curl_close($curl);
+  //           // echo $response;
+  //           // die;
+            
+  //           if($httpcode==200)
+  //           {
+  //             $response=json_decode($response,true);
+  //             if($response['HasErrors']==false)
+  //             {
+  //               $info_arr['data'][$key]['pid']=$val['pid'];
+  //               $info_arr['data'][$key]['amount']=$response['TotalAmount']['Value'];       
+  //               $info_arr['data'][$key]['error']=0;
+  //               $info_arr['data'][$key]['error_message']=Null;
+  //               $info_arr['data'][$key]['currency']=$response['TotalAmount']['CurrencyCode'];
+  //               $total_amount=$response['TotalAmount']['Value']+$total_amount;
+  //             }else{
+  //               $is_single_pro_error=true;
+  //               $info_arr['data'][$key]['pid']=$val['pid'];
+  //               $info_arr['data'][$key]['error']=1;
+  //               $info_arr['data'][$key]['error_message']=$response['Notifications'][0]['Message'];
+  //               $info_arr['data'][$key]['error_code']=$response['Notifications'][0]['Code'];
+  //             }
+  //           }else{
+  //             $is_single_pro_error=true;
+  //             $info_arr['data'][$key]['pid']=$val['pid'];
+  //             $info_arr['data'][$key]['error']=1;
+  //             $info_arr['data'][$key]['error_message']='Pad string passed';
+  //             $info_arr['data'][$key]['error_code']=Null;
+  //           }            
+  //         }else{
+  //             $info_arr['data'][$key]['pid']=$val['pid'];
+  //             $info_arr['data'][$key]['amount']=0;
+  //             $info_arr['data'][$key]['error']=0;
+  //             $info_arr['data'][$key]['error_message']='';
+  //             $info_arr['data'][$key]['error_code']=Null;
+  //         }
+  //       }else{
+  //         $info_arr['data'][$key]['pid']=$val['pid'];
+  //         $info_arr['data'][$key]['error']=1;
+  //         $info_arr['data'][$key]['error_message']='Product Not Found';
+  //         $info_arr['data'][$key]['error_code']=Null;
+  //       }
+  //       // $i++;
+  //       $info_arr['TotalAmount']=$total_amount;
+  //       $info_arr['status']=true;
+  //       $info_arr['is_single_pro_error']=$is_single_pro_error;
+  //       $info_arr['message']='';
+  //     }      
+  //   }else{      
+  //     $info_arr['status']=false;
+  //     $info_arr['message']='Something Went Wrong';
+  //   }
+  //   return $info_arr;
+  // }
+
+  // public function weight_farmula($weight,$unit)
+  // {
+  //   $value=0;
+  //   if(!empty($weight))
+  //   {
+  //     if($unit=="G")
+  //     {
+  //       $value=$weight/1000;
+  //     }else if($unit=="T")
+  //     {
+  //       $value=$weight*1000;
+  //     }else if($unit=="KG")
+  //     {
+  //       $value=$weight;
+  //     }
+  //   }
+  //   return $value;
+  // }
+
+  //
+
   public function create_shipments($order_items,$is_order,$seller_data,$post_data)
   {
     $info_arr=array();
@@ -342,6 +581,7 @@ class Shipping_lib {
       //   foreach ($products as $key => $val)
       // {
       //   $product_data = $this->CI->custom_model->get_data_array("SELECT pro.product_name,pro.price,pro.sale_price,pro.weight,pro.weight_unit,pro.city,pro.warehouse_location,pro.city,pro.lat,pro.lng,pro.weight_unit,pro.weight,pro.length,pro.width,pro.height,pro.is_delivery_available,admin.street_name,admin.building_no,admin.city as ad_city,admin.state,admin.postal_code FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id WHERE pro.id='".$val['pid']."'  ");
+
         foreach ($order_items as $ori_key => $ori_val)
         {
           $productData = $this->CI->custom_model->get_data_array("SELECT product_name,packaging_type, req_loading , vehical_requirement, is_hazardous, hazardous_specify,price,sale_price,weight,weight_unit,city,warehouse_location,lat,lng,weight_unit,weight,length,width,height,is_delivery_available FROM product  WHERE id='".$ori_val['product_id']."'");

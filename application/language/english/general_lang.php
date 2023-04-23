@@ -2,6 +2,9 @@
 
 $lang['h_sar'] = "SAR";
 $lang['SAR'] = "SAR";
+$lang['Sub'] = "Sub";
+$lang['Main'] = "Main";
+
 $lang['h_usd'] = "USD";
 $lang['USD'] = "USD";
 $lang['Home'] = "Home";
@@ -439,9 +442,11 @@ $lang['select csv file with image name'] = "Select CSV File with image name";
 $lang['upload multiple images for product'] = "Upload multiple images for product";
 $lang['download sample CSV file to upload product'] = "Download sample CSV file to upload product";
 $lang['click to download'] = "Click To Download";
-$lang['click to see category ids'] = "Click to see category ids";
+$lang['category Lists'] = "Category Lists";
 $lang['see your uploaded Image'] = "See Your uploaded Image";
 $lang['import'] = "Image";
+$lang['importkp'] = "Import";
+
 $lang['aPickup_List'] = "Pickup List";
 $lang['aEdit'] = "Edit";
 $lang['aAdd_Brand'] = "Add Brand";
@@ -578,6 +583,7 @@ $lang['aPlease_Enter_Quantity'] = "Please Enter Quantity";
 $lang['aPlease_Enter_Item_Description'] = "Please Enter Item Description";
 $lang['aPlease_Enter_SKU'] = "Please Enter SKU";
 $lang['aPlease_Enter_Price'] = "Please Enter Price";
+$lang['Catalogue'] = "Catalog"; //
 $lang['aPlease_Enter_Net_Amount'] = "Please Enter Net Amount";
 $lang['aInvalid_product_id_or'] = "Invalid product id or this product not belongs to you";
 $lang['aUser_Cancelled_Request'] = "User Cancelled Request";
@@ -813,3 +819,9 @@ $lang['We_helps_you'] = "We helps you to grow your business more";
 $lang['faster'] = "faster";
 $lang['and'] = "and";
 $lang['easier'] = "easier";
+$lang['aCreate_Catalogue'] = "Create Catalog";
+$lang['catalogue_name'] = "catalog name";
+$lang['Select_products'] = "Select products";
+$lang['aSubmit_catalogue'] = "Submit catalog";
+$lang['upload multiple images for catalogue'] = "upload multiple images for catalog";
+$lang['aBulk_Upload'] = "BULK UPLOAD";
