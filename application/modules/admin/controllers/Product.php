@@ -1658,27 +1658,19 @@ class Product extends Admin_Controller
 	public function cat_data()
 	{
 		$language = $this->uri->segment(1);
-		// echo "<pre>";
-		// print_r($_SERVER['HTTP_REFERER']);
-		// echo $language; // outputs "en"
-		// print_r($language);
-		// exit();
-
-		// $url = $_SERVER['HTTP_REFERER'];
-		// $path = parse_url($url, PHP_URL_PATH); // gets the path component of the URL
-		// $parts = explode('/', $path); // splits the path into an array of parts
-		// $language = $parts[1]; // the language code is the second part of the path
-		
+	
 		if ($language == 'en') {
 			$category_listing = $this->custom_model->my_where("category", "id,display_name", array("parent" => '0', 'status' => 'active'));
+			echo "<HTML lang='en'>";
 		} else {
 			$category_listing = $this->custom_model->my_where("category_trans", "id,display_name", array("parent" => '0', 'status' => 'active'));
+			echo "<HTML lang='ar' dir='rtl'>";
 		}
 		// $category_listing = $this->custom_model->my_where("category","id,display_name",array("parent" => '0', 'status'=>'active' ) );
 
 		if ($category_listing) {
 			foreach ($category_listing as $key => $value) {
-				echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>";
+				echo "<span class='first category_list_content'>";
 				$data = lang('Main').'-->' . $value['id'] . ' . ' . $value['display_name'];
 				echo $data;
 
@@ -1734,7 +1726,7 @@ class Product extends Admin_Controller
 			$unit_list = $this->custom_model->get_data_array(" SELECT * FROM unit_list_trans ORDER BY id ASC ");
 		}	
 		if (!empty($unit_list)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>". lang('Unit') . '-->' ;
+			echo "<span class='first category_list_content'> Unit List -->";
 			foreach ($unit_list as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val['id'] . " . " . $val['unit_name'] . "</p>";
 			}
@@ -1746,7 +1738,7 @@ class Product extends Admin_Controller
 
 
 		if (!empty($city_list)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> City List -->";
+			echo "<span class='first category_list_content'> City List -->";
 			foreach ($city_list as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val['id'] . " . " . $val['city_name'] . " | " . $city_trans[$key]['city_name']. "</p>";
 			}
@@ -1762,7 +1754,7 @@ class Product extends Admin_Controller
 		// print_r($vehical_requirement);
 		// die;
 		if (!empty($pack_arr)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Packaging Type -->";
+			echo "<span class='first category_list_content'>". lang('aVehical_Requirement')." -->";
 			foreach ($pack_arr as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1770,7 +1762,7 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($req_loading_arr)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Requirement for Loading -->";
+			echo "<span class='first category_list_content'>". lang('aRequirement_for_Loading')." -->";
 			foreach ($req_loading_arr as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1778,7 +1770,7 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($get_hazardous)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Is this Hazardous material -->";
+			echo "<span class='first category_list_content'>". lang('aIs_this_Hazardous_material')." -->";
 			foreach ($get_hazardous as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1786,12 +1778,13 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($vehical_requirement)) {
-			echo "<span class='first' style='margin-left: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Vehicle Requirement -->";
+			echo "<span class='first category_list_content'>". lang('aVehical_Requirement')." -->";
 			foreach ($vehical_requirement as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
 			echo "</span>";
 		}
+		echo "</html>";
 	}
 
 
