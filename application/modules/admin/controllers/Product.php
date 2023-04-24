@@ -1,3 +1,12 @@
+<style type="text/css">
+	.category_list_content{
+		margin: 3%;
+		display: block;
+		border: 1px solid #4e924edd;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+	</style>
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
