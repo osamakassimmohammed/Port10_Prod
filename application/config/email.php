@@ -7,7 +7,7 @@
 | Configuration of outgoing mail server.
 | */
 
-// $config['protocol'] = 'smtp';
+$config['protocol'] = 'smtp';
 // // $config['smtp_host'] = 'sg3plcpnl0180.prod.sin3.secureserver.net';
 // // $config['smtp_port'] = '465';
 
