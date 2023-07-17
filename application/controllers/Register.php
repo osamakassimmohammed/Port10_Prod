@@ -203,7 +203,7 @@ class Register extends MY_Controller
             			}
                         }
                   }
-                  $this->virtual_account($post_data);
+                  // $this->virtual_account($post_data);
  		}
  		else
  		{
