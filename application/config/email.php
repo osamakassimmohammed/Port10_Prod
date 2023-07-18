@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -14,16 +15,15 @@ $config['protocol'] = 'smtp';
 // // $config['smtp_host'] = 'mail.persausive.in';
 // // $config['smtp_port'] = '587';
 // // $config['smtp_timeout'] = '80';
-// // $config['smtp_user'] = 'info@persausive.in';
+// // $config['smtp_user'] = 'info@port10.sa';
 // // $config['smtp_pass'] = 'info@8899';
 
-$config['smtp_host'] = 'mail.persausive.in';
+$config['smtp_host'] = 'smtp.gmail.com';
 $config['smtp_port'] = '587';
 $config['smtp_timeout'] = '80';
-$config['smtp_user'] = 'hello@port10.sa';
-$config['smtp_pass'] = '52Y%wi]CS#HK';
-
-// // $config['smtp_crypto'] = 'tls'; 
+$config['smtp_user'] = 'info@port10.sa';
+$config['smtp_pass'] = 'EM@Port@';
+$config['smtp_crypto'] = 'tls'; 
 // // $config['smtp_host'] = 'smtp.gmail.com';
 // // $config['smtp_port'] = '587';
 // // $config['smtp_timeout'] = '80';

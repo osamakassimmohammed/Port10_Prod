@@ -32,10 +32,10 @@ class Email_cilib {
 		// echo $message;
 		// die;			
 		
-		// $emails.=',hello@port10.sa';	this for css	
-		$this->CI->email->from('hello@port10.sa',"Port10");
+		// $emails.=',info@port10.sa';	this for css	
+		$this->CI->email->from('info@port10.sa',"Port10");
 		$this->CI->email->to($emails);
-		// $this->CI->email->cc('hello@port10.sa');
+		// $this->CI->email->cc('info@port10.sa');
 		// $this->email->bcc('them@their-example.com');
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
@@ -56,10 +56,10 @@ class Email_cilib {
 		// echo $message;
 		// die;			
 		
-		// $emails.=',hello@port10.sa';	this for css	
-		$this->CI->email->from('hello@port10.sa',"Port10");
+		// $emails.=',info@port10.sa';	this for css	
+		$this->CI->email->from('info@port10.sa',"Port10");
 		$this->CI->email->to($emails);
-		// $this->CI->email->cc('hello@port10.sa');
+		// $this->CI->email->cc('info@port10.sa');
 		// $this->email->bcc('them@their-example.com');
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
@@ -93,7 +93,7 @@ class Email_cilib {
 		$this->CI->email->from('INFO@BRANDSBOUTIQUE-SA.COM',"Brands Boutique");
 		$this->CI->email->to($emails);
 		// $this->CI->email->to("quamer123@gmail.com");
-		// $this->CI->email->cc('hello@port10.sa');
+		// $this->CI->email->cc('info@port10.sa');
 		// $this->email->bcc('them@their-example.com');
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);

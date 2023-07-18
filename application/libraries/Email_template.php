@@ -156,7 +156,7 @@ class Email_template{
 		               Activate
 		               </a>
 		               <div  style="width: 100%; font-weight: 500; margin-top: 15px; font-size: 17px; line-height: 22px; padding: 0px 00px; margin-top: 20px;" >
-		                  If you have any questions, check out our Frequently Asked Questions page by clicking <a href="https://port10.sa/en/help" target="_blank"> Here </a>   or contact us at <a href="mailto:hello@port10.sa"  target="_blank"> hello@port10.sa  </a>  and we will be more than happy to serve you. 
+		                  If you have any questions, check out our Frequently Asked Questions page by clicking <a href="https://port10.sa/en/help" target="_blank"> Here </a>   or contact us at <a href="mailto:info@port10.sa"  target="_blank"> info@port10.sa  </a>  and we will be more than happy to serve you. 
 		               </div>
 		               <div style="clear:both;"></div>
 		               <div style="font-weight: 600; font-size: 22px; margin-top: 40px; margin-bottom: 10px; color: #fd3a58;">
@@ -213,7 +213,7 @@ class Email_template{
 		               </a>          
 
 		               <div  style="width: 100%; font-weight: 500; margin-top: 15px; font-size: 17px; line-height: 22px; padding: 0px 00px; margin-top: 20px;" >
-		                  إذا كان لديك أي أسئلة، نرجو منك زيارة صفحة الأسئلة الشائعة بالضغط هنا أو التواصل بنا على <a href="mailto:hello@port10.sa"  target="_blank">hello@port10.sa</a> وسنكون سعيدين لخدمتك.
+		                  إذا كان لديك أي أسئلة، نرجو منك زيارة صفحة الأسئلة الشائعة بالضغط هنا أو التواصل بنا على <a href="mailto:info@port10.sa"  target="_blank">info@port10.sa</a> وسنكون سعيدين لخدمتك.
 		               </div>
 		               <div style="clear:both;"></div>
 		               <div style="font-weight: 600; font-size: 22px; margin-top: 40px; margin-bottom: 10px; color: #fd3a58;">
@@ -278,7 +278,7 @@ class Email_template{
 		               }
 
 		               $html_tag.='<div  style="width: 100%; font-weight: 500; margin-top: 15px; font-size: 17px; line-height: 22px; padding: 0px 00px; margin-top: 20px;" >
-		                  If you have any questions, check out our Frequently Asked Questions page by clicking <a href="https://port10.sa/en/help" target="_blank"> Here </a>   or contact us at <a href="mailto:hello@port10.sa"  target="_blank"> hello@port10.sa  </a>  and we will be more than happy to serve you. 
+		                  If you have any questions, check out our Frequently Asked Questions page by clicking <a href="https://port10.sa/en/help" target="_blank"> Here </a>   or contact us at <a href="mailto:info@port10.sa"  target="_blank"> info@port10.sa  </a>  and we will be more than happy to serve you. 
 		               </div>
 		               <div style="clear:both;"></div>
 		               <div style="font-weight: 600; font-size: 22px; margin-top: 40px; margin-bottom: 10px; color: #fd3a58;">
@@ -343,7 +343,7 @@ class Email_template{
 		               }         
 
 		               $html_tag.='<div  style="width: 100%; font-weight: 500; margin-top: 15px; font-size: 17px; line-height: 22px; padding: 0px 00px; margin-top: 20px;" >
-		                  إذا كان لديك أي أسئلة، نرجو منك زيارة صفحة الأسئلة الشائعة بالضغط هنا أو التواصل بنا على <a href="mailto:hello@port10.sa"  target="_blank">hello@port10.sa</a> وسنكون سعيدين لخدمتك.
+		                  إذا كان لديك أي أسئلة، نرجو منك زيارة صفحة الأسئلة الشائعة بالضغط هنا أو التواصل بنا على <a href="mailto:info@port10.sa"  target="_blank">info@port10.sa</a> وسنكون سعيدين لخدمتك.
 		               </div>
 		               <div style="clear:both;"></div>
 		               <div style="font-weight: 600; font-size: 22px; margin-top: 40px; margin-bottom: 10px; color: #fd3a58;">
