@@ -1,12 +1,3 @@
-<style type="text/css">
-	.category_list_content{
-		margin: 3%;
-		display: block;
-		border: 1px solid #4e924edd;
-		margin-bottom: 10px;
-		padding: 10px;
-	}
-	</style>
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -431,6 +422,14 @@ class Product extends Admin_Controller
 		$weight_unit_arr['T'] = lang('Tonne');
 		$weight_unit_arr['KG'] = lang('Kilogram');
 		$weight_unit_arr['G'] = lang('Gram');
+		return $weight_unit_arr;
+	}
+	public function get_weight_abv_unit()
+	{
+		$weight_unit_arr = array();
+		$weight_unit_arr[0] = 'T';
+		$weight_unit_arr[1] = 'KG';
+		$weight_unit_arr[3] = 'G';
 		return $weight_unit_arr;
 	}
 
@@ -1235,6 +1234,8 @@ class Product extends Admin_Controller
 						$is_hazardous 			= $line[24];
 						$product_image 			= $line[25];
 						$image_gallery 			= $line[26];
+						$weight_unit            = $line[27];
+						$postal_code            = $line[28];
 
 						// $seller_check = $this->custom_model->my_where('admin_users','id',array('id' => $seller_id));
 
@@ -1242,9 +1243,63 @@ class Product extends Admin_Controller
 						// {
 						// 	$seller_id = 1;
 						// }
-
-
+						//Test
+						// $city = 'New York'; // Replace with your city name
+						// $postal_code = '10001'; // Replace with your postal code
 						$inc_data = $is_cat = $is_sub = array();
+
+						if (!empty($city)) {
+							$is_city = $this->custom_model->my_where('city_list', 'id', array('id' => $city));
+							
+							if (!empty($is_city)) {
+								$city_name = $this->db->get_where('city_list',array('id'=>$city))->result_array();
+								
+								$inc_data['city'] = $city_name[0]['city_name'];
+							} else {
+
+								$error[$i]['error'] = $product_name . ' city empty';
+								$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+								redirect($language . '/admin/product/list1');
+							}
+						} else {
+
+							$error[$i]['error'] = $product_name . ' city empty please enter value';
+							$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+							redirect($language . '/admin/product/list1');
+							// break;  
+						}
+
+						if (empty($postal_code)) {
+
+							$error[$i]['error'] = $product_name . ' postal_code empty';
+							$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+							redirect($language . '/admin/product/list1');
+						} else {
+
+							$apiKey = 'AIzaSyCcf4oVp2zfW5qBYMtRD54DApyRolch_qE'; // Replace with your Google API key
+
+							$url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($city_name[0]['city_name']) . "+" . urlencode($postal_code) . "&key=" . $apiKey;
+
+							$ch = curl_init();
+							curl_setopt($ch, CURLOPT_URL, $url);
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+							$response = curl_exec($ch);
+							curl_close($ch);
+
+							$json = json_decode($response);
+
+							$latitude = $json->results[0]->geometry->location->lat;
+							$longitude = $json->results[0]->geometry->location->lng;
+
+							// echo "Latitude: " . $latitude . "<br>";
+							// echo "Longitude: " . $longitude;
+							
+							
+							$inc_data['lat'] = $latitude;
+							$inc_data['lng'] = $longitude;
+						}
+
+						
 
 						if (!empty($seller_id)) $inc_data['seller_id'] = $seller_id;
 
@@ -1284,7 +1339,35 @@ class Product extends Admin_Controller
 							$is_unite = $this->custom_model->my_where('unit_list', 'id', array('id' => $unite));
 							if (!empty($is_unite)) {
 								$inc_data['unite'] = $unite;
+							} else {
+
+								$error[$i]['error'] = $product_name . ' unite empty';
+								$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+								redirect($language . '/admin/product/list1');
 							}
+						} else {
+
+							$error[$i]['error'] = $product_name . ' unite empty please enter value';
+							$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+							redirect($language . '/admin/product/list1');
+							// break;  
+						}
+						if (!empty($weight_unit)) {
+							// $is_weight_unit = $this->custom_model->my_where('unit_list', 'id', array('id' => $weight_unit));
+							if (in_array($weight_unit,['KG','T','G'])) {
+								$inc_data['weight_unit'] = $weight_unit;
+							} else {
+
+								$error[$i]['error'] = $product_name . ' weight_unit wrong';
+								$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+								redirect($language . '/admin/product/list1');
+							}
+						} else {
+
+							$error[$i]['error'] = $product_name . ' weight_unit empty please enter value';
+							$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+							redirect($language . '/admin/product/list1');
+							// break;  
 						}
 
 
@@ -1321,12 +1404,12 @@ class Product extends Admin_Controller
 
 						if (!empty($height)) $inc_data['height'] = $height;
 
-						if (!empty($city)) {
-							$is_city = $this->custom_model->my_where('city_list', 'id', array('id' => $city));
-							if (!empty($is_city)) {
-								$inc_data['city'] = $city;
-							}
-						}
+						// if (!empty($city)) {
+						// 	$is_city = $this->custom_model->my_where('city_list', 'id', array('id' => $city));
+						// 	if (!empty($is_city)) {
+						// 		$inc_data['city'] = $city;
+						// 	}
+						// }
 
 
 
@@ -1428,10 +1511,10 @@ class Product extends Admin_Controller
 
 						// if(!empty($image_name)) $inc_data['product_image'] 	= $image_name;
 						// echo "<pre>";
-						// print_r($is_cat);
+						// // print_r($is_cat);
 						// print_r($inc_data);
 						// exit();
-
+						// $inc_data['is_delivery_available'] = 0;
 						if (!empty($is_cat) && !empty($is_sub)) {
 							$is_product = $this->custom_model->my_where('product', 'id', array('product_name' => $product_name, 'seller_id' => $seller_id));
 							if (empty($is_product)) {
@@ -1439,9 +1522,13 @@ class Product extends Admin_Controller
 								$product_id_trans	=	$this->custom_model->my_insert($inc_data, 'product_trans');
 							} else {
 								$error[$i]['error'] = $product_name . ' already into database';
+								$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+								redirect($language . '/admin/product/list1');
 							}
 						} else {
 							$error[$i]['error'] = 'For ' . $product_name . ' Invalid category or sub caetgory id passsed';
+							$this->session->set_flashdata('csv_insert', $error[$i]['error']);
+							redirect($language . '/admin/product/list1');
 						}
 
 						$i++;
@@ -1452,10 +1539,9 @@ class Product extends Admin_Controller
 						$this->session->set_flashdata('csv_insert', 'CSV uploded successfully');
 						redirect($language . '/admin/product/list1');
 					} else {
-						echo "<pre>";
-						print_r($error);
-						echo '<a href=' . base_url($language . '/admin/product/list1') . ' class="btn btn-ifno">Back to list</a>';
-						die;
+
+						$this->session->set_flashdata('csv_insert', $error[0]['error']);
+						redirect($language . '/admin/product/list1');
 					}
 				}
 			} else {
@@ -1487,9 +1573,9 @@ class Product extends Admin_Controller
 			foreach ($_FILES['file']['name'] as $key => $value) {
 				if (isset($_FILES['file']['name'][$key]) && $_FILES['file']['name'][$key] != '') {
 					$file_name = $_FILES["file"]['name'][$key];
-					$newFileName = rand(10,1000).time();
-					$imageFileType = pathinfo($file_name,PATHINFO_EXTENSION);
-					$newFileName = $newFileName.".".$imageFileType;
+					$newFileName = rand(10, 1000) . time();
+					$imageFileType = pathinfo($file_name, PATHINFO_EXTENSION);
+					$newFileName = $newFileName . "." . $imageFileType;
 					$file_temp = $_FILES["file"]['tmp_name'][$key];
 					$image_name = $this->uploads_new($newFileName, $file_temp, $folder_name);
 					if ($image_name != false) {
@@ -1667,7 +1753,7 @@ class Product extends Admin_Controller
 	public function cat_data()
 	{
 		$language = $this->uri->segment(1);
-	
+
 		if ($language == 'en') {
 			$category_listing = $this->custom_model->my_where("category", "id,display_name", array("parent" => '0', 'status' => 'active'));
 			echo "<HTML lang='en'>";
@@ -1679,8 +1765,8 @@ class Product extends Admin_Controller
 
 		if ($category_listing) {
 			foreach ($category_listing as $key => $value) {
-				echo "<span class='first category_list_content'>";
-				$data = lang('Main').'-->' . $value['id'] . ' . ' . $value['display_name'];
+				echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>";
+				$data = lang('Main') . '-->' . $value['id'] . ' . ' . $value['display_name'];
 				echo $data;
 
 				$main_id = $value['id'];
@@ -1689,14 +1775,14 @@ class Product extends Admin_Controller
 						$s_listing = $this->custom_model->my_where("category", "id,display_name", array("parent" => $main_id));
 					} else {
 						$s_listing = $this->custom_model->my_where("category_trans", "id,display_name", array("parent" => $main_id));
-					}	
+					}
 					if (!empty($s_listing)) {
 
 						echo "<p class='asdasd' style='margin-left: 4%;'>";
 						foreach ($s_listing as $skey => $vsalue) {
 							$sub_id = $vsalue['id'];
 							// $sdata = $vsalue['id'].' :- '.$vsalue['display_name'];
-							$sdata = lang('Sub').'-->' . $vsalue['id'] . ' . ' . $vsalue['display_name'];
+							$sdata = lang('Sub') . '-->' . $vsalue['id'] . ' . ' . $vsalue['display_name'];
 
 							echo $sdata;
 							echo "<br>";
@@ -1705,7 +1791,7 @@ class Product extends Admin_Controller
 								$ss_listing = $this->custom_model->my_where("category", "id,display_name", array("parent" => $sub_id));
 							} else {
 								$ss_listing = $this->custom_model->my_where("category_trans", "id,display_name", array("parent" => $sub_id));
-							}	
+							}
 							// echo "<pre>";
 							// print_r($ss_listing);
 							// die;
@@ -1733,9 +1819,9 @@ class Product extends Admin_Controller
 			$unit_list = $this->custom_model->get_data_array(" SELECT * FROM unit_list ORDER BY id ASC ");
 		} else {
 			$unit_list = $this->custom_model->get_data_array(" SELECT * FROM unit_list_trans ORDER BY id ASC ");
-		}	
+		}
 		if (!empty($unit_list)) {
-			echo "<span class='first category_list_content'> Unit List -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> Unit List -->";
 			foreach ($unit_list as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val['id'] . " . " . $val['unit_name'] . "</p>";
 			}
@@ -1747,9 +1833,9 @@ class Product extends Admin_Controller
 
 
 		if (!empty($city_list)) {
-			echo "<span class='first category_list_content'> City List -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'> City List -->";
 			foreach ($city_list as $key => $val) {
-				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val['id'] . " . " . $val['city_name'] . " | " . $city_trans[$key]['city_name']. "</p>";
+				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val['id'] . " . " . $val['city_name'] . " | " . $city_trans[$key]['city_name'] . "</p>";
 			}
 			echo "</span>";
 		}
@@ -1758,12 +1844,20 @@ class Product extends Admin_Controller
 		$req_loading_arr = $this->get_req_loading();
 		$get_hazardous = $this->get_hazardous();
 		$vehical_requirement = $this->vehical_requirement();
+		$weight_unit_arr = $this->get_weight_abv_unit();
 		// $vehical_requirement = $this->vehical_requirement();
 		// echo "<pre>";
 		// print_r($vehical_requirement);
 		// die;
+		if (!empty($weight_unit_arr)) {
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>" . lang('aSelect_Weight_Unit') . " -->";
+			foreach ($weight_unit_arr as $key => $val) {
+				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
+			}
+			echo "</span>";
+		}
 		if (!empty($pack_arr)) {
-			echo "<span class='first category_list_content'>". lang('aVehical_Requirement')." -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>" . lang('aVehical_Requirement') . " -->";
 			foreach ($pack_arr as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1771,7 +1865,7 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($req_loading_arr)) {
-			echo "<span class='first category_list_content'>". lang('aRequirement_for_Loading')." -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>" . lang('aRequirement_for_Loading') . " -->";
 			foreach ($req_loading_arr as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1779,7 +1873,7 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($get_hazardous)) {
-			echo "<span class='first category_list_content'>". lang('aIs_this_Hazardous_material')." -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>" . lang('aIs_this_Hazardous_material') . " -->";
 			foreach ($get_hazardous as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
@@ -1787,7 +1881,7 @@ class Product extends Admin_Controller
 		}
 
 		if (!empty($vehical_requirement)) {
-			echo "<span class='first category_list_content'>". lang('aVehical_Requirement')." -->";
+			echo "<span class='first category_list_content' style='margin: 3%;display: block;border: 1px solid #4e924edd;margin-bottom: 10px;padding: 10px;'>" . lang('aVehical_Requirement') . " -->";
 			foreach ($vehical_requirement as $key => $val) {
 				echo "<p class='asdasd' style='margin-left: 4%;'>" . $val . "</p>";
 			}
