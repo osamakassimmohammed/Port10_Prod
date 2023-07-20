@@ -213,7 +213,6 @@ if (empty($stock_deactive) && empty($stock_active))
                   <?php echo lang('Sub_category'); ?><span class="required">*</span>
                </label>
                <select placeholder="" id="shope_sub_category" name="subcategory">
-                     <option value="0"> <?php echo lang('select_sub_category'); ?></option>
                   <?php
                   if (!empty($sub_category)) {
                      foreach ($sub_category as $itkey => $itvalue) {
@@ -239,7 +238,6 @@ if (empty($stock_deactive) && empty($stock_active))
                   </select>
                </div>
             <?php } ?>
-
             <!--  this comment for to hide sub sub category -->
             <!-- <div class="col-sm-4" style="">
                <label for="category">Sub sub category</label>
