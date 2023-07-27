@@ -145,7 +145,7 @@
 	$lang['State_Province_Region'] = "المنطقة";
 	$lang['Select_State_Province_Region'] = "الرجاء أختيار المنطقة";
 	$lang['Zip_Or_Postal_Code'] = "الرمز أو الرقم الخاص";
-	$lang['Select_Zip_Or_Postal_Code'] = "أختر الرمز أو الرقم الخاص";
+	$lang['Select_Zip_Or_Postal_Code'] = "أختر الرمز أو الرقم الخاص
 	$lang['Country'] = "الدولة";
 	$lang['Back'] = "رجوع";
 	$lang['Next'] = "التالي";
@@ -440,7 +440,7 @@
 	$lang['aProduct_Delete_successfully'] = "تم حذف المنتج بنجاح";	
 	$lang['aSearch_Tag'] = "علامة البحث";	
 	$lang['aPlease_enter_short_description'] = "من فضلك ادخال وصف موجز"	;
-	$lang['aSub_category'] = "تصنيف فرعي";
+	$lang['aSub_category'] = "تصنيف فرعي"
 	$lang['aDescription'] = "وصف";
 	$lang['aSpecification'] = "تخصيص";	
 	$lang['aProduct_Unite'] = "وحدات المنتج";	
