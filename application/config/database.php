@@ -78,9 +78,10 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'p10@1234',
+	'database' => 'p10_v2',
+
 	// 'username' => 'root',
 	// 'password' => '',
-	'database' => 'p10_v2',
 	// 'database' => 'port10',
 
 	'dbdriver' => 'mysqli',

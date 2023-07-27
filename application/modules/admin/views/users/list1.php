@@ -31,6 +31,16 @@
   padding: 7px;
   transition-duration: 0.2s;
   }
+  .btn-circle i.theme{
+    font-size: 18px;
+    position: relative;
+    left: -1px;
+    top: 3px;
+}
+.btn:hover, .btn:focus, .btn.focus {
+    color: white;
+    text-decoration: none;
+}
 </style>
 
 
@@ -61,7 +71,7 @@
   <!-- <th>Address</th>     -->
   <th>Order Count</th>    
   <th>Date</th>  
-  <th>Action</th>  
+  <th style="width: 100px;">Action</th>  
   
 </tr>
 </thead>
@@ -69,7 +79,7 @@
 <tbody id="table_body">
 <?php
 
-//print_r($list);
+// print_r($users_data);
   if (!empty($users_data)){ foreach($users_data as $key => $row) {?>
 
 <tr>
@@ -81,7 +91,15 @@
 <td><?php echo $row['order_count']?></td>
 <td><?php echo $row['created_on'];?></td>
 <td>
-  <a style="width: auto; padding: 0px 12px;" href="users/order_history/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons">remove_red_eye</i> <span style="margin-top: 0px; float: right; margin-left: 4px;" >View</span> </a>
+  <a style="width: auto; padding: 0px 12px;margin:0.1rem 1rem" href="users/order_history/<?php echo $row['id'] ?>" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons">remove_red_eye</i> <span style="margin-top: 0px; float: right; margin-left: 4px;" >View</span> </a>
+  <?php if($row['is_email_verify'] == 1) { ?>
+  <a style="width: auto; padding: 0px 12px;margin:0.1rem 1rem" href="users/change_verification_status/<?php echo $row['id'] ?>" class="btn bg-light-theme-blue btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons theme">check</i> <span style="margin-top: 0px; margin-left: 4px;" >UnVerify</span> </a>
+  <?php } else { ?>
+    <a style="width: auto; padding: 0px 12px;margin:0.1rem 1rem" href="users/change_verification_status/<?php echo $row['id'] ?>" class="btn bg-light-theme-blue btn-circle waves-effect waves-circle waves-float " role="button"><i class="material-icons theme">check</i> <span style="margin-top: 0px; float: right; margin-left: 4px;" >Verify</span> </a>
+  <?php } ?>
+
+  <a  style="width: auto; padding: 0px 12px;margin:0.1rem 1rem" href="users/delete_user/<?php echo $row['id'] ?>" class="btn bg-light-theme-red btn-circle waves-effect waves-circle waves-float delete" role="button"><i class="material-icons theme">delete</i> <span style="margin-top: 0px; margin-left: 4px;" >Delete</span> </a>
+
 </td>
 </tr>
 <?php } } else { ?>
@@ -115,6 +133,7 @@
 </script> 
 
 <script type="text/javascript">
+
     $(document).on("keyup","#search_val",function(){      
     var serach=$(this).val(); 
     // alert(serach);
@@ -258,4 +277,11 @@
       return trHTML;    
      }
     }
+</script>
+
+<!-- delete functionality using Ajax functionality -->
+<script type="text/javascript">
+    $(document).on("click",".delete",function(){
+      swal("","Successfully Deleted",'warning');
+    });
 </script>
