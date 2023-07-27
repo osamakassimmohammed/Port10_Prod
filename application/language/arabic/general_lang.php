@@ -440,7 +440,7 @@
 	$lang['aProduct_Delete_successfully'] = "تم حذف المنتج بنجاح";	
 	$lang['aSearch_Tag'] = "علامة البحث";	
 	$lang['aPlease_enter_short_description'] = "من فضلك ادخال وصف موجز"	;
-	$lang['aSub_category'] = "تصنيف فرعي"
+	$lang['aSub_category'] = "تصنيف فرعي";
 	$lang['aDescription'] = "وصف";
 	$lang['aSpecification'] = "تخصيص";	
 	$lang['aProduct_Unite'] = "وحدات المنتج";	
