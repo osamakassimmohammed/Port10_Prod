@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -29,7 +29,7 @@ $config['ci_bootstrap'] = array(
 		'description'	=> '',
 		'keywords'		=> ''
 	),
-	
+
 	/*
 	// Default scripts to embed at page head or end
 	'scripts' => array(
@@ -81,8 +81,7 @@ $config['ci_bootstrap'] = array(
 			'assets/admin/js/chosen.jquery.js',
 			'assets/admin/js/viewer.min.js',
 		),
-		'foot'	=> array(
-		),
+		'foot'	=> array(),
 	),
 
 	// Default stylesheets to embed at page head
@@ -110,7 +109,7 @@ $config['ci_bootstrap'] = array(
 
 	// Default CSS class for <body> tag
 	'body_class' => '',
-	
+
 	// Multilingual settings
 	// 'languages' => array(
 	// ),
@@ -137,11 +136,11 @@ $config['ci_bootstrap'] = array(
 			'name'		=> 'Dashbord',
 			'url'		=> '',
 			'icon'		=> 'dashboard',
-		),    
+		),
 
-  				  
 
-  		'users' => array(
+
+		'users' => array(
 			'name'		=> 'Customer List',
 			'url'		=> 'users',
 			'icon'		=> 'group',
@@ -152,10 +151,10 @@ $config['ci_bootstrap'] = array(
 				'Supplier Sub Active'				=> 'users/supplier_list/active',
 				'Supplier Sub Expired'				=> 'users/supplier_list/expired',
 				'Supplier Remitter'				=> 'users/supplier_excel',
-			)				
+			)
 		),
 
-  		'orders' => array(
+		'orders' => array(
 			'name'		=> 'Orders',
 			'url'		=> 'orders',
 			'icon'		=> 'shopping_cart',
@@ -173,24 +172,24 @@ $config['ci_bootstrap'] = array(
 		),
 
 		'vorders' => array(
-        	'name'		=> 'Orders',
-        	'url'		=> 'vorders',
-        	'icon'		=> 'shopping_cart',
-				),
-		
+			'name'		=> 'Orders',
+			'url'		=> 'vorders',
+			'icon'		=> 'shopping_cart',
+		),
+
 		'Logistics' => array(
-        	'name'		=> 'logistics',
-        	'url'		=> 'logistics',
+			'name'		=> 'logistics',
+			'url'		=> 'logistics',
 			'icon'		=> 'shopping_cart',
 			'children'  => array(
-				'Shipments' => 'shipments',
+				// 'Shipments' => 'shipments',
 				// 'Labels' => 'shipments/shipmentLabelIndex',
 				'Pickups' => 'shipments/shipmentPickupIndex',
-				)
+			)
 		),
 		'Virtual Accounts' => array(
-        	'name'		=> 'Virtual Account',
-        	'url'		=> 'vorders/vaccount',
+			'name'		=> 'Virtual Account',
+			'url'		=> 'vorders/vaccount',
 			'icon'		=> 'group',
 			// 'children'  => array(
 			// 	'Account Dashboard' => 'virtualAccount/dashboard',
@@ -198,8 +197,8 @@ $config['ci_bootstrap'] = array(
 			// 	'Virtual Account list' => 'virtualAccount/index',
 			// 	'Account Invoices' => 'virtualAccount/invoices-list'
 			// 	)
-		),		
-				
+		),
+
 
 		// 'vorders' => array(
 		// 	'name'		=> 'Supplier Order',
@@ -220,17 +219,17 @@ $config['ci_bootstrap'] = array(
 			'url'		=> 'assign_quotation',
 			'icon'		=> 'group',
 			'children'  => array(
-				'Listing'			=> 'assign_quotation',				
+				'Listing'			=> 'assign_quotation',
 			)
-		), 
+		),
 
 		'receive_quotation' => array(
-        	'name'		=> 'Quotation',
-        	'url'		=> 'receive_quotation',
-        	'icon'		=> 'group',
-            	),
+			'name'		=> 'Quotation',
+			'url'		=> 'receive_quotation',
+			'icon'		=> 'group',
+		),
 
-        'category' => array(
+		'category' => array(
 			'name'		=> 'Category',
 			'url'		=> 'category',
 			'icon'		=> 'widgets',
@@ -238,23 +237,23 @@ $config['ci_bootstrap'] = array(
 				'List'			=> 'category',
 				// 'Create'		=> 'category/create',
 			)
-		),  
+		),
 
 		'subs_plans' => array(
 			'name'		=> 'Subscription Plan',
 			'url'		=> 'subs_plans',
 			'icon'		=> 'group',
 			'children'  => array(
-				'Listing'			=> 'subs_plans',				
-				'Subscription More'			=> 'subs_plans/sub_more',				
+				'Listing'			=> 'subs_plans',
+				'Subscription More'			=> 'subs_plans/sub_more',
 			)
-		), 
+		),
 
 		// 'attribute' => array(
-  //       	'name'		=> 'Product Sizes ',
-  //       	'url'		=> 'attribute/attribute_item',
-  //       	'icon'		=> 'add_a_photo',
-  //           	),
+		//       	'name'		=> 'Product Sizes ',
+		//       	'url'		=> 'attribute/attribute_item',
+		//       	'icon'		=> 'add_a_photo',
+		//           	),
 
 		// 'product' => array(
 		// 	'name'		=> 'Product',
@@ -269,25 +268,31 @@ $config['ci_bootstrap'] = array(
 		// ),
 
 		'brand' => array(
-        	'name'		=> 'Brands',
-        	'url'		=> 'brand',
-        	'icon'		=> 'wb_auto',
-        ),
+			'name'		=> 'Brands',
+			'url'		=> 'brand',
+			'icon'		=> 'wb_auto',
+		),
 
-        'product/list1' => array(
-            'name'      => 'Product',
-            'url'       => 'product/list1',
-            'icon'      => 'add_a_photo',
-        ),
+		'product/list1' => array(
+			'name'      => 'Product',
+			'url'       => 'product/list1',
+			'icon'      => 'add_a_photo',
+		),
+
+		'catalogue' => array(
+			'name'      => 'Catalogue',
+			'url'       => 'catalogue/list1',
+			'icon'      => 'add_a_photo',
+		),
 
 		'chat' => array(
-        	'name'		=> 'Messages',
-        	'url'		=> 'chat',
-        	'icon'		=> 'chat',
-        		/*'children'  => array(				
+			'name'		=> 'Messages',
+			'url'		=> 'chat',
+			'icon'		=> 'chat',
+			/*'children'  => array(				
 				'Messaging'			=> 'chat',
 				)*/
-        ),
+		),
 
 		'panel/account' => array(
 			'name'		=> 'Account Settings',
@@ -297,48 +302,48 @@ $config['ci_bootstrap'] = array(
 			// 	'Edit Profile'			=> 'panel/account',
 			// 	// 'Subscription History'			=> 'panel/supplier_sub',
 			// 	)
-		), 
-        
-        // 'panel/supplier_sub' => array(
-        //     'name'      => 'Subscription History',
-        //     'url'       => 'panel/supplier_sub',
-        //     'icon'      => 'subscriptions',
-        //     // 'children'  => array(               
-        //     //     'Edit Profile'          => 'panel/account',
-        //     //     'Subscription History'          => 'panel/supplier_sub',
-        //     //     )
-        // ), 
+		),
+
+		// 'panel/supplier_sub' => array(
+		//     'name'      => 'Subscription History',
+		//     'url'       => 'panel/supplier_sub',
+		//     'icon'      => 'subscriptions',
+		//     // 'children'  => array(               
+		//     //     'Edit Profile'          => 'panel/account',
+		//     //     'Subscription History'          => 'panel/supplier_sub',
+		//     //     )
+		// ), 
 
 		'blog' => array(
-        	'name'		=> 'Blog ',
-        	'url'		=> 'blog',
-        	'icon'		=> 'add_a_photo',
-        	'children'  => array(				
+			'name'		=> 'Blog',
+			'url'		=> 'blog',
+			'icon'		=> 'add_a_photo',
+			'children'  => array(
 				'List'			=> 'blog',
 				'Create'		=> 'blog/create',
 			)
-        ),
+		),
 
 		'help' => array(
-        	'name'		=> 'Help ',
-        	'url'		=> 'help',
-        	'icon'		=> 'add_a_photo',
-        	'children'  => array(				
+			'name'		=> 'Help',
+			'url'		=> 'help',
+			'icon'		=> 'add_a_photo',
+			'children'  => array(
 				'Faq List'			=> 'help',
 				'Faq Create'		=> 'help/create',
 				'Tutorial List'		=> 'help/tutorial',
 				'Tutorial Add'		=> 'help/tutorial_create',
 			)
-        ),
+		),
 
 		'email' => array(
-        	'name'		=> 'Newsletter',
-        	'url'		=> 'email',
-        	'icon'		=> 'add_a_photo',
-        	'children'  => array(								
-				'Subscribe Email'		=> 'email/index',								
+			'name'		=> 'Newsletter',
+			'url'		=> 'email',
+			'icon'		=> 'add_a_photo',
+			'children'  => array(
+				'Subscribe Email'		=> 'email/index',
 			)
-        ),	
+		),
 
 		// 'tax' => array(
 		// 	'name'		=> 'TAX',
@@ -381,26 +386,26 @@ $config['ci_bootstrap'] = array(
 		// 		'Create'		=> 'vouchers/create',
 		// 	)
 		// ),
-  		
-		
-  		'pages' => array(
-        	'name'		=> 'Pages',
-        	'url'		=> 'pages',
-        	'icon'		=> 'pages',
-        	'children'  => array(
-        		'List'			=> 'pages',
-        	   	// 'Create'		=> 'pages/create',       	   	
-        	)
-        ),
-
-        'tax' => array(
-        	'name'		=> 'Tax Percentage',
-        	'url'		=> 'tax/index',
-        	'icon'		=> 'control_point',
-         ),
 
 
-       
+		'pages' => array(
+			'name'		=> 'Pages',
+			'url'		=> 'pages',
+			'icon'		=> 'pages',
+			'children'  => array(
+				'List'			=> 'pages',
+				// 'Create'		=> 'pages/create',       	   	
+			)
+		),
+
+		'tax' => array(
+			'name'		=> 'Tax Percentage',
+			'url'		=> 'tax/index',
+			'icon'		=> 'control_point',
+		),
+
+
+
 		/*'pcustomize' => array(
 			'name'		=> 'Customize',
 			'url'		=> 'pcustomize',
@@ -411,7 +416,7 @@ $config['ci_bootstrap'] = array(
 			)
 		),
 
-		*/	
+		*/
 
 
 
@@ -421,16 +426,16 @@ $config['ci_bootstrap'] = array(
 		// 	'icon'		=> 'widgets',
 		// 	'children'  => array(
 		// 		'Banner'				=> 'application/banner',
-				
+
 		// 	)
 		// ),		
 
 
 		// 'api' => array(
-  //       	'name'		=> 'Api ',
-  //       	'url'		=> 'api',
-  //       	'icon'		=> 'add_a_photo',
-  //           	),
+		//       	'name'		=> 'Api ',
+		//       	'url'		=> 'api',
+		//       	'icon'		=> 'add_a_photo',
+		//           	),
 
 
 
@@ -447,51 +452,51 @@ $config['ci_bootstrap'] = array(
 			'url'		=> '',
 			'icon'		=> 'dashboard',
 			'flag'		=> 'dashbord',
-		), 
+		),
 		'receive_quotation' => array(
-        	'name'		=> 'Quotation',
-        	'url'		=> 'receive_quotation',
-        	'icon'		=> 'group',
-        	'flag'		=> 'receive_quotation',
-            	),
+			'name'		=> 'Quotation',
+			'url'		=> 'receive_quotation',
+			'icon'		=> 'group',
+			'flag'		=> 'receive_quotation',
+		),
 		'vorders' => array(
-        	'name'		=> 'Orders',
-        	'url'		=> 'vorders',
-        	'icon'		=> 'shopping_cart',
-        	'flag'		=> 'vorders',
-            	),
+			'name'		=> 'Orders',
+			'url'		=> 'vorders',
+			'icon'		=> 'shopping_cart',
+			'flag'		=> 'vorders',
+		),
 		'brand' => array(
-        	'name'		=> 'Brands',
-        	'url'		=> 'brand',
-        	'icon'		=> 'wb_auto',
-        	'flag'		=> 'brand',
-        ),
+			'name'		=> 'Brands',
+			'url'		=> 'brand',
+			'icon'		=> 'wb_auto',
+			'flag'		=> 'brand',
+		),
 
 		'product/list1' => array(
-            'name'      => 'Product',
-            'url'       => 'product/list1',
-            'icon'      => 'add_a_photo',
-            'flag'		=> 'product',
-        ),
+			'name'      => 'Product',
+			'url'       => 'product/list1',
+			'icon'      => 'add_a_photo',
+			'flag'		=> 'product',
+		),
 		'chat' => array(
-        	'name'		=> 'Messages',
-        	'url'		=> 'chat',
-        	'icon'		=> 'chat',
-        	'flag'		=> 'chat',
-        ),
-        'panel/account' => array(
+			'name'		=> 'Messages',
+			'url'		=> 'chat',
+			'icon'		=> 'chat',
+			'flag'		=> 'chat',
+		),
+		'panel/account' => array(
 			'name'		=> 'Account Settings',
 			'url'		=> 'panel/account',
 			'icon'		=> 'settings',
 			'flag'		=> 'panel',
-		), 
+		),
 
-	),	
+	),
 	// Login page
 	'login_url' => 'admin/login',
 
 	// Restricted pages
-	
+
 	'page_auth' => array(
 		// 'useful_links'					=> array('webmaster', 'admin', 'manager'),
 		'user'							=> array('webmaster', 'admin', 'manager'),
@@ -504,20 +509,20 @@ $config['ci_bootstrap'] = array(
 		'util/remove_db'				=> array('webmaster'),
 		'assign_quotation'				=> array('webmaster'),
 		'tax/index'				=> array('webmaster'),
-		'blog'				=> array('webmaster','admin'),
-		'category'				=> array('webmaster','admin'),		
-		'help'				=> array('webmaster','admin'),
-		'pages'				=> array('webmaster','admin'),
-		'email_send'				=> array('webmaster','admin'),
-		'home_data'				=> array('webmaster','admin'),
-		'orders'				=> array('webmaster','admin'),
-		'users'				=> array('webmaster','admin'),
-		'attribute'				=> array('webmaster','admin'),
-		'subs_plans'				=> array('webmaster','admin'),
+		'blog'				=> array('webmaster', 'admin'),
+		'category'				=> array('webmaster', 'admin'),
+		'help'				=> array('webmaster', 'admin'),
+		'pages'				=> array('webmaster', 'admin'),
+		'email_send'				=> array('webmaster', 'admin'),
+		'home_data'				=> array('webmaster', 'admin'),
+		'orders'				=> array('webmaster', 'admin'),
+		'users'				=> array('webmaster', 'admin'),
+		'attribute'				=> array('webmaster', 'admin'),
+		'subs_plans'				=> array('webmaster', 'admin'),
 		'email'				=> array('webmaster'),
-		'vorders'				=> array('vendor','subsupplier'),
-		'receive_quotation'		=> array('vendor','subsupplier'),
-		'chat'		=> array('webmaster','vendor','admin','subsupplier'),
+		'vorders'				=> array('vendor', 'subsupplier'),
+		'receive_quotation'		=> array('vendor', 'subsupplier'),
+		'chat'		=> array('webmaster', 'vendor', 'admin', 'subsupplier'),
 		// 'panel'				=> array('vendor'),
 	),
 
@@ -537,14 +542,14 @@ $config['ci_bootstrap'] = array(
 
 	// Useful links to display at bottom of sidemenu
 	'useful_links' => array(
-        array(
-            'auth'      => array('webmaster', 'admin', 'manager', 'vendor'),
-            'name'      => 'Frontend Website',
-            'url'       => '',
-            'target'    => '_blank',
-            'color'     => 'text-aqua'
-        ),
-    ),
+		array(
+			'auth'      => array('webmaster', 'admin', 'manager', 'vendor'),
+			'name'      => 'Frontend Website',
+			'url'       => '',
+			'target'    => '_blank',
+			'color'     => 'text-aqua'
+		),
+	),
 
 	// Debug tools
 	'debug' => array(
