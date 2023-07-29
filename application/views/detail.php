@@ -8,7 +8,12 @@
    box-shadow: 0px 0px 0px #fff;
    }
    
-
+   .vendor_name_a a:hover {
+    color: #000 !important;
+   }
+   .vendor_name_a a {
+      color: #000 !important;
+   }
    .outstock_labl {
     display: inline-block;
     margin-top: -1px;
@@ -37,7 +42,56 @@ header {
     margin-bottom: 0px;
 }
    
-
+button.add_to_cart12 {
+    margin-top: 15px;
+    text-align: center;
+    width: 70%;
+    padding: 8px 7px;
+    border-radius: 5px;
+    background: #3f006f;
+    color: white;
+    margin-left: 15%;
+    border-radius: 100px;
+    font-size: 16px;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    line-height: 20px;
+    text-transform: uppercase;
+    /* font-weight: 500; */
+    letter-spacing: 0.05em;
+    border: 2px solid var(--theme-deafult);
+    background-image: linear-gradient(30deg, var(--theme-deafult) 50%, transparent 50%);
+    background-size: 850px;
+    background-repeat: no-repeat;
+    background-position: 0;
+    transition: background 300ms ease-in-out;
+}
+button.add_to_cart12:hover {
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    background-position: 100%;
+    color: #000000 !important;
+    background-color: #ffffff;
+    cursor: pointer;
+    border-radius: 100px;
+}
+.product-buttons .buy_crt_b {
+    border-radius: 100px;
+    background: #fff;
+    border-color: #fd4c68;
+    width: 48%;
+    margin-left: 3px !important;
+    color: #fd4c68;
+}
+.product-buttons .buy_crt_b:hover {
+    background-color: #fd4c68 !important;
+    color: #fff;
+}
+a.btn.btn-solid.add_crt_a.add_to_cart12 {
+    color: #fff;
+}
 </style>
 
       <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/frontend/css/xzoom.css" media="all" />
@@ -97,8 +151,11 @@ header {
                            <div class="product-right product-description-box">
                               <h2><?php echo $product_detail[0]['product_name']; ?></h2>
                                  <div class="vendor_name_a">
-                                    <img class="vendor_name_a_img" src="<?php echo base_url(); ?>assets/frontend/images/vendor.png">
-                                    <?php echo $product_detail[0]['first_name']; ?>
+                                    <a href="<?php echo base_url($language.'/home/vendor_info/').$product_detail[0]['seller_id']; ?>">
+                                       <img class="vendor_name_a_img" src="<?php echo base_url(); ?>assets/frontend/images/vendor.png">
+                                       <?php echo $product_detail[0]['first_name']; ?>
+                                    </a>
+                                    
                                 </div>
                              <div class="3three-star new_rating">
                               <?php echo $product_detail[0]['rating_element']; ?>
@@ -318,13 +375,26 @@ header {
 
                               </div>
                               <div class="product-buttons">
+                              <?php  if( $product_detail[0]['seller_id'] != $uid){ ?>
                                  <?php if ($product_detail[0]['price_select'] == '1') { ?>
                                              <a href="javascript:void(0)" data-detislqty="detislqty" data-id="<?php echo $product_detail[0]['id']; ?>" data-unit="get_unit<?php echo 1; ?>" class="btn btn-solid add_crt_a add_to_cart2"><?php echo lang('Add_to_cart'); ?></a>
                                  <?php } else { ?>
                                              <a href="javascript:void(0)" data-detislqty="detislqty" data-class="get_size<?php echo 1; ?>" data-unit="get_unit<?php echo 1; ?>" data-id="<?php echo $product_detail[0]['id']; ?>"  class="btn btn-solid add_crt_a add_to_cart2"><?php echo lang('Add_to_cart'); ?></a>
                                  <?php } ?>   
+                                 <?php }else{ ?>
+                                    <a title="<?php echo lang('Add_to_cart'); ?>" onclick="fireSweetAlert()"
+                                                      class="btn btn-solid add_crt_a add_to_cart12">
+                                                      <i class="ti-shopping-cart"></i>
+                                                      <?php echo lang('Add_to_cart'); ?>
+                                                   </a>
+                                 <?php } ?>   
                                  <input type="hidden" id="payment_mode" name="payment_mode" value="">
+                                 <?php  if( $product_detail[0]['seller_id'] != $uid){ ?>
                                  <button type="button" id="detail_buynow" class="btn btn-solid buy_crt_a"><?php echo lang('buy_now'); ?></button>
+                                 <?php }else{ ?>
+                                    <button type="button" id="detail_buynow_new" onclick="fireSweetAlert()" class="btn btn-solid buy_crt_b"><?php echo lang('buy_now'); ?></button>
+                                    
+                                 <?php } ?>   
                               </div>
                            </div>
                            </form>

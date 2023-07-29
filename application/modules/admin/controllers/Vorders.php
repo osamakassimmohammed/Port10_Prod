@@ -722,9 +722,36 @@ class Vorders extends Admin_Controller {
 	}
 	public function vaccount()
 	{
-		
+		$data = [];
+		$data['total_customers'] = $this->custom_model->get_data_array('SELECT COUNT(*) FROM admin_users')[0]['COUNT(*)'];
+		$data['total_customers'] = (int)$data['total_customers'] - 1;
+
+		$data['total_orders'] = $this->custom_model->count_last_month_record();
+		$data['total_amount'] = $this->custom_model->last_month_amount();
+		$data['last_month_transaction'] = $this->custom_model->last_month_transaction();
+
+		$data['get_last_month_payout_details'] = $this->custom_model->get_last_month_payout_details();
+
+		$date = $this->input->post('daterange');
+
+		// print_r($data['get_last_month_payout_details']);
+		// die;
+		// exit();
+
+		$this->mViewData['data'] = $data;
 		$this->render('vorders/vaccount_demo');
 	}
+
+	public function get_data_by_date() {
+        // $date = $this->input->post('daterange'); // Assuming the date is passed through POST method
+		$date1 = '2022/01/01';
+		$date2 = date('Y/m/d');
+        // $this->load->model('OrderModel');
+        $data = $this->custom_model->get_data_by_daterange($date1, $date2);
+		// $data = 'HELLO WORLD';
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 
 	// three join
 	// $orders = $this->custom_model->get_data_array("SELECT oitems.item_id,oitems.order_no,oitems.product_id,oitems.product_name,oitems.quantity,oitems.price,oitems.order_status as item_order_status,invoice.invoice_id,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1 FROM order_items as oitems INNER JOIN order_invoice as invoice ON   oitems.order_no=invoice.order_no  INNER JOIN  order_master as master ON oitems.order_no = master.order_master_id WHERE oitems.seller_id='$seller_id' AND invoice.seller_id='$seller_id' ORDER BY invoice.invoice_id DESC ");

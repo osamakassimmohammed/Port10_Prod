@@ -219,9 +219,15 @@ ul {
       <a target="_blank" href="<?php echo base_url('/assets/admin/port10-csv-sample.csv'); ?>" class="a_download">
         <input style=" color:#58595b; color:white;   margin-top: 1px;" type="submit" class="btn btn-primary" name="import" class="btn btn-primary" value="<?php echo lang('click to download'); ?>" />
       </a>
-     <a target="_blank" href="<?php echo base_url($language.'/admin/product/cat_data'); ?>" class="a_download">
+      <?php if ($language == 'en') { ?>
+     <a target="_blank" href="<?php echo base_url('en/admin/product/cat_data'); ?>" class="a_download">
         <input style=" color:#58595b; color:white;  margin-top: 1px;" type="submit" class="btn btn-primary" name="import" class="btn btn-primary" value="<?php echo lang('category Lists'); ?>" />
       </a>
+      <?php } else { ?>
+        <a target="_blank" href="<?php echo base_url('ar/admin/product/cat_data'); ?>" class="a_download">
+        <input style=" color:#58595b; color:white;  margin-top: 1px;" type="submit" class="btn btn-primary" name="import" class="btn btn-primary" value="<?php echo lang('category Lists'); ?>" />
+      </a>
+      <?php } ?>
 </div>
                               </div>
                           </div>

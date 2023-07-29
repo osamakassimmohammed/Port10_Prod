@@ -121,7 +121,9 @@ class Register extends MY_Controller
                               // echo "<pre>";
                               // print_r($post_data);
                               // print_r($new_member_insert_data);
+                              // $this->create_virtual_account($email,$phone,$cr_number,$first_name);
                               // die;
+
             			$query = $this->User_model->create_member($new_member_insert_data);
 
             			if($query == 'username')
@@ -268,5 +270,106 @@ class Register extends MY_Controller
               curl_close($ch);
 
       }
+
+
+      // public function create_virtual_account($email,$phone,$cr_number,$first_name) {
+
+      //       // echo $$email.'<br>'.$phone.'<br>'.$cr_number.'<br>'.$first_name;
+      //       $certPassword = 'a@dmin123';
+      //       $certFile = '/home/sayan/Desktop/WIS/projects/beyond_tech/port10_git/Port10/certificate.pfx';
+      //       // $certPassword = 'password'; // Password for the PKCS12 certificate
+      //       $data_create_va = json_encode([
+      //             "RemitterDetails" => array(
+      //             "email" => $email,
+      //             "invoiceNotify" => "E",
+      //             "mobile" => $phone,
+      //             "notifLang" => 0,
+      //             "remitterId" => $cr_number,
+      //             "remitterName" => $first_name,
+      //             "operationCode" => "CREATE",
+      //             "maximumAmnt" => "98887867"
+      //       )
+      //       ]);
+
+           
+      //       /**================For Signature+++++++++++++++++++++ */
+      //       $curl = curl_init();
+      //       curl_setopt_array($curl, array(
+      //       CURLOPT_URL => "https://dpwu.alrajhibank.com.sa:443/VARESTService/RestAPI/VaCreation",
+      //       CURLOPT_RETURNTRANSFER => true,
+      //       CURLOPT_ENCODING => '',
+      //       CURLOPT_MAXREDIRS => 10,
+      //       CURLOPT_TIMEOUT => 0,
+      //       CURLOPT_FOLLOWLOCATION => true,
+      //       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      //       CURLOPT_CUSTOMREQUEST => 'POST',
+      //       CURLOPT_POSTFIELDS =>$data_create_va,
+      //       CURLOPT_HTTPHEADER => array(
+      //             'Content-Type: application/json',
+      //             'Accept: application/json'
+      //       ),
+      //       ));
+
+      //       $response = curl_exec($curl);
+      //       $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      //       curl_close($curl);
+
+
+
+
+
+      //       $check_value_response = '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';
+      //       $postData = [];
+      //       $postDataNew = [];
+
+      //       $postData["Header"] = 
+      //       array(
+      //             "clientId" => "0125095263",
+      //             "msgReference" => "25Tjara05",
+      //             "schemeId" => "VA0125095263",
+      //       );
+      //       $postDataNew['RemitterDetails'][0] = array(
+      //             "email" => $email,
+      //             "invoiceNotify" => "E",
+      //             "mobile" => $phone,
+      //             "notifLang" => 0,
+      //             "remitterId" => $cr_number,
+      //             "remitterName" => $first_name,
+      //             "operationCode" => "CREATE",
+      //             "maximumAmnt" => "98887867"
+      //       ) ;
+      //       $postData["Data"] =  $postDataNew;
+
+      //       $postData["Signature"] = $check_value_response;
+      //       $requestData = (json_encode($postData));
+      //       // print_r($postData);
+      //       // print_r($requestData);
+      //       /**================For Bank+++++++++++++++++++++ */
+      //       $curl = curl_init();
+      //       curl_setopt_array($curl, array(
+      //       CURLOPT_URL => "https://dpwu.alrajhibank.com.sa:443/VARESTService/RestAPI/VaCreation",
+      //       CURLOPT_RETURNTRANSFER => true,
+      //       CURLOPT_ENCODING => '',
+      //       CURLOPT_MAXREDIRS => 10,
+      //       CURLOPT_TIMEOUT => 0,
+      //       CURLOPT_FOLLOWLOCATION => true,
+      //       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      //       CURLOPT_CUSTOMREQUEST => 'POST',
+      //       CURLOPT_POSTFIELDS => $requestData,
+      //       CURLOPT_HTTPHEADER => array(
+      //             'Content-Type: application/json',
+      //             'Accept: application/json'
+      //       ),
+      //       CURLOPT_SSLCERT => '/var/www/html/Port10/dev_port10_sa.pfx',
+      //       CURLOPT_SSLCERTPASSWD => 'a@admin',
+      //       ));
+
+      //       $response = curl_exec($curl);
+      //       $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      //       curl_close($curl);
+           
+            
+      // }
+
 }
 ?>

@@ -586,46 +586,260 @@
 
 
 
-	// menu admin/vendor	
-	$lang['Dashbord'] = "لوحة التحكم";	
-	$lang['Customer List'] = "قائمة العميل";	
-	$lang['Orders'] = "الطلبات";	  //
-	$lang['Quotation'] = "طلب تسعيرة"; //	
-	$lang['Category'] = "الفئات";	
-	$lang['Subscription Plan'] = "خطة الاشتراك";	
-	$lang['Brands'] = "العلامات التجارية";	
-	$lang['Product'] = "منتج";	//
-	$lang['Messages'] = "رسالة";	
-	$lang['Account Settings'] = "اعدادات الحساب";	
-	$lang['Blog'] = "مدونة";	
-	$lang['Help'] = "مساعدة";	//
-	$lang['Newsletter'] = "النشرة الاخبارية";	
-	$lang['Home Data'] = "البيانات الرئيسية";	
-	$lang['Email Send'] = "ارسال البريد الالكتروني";	
-	$lang['Pages'] = "الصفحات";	
-	$lang['Tax Percentage'] = "نسبة الضريبة";
-	$lang['Sign_Out'] = "تسجيل خروج";	
-	$lang['Back_To_Website'] = "العودة الى الموقع الالكتروني";	
-	$lang['JOIN'] = "انضم";	
-	$lang['Deadline_Submission_Date'] = "التاريخ النهائي للتقديم";
-	$lang['RFQ_Status'] = "حالة RFQ";	
-	$lang['aAccess_Permission'] = "السماح بالدخول";
-	$lang['aSelect_Access_Permission'] = "حدد السماح بالدخول";	
-	$lang['aPlease_Select_Access_Permission'] = "من فضلك حدد السماح بالدخول";
-	$lang['aPlease_Select_Access_Permission2'] = "من فضلك تحديد سماح بالدخول صالح";
-	$lang['aSub_supplier_List'] = "قائمة الموردين الفرعية";
-	$lang['aAdd_Sub_Supplier'] = "اضافة مورد فرعي";
-	$lang['Your_compare_product_is_empty'] = "منتج المقارنة الخاص بك فارغ";
-	$lang['Add_To_Compare'] = "اضف للمقارنة";
-	$lang['Please_enter_product_id'] = "من فضلك ادخال الرقم المرجعي للمنتج";
-	$lang['SKU_Information'] = "معلومات SKU";
-	$lang['Befour_place_order_first_calculate_shipping_cast'] = "قبل ترتيب المكان ، قم أولاً بحساب طاقم الشحن";
-	$lang['Calculate_Shipping_Rate'] = "احسب سعر الشحن";
-	$lang['Please_select_pickup_date'] = "الرجاء تحديد تاريخ الاستلام";
-	$lang['Please_select_ready_time'] = "الرجاء تحديد وقت الاستعداد";
-	$lang['Please_select_last_pickup_time'] = "الرجاء تحديد أخر وقت للاستلام";
-	$lang['Please_select_closing_time'] = "الرجاء تحديد وقت الاغلاق";
-	$lang['Please_select_shipping_date_time'] = "من فضلك تحديد وقت وتاريخ الشحن";
-	$lang['Please_select_due_date'] = "من فضلك تحديد تاريخ التسليم";
-	$lang['Shipping'] = "الشحن";
-	$lang['Shipping_Cost'] = "تكلفة الشحن";
+
+// menu admin/vendor
+$lang['Dashbord'] = "لوحة التحكم";
+$lang['Customer List'] = "قائمة العميل";
+$lang['Orders'] = "الطلبات"; //
+$lang['logistics'] = "الخدمات اللوجستية"; //
+$lang['Virtual Account'] = "الحساب الافتراضي;";
+$lang['acreate_Pickup'] = "إنشاء طلب شحن ";
+$lang['Labels'] = "ملصقات"; //
+$lang['label'] = "ملصق";
+$lang['Pending'] = "قيد الانتظار"; //
+$lang['Completed'] = "مكتمل"; //
+$lang['Canceled'] = "ألغيت"; //
+$lang['Delivered'] = "تم التوصيل"; //
+$lang['Pickups'] = "الطلبات"; //
+$lang['Shipments'] = "الشحنات"; //
+$lang['Shipment_Id'] = "الرقم المرجعي للشحنة"; //
+$lang['Pickup_id'] = "معرّف الالتقاط";
+$lang['guid'] = "دليل";
+$lang['from'] = "من";
+$lang['Sub'] = "الفرعية";
+$lang['Main'] = "رئيسي";
+$lang['select csv file with image name'] = "حدد ملف CSV باسم الصورة";
+$lang['upload multiple images for product'] = "تحميل صور متعددة للمنتج";
+$lang['download sample CSV file to upload product'] = "تحميل نموذج ملف CSV لتحميل المنتج";
+$lang['click to download'] = "اضغط للتحميل";
+$lang['click to see category ids'] = "اضغط لرؤية معرفات الفئات";
+$lang['category Lists'] = "قوائم الفئات";
+$lang['see your uploaded Image'] = "انظر الصورة التي تم تحميلها";
+$lang['import'] = "صورة";
+$lang['aPickup_List'] = "قائمة طلبات شحن ";
+$lang['label'] = "ضع الكلمة المناسبة";
+$lang['status'] = "حالة";
+$lang['STATUS'] = "حالة";
+$lang['Air Waybill Number'] = "رقم بوليصة الشحن الجوي";
+$lang['Pickup_Location'] = "موقع استلام الشحنة";
+$lang['shipping_date'] = "تاريخ الشحن";
+$lang['Quotation'] = "طلب تسعيرة"; //
+$lang['Category'] = "الفئات";
+$lang['Subscription Plan'] = "خطة الاشتراك";
+$lang['acreate_Shipment'] = "انشاء شحنة";
+$lang['aShipment_List'] = "قائمة الشحنات";
+$lang['Mode_of_Transport'] = "طريقة النقل";
+$lang['acreate_Label'] = "انشاء ملصق";
+$lang['aLabel_List'] = "قائمة الملصقات";
+$lang['Brands'] = "العلامات التجارية";
+$lang['Product'] = "منتج"; //
+$lang['Catalogue'] = "فهرس"; //
+$lang['Messages'] = "رسالة";
+$lang['Account Settings'] = "اعدادات الحساب";
+$lang['Blog'] = "مدونة";
+$lang['Help'] = "مساعدة"; //
+$lang['Newsletter'] = "النشرة الاخبارية";
+$lang['Home Data'] = "البيانات الرئيسية";
+$lang['Email Send'] = "ارسال البريد الالكتروني";
+$lang['Pages'] = "الصفحات";
+$lang['acreate_V_Account'] = "انشاء حساب افتراضي";
+$lang['Tax Percentage'] = "نسبة الضريبة";
+$lang['Sign_Out'] = "تسجيل خروج";
+$lang['Back_To_Website'] = "العودة الى الموقع الالكتروني";
+$lang['JOIN'] = "انضم ";
+$lang['Deadline_Submission_Date'] = "التاريخ النهائي للتقديم";
+$lang['RFQ_Status'] = "حالة RFQ";
+$lang['aAccess_Permission'] = "إذن الوصول";
+$lang['aSelect_Access_Permission'] = "Select Access Permission";
+$lang['aPlease_Select_Access_Permission'] = "Please Select Access Permission";
+$lang['aPlease_Select_Access_Permission2'] = "Please Select Valid Access Permission";
+$lang['aSub_supplier_List'] = "قائمة الموردين الفرعية";
+$lang['aAdd_Sub_Supplier'] = "اضافة مورد فرعي";
+$lang['Your_compare_product_is_empty'] = "منتج المقارنة الخاص بك فارغ";
+$lang['aCompare_Products'] = "قارن بين المنتجات";
+$lang['add_To_Compare'] = "اضف للمقارنة";
+$lang['Please_enter_product_id'] = "من فضلك ادخال الرقم المرجعي للمنتج";
+$lang['SKU_Information'] = "معلومات SKU";
+$lang['Befour_place_order_first_calculate_shipping_cast'] = "قبل ترتيب المكان ، قم أولاً بحساب طاقم الشحن";
+$lang['Calculate_Shipping_Rate'] = "احسب سعر الشحن";
+$lang['Please_select_pickup_date'] = "الرجاء تحديد تاريخ الاستلام";
+$lang['Please_select_ready_time'] = "الرجاء تحديد وقت الاستعداد";
+$lang['Please_select_last_pickup_time'] = "الرجاء تحديد أخر وقت للاستلام";
+$lang['Please_select_closing_time'] = "الرجاء تحديد وقت الاغلاق";
+$lang['Please_select_shipping_date_time'] = "من فضلك تحديد وقت وتاريخ الشحن";
+$lang['Please_select_due_date'] = "من فضلك تحديد تاريخ التسليم";
+$lang['shipping_due_date'] = "تاريخ التسليم";
+$lang['Shipping'] = "الشحن";
+$lang['last_pickup_time'] = "آخر وقت للاستلام";
+$lang['ready_time'] = "وقت الجاهزية";
+$lang['Shipping_Cost'] = "تكلفة الشحن";
+$lang['aManual'] = "يدوي";
+$lang['aOrderId/customer_Info'] = "معرف الطلب / معلومات العميل";
+$lang['aFull_Name'] = "الاسم الكامل";
+$lang['pickup_date'] = "وقت الاغلاق";
+$lang['aCr_Number'] = "رقم Cr";
+$lang['aPhone'] = "هاتف";
+$lang['aEmail'] = "بريد إلكتروني";
+$lang['aQuotation_Send'] = "إرسال الاقتباس";
+$lang['aPermission'] = "إذن";
+$lang['aDate'] = "تاريخ";
+$lang['PER_YEAR'] = "كل سنة";
+$lang['Collection_Inquiry'] = "استعلام عن التحصيل";
+$lang['Client_ID'] = "معرف العميل";
+$lang['Scheme_ID'] = "معرف المخطط";
+$lang['Select_Scheme_ID'] = "حدد معرف النظام";
+$lang['Date_range'] = "نطاق الموعد";
+$lang['Remitter_ID'] = "معرف المرسل";
+$lang['Invoice_No'] = "رقم الفاتورة";
+$lang['Virtual_Acc_No'] = "رقم الحساب الافتراضي";
+$lang['Payment_Status'] = "حالة السداد";
+$lang['Partial'] = "جزئي";
+$lang['Pending_deletion'] = "في انتظار الحذف";
+$lang['aclear'] = "واضح";
+$lang['Enter_Client_ID'] = "أدخل معرف العميل";
+$lang['Select_Date_range'] = "حدد النطاق الزمني";
+$lang['Enter_Remitter_ID'] = "أدخل معرف المرسل";
+$lang['Enter_Invoice_No'] = "أدخل رقم الفاتورة";
+$lang['Enter_Virtual_Acc_No'] = "أدخل رقم الحساب الافتراضي";
+$lang['aREMITTER_ID'] = "معرف المحول";
+$lang['aREMITTER_NAME'] = "اسم المحول";
+$lang['aINVOICE_NAME'] = "اسم الفاتورة";
+$lang['aINVOICE_DESCRIPTION'] = "وصف الفاتورة";
+$lang['aINVOICE_NO'] = "رقم الفاتورة";
+$lang['aDUE_AMOUNT'] = "مبلغ مستحق";
+$lang['aDUE_DATE'] = "تاريخ الاستحقاق";
+$lang['aCOLLECTED_AMOUNT'] = "المبلغ الذي تم تحصيله";
+$lang['aPAYMENT_CHANNEL'] = "قناة الدفع";
+$lang['aAdd_Items'] = "إضافة عناصر";
+$lang['aNone'] = "لا أحد";
+$lang['aPaid'] = "مدفوع";
+$lang['aUnpaid'] = "غير مدفوعة";
+$lang['aSign_in_to_start_your_session'] = "تسجيل الدخول لبدء الجلسة الخاصة بك";
+$lang['aRemember_Me'] = "تذكرنى";
+$lang['aUnder_construction'] = "تحت التشيد";
+$lang['aUnder_construction'] = "تحت التشيد";
+$lang['Why_Us?'] = "لماذا نحن؟";
+$lang['Today_there'] = "اليوم ، هناك العديد من المشترين والبائعين الذين يرغبون في ذلك
+ل
+تواصل مع بعضها البعض دون أي متاعب. لقد ولت الأيام التي كان فيها الأمر صعبًا
+ل
+العثور على مشترين وبائعين أصليين وموثوقين لأن منصات B2B قد تم حلها
+هذا
+منصة. إنها منصة موثوقة تربط كلاهما.";
+$lang['transaction_or_business'] = "Port10 هي معاملة أو عمل يتم إجراؤه بين واحد
+الأعمال التجارية وأخرى ، مثل تاجر الجملة وتاجر التجزئة. يشير Port10
+إلى الأعمال التي تتم بين الشركات ، وليس بين شركة و
+المستهلك الفردي";
+$lang['Your_Dream'] = "حلمك";
+$lang['Entrepreneurship'] = "ريادة الأعمال";
+$lang['We_Make_Buying/Selling'] = "نقوم بالشراء / البيع";
+$lang['simpler'] = "أبسط";
+$lang['Connect_with_Buyers/Sellers'] = "تواصل مع المشترين / البائعين";
+$lang['Globally'] = "عالميا";
+$lang['Rapid_Increase_in_Sellers'] = "زيادة سريعة في البائعين";
+$lang['Easy_way_to_grow_your'] = "طريقة سهلة لتنمية الخاص بك";
+$lang['B2B_Business'] = "B2B الأعمال";
+$lang['trying_to_grow'] = "إذا كنت تحاول تنمية عملك ، ومن لا يفعل ذلك ، يجب أن تفكر في ذلك
+هذه الأفكار سهلة التنفيذ قبل إنفاق الكثير من المال على الإعلانات أو التسويق الخارجي الآخر
+جهود.";
+$lang['Seller'] = "تاجر";
+$lang['Buyer'] = "مشتر";
+$lang['Create_your_Account'] = "أنشئ حسابك";
+$lang['To_sign_up_for_Port10'] = "للتسجيل في Port10 ، قم بإنشاء ملف
+حساب Port10. يمكنك استخدام اسم المستخدم وكلمة المرور ل
+قم بتسجيل الدخول إلى Port10 وستظهر الآن جميع أنحاء الخدمة.";
+$lang['Business_Wi-Fi_Solution'] = "حل Wi-Fi للأعمال";
+$lang['Keep_your_business_connected'] = "ابق عملك على اتصال و
+آمن باستخدام نقاط الوصول المُدارة عن بُعد من NETGEAR. ممتاز
+لجميع الأعمال التي تم تحجيمها.";
+$lang['Add_products'] = "أضف المنتجات";
+$lang['Add_product_category'] = "أضف منتجًا إلى فئة لتصنعه
+كان متوفرا في المتجر. يمكنك أيضًا إضافة منتجات متعددة
+ذات مرة. ثم يمكن للمشترين رؤية منتجاتك.";
+$lang['Manage_Orders'] = "إدارة الطلبات";
+$lang['manage_your_orders'] = "نحن
+تجعل من السهل عليك إدارة طلباتك. حينما
+يقوم العميل بتقديم طلب ،
+بناءً على ذلك يمكننا إدارة طلباتنا.";
+$lang['Select_product'] = "حدد المنتج";
+$lang['Goods_and_services'] = "السلع والخدمات ضرورية
+لتلبية احتياجات المجتمع. حدد ما تريده
+المنتج والقيام بالشراء في منصتنا.";
+$lang['Place_order_content'] = "إذا كنت مهتمًا بأي من
+المنتجات وترغب في شرائها ، يرجى متابعة التسوق
+أو تحقق من طلبك.";
+$lang['Recieve_your_order'] = "استلم طلبك";
+$lang['Recieve_your_order_content'] = "بمجرد تسليم الشخص
+يسلم طلبك ويعطي إثبات التسليم ، ذلك
+تشير إلى أن
+اكتملت عملية تسليم الطرد.";
+$lang['Get_Started'] = "ابدأ مع Port10";
+$lang['Get_Started_content'] = "تتجه الشركات في سوق B2B إلى التجارة الإلكترونية B2B
+منصة مصممة خصيصًا للشركات التي تجري عمليات شراء عبر الإنترنت. تمكن الشركات من
+إنشاء واجهات متاجر وتجارب استثنائية في مجال التجارة الإلكترونية لعملائهم من رجال الأعمال.";
+$lang['We_helps_you'] = "نحن نساعدك على تنمية عملك أكثر";
+$lang['faster'] = "أسرع";
+$lang['and'] = "و";
+$lang['easier'] = "أسهل";
+$lang['aCreate_Catalogue'] = "إنشاء كتالوج";
+$lang['catalogue_name'] = "اسم الكتالوج";
+$lang['Select_products'] = "حدد المنتجات";
+$lang['aSubmit_catalogue'] = "إرسال الكتالوج";
+$lang['upload multiple images for catalogue'] = "تحميل صور متعددة للكتالوج";
+$lang['aBulk_Upload'] = "تحميل مجمع";
+$lang['importkp'] = "يستورد";
+$lang['Add_Product'] = "أضف منتج";
+$lang['Remove_Product'] = "إزالة المنتج";
+$lang['Seller_Products:'] = "منتجات البائع:";
+$lang['First_Name'] = "الاسم الأول";
+$lang['Last_Name'] = "اسم العائلة";
+$lang['Contact_No'] = "رقم الاتصال";
+$lang['Email'] = "بريد إلكتروني";
+$lang['Active_Status'] = "الحالة النشطة";
+$lang['City'] = "مدينة";
+$lang['aSelect_products'] = "حدد المنتجات";
+$lang['aCatalog_Images_Gallery'] = "معرض صور الكتالوج";
+$lang['Catalog_name'] = "اسم الكتالوج";
+$lang['aSelect_theme:'] = "اختر نمطا:";
+$lang['aDefault'] = "تقصير";
+$lang['aDark_Theme'] = "مظهر داكن";
+$lang['aBlue_Theme'] = "الموضوع الأزرق";
+$lang['aRed_Theme'] = "موضوع أحمر";
+$lang['aCatagory'] = "تقصير";
+$lang['Brand_Name'] = "اسم العلامة التجارية";
+$lang['Seller_Information:'] = "معلومات البائع:";
+$lang['aProducts:'] = "منتجات:";
+$lang['DownLoad_pdf'] = "تحميل PDF";
+$lang['Purchase_mode'] = "وضع الشراء:";
+$lang['acredit'] = "ائتمان";
+$lang['adebit'] = "دَين";
+$lang['abalance'] = "توازن";
+$lang['aUsed_Amount'] = "المبلغ المستخدم";
+$lang['aLocked_Amount'] = "مبلغ مؤمن";
+$lang['awithdraw'] = "ينسحب";
+$lang['aBank_Name'] = "اسم البنك";
+$lang['aAccount_Number'] = "رقم حساب";
+$lang['aBranch_Name'] = "اسم الفرع";
+$lang['aIFSC_Code'] = "رقم حساب";
+$lang['aReason_Of_Withdrawal'] = "سبب الانسحاب";
+$lang['aEnter_Amount'] = "أدخل المبلغ";
+$lang['aEnter_Reason_Of_Withdrawal'] = "أدخل سبب الانسحاب";
+$lang['aEnter_Bank_Name'] = "أدخل اسم البنك";
+$lang['aEnter_Account_Number'] = "أدخل رقم الحساب";
+$lang['aEnter_Branch_Name'] = "أدخل اسم الفرع";
+$lang['aEnter_IFSC_Code'] = "أدخل رمز IFSC";
+$lang['aEnter_IBAN'] = "أدخل رقم الحساب المصرفي الدولي (IBAN)";
+$lang['aRegistered_Account'] = "حساب مسجل";
+$lang['aAnother_Account'] = "حساب آخر";
+$lang['aSend_OTP'] = "أرسل OTP";
+$lang['aResend_OTP'] = "إعادة إرسال OTP";
+$lang['aVendor_name'] = "اسم البائع";
+$lang['aInvoice_No'] = "رقم الفاتورة";
+$lang['aAmount_credited'] = "المبلغ المعتمد";
+$lang['aTotal_orders'] = "إجمالي الطلبات";
+$lang['aToday_Collected_Amount'] = "المبلغ الذي تم جمعه اليوم";
+$lang['aTotal_Amount_Collected'] = "المبلغ الإجمالي المحصل";
+$lang['aTransactions'] = "المعاملات";
+$lang['aSelect_Date_Range:'] = "حدد النطاق الزمني:";
+$lang['aTotal_Cutomers'] = "إجمالي العملاء";
+$lang['aCustomer_Payout'] = "دفع تعويضات العملاء";

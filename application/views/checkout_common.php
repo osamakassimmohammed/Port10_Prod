@@ -74,8 +74,8 @@
        var address_1=$("#ck_address_1").val();
        var searchInput=$("#searchInput").val();
        var payment_mode=$("#payment_mode").val();
-       // var address_2=$("#ck_address_2").val();
-       // var payment_mode=$('input[name=payment_mode]:checked').val();       
+       var pin_order_ids=$("#pin_order_ids").val();
+       var purchasing_mode=$('input[name=purchasing_mode]:checked').val();       
        // var delivery_option=$('input[name=delivery_option]:checked').val();       
        var error=1;
        
@@ -165,7 +165,7 @@
        }
        if(error==1)
        {
-         var jsonData = {'first_name':first_name,'last_name':last_name,'payment_mode':payment_mode,'mobile_no':phone,'email':email,'address_1':address_1,'country':country,'city':city,'state':state,'pincode':pincode,'google_address':searchInput,'lat':lat,'lng':lng,'flow_type':g_flow_type,'in_id':g_in_id};
+         var jsonData = {'first_name':first_name,'last_name':last_name,'payment_mode':payment_mode,'mobile_no':phone,'email':email,'address_1':address_1,'country':country,'city':city,'state':state,'pincode':pincode,'google_address':searchInput,'lat':lat,'lng':lng,'flow_type':g_flow_type,'in_id':g_in_id,'pin_order_ids':pin_order_ids,'purchasing_mode':purchasing_mode};
          return jsonData;
        }else{
          swal("","<?php echo lang('Something'); ?>","warning");

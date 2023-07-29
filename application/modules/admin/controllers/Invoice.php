@@ -99,9 +99,9 @@ class Invoice extends Admin_Controller {
 
 			}			
 			$this->load->library('pdf_create');
-		// 	echo "<pre>";
-		// print_r($orders_invoice);
-		// die;
+			// 	echo "<pre>";
+			// print_r($orders_invoice);
+			// die;
 		    // $response = $this->pdf_product->get_print_pdf_list($orders_invoice,$order,$item_id);
 		    $response = $this->pdf_create->get_print_pdf_new($orders_invoice,$order,$language);
 		}else{

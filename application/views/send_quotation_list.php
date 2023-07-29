@@ -884,7 +884,7 @@
 
   $(document).on("click", ".vendor_name", function () {
     var id = $(this).data('id');
-    // alert(id);
+    alert(id);
     g_seller_id = id;
     var name = $(this).text();
     $("#seller_id").val(name);
