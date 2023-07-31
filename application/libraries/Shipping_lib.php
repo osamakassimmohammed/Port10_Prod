@@ -180,7 +180,7 @@ class Shipping_lib {
         
         if(!empty($product_data))
         {
-          if($product_data[0]['is_delivery_available']==1)
+          if($product_data[0]['is_delivery_available'] == 0)
           {
             $weight_value = $this->weight_farmula($product_data[0]['weight'],$product_data[0]['weight_unit']);
 

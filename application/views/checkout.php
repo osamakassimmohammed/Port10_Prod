@@ -16,13 +16,13 @@
     color: red !important;
     padding:2px
   }
-   <?php  $disabled='';
+   <?php  $disabled='disabled';
 
-   if($is_calculate_rate==0){ ?>
+   if($is_calculate_rate == 0){ ?>
       .shipping_rate_li{
          display: none;
       }
-   <?php $disabled='disabled';  } ?>
+   <?php $disabled='';  } ?>
 </style>
 <?php
   $first_name = $last_name = $mobile_no = $email = $country = $city = $state = $pincode = $address_1 = $address_2 =$google_address=$lat=$lng='';

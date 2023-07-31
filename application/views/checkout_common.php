@@ -2,9 +2,11 @@
    var shippting_api_call=0;
    $(document).on("click","#shipping_rate",function(){
       jsonData = get_details();
+      // cosole.log(jsonData);
+      console.log(jsonData);
       if(jsonData!=false)
       {
-         if(shippting_api_call==0)
+         if(shippting_api_call == 0)
          {
            $("#shipping_error").hide();
            $('#loading').show(); 
@@ -22,7 +24,7 @@
                  {    
                      if(response.is_single_pro_error==false)
                      {
-                        $("#shipping_rate").attr("disabled", true);
+                        // $("#shipping_rate").attr("disabled", true);
                         $("#ship_li").show();
                         var sale_price = parseFloat($("#total_cost").text().replaceAll(',', ''));
                         $("#ship_cost").text(response.TotalAmount);
@@ -56,7 +58,9 @@
               }
             });   
          }else{
-            swal("","You already calculated shipping cost","warning");
+            shippting_api_call = 0;
+            location.reload(true)
+            // swal("","You already calculated shipping cost","warning");
          }
       }
    }); 
@@ -179,14 +183,14 @@
     jsonData = get_details();
     if(jsonData!=false)
     {
-      if(g_is_calculate_rate==1)
-      {
-         if(shippting_api_call==0)
-         {
-            swal("","<?php echo lang('Befour_place_order_first_calculate_shipping_cast'); ?>","warning");
-            return false;
-         }         
-      }
+      // if(g_is_calculate_rate == 0)
+      // {
+      //    if(shippting_api_call == 1)
+      //    {
+      //       swal("","<?php echo lang('Befour_place_order_first_calculate_shipping_cast'); ?>","warning");
+      //       return false;
+      //    }         
+      // }
       $('#loading').show(); 
         $.ajax({
            type: 'POST',

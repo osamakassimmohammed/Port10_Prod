@@ -52,11 +52,11 @@ class Ajax extends MY_Controller {
 					}else if($post_arr['flow_type']=='invoice')
 					{
 						$in_id=$post_arr['in_id'];
-						$data = $this->custom_model->get_data_array("SELECT pro.id,pro.product_name,pro.product_image,pro.status,pro.stock,pro.stock_status,pro.price,pro.sale_price,pro.product_delete,pro.is_delivery_available,qoin.in_id,qoin.in_qty as quantity,qoin.in_unit,qoin.in_price,qoin.invoice_status FROM $product as pro INNER JOIN quotation_invoice as qoin ON pro.id=qoin.in_sku WHERE qoin.in_id='$in_id' AND qoin.uid='$uid' AND pro.product_delete=0 AND pro.status=1 ");
+						$data = $this->custom_model->get_data_array("SELECT pro.id,pro.product_name,pro.product_image,pro.status,pro.stock,pro.stock_status,pro.price,pro.sale_price,pro.product_delete,pro.is_delivery_available,qoin.in_id,qoin.in_qty as quantity,qoin.in_unit,qoin.in_price,qoin.invoice_status FROM product as pro INNER JOIN quotation_invoice as qoin ON pro.id=qoin.in_sku WHERE qoin.in_id='$in_id' AND qoin.uid='$uid' AND pro.product_delete=0 AND pro.status=1 ");
 
 						if(!empty($data))
 						{
-							$unit_data = $this->custom_model->my_where($unit_list,'id,unit_name',array('id' => $data[0]['in_unit']));
+							$unit_data = $this->custom_model->my_where('unit_list','id,unit_name',array('id' => $data[0]['in_unit']));
 							if(!empty($unit_data))
 							{
 								$data[0]['unit_name']=$unit_data[0]['unit_name'];

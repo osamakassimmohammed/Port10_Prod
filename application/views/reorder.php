@@ -15,13 +15,13 @@
    position: static;
    box-shadow: 0px 0px 0px #fff;
    }
-   <?php  $disabled='';
+   <?php  $disabled='disabled';
 
-   if($is_calculate_rate==0){ ?>
-      .shipping_rate_li{
-         display: none;
-      }
-   <?php $disabled='disabled';  } ?>
+if($is_calculate_rate == 0){ ?>
+   .shipping_rate_li{
+      display: none;
+   }
+<?php $disabled='';  } ?>
 </style>
 <?php
   $first_name = $last_name = $mobile_no = $email = $country = $city = $state = $pincode = $address_1 = $address_2 =$google_address=$lat=$lng='';
@@ -208,7 +208,7 @@
                               
                               <li id="shipping_rate_li">
                                  <label for="shipping_rate"><?php echo lang('Calculate_Shipping_Rate'); ?>:</label>
-                                 <input type="checkbox" class="" id="shipping_rate">
+                                 <input type="checkbox" class="" id="shipping_rate" <?php echo $disabled; ?> >
                               </li>
                            </ul>
                            
