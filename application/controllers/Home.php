@@ -642,7 +642,7 @@ class Home extends MY_Controller
 
 		$attp = array();
 		$attc = array();
-		$is_calculate_rate = 0;
+		$is_calculate_rate = 1;
 
 		if (!empty($uid)) {
 			$is_data = $this->custom_model->my_where('my_cart', '*', array('user_id' => $uid, 'meta_key' => 'cart'));
@@ -756,8 +756,8 @@ class Home extends MY_Controller
 						// $round_price=round($round_price);
 						$curr[0]['sale_price'] = $round_price;
 					}
-					if ($curr[0]['is_delivery_available'] == 1) {
-						$is_calculate_rate = 1;
+					if ($curr[0]['is_delivery_available'] == 0) {
+						$is_calculate_rate = 0;
 					}
 					$data[$key]['p'] = $curr[0];
 					$data[$key]['c'] = $value;
