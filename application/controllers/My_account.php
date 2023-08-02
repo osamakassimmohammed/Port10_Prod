@@ -407,7 +407,7 @@ class My_account extends MY_Controller {
 		if (!empty($this->uid))
 		{
 			$data = array();
-			$data = $this->custom_model->get_data_array("SELECT *, order_invoice.net_total as net FROM `order_master` join `order_invoice` on order_master.order_master_id = order_invoice.order_no WHERE `user_id` = '$this->uid' AND order_master.is_show='1' ORDER BY order_master.order_master_id desc ");
+			$data = $this->custom_model->get_data_array("SELECT *, order_invoice.net_total as net FROM `order_master` join `order_invoice` on order_master.order_master_id = order_invoice.order_no WHERE `user_id` = '$this->uid'  ORDER BY order_master.order_master_id desc ");
 			foreach ($data as $key => $value)
 			{
 
