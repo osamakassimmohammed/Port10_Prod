@@ -9,8 +9,8 @@ class Shipping_lib {
 
 
   ///SHIPPING RATE////
-  protected $shi_UserName='armx.ruh.it@gmail.com';
-  protected $shi_Password='YUre@9982';
+  protected $shi_UserName='info@port10.sa';
+  protected $shi_Password='4vHa3UA7wdCPV#y';
   protected $shi_Version='v1';
   protected $shi_AccountNumber='60536338';
   protected $shi_AccountPin='543543';
@@ -192,8 +192,8 @@ class Shipping_lib {
           	$ShipmentDetails['DescriptionOfGoods']=$product_data[0]['product_name'];
           	$ShipmentDetails['GoodsOriginCountry']=$this->shi_CountryCode;
           	$ShipmentDetails['NumberOfPieces']=$val['qty'];
-          	$ShipmentDetails['ProductGroup']='EXP';
-          	$ShipmentDetails['ProductType']='PPX';
+          	$ShipmentDetails['ProductGroup']='DOM';
+          	$ShipmentDetails['ProductType']='ONP';
             // $ShipmentDetails['ProductGroup']='DOM';
             // $ShipmentDetails['ProductType']='CDS';
             $ShipmentDetails['PaymentType']='P';
