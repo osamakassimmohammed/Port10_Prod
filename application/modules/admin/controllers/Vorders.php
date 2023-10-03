@@ -144,22 +144,22 @@ class Vorders extends Admin_Controller {
     	if($ajax=='call')
 		{   			
 			
-			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC  ");
+			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC  ");
    		}else 
    		{
 			if(empty($serach))
 			{
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC  ");
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC  ");
 			}
 			else {
 
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC ");			
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='Pending' ORDER BY invoice.invoice_id DESC ");			
 			}
 		}		
 
@@ -231,22 +231,22 @@ class Vorders extends Admin_Controller {
     	if($ajax=='call')
 		{   			
 			
-			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC  ");
+			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC  ");
    		}else 
    		{
 			if(empty($serach))
 			{
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC  ");
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC  ");
 			}
 			else {
 
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC ");			
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='Delivered' ORDER BY invoice.invoice_id DESC ");			
 			}
 		}		
 
@@ -318,22 +318,22 @@ class Vorders extends Admin_Controller {
     	if($ajax=='call')
 		{   			
 			
-			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC  ");
+			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC  ");
    		}else 
    		{
 			if(empty($serach))
 			{
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC  ");
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC  ");
 			}
 			else {
 
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC ");			
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.order_status='canceled' ORDER BY invoice.invoice_id DESC ");			
 			}
 		}		
 
@@ -405,22 +405,22 @@ class Vorders extends Admin_Controller {
     	if($ajax=='call')
 		{   			
 			
-			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+			$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC  ");
+			$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC  ");
    		}else 
    		{
 			if(empty($serach))
 			{
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC  ");
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC  ");
 			}
 			else {
 
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC limit $rowno,$rowperpage ");
 
-				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id' AND master.is_show='1' AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC ");			
+				$orders_count = $this->custom_model->get_data_array("SELECT invoice.invoice_id FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE ( invoice.invoice_id LIKE '%$serach%' OR invoice.order_no LIKE '%$serach%' OR invoice.payment_status LIKE '%$serach%' OR invoice.order_status LIKE '%$serach%' OR invoice.net_total LIKE '%$serach%' OR invoice.sub_total LIKE '%$serach%' OR master.first_name LIKE '%$serach%' OR master.last_name LIKE '%$serach%' OR master.mobile_no LIKE '%$serach%' OR master.email LIKE '%$serach%' OR master.display_order_id LIKE '%$serach%') AND invoice.seller_id='$seller_id'  AND invoice.created_date LIKE '%$now%' ORDER BY invoice.invoice_id DESC ");			
 			}
 		}		
 
@@ -617,7 +617,7 @@ class Vorders extends Admin_Controller {
 					// && !empty($post_data['ReadyTime']) && !empty($post_data['LastPickupTime']) && !empty($post_data['ClosingTime']) && !empty($post_data['PickupDate']) 	
 
 					$seller_id = $this->nmUser_id;					
-					$is_order = $this->custom_model->get_data_array("SELECT master.order_master_id,master.display_order_id,master.first_name,master.last_name,master.user_id,master.mobile_no as phone,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.google_address,master.lat,master.lng,invoice.invoice_ref,invoice.payment_status,invoice.payment_mode,invoice.seller_id,invoice.net_total,invoice.shipping_cost,invoice.sub_total,invoice.shipping_id	 FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND master.is_show='1' AND master.order_master_id='$order_id' ");
+					$is_order = $this->custom_model->get_data_array("SELECT master.order_master_id,master.display_order_id,master.first_name,master.last_name,master.user_id,master.mobile_no as phone,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.google_address,master.lat,master.lng,invoice.invoice_ref,invoice.payment_status,invoice.payment_mode,invoice.seller_id,invoice.net_total,invoice.shipping_cost,invoice.sub_total,invoice.shipping_id	 FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'   AND master.order_master_id='$order_id' ");
 					if(!empty($is_order))
 					{
 						if(!empty($is_order[0]['shipping_id']))
@@ -671,7 +671,7 @@ class Vorders extends Admin_Controller {
 				$start_date= date("Y-m-d", strtotime($post_data['start_date']));
 				$end_date= date("Y-m-d", strtotime($post_data['end_date']));
 				$seller_id = $this->nmUser_id;
-				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id' AND master.is_show='1' AND master.order_datetime BETWEEN '$start_date' AND '$end_date' ORDER BY invoice.invoice_id DESC  ");
+				$orders = $this->custom_model->get_data_array("SELECT invoice.invoice_id,invoice.order_no,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,invoice.net_total as in_net_total,invoice.sub_total as in_sub_total,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1,master.currency,master.order_datetime FROM order_invoice as invoice INNER JOIN order_master as master ON invoice.order_no = master.order_master_id  WHERE invoice.seller_id='$seller_id'  AND master.order_datetime BETWEEN '$start_date' AND '$end_date' ORDER BY invoice.invoice_id DESC  ");
 				// AND user.id!='1'
 				$file_name=date("d-m-Y").'-order_excel.csv';
 
@@ -722,9 +722,209 @@ class Vorders extends Admin_Controller {
 	}
 	public function vaccount()
 	{
-		
+		$data = [];
+		$data['total_customers'] = $this->custom_model->get_data_array('SELECT COUNT(*) FROM admin_users')[0]['COUNT(*)'];
+		$data['total_customers'] = (int)$data['total_customers'] - 1;
+
+		$data['total_orders'] = $this->custom_model->count_last_month_record();
+		$data['total_amount'] = $this->custom_model->last_month_amount();
+		$data['last_month_transaction'] = $this->custom_model->last_month_transaction();
+
+		$data['get_last_month_payout_details'] = $this->custom_model->get_last_month_payout_details();
+
+		$date = $this->input->post('daterange');
+		// echo "<pre>";
+		// print_r($data['last_month_transaction']);
+		// die;
+		// exit();
+
+		$this->mViewData['data'] = $data;
 		$this->render('vorders/vaccount_demo');
 	}
+	public function remitters()
+	{
+		$data = [];
+		$data['total_customers'] = $this->custom_model->get_data_array('SELECT COUNT(*) FROM account_details')[0]['COUNT(*)'];
+	
+		$data['total_customers'] = (int)$data['total_customers'] - 1;
+		// print_r($data['total_customers']);
+		// exit();
+
+		$data['total_orders'] = $this->custom_model->count_last_month_record();
+		$data['total_amount'] = $this->custom_model->last_month_amount();
+		$data['last_month_transaction'] = $this->custom_model->va_account_details();
+		$data['active_transaction'] = $this->db->get_where('account_details',array('is_active'=>1))->result();
+		$data['inactive_transaction'] = $this->db->get_where('account_details',array('is_active'=>0))->result();
+
+		// print_r($data['last_month_transaction']);
+		// exit();
+
+		$data['get_last_month_payout_details'] = $this->custom_model->get_last_month_payout_details();
+
+		$date = $this->input->post('daterange');
+		// echo "<pre>";
+		// print_r($data['last_month_transaction']);
+		// die;
+		// exit();
+
+		$this->mViewData['data'] = $data;
+		$this->render('vorders/remitter_demo');
+	}
+	function update_approve_decline_remitters() {
+		// Process the form data here
+       
+        $dataId = $this->input->post('dataId');
+        $datasType = $this->input->post('datasType');
+		// print_r($_POST);
+		// exit();
+		
+		if($datasType == 'approve'){
+			$data = [
+				'message' => "Your Transaction is Active",
+			];
+			$account_details_data = [
+				'is_active' => 1,
+			];
+			
+			$this->custom_model->my_update($account_details_data, array('id' => $dataId), 'account_details');
+			
+		}else{
+			$data = [
+				'message' => "Your Transaction is Inactive",
+			];
+			$account_details_data = [
+				'is_active' => 0,
+			];
+			$this->custom_model->my_update($account_details_data, array('id' => $dataId), 'account_details');
+			
+		}
+
+        // Send the response as JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+	}
+	public function payout($user_id)
+	{
+		$data = $this->custom_model->my_where('admin_users', "*", array('id' => $user_id));
+		$this->mViewData['data'] = $data;
+		$this->render('vorders/payout_admin_new');
+		// $this->urender('payout_admin', 'udefault');
+	}
+
+	public function update_approve_decline_withdrawal() {
+
+		
+		// Process the form data here
+        $dataUId = $this->input->post('dataUId');
+        $dataId = $this->input->post('dataId');
+        $amount = (float) $this->input->post('dataAmount');
+        $datasType = $this->input->post('datasType');
+		// print_r($_POST);
+		// exit();
+		
+		if($datasType == 'approve'){
+			$data = [
+				'message' => "Your Transaction is Approved",
+			];
+			$user_account_details = $this->custom_model->my_where('account_details', "*", array('user_id' => $dataUId));
+			$user_account_details_admin = $this->custom_model->my_where('account_details', "*", array('user_id' => 1));
+			$updated_balance = [
+				'balance' => (float) $user_account_details[0]['balance'] - $amount,
+			];
+			$updated_balance_admin = [
+				'balance' => (float) $user_account_details_admin[0]['balance'] + $amount,
+			];
+			$this->custom_model->my_update($updated_balance, array('user_id' => $dataUId), 'account_details');
+			$this->custom_model->my_update($updated_balance_admin, array('user_id' => 1), 'account_details');
+			$va_transactions_data = [
+				'status' => 2,
+			];
+			$this->custom_model->my_update($va_transactions_data, array('id' => $dataId), 'va_transactions');
+			
+
+			// print_r($updated_balance_admin);
+			// print_r($updated_balance);
+			
+		}else{
+			$va_transactions_data = [
+				'status' => 3,
+			];
+			$order_status = "canceled";
+			$transactions_data = $this->custom_model->my_where('va_transactions', "*", array('id' => $dataId));
+
+			$this->custom_model->my_update($va_transactions_data, array('id' => $dataId), 'va_transactions');
+			$this->custom_model->my_update(array('order_status'=>$order_status),array('order_no' => $transactions_data[0]['order_id']),'order_invoice');
+			$this->custom_model->my_update(array('order_status'=>$order_status),array('order_no' => $transactions_data[0]['order_id']),'order_items');
+			$this->custom_model->my_update(array('order_status'=>$order_status),array('order_master_id' => $transactions_data[0]['order_id']),'order_master');
+
+			$data = [
+				'message' => "Your Transaction is Declined",
+			];
+		}
+
+        // Send the response as JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+	}
+	public function update_db_for_withdrawal() {
+		// Process the form data here
+        $payment_note = $this->input->post('payment_note');
+        $amount = (float) $this->input->post('amount');
+
+		$user_account_details = $this->custom_model->my_where('account_details', "*", array('user_id' => 1))[0];
+
+		if ($amount >= (float) $user_account_details['balance']) {
+			$data = [
+				'message' => "You don't have sufficient balance, Please try with different amount",
+			];
+		} else {
+			$record = [
+				'user_id' => 1,
+				'amount' => $amount,
+				'transaction_type' => 'debit',
+				'payment_note' => $payment_note,
+				'status' => '1',
+			];
+			$this->custom_model->my_insert($record, 'va_transactions'); // insert record in the database
+			$updated_balance = [
+				'balance' => (float) $user_account_details['balance'] - $amount,
+			];
+			$this->custom_model->my_update($updated_balance, array('user_id' => 1), 'account_details');
+
+			// Prepare the response data
+			$data = array(
+				'message' => 'The entered amount withdrawn successfully!',
+			);
+		}
+
+
+        // Send the response as JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+	}
+
+	public function get_data_by_date() {
+        // $date = $this->input->post('daterange'); // Assuming the date is passed through POST method
+		$date1 =  $this->input->post('start_date');
+		$date2 =  $this->input->post('end_date');
+		$timestamp1 = strtotime($date1);
+		$timestamp2 = strtotime($date2);
+
+// Convert timestamp to desired format
+		$formattedDate1 = date('Y-m-d', $timestamp1);
+		$formattedDate2 = date('Y-m-d', $timestamp2);
+
+		// $date1 =  "2023-05-01";
+		// $date2 =  "2023-07-20";
+
+        // $this->load->model('OrderModel');
+        $data = $this->custom_model->get_data_by_daterange($formattedDate1, $formattedDate2);
+		// print_r($data);
+		// exit();
+		// $data = 'HELLO WORLD';
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 
 	// three join
 	// $orders = $this->custom_model->get_data_array("SELECT oitems.item_id,oitems.order_no,oitems.product_id,oitems.product_name,oitems.quantity,oitems.price,oitems.order_status as item_order_status,invoice.invoice_id,invoice.item_ids,invoice.payment_status,invoice.payment_mode,invoice.created_date,invoice.order_status,invoice.seller_id,master.display_order_id,master.first_name,master.last_name,master.mobile_no,master.email,master.country,master.city,master.state,master.pincode,master.address_1 FROM order_items as oitems INNER JOIN order_invoice as invoice ON   oitems.order_no=invoice.order_no  INNER JOIN  order_master as master ON oitems.order_no = master.order_master_id WHERE oitems.seller_id='$seller_id' AND invoice.seller_id='$seller_id' ORDER BY invoice.invoice_id DESC ");

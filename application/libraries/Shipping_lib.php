@@ -6,8 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Shipping_lib {
 
-
-
   ///SHIPPING RATE////
   protected $shi_UserName='info@port10.sa';
   protected $shi_Password='4vHa3UA7wdCPV#y';
@@ -21,16 +19,30 @@ class Shipping_lib {
   protected $shi_url='https://ws.aramex.net/ShippingAPI.V2/RateCalculator/Service_1_0.svc/json/CalculateRate';
 	/// thise are test key
 
+  //
   // protected $shi_UserName='reem@reem.com';
   // protected $shi_Password='123456789';
   // protected $shi_Version='1.0';
-  // protected $shi_AccountNumber='4004636';
-  // protected $shi_AccountPin='432432';
+  // protected $shi_AccountNumber='60536338';
+  // protected $shi_AccountPin='543543';
   // protected $shi_AccountEntity='RUH';
   // protected $shi_AccountCountryCode='SA';
   // protected $shi_Source=24;
   // protected $shi_CountryCode='SA';
-  // protected $shi_url='https://ws.dev.aramex.net/ShippingAPI.V2/';
+  // protected $shi_url='https://ws.aramex.net/ShippingAPI.V2/RateCalculator/Service_1_0.svc/json/CalculateRate';
+//
+  protected $ship_UserName='armx.ruh.it@gmail.com';
+  protected $ship_Password='YUre@9982';
+  protected $ship_Version='v1';
+  protected $ship_AccountNumber='60536338';
+  protected $ship_AccountPin='543543';
+  // protected $ship_AccountNumber='4004636';
+  // protected $ship_AccountPin='442543';
+  protected $ship_AccountEntity='RUH';
+  protected $ship_AccountCountryCode='SA';
+  protected $ship_Source=24;
+  protected $ship_CountryCode='SA';
+  protected $ship_url='https://ws.aramex.net/ShippingAPI.V2/Shipping/Service_1_0.svc';
 
 
   // protected $shi_UserName='armx.ruh.it@gmail.com';
@@ -87,6 +99,20 @@ class Shipping_lib {
     $ClientInfo['AccountEntity']=$this->shi_AccountEntity;
     $ClientInfo['AccountCountryCode']=$this->shi_AccountCountryCode;
     $ClientInfo['Source']=$this->shi_Source;
+    return $ClientInfo;
+	}
+
+  public function get_ShipClientInfo()
+	{
+		$ClientInfo=array();
+    $ClientInfo['UserName']=$this->ship_UserName;
+    $ClientInfo['Password']=$this->ship_Password;
+    $ClientInfo['Version']=$this->ship_Version;
+    $ClientInfo['AccountNumber']=$this->ship_AccountNumber;
+    $ClientInfo['AccountPin']=$this->ship_AccountPin;
+    $ClientInfo['AccountEntity']=$this->ship_AccountEntity;
+    $ClientInfo['AccountCountryCode']=$this->ship_AccountCountryCode;
+    $ClientInfo['Source']=$this->ship_Source;
     return $ClientInfo;
 	}
 
@@ -176,14 +202,18 @@ class Shipping_lib {
       foreach ($products as $key => $val)
       {
         $product_data = $this->CI->custom_model->get_data_array("SELECT pro.product_name,pro.price,pro.sale_price,pro.weight,pro.weight_unit,pro.city,pro.warehouse_location,pro.city,pro.lat,pro.lng,pro.weight_unit,pro.weight,pro.length,pro.width,pro.height,pro.is_delivery_available,admin.street_name,admin.building_no,admin.city as ad_city,admin.state,admin.postal_code FROM product as pro INNER JOIN admin_users as admin ON pro.seller_id=admin.id WHERE pro.id='".$val['pid']."'  ");
-        
+      
+        // print_r("hi");
         
         if(!empty($product_data))
         {
           if($product_data[0]['is_delivery_available'] == 0)
           {
             $weight_value = $this->weight_farmula($product_data[0]['weight'],$product_data[0]['weight_unit']);
-
+          
+            // echo "<pre>";
+            // print_r($product_data[0]);
+            // exit();
           	$OriginAddress=$this->get_OriginAddress($product_data[0]);
           	$ShipmentDetails=$Transaction=$shipping_arr=array();
           	$ShipmentDetails['Dimensions']=null;
@@ -192,10 +222,11 @@ class Shipping_lib {
           	$ShipmentDetails['DescriptionOfGoods']=$product_data[0]['product_name'];
           	$ShipmentDetails['GoodsOriginCountry']=$this->shi_CountryCode;
           	$ShipmentDetails['NumberOfPieces']=$val['qty'];
-          	$ShipmentDetails['ProductGroup']='DOM';
-          	$ShipmentDetails['ProductType']='ONP';
-            // $ShipmentDetails['ProductGroup']='DOM';
-            // $ShipmentDetails['ProductType']='CDS';
+          	// $ShipmentDetails['ProductGroup']='EXP';
+          	// $ShipmentDetails['ProductType']='PPX';
+
+            $ShipmentDetails['ProductGroup']='DOM';
+            $ShipmentDetails['ProductType']='ONP';
             $ShipmentDetails['PaymentType']='P';
           	$ShipmentDetails['PaymentOptions']='';
           	$ShipmentDetails['CustomsValueAmount']=null;
@@ -223,11 +254,15 @@ class Shipping_lib {
             // echo "<pre>";
             // print_r('hi');
             // exit();
-          
+            // echo "<pre>";
+            // print_r($ShipmentDetails['ActualWeight']);
+            // exit();
             $shipping_arr = json_encode($shipping_arr);
+            // echo "<pre>";
             // print_r($shipping_arr);
             // exit();
-            // print_r("hi");
+
+        
           
             $curl = curl_init();
 
@@ -251,7 +286,7 @@ class Shipping_lib {
             $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
 
-            // print_r($httpcode);
+            // print_r($response);
             // exit();
 
             if($httpcode==200)
@@ -378,7 +413,7 @@ class Shipping_lib {
   //   $OriginAddress['CountryCode']=$this->shi_CountryCode;    
   //   $OriginAddress['Longitude']=empty($orignin_data['lng'])? 0:$orignin_data['lng'];    
   //   $OriginAddress['Latitude']=empty($orignin_data['lat'])? 0:$orignin_data['lat'];    
-  //   $OriginAddress['BuildingNumber']=$orignin_data['building_no'];    
+  //   $OriginAddress['BuildingNumber']=$ori1111111gnin_data['building_no'];    
   //   $OriginAddress['BuildingName']=null;    
   //   $OriginAddress['Floor']=null;    
   //   $OriginAddress['Apartment']=null;    
@@ -555,7 +590,7 @@ class Shipping_lib {
     if(!empty($order_items) && !empty($is_order) && !empty($seller_data) && !empty($post_data) )
     {
         $currency="SAR";
-        $ClientInfo=$this->get_ClientInfo();
+        $ClientInfo=$this->get_ShipClientInfo();
         $PickupAddress=$this->get_DestinationAddress($seller_data[0]);
 
         // print_r($ClientInfo);
@@ -648,7 +683,7 @@ class Shipping_lib {
         $ShipmentDetails['GoodsOriginCountry']=$this->shi_CountryCode;
         $ShipmentDetails['NumberOfPieces']=$quantity_all;
         $ShipmentDetails['ProductGroup']='DOM';
-        $ShipmentDetails['ProductType']='CDS';
+        $ShipmentDetails['ProductType']='ONP';
         $ShipmentDetails['PaymentType']='P';
         $ShipmentDetails['PaymentOptions']='';
         $ShipmentDetails['CustomsValueAmount']=array("CurrencyCode"=>$currency,"Value"=>$is_order[0]['shipping_charge']);
@@ -685,7 +720,7 @@ class Shipping_lib {
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://ws.sbx.aramex.net/ShippingAPI.V2/Shipping/Service_1_0.svc/json/CreateShipments',
+          CURLOPT_URL => 'https://ws.aramex.net/ShippingAPI.V2/Shipping/Service_1_0.svc/json/CreateShipments',
           // CURLOPT_URL => $this->shi_url.'Shipping/Service_1_0.svc/json/CreateShipments',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
@@ -784,14 +819,14 @@ class Shipping_lib {
     $CollectAmount=null;
     $is_order[0]['phone'] = $is_order[0]['mobile_no'];
     // $is_order[0]['pincode'] = $is_order[0]['postal_code'];
-
-    // //print_r();
-    // //exit();
     $is_order[0]['postal_code'] = $is_order[0]['pincode'];
     $info_arr=array();
     if(!empty($order_items) && !empty($is_order) && !empty($seller_data) && !empty($post_data) )
     {
-        $ClientInfo=$this->get_ClientInfo();
+        $ClientInfo=$this->get_ShipClientInfo();
+        // echo "<pre>";
+        //   print_r($ClientInfo);
+        //   exit();
         $PickupAddress=$this->get_DestinationAddress($seller_data[0]);
         $PickupContact=$this->get_PickupContact($seller_data[0]);
 
@@ -801,7 +836,7 @@ class Shipping_lib {
         $create_pickup_arr=$LabelInfo=array();
 
         $create_pickup_arr['ClientInfo']=$ClientInfo;
-        $LabelInfo['ReportID']='9729';
+        $LabelInfo['ReportID']='9201';
         $LabelInfo['ReportType']='URL';
         $create_pickup_arr['LabelInfo']=$LabelInfo;
 
@@ -896,7 +931,7 @@ class Shipping_lib {
           $ShipmentDetails['GoodsOriginCountry']=$this->shi_CountryCode;
           $ShipmentDetails['NumberOfPieces']=$order_items[0]['quantity'];
           $ShipmentDetails['ProductGroup']='DOM';
-          $ShipmentDetails['ProductType']='CDS';
+          $ShipmentDetails['ProductType']='ONP';
           $ShipmentDetails['PaymentType']='P';
           $ShipmentDetails['PaymentOptions']='';
           $ShipmentDetails['CustomsValueAmount']=null;
@@ -931,14 +966,16 @@ class Shipping_lib {
         $Transaction['Reference5']='';
 
         $create_pickup_arr['Transaction']=$Transaction;
-
+       
         $create_pickup_arr = json_encode($create_pickup_arr);
-
-
+        
+        // echo "<pre>";
+        // print_r($create_pickup_arr);
+        // exit();
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => $this->shi_url.'Shipping/Service_1_0.svc/json/CreatePickup',
+          CURLOPT_URL => $this->ship_url.'/json/CreatePickup',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -1073,7 +1110,7 @@ class Shipping_lib {
     $ShipmentDetails['GoodsOriginCountry']=null;
     $ShipmentDetails['NumberOfPieces']=null;
     $ShipmentDetails['ProductGroup']='DOM';
-    $ShipmentDetails['ProductType']='CDS';
+    $ShipmentDetails['ProductType']='ONP';
     $ShipmentDetails['PaymentType']='P';
     $ShipmentDetails['PaymentOptions']='';
     $ShipmentDetails['CustomsValueAmount']=null;

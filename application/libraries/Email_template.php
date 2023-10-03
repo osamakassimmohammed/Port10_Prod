@@ -170,6 +170,7 @@ class Email_template{
 		return $html_tag;
 	}
 
+
 	public function wecom_email_ar($first_name,$link)
 	{
 		$html_tag='';
@@ -528,6 +529,66 @@ class Email_template{
 		         </div>
 		 
 		      </div>
+		   </body>
+		</html>';
+		return $html_tag;
+	}
+
+
+	public function create_virtual_account_email($first_name,$iban,$remitterId,$bban,$max_amount)
+	{
+		$html_tag='';
+		$html_tag.='<!DOCTYPE html>
+		<html  >
+		   <head>
+		      <title>Index</title>
+		   </head>
+		   <style>
+		      html, body{
+		      padding:0px;
+		      margin:0px;
+		      font-family: arial;
+		      font-size: 14px;
+		      }
+		      div{
+		      box-sizing: border-box;
+		      }
+		      .row_padng td{
+		      padding:10px 0px;
+		      }
+		   </style>';
+		   $html_tag.='<body>
+		         <div style="text-align: center; background: #f3f3f3; " >
+		            <div style="width: 750px; background: #fff; box-shadow: 0px 0px 4px 1px #cccccc25; display: inline-block; margin: 20px 0px; padding: 0px 15px 10px 15px; border-radius: 8px; border-top: 5px solid #fd3a58; border-bottom: 5px solid #fd3a58; " >
+		               <div style="padding:10px 0px;">
+		                  <img src="'.base_url('assets/frontend/images/icon/logo-04.png').'" style="width: 130px; margin-top: 10px; margin-bottom: 30px; " >
+		               </div>
+		               <div style="clear:both;"></div>
+		               <div style="width: 100%;">
+		                  <div style="width: 100%; font-weight: 600; font-size: 20px; margin-top: 00px;" > 
+		                     Welcome!
+		                  </div>
+		                  <div style="width: 100%; font-weight: 500; margin-top:15px; font-size: 18px; line-height: 24px; " >
+						  	Hi '.$first_name.', Your virtual account has been created with alrajhi bank and below attached are your credentials.
+							<ul>
+							<li>IBAN :- '.$iban.'</li>
+							<li>BBAN :- '.$bban.'</li>
+							<li>Max amount :- '.$max_amount.'</li>
+							</ul>
+		                  </div>
+		               </div>
+		               <div style="clear:both;"></div>
+		               
+		               <div  style="width: 100%; font-weight: 500; margin-top: 15px; font-size: 17px; line-height: 22px; padding: 0px 00px; margin-top: 20px;" >
+		                  If you have any questions, check out our Frequently Asked Questions page by clicking <a href="https://port10.sa/en/help" target="_blank"> Here </a>   or contact us at <a href="mailto:info@port10.sa"  target="_blank"> info@port10.sa  </a>  and we will be more than happy to serve you. 
+		               </div>
+		               <div style="clear:both;"></div>
+		               <div style="font-weight: 600; font-size: 22px; margin-top: 40px; margin-bottom: 10px; color: #fd3a58;">
+		                  Team Port10
+		               </div>
+		               <div style="clear:both;"></div>
+		            </div>        
+		         </div>
 		   </body>
 		</html>';
 		return $html_tag;

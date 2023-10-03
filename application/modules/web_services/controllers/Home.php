@@ -1335,6 +1335,7 @@ class Home extends Admin_Controller {
 
 	public function place_order()
 	{
+		
 		$json = file_get_contents('php://input');
 
 		// $json 		= '{"mobile_no": "8149169115", "email": "girish@persausive.in", "language": "en", "device": "ios", "shipping_charge": "0", "name": "Girish", "payment_mode": "cash-on-del","address":"address", "city":"city", "country":"country","state":"state","pincode":"pincode","source":"android","order_pickup_status":"Restaurant" }';

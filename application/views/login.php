@@ -1,3 +1,4 @@
+
 <style type="text/css">
     .home_active {
         font-weight: 600 !important;
@@ -59,16 +60,37 @@
     }
 
     .field-icon {
-        float: right;
-        margin-left: 320px;
-        margin-top: -55px;
-        position: relative;
-        z-index: 2;
-    }
+    float: right;
+    margin-left: 320px;
+    margin-top: -35px;
+    position: relative;
+    z-index: 2;
+    margin-right: 10px;
+}
+.field-icon-sign{
+    float: right;
+    margin-left: 320px;
+    margin-top: -58px;
+    position: relative;
+    z-index: 2;
+    margin-right: 10px;
+}
 
     select option {
         border-radius: 10px !important;
     }
+    .registr_form_main .theme-form input {
+    margin-bottom: 5px !important;
+}
+.min-letters{
+    margin: -20px 15px 15px 10px;
+    font-size:11px
+}
+.login-page.section-b-space .col-lg-6 {
+    padding: 0px;
+    padding: 30px 10px 20px 10px;
+    height: 540px;
+}
 </style>
 
 
@@ -119,7 +141,7 @@
                                     placeholder="<?php echo lang('Enter_Your_Password'); ?>" name="pass"
                                     value="<?php echo $remember_arr['remember_password']; ?>">
                                 <label class="">
-                                    <span toggle="#lpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    <span toggle="#lpass" class="fa fa-fw fa-eye field-icon-sign toggle-password"></span>
                                     <input type="checkbox" name="remember_me" <?php echo $remember_c; ?>>
                                     <span class="login_ck_spn">
                                         <?php echo lang('Keep_Me_Signed_In'); ?>
@@ -211,7 +233,7 @@
                                 </div>
 
 
-                                <div class="form-group">
+                                <div class="form-group mt-4">
                                     <label for="sestiblishment">
                                         <?php echo lang('Entity_Name'); ?> <span class="strict">*</span><i
                                             class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
@@ -221,20 +243,21 @@
                                     <input type="text" class="form-control space isSpecial" id="sestiblishment"
                                         placeholder="<?php echo lang('Entity_Name'); ?>" name="entity_name">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-4">
                                     <label for="scr_number">
                                         <?php echo lang('CR_Number'); ?> <span class="strict">*</span>
                                     </label>
-                                    <input type="text" class="form-control space" id="scr_number"
-                                        placeholder="<?php echo lang('CR_Number'); ?>" name="cr_number"
+                                    <input type="text" maxlength="7" class="form-control space" id="scr_number"
+                                        placeholder="<?php echo lang('CR_Number'); ?>" name="cr_number" 
                                         onkeypress="return isNumberKey(event)">
-
+                                        <span class="text-danger min-letters">Please enter minimum 4 no's</span>
                                 </div>
+                                
 
 
 
-                                <div class="clear"></div>
-                                <label class="">
+                                <div class="clear mt-4"></div>
+                                <label class="mt-3">
                                     <input type="checkbox" name="remember_me">
                                     <span class="login_ck_spn">
                                         <?php echo lang('Keep_Me_Signed_In'); ?>
@@ -256,7 +279,7 @@
                                     <input type="text" class="form-control space" id="sstreet_name"
                                         placeholder="<?php echo lang('Street_Name'); ?>" name="street_name">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-3">
                                     <label for="sbuilding_no">
                                         <?php echo lang('Building_Num'); ?>
                                     </label>
@@ -264,7 +287,7 @@
                                         placeholder="<?php echo lang('Building_Num'); ?>" name="building_no">
                                 </div>
 
-                                <div class="form-group hlf_fld_lft">
+                                <div class="form-group hlf_fld_lft mt-3">
                                     <label for="scity">
                                         <?php echo lang('City'); ?> <span class="strict">*</span>
                                     </label>
@@ -281,7 +304,7 @@
                                     <!-- <input type="text" class="form-control space" id="scity" placeholder="City" name="city"> -->
                                 </div>
 
-                                <div class="form-group hlf_fld_right">
+                                <div class="form-group hlf_fld_right mt-3">
                                     <label for="sstate">
                                         <?php echo lang('State_Province_Region'); ?> <span class="strict">*</span>
                                     </label>
@@ -312,7 +335,7 @@
                                     </select>
                                 </div> -->
 
-                                <div class="form-group hlf_fld_lft">
+                                <div class="form-group hlf_fld_lft mt-1">
                                     <label for="scountry">
                                         <?php echo lang('Zip_Or_Postal_Code'); ?>
                                     </label>
@@ -321,7 +344,7 @@
                                         name="postal_code" maxlength="7" onkeypress="return isNumberKey(event)">
                                 </div>
 
-                                <div class="form-group hlf_fld_right">
+                                <div class="form-group hlf_fld_right mt-1">
                                     <label for="scountry">
                                         <?php echo lang('Country'); ?>
                                     </label>
@@ -332,10 +355,10 @@
 
                                 <div class="clear"></div>
 
-                                <a class="btn btn-solid regstr_new_a_bck back_reg_2">
+                                <a class="btn btn-solid regstr_new_a_bck back_reg_2 mt-3">
                                     <?php echo lang('Back'); ?>
                                 </a>
-                                <button type="button" id="next2" class="btn btn-solid regist_nex next_registr2">
+                                <button type="button" id="next2" class="btn btn-solid regist_nex next_registr2 mt-3">
                                     <?php echo lang('Next'); ?>
                                 </button>
 
@@ -350,6 +373,7 @@
                                     <input type="text" class="form-control space2 ccp" id="sphone"
                                         placeholder="<?php echo lang('Phone'); ?>" name="phone"
                                         onkeypress="return isNumberKey(event)">
+                                        <span class="text-danger min-letters">Please enter 12 no's</span>
                                 </div>
                                 <div class="form-group hlf_fld_right">
                                     <label for="semail">
@@ -357,17 +381,19 @@
                                     </label>
                                     <input type="text" class="form-control space" id="semail"
                                         placeholder="<?php echo lang('Email'); ?>" name="email">
+                                        <span class="min-letters"></span>
                                 </div>
 
-                                <div class="form-group hlf_fld_lft">
+                                <div class="form-group hlf_fld_lft mt-2">
                                     <label for="svat_number">
                                         <?php echo lang('VAT_Number'); ?> <span class="strict">*</span>
                                     </label>
-                                    <input maxlength="15" type="text" class="form-control" id="svat_number"
+                                    <input maxlength="15" minlength="11" type="text" class="form-control" id="svat_number"
                                         placeholder="<?php echo lang('VAT_Number'); ?>" name="vat_number"
                                         onkeypress="return isNumberKey(event)">
+                                        <span class="text-danger min-letters">Please enter minimum 11 no's</span>
                                 </div>
-                                <div class="form-group hlf_fld_right">
+                                <div class="form-group hlf_fld_right mt-2">
                                     <label for="sbank_name">
                                         <?php echo lang('Preferred_Bank_Name'); ?><span class="strict">*</span>
                                     </label>
@@ -382,17 +408,19 @@
                                             <?php }
                                         } ?>
                                     </select>
+                                    <span class="min-letters"></span>
                                 </div>
                                 <div class="clear"></div>
-                                <div class="form-group hlf_fld_lft">
+                                <div class="form-group hlf_fld_lft mt-2">
                                     <label for="siban">
                                         <?php echo lang('IBAN'); ?> <span class="strict">*</span>
                                     </label>
-                                    <input maxlength="34" type="text" class="form-control isSpecial" id="siban"
+                                    <input maxlength="34" minlength="10" type="text" class="form-control isSpecial" id="siban"
                                         placeholder="<?php echo lang('IBAN'); ?>" name="iban">
+                                        <span class="text-danger min-letters">Please enter minimum 22 no's</span>
                                 </div>
 
-                                <div class="form-group hlf_fld_right">
+                                <div class="form-group hlf_fld_right mt-2">
                                     <label for="sbank_name">
                                         <?php echo lang('User_Name'); ?> <span class="strict">*</span><i
                                             class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip"
@@ -401,10 +429,11 @@
                                     </label>
                                     <input type="text" class="form-control space" id="sfirst_name"
                                         placeholder="<?php echo lang('User_Name'); ?>" name="first_name">
+                                        <span class="min-letters"></span>
                                 </div>
 
                                 <div class="clear"></div>
-                                <div class="form-group hlf_fld_lft">
+                                <div class="form-group hlf_fld_lft mt-2">
                                     <label for="spass">
                                         <?php echo lang('Password'); ?> <span class="strict">*</span><i
                                             class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip"
@@ -413,23 +442,25 @@
                                     <input type="password" class="form-control" id="spass"
                                         placeholder="<?php echo lang('Password'); ?>" name="password">
                                     <span toggle="#spass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    <span class="text-danger min-letters">Please enter minimum 6 no's</span>
                                 </div>
 
-                                <div class="form-group hlf_fld_right">
+                                <div class="form-group hlf_fld_right mt-2">
                                     <label for="scpass">
                                         <?php echo lang('Confirm_Password'); ?> <span class="strict">*</span>
                                     </label>
                                     <input type="password" class="form-control" id="scpass"
                                         placeholder="<?php echo lang('Confirm_Password'); ?>" name="scpass">
                                     <span toggle="#scpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    <span class="text-danger min-letters">Please enter minimum 6 no's</span>
                                 </div>
 
                                 <div class="clear"></div>
 
-                                <a class="btn btn-solid regstr_new_a_bck back_reg_3">
+                                <a class="btn btn-solid regstr_new_a_bck back_reg_3 mt-3">
                                     <?php echo lang('Back'); ?>
                                 </a>
-                                <button class="btn btn-solid regist_nex next_registr3">
+                                <button class="btn btn-solid regist_nex next_registr3 mt-3">
                                     <?php echo lang('Sign_Up'); ?>
                                 </button>
 
@@ -560,8 +591,8 @@
             swal("", "<?php echo lang('Please_Enter_Entity_Name'); ?>", "warning");
             return false;
         }
-
-        if (scr_number == "") {
+        var crNumber = /^\d{4,7}$/;
+        if (!scr_number.match(crNumber)) {
             error = 0;
             stepone = 0;
             swal("", "<?php echo lang('Please_Enter_CR_Number'); ?>", "warning");
@@ -663,7 +694,8 @@
         var scpass = $.trim($("#scpass").val());
 
 
-        if (sphone == "") {
+        var phoneNumber = /^\d{10,13}$/;
+        if (!sphone.match(phoneNumber)) {
             error = 0;
             stepthree = 0;
             swal("", "<?php echo lang('Please_Enter_Phone'); ?>", "warning");
@@ -684,8 +716,8 @@
                 return false;
             }
         }
-
-        if (svat_number == "") {
+        var vatNumber = /^\d{11,15}$/;
+        if (!svat_number.match(vatNumber)) {
             error = 0;
             stepthree = 0;
             swal("", "<?php echo lang('Please_Enter_VAT_Number'); ?>", "warning");
@@ -697,13 +729,13 @@
             swal("", "<?php echo lang('Please_Select_Preferred_Bank_Name'); ?>", "warning");
             return false;
         }
-
-        if (siban == "") {
-            error = 0;
-            stepthree = 0;
-            swal("", "<?php echo lang('Please_Enter_IBAN'); ?>", "warning");
-            return false;
-        }
+        var ibanNumber = /^[A-Za-z]{2}\d*$/;
+        // if (!siban.match(ibanNumber)) {
+        //     error = 0;
+        //     stepthree = 0;
+        //     swal("", "<?php echo lang('Please_Enter_IBAN'); ?>", "warning");
+        //     return false;
+        // }
 
         var letterNumber = /^[0-9a-zA-Z]+$/;
         if (!sestiblishment.match(letterNumber)) {
@@ -712,8 +744,8 @@
             swal("", "<?php echo lang('IBNA_Must_Be_Alpha_Number_Value'); ?>", "warning");
             return false;
         }
-
-        if (sfirst_name == "") {
+        var userNames = /^[a-zA-Z]*$/;
+        if (!sfirst_name.match(userNames)) {
             error = 0;
             stepthree = 0;
             swal("", "<?php echo lang('Please_Enter_User_Name'); ?>", "warning");

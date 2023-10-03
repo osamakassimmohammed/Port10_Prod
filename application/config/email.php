@@ -47,4 +47,3 @@ $config['newline'] = "\r\n";
 // $config['mailtype'] = 'html';
 // $config['wordwrap'] = TRUE;
 // $config['newline'] = "\r\n";
-

@@ -318,17 +318,14 @@ class Order extends MY_Controller {
 				// $data_res=$this->product_check($data,$flag=false,$is_other=false);
 				$this->load->library('user_account');
 				$data_res = $this->user_account->product_check($data,$flag=false,$is_other=false,$language);
-				
-				if($data_res['status'] == 1 )
+			
+				if($data_res['status']==1 )
 				{
 					$is_calculate_rate = 1;
 					if($data[0]['is_delivery_available'] == 0)
 					{
-						$is_calculate_rate = 0;
+						$is_calculate_rate=0;
 					}
-
-					// print_r($is_calculate_rate);
-					// exit();
 					$pid=$data_res['data'][0]['id'];
 					$qty=$data_res['data'][0]['quantity'];
 					$unit=$data_res['data'][0]['unit'];

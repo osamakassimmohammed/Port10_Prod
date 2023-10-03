@@ -45,6 +45,41 @@
       line-height: inherit;
       margin-top: 0px;
    }
+   button.add_to_cart12 {
+    margin-top: 15px;
+    text-align: center;
+    width: 70%;
+    padding: 8px 7px;
+    border-radius: 5px;
+    background: #3f006f;
+    color: white;
+    margin-left: 15%;
+    border-radius: 100px;
+    font-size: 16px;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    line-height: 20px;
+    text-transform: uppercase;
+    /* font-weight: 500; */
+    letter-spacing: 0.05em;
+    border: 2px solid var(--theme-deafult);
+    background-image: linear-gradient(30deg, var(--theme-deafult) 50%, transparent 50%);
+    background-size: 850px;
+    background-repeat: no-repeat;
+    background-position: 0;
+    transition: background 300ms ease-in-out;
+}
+button.add_to_cart12:hover {
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    background-position: 100%;
+    color: #000000 !important;
+    background-color: #ffffff;
+    cursor: pointer;
+    border-radius: 100px;
+}
 </style>
 
 <div class="row" style="margin: 0px;">
@@ -240,6 +275,7 @@
                                                    <li class="bg-light1"></li>
                                                    <li class="bg-light2"></li>
                                                 </ul>
+                                                <?php  if( $product_value['seller_id'] != $uid){ ?>
 
                                                 <?php if ($product_value['price_select'] == '1') { ?>
                                                    <button title="<?php echo lang('Add_to_cart'); ?>"
@@ -257,6 +293,13 @@
                                                       data-unit="get_unit<?php echo $i; ?>"
                                                       data-detislqty="<?php echo $product_value['min_order_quantity']; ?>"
                                                       class="add_to_cart2">
+                                                      <i class="ti-shopping-cart"></i>
+                                                      <?php echo lang('Add_to_cart'); ?>
+                                                   </button>
+                                                <?php } ?>
+                                                <?php }else{?>
+                                                   <button title="<?php echo lang('Add_to_cart'); ?>" onclick="fireSweetAlert()"
+                                                      class="add_to_cart12">
                                                       <i class="ti-shopping-cart"></i>
                                                       <?php echo lang('Add_to_cart'); ?>
                                                    </button>
@@ -396,7 +439,9 @@
                                              <li class="bg-light1"></li>
                                              <li class="bg-light2"></li>
                                           </ul>
+                                          <?php  if( $product_value['seller_id'] != $uid){ ?>
 
+                                         
                                           <?php if ($product_value['price_select'] == '1') { ?>
                                              <button title="<?php echo lang('Add_to_cart'); ?>"
                                                 data-id="<?php echo $product_value['id']; ?>"
@@ -416,6 +461,15 @@
                                                 <i class="ti-shopping-cart"></i>
                                                 <?php echo lang('Add_to_cart'); ?>
                                              </button>
+                                          <?php } ?>
+                                          <?php }else{ ?>
+                                             <button title="<?php echo lang('Add_to_cart'); ?>"
+                                             onclick="fireSweetAlert()"
+                                                class="add_to_cart12">
+                                                <i class="ti-shopping-cart"></i>
+                                                <?php echo lang('Add_to_cart'); ?>
+                                             </button>
+                                             
                                           <?php } ?>
                                           <div class="wrp_cmpr_2">
                                              <label>
@@ -509,7 +563,7 @@
                                              <?php echo $currency_symbol; ?>
                                              <?php echo $product_value['sale_price']; ?>
                                           </h4>
-
+                                          <?php  if( $product_value['seller_id'] != $uid){ ?>
                                           <?php if ($product_value['price_select'] == '1') { ?>
                                              <button title="<?php echo lang('Add_to_cart'); ?>"
                                                 data-id="<?php echo $product_value['id']; ?>"
@@ -530,6 +584,13 @@
                                                 <?php echo lang('Add_to_cart'); ?>
                                              </button>
                                           <?php } ?>
+                                          <?php }else{?>
+                                                   <button title="<?php echo lang('Add_to_cart'); ?>" onclick="fireSweetAlert()"
+                                                      class="add_to_cart12">
+                                                      <i class="ti-shopping-cart"></i>
+                                                      <?php echo lang('Add_to_cart'); ?>
+                                                   </button>
+                                                <?php } ?>
                                           <div class="wrp_cmpr_2">
                                              <label>
                                                 <input type="checkbox" class="add_check2 compare_ck"
@@ -625,7 +686,7 @@
                                              <?php echo $currency_symbol; ?>
                                              <?php echo $product_value['sale_price']; ?>
                                           </h4>
-
+                                          <?php  if( $product_value['seller_id'] != $uid){ ?>
                                           <?php if ($product_value['price_select'] == '1') { ?>
                                              <button title="<?php echo lang('Add_to_cart'); ?>"
                                                 data-id="<?php echo $product_value['id']; ?>"
@@ -646,6 +707,13 @@
                                                 <?php echo lang('Add_to_cart'); ?>
                                              </button>
                                           <?php } ?>
+                                          <?php }else{?>
+                                                   <button title="<?php echo lang('Add_to_cart'); ?>" onclick="fireSweetAlert()"
+                                                      class="add_to_cart12">
+                                                      <i class="ti-shopping-cart"></i>
+                                                      <?php echo lang('Add_to_cart'); ?>
+                                                   </button>
+                                                <?php } ?>
                                           <div class="wrp_cmpr_2">
                                              <label>
                                                 <input type="checkbox" class="add_check2 compare_ck"

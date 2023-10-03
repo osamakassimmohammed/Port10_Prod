@@ -17,40 +17,11 @@
 <!--section start-->
 <!-- section start -->
 <!--section start-->
-<section class="faq-section section-b-space new_help_sectn">
+<section class="faq-section section-b-space">
    <div class="container contr_width">
       <div class="row">
          <div class="ml-auto mr-auto">
-      <div class="col-12">
-            <?php if(!empty($tutorial_data)){ ?>
-            <div class="title1 section-t-sspace">
-               <!-- <h4>exclusive products</h4> -->
-               <h2 class="title-inner1"><?php echo lang('TUTORIALS'); ?></h2>
-            </div>
-            <div class="sectn_tutorial_as">
-                <?php foreach ($tutorial_data as $tud_key => $tud_val) { ?>
-                <div class="singl_tutorl_wrap">
-                    <div class="singl_img_tutrl">
-                        <div class="tutorl_title">
-                            <?php echo $tud_val['heading']; ?>
-                        </div>
-                        <video class="tutoril_img" controls>
-                          <source src="<?php echo base_url('assets/admin/banner/').$tud_val['video']; ?>" type="video/mp4">
-                        </video>             
-                        <div class="tutorl_text">
-                           <?php echo $tud_val['description']; ?>
-                        </div>
 
-                    </div>
-                </div>  
-                <?php } ?>              
-
-            </div>
-           
-            <?Php }else{ ?>
-               <h2 class="text-danger text-center"><?php echo lang('Tutorials_not_found'); ?></h2>
-            <?php } ?>
-         </div>
          <div class="col-12">
             <?Php if($faq_data){ ?>
             <div class="title1 section-t-sspace">
@@ -80,7 +51,37 @@
             <h2 class="text-danger text-center"><?php echo lang('faq_not_found'); ?></h2>
          <?php } ?>
          </div>
+         <br/>
+         <div class="col-12">
+            <?php if(!empty($tutorial_data)){ ?>
+            <div class="title1 section-t-sspace">
+               <!-- <h4>exclusive products</h4> -->
+               <h2 class="title-inner1"><?php echo lang('TUTORIALS'); ?></h2>
+            </div>
+            <div class="sectn_tutorial_as">
+                <?php foreach ($tutorial_data as $tud_key => $tud_val) { ?>
+                <div class="singl_tutorl_wrap">
+                    <div class="singl_img_tutrl">
+                        <div class="tutorl_title">
+                            <?php echo $tud_val['heading']; ?>
+                        </div>
+                        <video class="tutoril_img" controls>
+                          <source src="<?php echo base_url('assets/admin/banner/').$tud_val['video']; ?>" type="video/mp4">
+                        </video>             
+                        <div class="tutorl_text">
+                           <?php echo $tud_val['description']; ?>
+                        </div>
 
+                    </div>
+                </div>  
+                <?php } ?>              
+
+            </div>
+           
+            <?Php }else{ ?>
+               <h2 class="text-danger text-center"><?php echo lang('Tutorials_not_found'); ?></h2>
+            <?php } ?>
+         </div>
 
          </div>
       </div>

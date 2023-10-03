@@ -191,12 +191,14 @@ $config['ci_bootstrap'] = array(
 			'name'		=> 'Virtual Account',
 			'url'		=> 'vorders/vaccount',
 			'icon'		=> 'group',
-			// 'children'  => array(
-			// 	'Account Dashboard' => 'virtualAccount/dashboard',
-			// 	// 'Labels' => 'shipments/shipmentLabelIndex',
-			// 	'Virtual Account list' => 'virtualAccount/index',
-			// 	'Account Invoices' => 'virtualAccount/invoices-list'
-			// 	)
+			'children'  => array(
+				// 'Account Dashboard' => 'virtualAccount/dashboard',
+				// 'Labels' => 'shipments/shipmentLabelIndex',
+				// 'Virtual Account list' => 'virtualAccount/index',
+				// 'Account Invoices' => 'virtualAccount/invoices-list'
+				  'Transactions'=>'vorders/vaccount',
+				  'Remitters'=>'vorders/remitters'
+				)
 		),
 
 
@@ -520,6 +522,7 @@ $config['ci_bootstrap'] = array(
 		'attribute'				=> array('webmaster', 'admin'),
 		'subs_plans'				=> array('webmaster', 'admin'),
 		'email'				=> array('webmaster'),
+		'vorders/vaccount'				=> array('webmaster', 'admin', 'manager'),
 		'vorders'				=> array('vendor', 'subsupplier'),
 		'receive_quotation'		=> array('vendor', 'subsupplier'),
 		'chat'		=> array('webmaster', 'vendor', 'admin', 'subsupplier'),

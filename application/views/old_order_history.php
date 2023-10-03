@@ -1,90 +1,92 @@
 <style type="text/css">
-   .home_active {
-      font-weight: 600 !important;
-      color: #c09550 !important;
-   }
+.home_active {
+    font-weight: 600 !important;
+    color: #c09550 !important;
+}
 
-   .reorder_btn {
-      background: #004670;
-      padding: 10px 15px;
-      border-radius: 100px;
-      color: #fff !important;
-   }
+.reorder_btn {
+    background: #004670;
+    padding: 10px 15px;
+    border-radius: 100px;
+    color: #fff !important;
+}
 
-   .writec {
-      /*font-size: 36px;*/
-      color: #222222;
-      text-transform: uppercase;
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: 0.02em;
-   }
+.writec {
+    /*font-size: 36px;*/
+    color: #222222;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
 
-   .or_unit {
-      margin-left: 00px;
-      margin-top: -30px;
-      font-weight: 600;
-      line-height: 23px;
-      width: 100%;
-      /* text-align: center; */
-      display: inline-block;
-      margin-left: 0px;
-   }
+.or_unit {
+    margin-left: 00px;
+    margin-top: -30px;
+    font-weight: 600;
+    line-height: 23px;
+    width: 100%;
+    /* text-align: center; */
+    display: inline-block;
+    margin-left: 0px;
+}
 
-   .or_pro {
-      margin-left: 00px;
-      width: 100%;
-      /* th_crt6 */
-      display: inline-block;
-      margin-top: 7px;
-   }
+.or_pro {
+    margin-left: 00px;
+    width: 100%;
+    /* th_crt6 */
+    display: inline-block;
+    margin-top: 7px;
+}
 
-   td {
-      vertical-align: middle !important;
-   }
+td {
+    vertical-align: middle !important;
+}
 
-   .or_qty {
-      text-align: center;
-   }
+.or_qty {
+    text-align: center;
+}
 
-   body {
-      background: #f8fbfd;
-   }
+body {
+    background: #f8fbfd;
+}
 
-   .table thead th {
-      vertical-align: bottom;
-      border-bottom: 1px solid #dee2e6;
-      border-top: 0px;
-   }
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 0px;
+}
 
-   .btn-solid {
-      padding: 10px 10px !important;
-   }
+.btn-solid {
+    padding: 10px 10px !important;
+}
 </style>
 <div class="holder mt-0">
-   <div class="container">
-      <ul class="breadcrumbs">
-         <li><a href="<?php echo base_url($language); ?>"><?php echo lang('h_home'); ?></a></li>
-         <li><span>
-               <?php echo lang('order_history'); ?>
-            </span></li>
-      </ul>
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li><a href="<?php echo base_url($language); ?>"><?php echo lang('h_home'); ?></a></li>
+            <li><span>
+                    <?php echo lang('order_history'); ?>
+                </span></li>
+        </ul>
 
 
-   </div>
+    </div>
 </div>
 
 <div class="holder mt-0">
-   <?php if (!empty($data)) { ?>
-      <div class="container">
-         <div class="row">
+    <div class="container">
+        <a href="<?php echo base_url($language . '/my_account/group_orders/'); ?>"
+            class="product-item-price btn btn-solid"> Group order List</a>
+        <?php if (!empty($data)) { ?>
+        <div class="row">
             <div class="col-lg-12 wrap_old_histry">
 
-               <?php foreach ($data as $data_key => $data_val) {
+                <?php foreach ($data as $data_key => $data_val) {
                   $currency = $data_val['currency'];
                   ?>
-                  <div class="table-responsive">
-                     <h3 style="display: none">
+                <div class="table-responsive">
+                    <h3 style="display: none">
                         <?php echo date('d-M-Y', strtotime($data_val['order_datetime'])); ?>, Tansaction Ref
                         <?php echo $data_val['display_order_id']; ?>,
                         <?php
@@ -101,114 +103,114 @@
                         }
                         ?>
                         <?php if ($data_val['payment_status'] == 'Paid') { ?>
-                           <span class="invoic_spn_as"><a
-                                 href="<?php echo base_url('invoice/order/') . $data_val['order_master_id'] . '/' . 'order' ?>"
-                                 class="invoic reorder_btn"> Invoice</a></span>
+                        <span class="invoic_spn_as"><a
+                                href="<?php echo base_url('invoice/order/') . $data_val['order_master_id'] . '/' . 'order' ?>"
+                                class="invoic reorder_btn"> Invoice</a></span>
                         <?php } ?>
-                     </h3>
-                     <table class="table check-tbl">
+                    </h3>
+                    <table class="table check-tbl">
                         <thead>
-                           <tr>
-                              <th colspan="1">
-                                 <?php echo lang('ITEMS_u'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('QUANTITY_u'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('PRODUCT_REF'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('PRICE_u'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('WRITE_REVIEW'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('STATUS'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('INVOICE'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('TOTAL_u'); ?>
-                              </th>
-                              <th>
-                                 <?php echo lang('REORDER'); ?>
-                              </th>
-                           </tr>
+                            <tr>
+                                <th colspan="1">
+                                    <?php echo lang('ITEMS_u'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('QUANTITY_u'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('PRODUCT_REF'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('PRICE_u'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('WRITE_REVIEW'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('STATUS'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('INVOICE'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('TOTAL_u'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('REORDER'); ?>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                           <?php if(!empty($data_val['items'])){?>
-                           <?php foreach ($data_val['items'] as $items_key => $items_val) { ?>
+                            <?php if(!empty($data_val['items'])){?>
+                            <?php foreach ($data_val['items'] as $items_key => $items_val) { ?>
 
-                              <tr class="alert">
-                                 <?php
+                            <tr class="alert">
+                                <?php
                                  if (filter_var($items_val['product_image'], FILTER_VALIDATE_URL)) {
                                     $image_url = $items_val['product_image'];
                                  } else {
                                     $image_url = base_url("assets/admin/products/") . $items_val['product_image'];
                                  }
                                  ?>
-                                 <td colspan="1" class="product-item-img">
+                                <td colspan="1" class="product-item-img">
                                     <a href="<?php echo base_url($language . '/home/detail/') . $items_val['id']; ?>"><img
-                                          height="100px" src="<?php echo $image_url; ?>" alt=""></a>
+                                            height="100px" src="<?php echo $image_url; ?>" alt=""></a>
                                     <div class="clear"></div>
                                     <a class="or_pro"
-                                       href="<?php echo base_url($language . '/home/detail/') . $items_val['id']; ?>"><?php echo $items_val['product_name']; ?></a>
+                                        href="<?php echo base_url($language . '/home/detail/') . $items_val['id']; ?>"><?php echo $items_val['product_name']; ?></a>
                                     <?php if (!empty($items_val['attribute'])) { ?>
-                                       <div class="clear"></div>
-                                       <p style="color:black">
-                                          <?php echo $items_val['attribute']; ?>
-                                       </p>
+                                    <div class="clear"></div>
+                                    <p style="color:black">
+                                        <?php echo $items_val['attribute']; ?>
+                                    </p>
                                     <?php } ?>
                                     <div class="clear"></div>
                                     <p class="or_unit">
-                                       <?php echo $items_val['unit_name']; ?>
+                                        <?php echo $items_val['unit_name']; ?>
                                     </p>
-                                 </td>
+                                </td>
 
-                                 <td class="product-item-price or_qty" style="color:black">
+                                <td class="product-item-price or_qty" style="color:black">
                                     <?php echo $items_val['quantity']; ?>
-                                 </td>
-                                 <td class="product-item-price" style="color:black">
+                                </td>
+                                <td class="product-item-price" style="color:black">
                                     <?php echo $items_val['trans_ref']; ?>
-                                 </td>
-                                 <td class="product-item-price pric_bld_a" style="color:black">
+                                </td>
+                                <td class="product-item-price pric_bld_a" style="color:black">
                                     <?php echo $currency . '  ' . number_format($items_val['price'], 2); ?>
-                                 </td>
-                                 <td class="product-item-price" style="color:black"> <a
-                                       href="<?php echo base_url($language . '/home/detail/') . $items_val['product_id']; ?>/#rating_div"
-                                       class="writec"> <?php echo lang('write_review'); ?> </a> </td>
-                                 <td class="product-item-price pric_bld_a" style="color:black">
+                                </td>
+                                <td class="product-item-price" style="color:black"> <a
+                                        href="<?php echo base_url($language . '/home/detail/') . $items_val['product_id']; ?>/#rating_div"
+                                        class="writec"> <?php echo lang('write_review'); ?> </a> </td>
+                                <td class="product-item-price pric_bld_a" style="color:black">
                                     <?php echo lang('success'); ?>
-                                 </td>
-                                 <td class="product-item-price" style="color:black"> <a target="_blank"
-                                       href="<?php echo base_url($language . '/invoice/index/') . $items_val['item_id'] ?>"
-                                       class="btn btn-solid"> <?php echo lang('DOWNLOAD'); ?> </a></td>
-                                 <td class="product-item-price pric_bld_a" style="color:black">
+                                </td>
+                                <td class="product-item-price" style="color:black"> <a target="_blank"
+                                        href="<?php echo base_url($language . '/invoice/index/') . $items_val['item_id'] ?>"
+                                        class="btn btn-solid"> <?php echo lang('DOWNLOAD'); ?> </a></td>
+                                <td class="product-item-price pric_bld_a" style="color:black">
                                     <?php echo $currency . '  ' . number_format($items_val['sub_total'] + $items_val['tax'], 2); ?>
-                                 </td>
+                                </td>
 
-                                 <td class="product-item-price" style="color:black"> <a
-                                       href="<?php echo base_url($language . '/order/reorder/') . $items_val['item_id'] ?>"
-                                       class="btn btn-solid"> <?php echo lang('REORDER'); ?> </a></td>
-                              </tr>
+                                <td class="product-item-price" style="color:black"> <a
+                                        href="<?php echo base_url($language . '/order/reorder/') . $items_val['item_id'] ?>"
+                                        class="btn btn-solid"> <?php echo lang('REORDER'); ?> </a></td>
+                            </tr>
 
 
-                           <?php }} ?>
+                            <?php }} ?>
 
                         </tbody>
-                     </table>
-                  </div>
-               <?php } ?>
+                    </table>
+                </div>
+                <?php } ?>
             </div>
-         </div>
+        </div>
 
-      </div>
-   <?php } else { ?>
-      <p class="" style="color: #ef5b28; text-align:center; font-size: 25px;">
-         <?php echo lang('Order_History_is_Empty'); ?>
-      </p>
-   <?php } ?>
+    </div>
+    <?php } else { ?>
+    <p class="" style="color: #ef5b28; text-align:center; font-size: 25px;">
+        <?php echo lang('Order_History_is_Empty'); ?>
+    </p>
+    <?php } ?>
 </div>

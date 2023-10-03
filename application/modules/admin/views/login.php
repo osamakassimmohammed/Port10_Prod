@@ -2,6 +2,11 @@
 	.form-group.form-float.form-group-lg {
 		width: 100%;
 	}
+	.login-page {
+    background-image: url(<?=base_url()?>assets/admin/images/main.jpg) !important;
+    /* background-size: cover; */
+    /* background-color: red; */
+}
 </style>
 
 <?php echo $form->messages();

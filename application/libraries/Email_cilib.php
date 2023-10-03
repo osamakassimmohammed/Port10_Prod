@@ -71,6 +71,29 @@ class Email_cilib {
 
 		$this->CI->email->send();
 	}
+	function send_virtual_account_email($emails,$subject,$message,$includes = true,$attached_file='')
+	{
+		
+		// echo $emails;
+		// echo $subject;
+		// echo $message;
+		// die;			
+		
+		// $emails.=',info@port10.sa';	this for css	
+		$this->CI->email->from('info@port10.sa',"Port10");
+		$this->CI->email->to($emails);
+		// $this->CI->email->cc('info@port10.sa');
+		// $this->email->bcc('them@their-example.com');
+		$this->CI->email->subject($subject);
+		$this->CI->email->message($message);
+		if(!empty($attached_file))
+		{
+			// 'http://example.com/filename.pdf'
+			$this->CI->email->attach($attached_file);
+		}
+
+		$this->CI->email->send();
+	}
 
 	function test_email()
 	{
@@ -98,5 +121,8 @@ class Email_cilib {
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
 		$this->CI->email->send();
-	}	
+	}
+
+
+	
 }

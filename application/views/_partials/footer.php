@@ -373,6 +373,9 @@
     }
 
   });
+  function fireSweetAlert() {
+    swal('','Can Not Add Your Product','warning');
+  }
 </script>
 <script type="text/javascript">
   $(document).on("submit", "#subscribe_form", function (e) {
