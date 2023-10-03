@@ -1,0 +1,52 @@
+certificate 
+
+
+P: t00KOol4$cH<>L
+Link: www.identrust.com/install 
+Activation Code: 6021437787
+
+Retrieval key
+7764-B7F2-21E8-BFE1
+
+
+SUBJECT INFORMATION:
+E-mail Address: anwaro@port10.sa
+Organization Unit: Verified Email: anwaro@port10.sa
+UID: A01410D0000017A5758B2E80000B1F7
+
+ISSUER INFORMATION:
+Common Name: TrustID CA A13
+Organization Name: IdenTrust
+Country Name: US
+
+GENERAL INFORMATION:
+Certificate Version: X.509v3
+Valid From: Tue Jun 29 04:37:48 MDT 2021
+Valid To: Wed Jun 29 04:37:48 MDT 2022
+Serial Number: 40017A5758B2FF51A7B313A464B32CAD
+Fingerprint: EC2F527440026B7D853F919D3EF18D03
+Thumbprint: 3734AEA0333529B86BDFC6AC1291D8F120A2F22D
+
+CRITICAL EXTENSIONS:
+KeyUsage [digitalSignature | keyEncipherment]
+
+NON-CRITICAL EXTENSIONS:
+SubjectAltName [rfc822Name: anwaro@port10.sa]
+BasicConstraints [CA: no]
+AuthorityInfoAccess [accessMethod: OBJECT ID = ocsp
+accessLocation: uniformResourceIdentifier: http://commercial.ocsp.identrust.com
+
+accessMethod: OBJECT ID = caIssuers
+accessLocation: uniformResourceIdentifier: http://validation.identrust.com/certs/trustidcaa13.p7c
+]
+CRLDistributionPoints [DistributionPoint: uniformResourceIdentifier: http://validation.identrust.com/crl/trustidcaa13.crl]
+CertificatePolicies [certificatePolicy[0]: policyIdentifier: 2.16.840.1.113839.0.6.11.1
+policyQualifiers[0]: policyQualifierId: id-pkix-cps
+CPS URI: https://secure.identrust.com/certificates/policy/ts/index.html
+policyQualifiers[1]: policyQualifierId: id-pkix-unotice
+displayText: This TrustID Certificate has been issued in accordance with IdenTrust's TrustID Certificate Policy found at https://secure.identrust.com/certificates/policy/ts/index.html]
+AuthorityKeyIdentifier [OCTET STRING = 20 bytes: 2D:B7:DE:1B:59:7E:2A:98:2E:CD:E1:D4:1B:E3:C5:10:12:5E:E9:14
+]
+SubjectKeyIdentifier [6E:0A:0D:06:3B:58:10:1E:38:F8:C3:01:93:14:34:DF:B6:F9:02:CD]
+ExtendedKeyUsage [KeyPurposeId 0:  TLS Web client authentication
+KeyPurposeId 1:  E-mail protection]

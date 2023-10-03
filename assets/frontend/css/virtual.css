@@ -1,0 +1,141 @@
+.data-cards{
+    background-color: #6CC8C3;
+    border-radius: 20px;
+    height: 150px;
+}
+.data-cards :first-child{
+    background-color: #3F006F;
+    border-radius: 20px 20px 0px 0px;
+}
+.send-otp-btn{
+    background-color: #6CC8C3;
+    color: white;
+    padding:5px 15px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+.resend-otp-btn{
+    background-color: #3F006F;
+    color: white;
+    padding:10px 15px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.otp-form-wrapper {
+	max-width: 500px;
+	margin: 0 auto;
+}
+.code-inputs .form-control {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px !important;
+    background: #ffffff;
+    border: 3px solid #ADADAD;
+    padding: 12px 19px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #212121;
+    transition: all 0.3s ease-in-out;
+    outline: none !important;
+    text-align: center;
+    margin: 0px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color:black
+}
+.code-inputs .form-control:focus {
+	border-color: #ADADAD;
+    font-size: 20px;
+    font-weight: bold;
+    color:black
+}
+.code-inputs {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.dashed-line{
+    border: 1px dashed #ADADAD;
+}
+.data-text h6{
+    color:#887777;
+    font-weight: 500;
+}
+
+@media screen and (max-device-width: 768px){
+    .sm-space-lr{
+        margin:0rem 2rem
+    }
+    }
+
+    /* admin */
+    .card-content p.title {
+        font-weight: 500;
+        color: #666;
+        font-family: 'Montserrat';
+        text-transform: uppercase;
+        text-align: left;
+        float: left;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .dashboard .card p.count {
+        font-weight: 400;
+        margin-bottom: 0px;
+        font-family: 'Montserrat';
+        font-size: 50px;
+        position: relative;
+        margin-left: 5px;
+    }
+    .dashboard .card {
+        float: left;
+        width: 100%;
+        margin-top: 15px;
+        padding: 25px 20px;
+        border-radius: 6px;
+        box-shadow: 0px 0px 8px rgb(0 0 0 / 30%);
+        color: black;
+        position: relative;
+        overflow: hidden;
+        font-size: 17px;
+        border-bottom: 0px solid rgba(0, 0, 0, 0.25);
+        background: #fff !important;
+    }
+    .dashboard h2 {
+        margin-top: 0px;
+        opacity: 1;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 100;
+        color: #ff375e;
+        font-family: 'Montserrat';
+        font-weight: 500;
+    }
+    .daterangepicker .calendar th, .daterangepicker .calendar td {
+        white-space: nowrap;
+        text-align: center;
+        min-width: 32px;
+        background: white;
+        color: black;
+    }
+    .daterangepicker .ranges {
+        float: none !important;
+    }
+    .date-range{
+        float: right;
+    }
+    body.ar .date-range{
+        float: left;
+    }
+    .daterangepicker {
+        top: 190px !important;
+    } 
+    /* admin */
