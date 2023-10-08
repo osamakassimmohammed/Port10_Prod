@@ -1028,11 +1028,11 @@ class Home extends MY_Controller
                                 // creating order @ap@
                                 //update balance in user va
                                 $this->custom_model->my_update(array('balance' => $updated_va_balance), array('user_id' => $uid), 'account_details', true, true);
-                                $response = $this->place_order->create_order($send_data, $products, $uid, 'website', $currency, $tax_table);
+                               
 
                             }
                         }    
-
+                        $response = $this->place_order->create_order($send_data, $products, $uid, 'website', $currency, $tax_table);
                      
                         if (!empty($response)) {
                             $uid = $this->session->userdata('uid');
