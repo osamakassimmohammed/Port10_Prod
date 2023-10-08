@@ -120,7 +120,7 @@ class Enc_dec_lib {
 		$return_data=array();
 		if(!empty($response))
 		{
-			$response=json_decode($response,true);			
+			$response=json_decode($response,true);
 			$update_data=array();
 			if($response[0]['status']==1)
 			{				
