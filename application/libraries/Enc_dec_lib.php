@@ -88,7 +88,7 @@ class Enc_dec_lib {
 
     public function get_payment_url($post,$uid,$track_id,$payment_type="")
     {
-    	// test url
+    	
     	// $test_url="https://securepayments.alrajhibank.com.sa/pg/payment/hosted.htm";
     	// live url
     	$test_url="https://digitalpayments.alrajhibank.com.sa/pg/payment/hosted.htm";
