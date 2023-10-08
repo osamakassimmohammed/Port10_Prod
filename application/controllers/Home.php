@@ -1012,25 +1012,26 @@ class Home extends MY_Controller
                         
                         $this->load->library('place_order');
                         $order_price = $this->place_order->get_order_price($products, $tax_table[0]);
-                        $user_va_balance = $this->place_order->get_user_balance($uid);
-                        $user_viban = $this->place_order->get_user_viban($uid);
-                        // echo "<pre>";
-                        // echo($order_price > $user_va_balance ? 'no balance' : 'done');
-                        // die;
-                        if ($order_price > $user_va_balance) {
-                            echo json_encode(array("status" => false, "message" => ($language == 'ar' ? "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance : "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance), "flag" => "redirect", "url" => base_url($language . '/home/view_cart')));
-                            // $updated_va_balance = $this->place_order->update_user_va_balance($products, $uid, $tax_table[0]);
-                            // echo($user_va_balance - $order_price);
-                            die;
-                        } else {
-                            $updated_va_balance = $user_va_balance - $order_price; // remaining user balance @ap@
-                            // creating order @ap@
-                            //update balance in user va
-                            $this->custom_model->my_update(array('balance' => $updated_va_balance), array('user_id' => $uid), 'account_details', true, true);
-                            $response = $this->place_order->create_order($send_data, $products, $uid, 'website', $currency, $tax_table);
+                        if ($send_data['payment_mode'] == 'va_transfer') {
+                            $user_va_balance = $this->place_order->get_user_balance($uid);
+                            $user_viban = $this->place_order->get_user_viban($uid);
+                            // echo "<pre>";
+                            // echo($order_price > $user_va_balance ? 'no balance' : 'done');
+                            // die;
+                            if ($order_price > $user_va_balance) {
+                                echo json_encode(array("status" => false, "message" => ($language == 'ar' ? "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance : "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance), "flag" => "redirect", "url" => base_url($language . '/home/view_cart')));
+                                // $updated_va_balance = $this->place_order->update_user_va_balance($products, $uid, $tax_table[0]);
+                                // echo($user_va_balance - $order_price);
+                                die;
+                            } else {
+                                $updated_va_balance = $user_va_balance - $order_price; // remaining user balance @ap@
+                                // creating order @ap@
+                                //update balance in user va
+                                $this->custom_model->my_update(array('balance' => $updated_va_balance), array('user_id' => $uid), 'account_details', true, true);
+                                $response = $this->place_order->create_order($send_data, $products, $uid, 'website', $currency, $tax_table);
 
-                        }
-                        
+                            }
+                        }    
 
                      
                         if (!empty($response)) {
