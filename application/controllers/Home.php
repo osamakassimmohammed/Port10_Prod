@@ -1009,7 +1009,7 @@ class Home extends MY_Controller
                         // echo "<pre>";
                         // print_r($products);
                         // die;
-
+                        
                         $this->load->library('place_order');
                         $order_price = $this->place_order->get_order_price($products, $tax_table[0]);
                         $user_va_balance = $this->place_order->get_user_balance($uid);
@@ -1032,9 +1032,7 @@ class Home extends MY_Controller
                         }
                         
 
-                        // echo "<pre>";
-                        // print_r($response);
-                        // die;
+                     
                         if (!empty($response)) {
                             $uid = $this->session->userdata('uid');
                             $this->session->set_userdata('content', '');
@@ -1044,6 +1042,7 @@ class Home extends MY_Controller
                             // $this->mViewData['data'] = $response;
 
                             // echo "string";
+                         
                             if ($send_data['payment_mode'] == 'online') {
                                 $track_id = $response['display_order_id'];
                                 $payment_insert['track_id'] = $track_id;
@@ -1052,6 +1051,8 @@ class Home extends MY_Controller
                                 $payment_insert['source'] = 'web';
                                 $payment_insert['created_date'] = date('Y-m-d H:i:s');
                                 $payment_insert['currency'] = $currency;
+
+                              
                                 $this->custom_model->my_insert($payment_insert, 'payment_details');
 
                                 if ($currency == "SAR") {
@@ -1065,11 +1066,13 @@ class Home extends MY_Controller
                                 $post['payment_password'] = $this->payment_password;
                                 $post['payment_id'] = $this->payment_id;
                                 $post['track_id'] = $track_id;
+                            
                                 $this->load->library('enc_dec_lib');
 
                                 $post['response_url'] = base_url($language . '/payment/ecom_response');
                                 $post['erro_url'] = base_url($language . '/payment/ecom_error');
                                 $plan_text = $this->enc_dec_lib->get_json_code($post);
+                               
                                 $trandata = $this->enc_dec_lib->encryptAES($plan_text, $this->payment_key);
 
                                 $post = array();
@@ -1077,6 +1080,14 @@ class Home extends MY_Controller
                                 $post['trandata'] = $trandata;
                                 $post['responseURL'] = base_url($language . '/payment/ecom_response');;
                                 $post['errorURL'] = base_url($language . '/payment/ecom_error');
+                                // echo "<pre>";
+                                // print_r($post);
+                                // print_r($uid);
+                                // print_r('hi');
+                                // print_r($track_id);
+
+
+                                // die;
                                 $pay_response = $this->enc_dec_lib->get_payment_url($post, $uid, $track_id, $payment_type = 'ecom');
                                 // echo "<pre>";
                                 // print_r($pay_response);

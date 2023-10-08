@@ -120,7 +120,10 @@ class Enc_dec_lib {
 		$return_data=array();
 		if(!empty($response))
 		{
-			$response=json_decode($response,true);			
+			$response=json_decode($response,true);	
+			// echo "<pre>";
+			// print_r($response);
+			// die;		
 			$update_data=array();
 			if($response[0]['status']==1)
 			{				
@@ -142,7 +145,7 @@ class Enc_dec_lib {
 				$update_data['payment_status']="Unpaid";
 			}
 			
-			if($payment_type=='ecom')
+			if($payment_type == 'ecom')
 			{				
 				$this->CI->custom_model->my_update($update_data,array('user_id' => $uid,'track_id' => $track_id),'payment_details');
 			}else{				
