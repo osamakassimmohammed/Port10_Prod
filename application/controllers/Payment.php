@@ -234,14 +234,23 @@ class Payment extends MY_Controller {
 		if(!empty($post_data))
 		{
 			$this->load->library('enc_dec_lib');
-			if(isset($post_data['paymentid']) && isset($post_data['trackid']) && isset($post_data['trandata']) )
+			// $response=$this->enc_dec_lib->decryptData($post_data['trandata'],$this->payment_key);
+			// $response=json_decode($response,true);
+			// echo "<pre>";
+			// print_r($response);
+			// exit();
+			// if(isset($post_data['paymentid']) && isset($post_data['track_id']) && isset($post_data['trandata']) )
+			if(isset($post_data['paymentid']) && isset($post_data['trandata']) )
 			{
 				$response=$this->enc_dec_lib->decryptData($post_data['trandata'],$this->payment_key);
 				$response=json_decode($response,true);
-				// echo '<pre>';
-				// print_r($response);
+				echo '<pre>';
+				print_r($response);
 				// die;
 				$is_transaction = $this->custom_model->my_where('payment_details','id,user_id,payment_status,display_order_id,user_id',array('track_id' =>$response[0]['trackId'],'paymentId' => $response[0]['paymentId']));
+				// echo '<pre>';
+				// print_r($is_transaction);
+				// die;
 				if(!empty($is_transaction))
 				{
 					$update_data=array();

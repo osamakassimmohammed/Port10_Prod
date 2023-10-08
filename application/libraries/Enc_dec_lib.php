@@ -94,9 +94,6 @@ class Enc_dec_lib {
     	$test_url="https://digitalpayments.alrajhibank.com.sa/pg/payment/hosted.htm";
 		$curl = curl_init();
 		$post = array($post);
-		// echo "<pre>";
-		// print_r($post);
-		// die;
 		$post=json_encode($post);
 		
 		curl_setopt_array($curl, array(
@@ -121,6 +118,7 @@ class Enc_dec_lib {
 		if(!empty($response))
 		{
 			$response=json_decode($response,true);
+
 			$update_data=array();
 			if($response[0]['status']==1)
 			{				
@@ -142,7 +140,7 @@ class Enc_dec_lib {
 				$update_data['payment_status']="Unpaid";
 			}
 			
-			if($payment_type=='ecom')
+			if($payment_type == 'ecom')
 			{				
 				$this->CI->custom_model->my_update($update_data,array('user_id' => $uid,'track_id' => $track_id),'payment_details');
 			}else{				

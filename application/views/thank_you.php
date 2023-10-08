@@ -1,18 +1,18 @@
 ﻿<style type="text/css">
-.home_active {
-    font-weight: 600 !important;
-    color: #c09550 !important;
-}
+    .home_active {
+        font-weight: 600 !important;
+        color: #c09550 !important;
+    }
 
-.contnr_main_headr.hedr_fixed {
-    position: static;
-    box-shadow: 0px 0px 0px #fff;
-}
+    .contnr_main_headr.hedr_fixed {
+        position: static;
+        box-shadow: 0px 0px 0px #fff;
+    }
 
-.fa-times-circle {
-    font-size: 50px !important;
-    color: #ea1f29 !important;
-}
+    .fa-times-circle {
+        font-size: 50px !important;
+        color: #ea1f29 !important;
+    }
 </style>
 
 
@@ -22,36 +22,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php if($order_data[0]['payment_status']=='Paid' || $order_data[0]['payment_mode']=='va_transfer'){ ?>
-                <div class="success-text"><i class="fa fa-check-circle" aria-hidden="true"></i>
-                    <h2><?php echo lang('Done'); ?></h2>
-                    <?php }else{ ?>
-                    <div class="success-text"><i class="fa fa-times-circle" aria-hidden="true"></i>
-                        <h2><?php echo lang('Failed'); ?></h2>
+                <?php if ($order_data[0]['payment_status'] == 'Paid' || $order_data[0]['payment_mode'] == 'va_transfer') { ?>
+                    <div class="success-text"><i class="fa fa-check-circle" aria-hidden="true"></i>
+                        <h2><?php echo lang('Done'); ?></h2>
+                    <?php } else { ?>
+                        <div class="success-text"><i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <h2><?php echo lang('Failed'); ?></h2>
                         <?php } ?>
-                        <?php if(@$order_data[0]['payment_mode']=='cash-on-del'){ ?>
-                        <p><?php echo lang('Transfer_Amount'); ?>
-                            <?php echo number_format($order_data[0]['net_total'],2); ?>
-                            <?php echo lang($order_data[0]['currency']); ?> <?php echo lang('To_Port10'); ?>
-                            ,<?php echo lang('Account_Number'); ?> SA30 8000 0131 6080 1056 6331
-                            <?php echo lang('With_AlRajhi_Bank'); ?> <?php echo $order_data[0]['display_order_id']; ?>
-                        </p>
+                        <?php if (@$order_data[0]['payment_mode'] == 'cash-on-del') { ?>
+                            <p><?php echo lang('Transfer_Amount'); ?>
+                                <?php echo number_format($order_data[0]['net_total'], 2); ?>
+                                <?php echo lang($order_data[0]['currency']); ?> <?php echo lang('To_Port10'); ?>
+                                ,<?php echo lang('Account_Number'); ?> SA30 8000 0131 6080 1056 6331
+                                <?php echo lang('With_AlRajhi_Bank'); ?> <?php echo $order_data[0]['display_order_id']; ?>
+                            </p>
                         <?php } ?>
-                        <?php if(!empty($tran_history)){ ?>
-                        <?php if($tran_history[0]['payment_status']=='Paid'){ ?>
-                        <p><?php echo lang('Your_order_is_processed'); ?>.</p>
-                        <?php }else{ ?>
-                        <p> <?php echo lang('Payment_for_this_order'); ?></p>
-                        <p><?php if(isset($tran_history[0]['code_msg'])){
-                            echo $tran_history[0]['code_msg'];
-                        }else{
-                         echo $tran_history[0]['errorText'];   
-                        } ?></p>
-                        <?php } ?>
-                        <p><?php echo lang('Transaction_ID'); ?>:<?php echo $tran_history[0]['track_id']; ?></p>
-                        <?php  }?>
+                        <?php if (!empty($tran_history)) { ?>
+                            <?php if ($tran_history[0]['payment_status'] == 'Paid') { ?>
+                                <p><?php echo lang('Your_order_is_processed'); ?>.</p>
+                            <?php } else { ?>
+                                <p> <?php echo lang('Payment_for_this_order'); ?></p>
+                                <p><?php if (isset($tran_history[0]['code_msg'])) {
+                                        echo $tran_history[0]['code_msg'];
+                                    } else {
+                                        echo $tran_history[0]['errorText'];
+                                    } ?></p>
+                            <?php } ?>
+                            <p><?php echo lang('Transaction_ID'); ?>:<?php echo $tran_history[0]['track_id']; ?></p>
+                        <?php  } ?>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
 </section>
@@ -93,52 +93,56 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php if(!empty($order_items)){ 
-                            foreach ($order_items as $oi_key => $oi_val) { ?>
-                            <div class="row product-order-detail">
-                                <div class="col-3 order_detail">
-                                    <div>
-                                        <h5><?php echo $oi_val['product_name']; ?></h5>
+                            <?php if (!empty($order_items)) {
+                                foreach ($order_items as $oi_key => $oi_val) { ?>
+                                    <div class="row product-order-detail">
+                                        <div class="col-3 order_detail">
+                                            <div>
+                                                <h5><?php echo $oi_val['product_name']; ?></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 order_detail">
+                                            <div>
+                                                <h5><?php echo $oi_val['unit_name']; ?></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 order_detail">
+                                            <div>
+                                                <h5><?php echo $oi_val['quantity']; ?></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 order_detail">
+                                            <div>
+                                                <h5><?php echo $oi_val['price']; ?>
+                                                    <?php echo lang($order_data[0]['currency']); ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
+                                <?php }  ?>
+                                <!-- number_format($order_data[0]['net_total'],2) -->
+                                <div class="total-sec">
+                                    <ul>
+                                        <li><?php echo lang('Subtotal_s'); ?>
+                                            <span><?php echo number_format($order_data[0]['sub_total'], 2); ?>
+                                                <?php echo lang($order_data[0]['currency']); ?></span>
+                                        </li>
+                                        <li><?php echo lang('fees'); ?>
+                                            <span><?php $fees = $order_data[0]['commission'] + $order_data[0]['transfer_fees'] + $order_data[0]['bank_fees'];
+                                                    echo number_format($fees, 2);  ?>
+                                                <?php echo lang($order_data[0]['currency']); ?></span>
+                                        </li>
+                                        <li><?php echo lang('VAT'); ?><span><?php echo number_format($order_data[0]['tax'], 2); ?>
+                                                <?php echo lang($order_data[0]['currency']); ?></span></li>
+                                        <li><?php echo lang('Shipping'); ?><span><?php echo number_format($order_data[0]['shipping_charge'], 2); ?>
+                                                <?php echo lang($order_data[0]['currency']); ?></span></li>
+                                    </ul>
                                 </div>
-                                <div class="col-3 order_detail">
-                                    <div>
-                                        <h5><?php echo $oi_val['unit_name']; ?></h5>
-                                    </div>
+                                <div class="final-total">
+                                    <h3><?php echo lang('total'); ?>
+                                        <span><?php echo number_format($order_data[0]['net_total'], 2); ?>
+                                            <?php echo lang($order_data[0]['currency']); ?></span>
+                                    </h3>
                                 </div>
-                                <div class="col-3 order_detail">
-                                    <div>
-                                        <h5><?php echo $oi_val['quantity']; ?></h5>
-                                    </div>
-                                </div>
-                                <div class="col-3 order_detail">
-                                    <div>
-                                        <h5><?php echo $oi_val['price']; ?>
-                                            <?php echo lang($order_data[0]['currency']); ?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }  ?>
-                            <!-- number_format($order_data[0]['net_total'],2) -->
-                            <div class="total-sec">
-                                <ul>
-                                    <li><?php echo lang('Subtotal_s'); ?>
-                                        <span><?php echo number_format($order_data[0]['sub_total'],2); ?>
-                                            <?php echo lang($order_data[0]['currency']); ?></span></li>
-                                    <li><?php echo lang('fees'); ?>
-                                        <span><?php $fees=$order_data[0]['commission']+$order_data[0]['transfer_fees']+$order_data[0]['bank_fees']; echo number_format($fees,2);  ?>
-                                            <?php echo lang($order_data[0]['currency']); ?></span></li>
-                                    <li><?php echo lang('VAT'); ?><span><?php echo number_format($order_data[0]['tax'],2); ?>
-                                            <?php echo lang($order_data[0]['currency']); ?></span></li>
-                                    <li><?php echo lang('Shipping'); ?><span><?php echo number_format($order_data[0]['shipping_charge'],2); ?>
-                                            <?php echo lang($order_data[0]['currency']); ?></span></li>
-                                </ul>
-                            </div>
-                            <div class="final-total">
-                                <h3><?php echo lang('total'); ?>
-                                    <span><?php echo number_format($order_data[0]['net_total'],2); ?>
-                                        <?php echo lang($order_data[0]['currency']); ?></span></h3>
-                            </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -150,9 +154,9 @@
                                     <li><?php echo lang('Transaction_Reference'); ?>:
                                         <?php echo $order_data[0]['display_order_id']; ?></li>
                                     <li><?php echo lang('aOrder_date'); ?>:
-                                        <?php echo date('d-m-Y' ,strtotime($order_data[0]['order_datetime'])); ?> </li>
+                                        <?php echo date('d-m-Y', strtotime($order_data[0]['order_datetime'])); ?> </li>
                                     <li><?php echo lang('Order_Total'); ?>
-                                        <?php echo number_format($order_data[0]['net_total'],2); ?>
+                                        <?php echo number_format($order_data[0]['net_total'], 2); ?>
                                         <?php echo lang($order_data[0]['currency']); ?></li>
                                 </ul>
                             </div>
@@ -170,22 +174,25 @@
                             </div>
                             <div class="col-sm-12 payment-mode" style="margin-top: 20px;">
                                 <h4><?php echo lang('Payment_Method'); ?></h4>
-                                <?php if($order_data[0]['payment_mode']=='cash-on-del'){ ?>
+                                <?php if ($order_data[0]['payment_mode'] == 'online') { ?>
                                     <p><?php echo lang('Card'); ?></p>
-                                    <?php }else{ ?>
-                                        <p><?php echo lang('Virtual_Account_Transfer'); ?></p>
+                                <?php } else { ?>
+                                    <p><?php echo lang('Virtual_Account_Transfer'); ?></p>
                                 <?php } ?>
                             </div>
                             <br>
                             <div class="col-sm-12 payment-mode" style="margin-top: 20px;">
                                 <h4><?php echo lang('Payment_Status'); ?></h4>
-                                <?php if($order_data[0]['payment_mode']=='cash-on-del'){ 
-                                echo lang('Unpaid');
-                             }else if($order_data[0]['payment_status']=='Unpaid'){ ?>
-                                <p><?php echo lang('Paid'); ?> </p>
-                                <?php }else{ ?>
-                                <p>Failed</p>
-                                <?php }?>
+                                <?php if ($order_data[0]['payment_mode'] == 'cash-on-del') {
+                                    echo lang('Unpaid');
+                                } else if ($order_data[0]['payment_status'] == 'Unpaid') { ?>
+                                    <p><?php echo lang('Unpaid');
+                                    } else if ($order_data[0]['payment_mode'] == 'online' && $order_data[0]['payment_status'] == 'Paid') {
+                                        echo lang('success');
+                                        ?> </p>
+                                <?php } else { ?>
+                                    <p><?= lang('Failed'); ?></p>
+                                <?php } ?>
                             </div>
 
                         </div>
