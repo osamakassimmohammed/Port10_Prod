@@ -76,13 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'p10@1234',
-	'database' => 'p10_v2',
-
 	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'port10',
+	// 'password' => 'p10@1234',
+	// 'database' => 'p10_v2',
+
+	'username' => 'root',
+	'password' => '',
+	'database' => 'port10',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

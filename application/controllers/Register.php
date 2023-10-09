@@ -102,7 +102,11 @@ class Register extends MY_Controller
                                     $new_member_insert_data['group_id']=5;
                                     $subs_start_date=date("Y-m-d");
                                     // $subs_end_date = date("Y-m-d", strtotime($subs_start_date.$default_period));
-                                    $subs_end_date='2022-12-31';
+                                    $monthsToAdd = 3;
+
+						// Convert the start date to a Unix timestamp, add 3 months, and then format it back to "Y-m-d" format
+						$subs_end_date_timestamp = strtotime($subs_start_date . " +$monthsToAdd months");
+						$subs_end_date = date("Y-m-d", $subs_end_date_timestamp);
                                      $new_member_insert_data['subs_start_date']=$subs_start_date;
                                      $new_member_insert_data['subs_end_date']=$subs_end_date;
                                      $new_member_insert_data['subs_status']='trial';
@@ -119,9 +123,9 @@ class Register extends MY_Controller
 
             			$this->load->model('User_model');
                               // echo "<pre>";
-                              // print_r($post_data);
+                              // // print_r($post_data);
                               // print_r($new_member_insert_data);
-                              // $this->create_virtual_account($email,$phone,$cr_number,$first_name);
+                              // // $this->create_virtual_account($email,$phone,$cr_number,$first_name);
                               // die;
 
             			$query = $this->User_model->create_member($new_member_insert_data);
