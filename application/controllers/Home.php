@@ -948,6 +948,7 @@ class Home extends MY_Controller
                             echo json_encode(array("status" => false, "message" => ($language == 'ar' ? 'Your shopping cart is empty' : 'Your shopping cart is empty'), "flag" => "redirect", "url" => base_url($language . '/home/view_cart')));
                             die;
                         }
+
                         $this->load->library('shipping_lib');
                         $rate_info = $this->shipping_lib->get_shipping_rate($products, $send_data);
                         // echo "<pre>";
@@ -972,15 +973,24 @@ class Home extends MY_Controller
                             } else {
                                 foreach ($rate_info['data'] as $ri_key => $ri_val) {
                                     if ($ri_val['error'] == 0) {
-                                        $products[$ri_key]['shipping_cost'] = $ri_val['amount'];
+                                        if (trim($post_arr['shippting_api_call'] == 1)) {
+                                            $products[$ri_key]['shipping_cost'] = $ri_val['amount'];
+                                        } else {
+                                            $products[$ri_key]['shipping_cost'] = 0;
+                                        }
                                     }
                                 }
-                                $shipping_charge = $rate_info['TotalAmount'];
+                                if (trim($post_arr['shippting_api_call'] == 1)) {
+                                    $shipping_charge = $rate_info['TotalAmount'];
+                                } else {
+                                    $shipping_charge = 0;
+                                }
                             }
                         } else {
                             echo json_encode(array("status" => false, "message" => $rate_info['message'], "flag" => ""));
                             die;
                         }
+
 
                         $send_data['shipping_charge'] = $shipping_charge;
                         $tax_table = $this->custom_model->my_where('tax', '*', array('id' => '1'));
@@ -1009,7 +1019,7 @@ class Home extends MY_Controller
                         // echo "<pre>";
                         // print_r($products);
                         // die;
-                        
+
                         $this->load->library('place_order');
                         $order_price = $this->place_order->get_order_price($products, $tax_table[0]);
                         if ($send_data['payment_mode'] == 'va_transfer') {
@@ -1019,7 +1029,7 @@ class Home extends MY_Controller
                             // echo($order_price > $user_va_balance ? 'no balance' : 'done');
                             // die;
                             if ($order_price > $user_va_balance) {
-                                echo json_encode(array("status" => false, "message" => ($language == 'ar' ? "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance : "You don't have enough balance in your viban, ". $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance), "flag" => "redirect", "url" => base_url($language . '/home/view_cart')));
+                                echo json_encode(array("status" => false, "message" => ($language == 'ar' ? "You don't have enough balance in your viban, " . $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance : "You don't have enough balance in your viban, " . $user_viban . ". Please recharge, your remaining balance is " . $user_va_balance), "flag" => "redirect", "url" => base_url($language . '/home/view_cart')));
                                 // $updated_va_balance = $this->place_order->update_user_va_balance($products, $uid, $tax_table[0]);
                                 // echo($user_va_balance - $order_price);
                                 die;
@@ -1028,12 +1038,10 @@ class Home extends MY_Controller
                                 // creating order @ap@
                                 //update balance in user va
                                 $this->custom_model->my_update(array('balance' => $updated_va_balance), array('user_id' => $uid), 'account_details', true, true);
-                               
-
                             }
-                        }    
+                        }
                         $response = $this->place_order->create_order($send_data, $products, $uid, 'website', $currency, $tax_table);
-                     
+
                         if (!empty($response)) {
                             $uid = $this->session->userdata('uid');
                             $this->session->set_userdata('content', '');
@@ -1043,7 +1051,7 @@ class Home extends MY_Controller
                             // $this->mViewData['data'] = $response;
 
                             // echo "string";
-                         
+
                             if ($send_data['payment_mode'] == 'online') {
                                 $track_id = $response['display_order_id'];
                                 $payment_insert['track_id'] = $track_id;
@@ -1053,7 +1061,7 @@ class Home extends MY_Controller
                                 $payment_insert['created_date'] = date('Y-m-d H:i:s');
                                 $payment_insert['currency'] = $currency;
 
-                              
+
                                 $this->custom_model->my_insert($payment_insert, 'payment_details');
 
                                 if ($currency == "SAR") {
@@ -1067,13 +1075,13 @@ class Home extends MY_Controller
                                 $post['payment_password'] = $this->payment_password;
                                 $post['payment_id'] = $this->payment_id;
                                 $post['track_id'] = $track_id;
-                            
+
                                 $this->load->library('enc_dec_lib');
 
                                 $post['response_url'] = base_url($language . '/payment/ecom_response');
                                 $post['erro_url'] = base_url($language . '/payment/ecom_error');
                                 $plan_text = $this->enc_dec_lib->get_json_code($post);
-                               
+
                                 $trandata = $this->enc_dec_lib->encryptAES($plan_text, $this->payment_key);
 
                                 $post = array();
@@ -1193,16 +1201,23 @@ class Home extends MY_Controller
                             } else {
                                 foreach ($rate_info['data'] as $ri_key => $ri_val) {
                                     if ($ri_val['error'] == 0) {
-                                        $products[$ri_key]['shipping_cost'] = $ri_val['amount'];
+                                        if (trim($post_arr['shippting_api_call'] == 1)) {
+                                            $products[$ri_key]['shipping_cost'] = $ri_val['amount'];
+                                        } else {
+                                            $products[$ri_key]['shipping_cost'] = 0;
+                                        }
                                     }
                                 }
-                                $shipping_charge = $rate_info['TotalAmount'];
+                                if (trim($post_arr['shippting_api_call'] == 1)) {
+                                    $shipping_charge = $rate_info['TotalAmount'];
+                                } else {
+                                    $shipping_charge = 0;
+                                }
                             }
                         } else {
                             echo json_encode(array("status" => false, "message" => $rate_info['message'], "flag" => ""));
                             die;
                         }
-
                         $send_data['shipping_charge'] = $shipping_charge;
                         $tax_table = $this->custom_model->my_where('tax', '*', array('id' => '1'));
                         $currency = $this->return_currency_name();

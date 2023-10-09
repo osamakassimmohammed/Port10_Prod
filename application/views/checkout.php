@@ -303,7 +303,7 @@ if (!empty($user_last_add)) {
 
                                             <li id="shipping_rate_li">
                                                 <label for="shipping_rate"><?php echo lang('Calculate_Shipping_Rate'); ?>:</label>
-                                                <input type="checkbox" class="" id="shipping_rate" <?php echo $disabled; ?>>
+                                                <input type="checkbox" class="" name="shipping_kp_rate"  id="shipping_rate" <?php echo $disabled; ?>>
                                             </li>
                                         </ul>
                                         <ul class="total">

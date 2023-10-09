@@ -167,7 +167,7 @@
        }
        if(error==1)
        {
-         var jsonData = {'first_name':first_name,'last_name':last_name,'payment_mode':payment_mode,'mobile_no':phone,'email':email,'address_1':address_1,'country':country,'city':city,'state':state,'pincode':pincode,'google_address':searchInput,'lat':lat,'lng':lng,'flow_type':g_flow_type,'in_id':g_in_id,'pin_order_ids':pin_order_ids,'purchasing_mode':purchasing_mode};
+         var jsonData = {'first_name':first_name,'last_name':last_name,'payment_mode':payment_mode,'mobile_no':phone,'email':email,'address_1':address_1,'country':country,'city':city,'state':state,'pincode':pincode,'google_address':searchInput,'lat':lat,'lng':lng,'flow_type':g_flow_type,'in_id':g_in_id,'pin_order_ids':pin_order_ids,'purchasing_mode':purchasing_mode,'shippting_api_call':shippting_api_call};
          return jsonData;
        }else{
          swal("","<?php echo lang('Something'); ?>","warning");
