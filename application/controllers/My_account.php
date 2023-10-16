@@ -767,37 +767,42 @@ class My_account extends MY_Controller
 	//@ap@
 	public function transaction()
 	{
-		// $language = $this->uri->segment(1);
+		$language = $this->uri->segment(1);
 		if (!empty($this->uid)) {
-			$data = array();	
+			$data = array();
 			$data = $this->custom_model->my_where('va_transactions', "*", array('user_id' => $this->uid));
 			// $data['balance'] = $this->custom_model->my_where('account_details', "balance", array('user_id' => $this->uid))[0];
-			$user_account_details = $this->custom_model->my_where('account_details', "*", array('user_id' => $this->uid))[0];
+			$user_account_details = $this->custom_model->my_where('account_details', "*", array('user_id' => $this->uid));
+			if ($user_account_details) {
+				$balance_details = $this->custom_model->my_where('va_transactions', "amount", array('user_id' => $this->uid, 'transaction_type' => 'debit', 'status' => 1));
+				$used_balance = 0;
+				foreach ($balance_details as $balance_detail) {
+					$used_balance += (float)($balance_detail['amount']);
+				}
+				$this->mViewData['data'] = $data;
+				$this->mViewData['user_account_details'] = $user_account_details[0];
+				$this->mViewData['used_balance'] = $used_balance;
+				$this->Urender('transaction', 'udefault');
+			} else {
+				redirect($language . '/home/index');
+			}
 			// check if the row exist in database or not 
 			// if ($user_account_detail->num_rows() > 0) {
 			// 	$user_account_details = $user_account_detail->row();
 			// }
-			$balance_details = $this->custom_model->my_where('va_transactions', "amount", array('user_id' => $this->uid, 'transaction_type' => 'debit','status'=>1));
-			$used_balance = 0;
-			foreach ($balance_details as $balance_detail) {
-				$used_balance += (float)($balance_detail['amount']);
-			}
-			$this->mViewData['data'] = $data;
-			$this->mViewData['user_account_details'] = $user_account_details;
-			$this->mViewData['used_balance'] = $used_balance;
-			$this->Urender('transaction', 'udefault');
+
 		}
 	}
 
 	public function withdraw()
 	{
 		if (!empty($this->uid)) {
-		$data = $this->custom_model->my_where('admin_users', "*", array('id' => $this->uid));
-		$this->mViewData['data'] = $data;
-		// echo "<pre>";
-		// print_r($this->mViewData['data']);
-		// exit();
-		$this->urender('withdraw', 'udefault');
+			$data = $this->custom_model->my_where('admin_users', "*", array('id' => $this->uid));
+			$this->mViewData['data'] = $data;
+			// echo "<pre>";
+			// print_r($this->mViewData['data']);
+			// exit();
+			$this->urender('withdraw', 'udefault');
 		}
 	}
 	public function payout()
@@ -805,10 +810,11 @@ class My_account extends MY_Controller
 		$this->urender('payout_admin', 'udefault');
 	}
 
-	public function update_db_for_withdrawal() {
+	public function update_db_for_withdrawal()
+	{
 		// Process the form data here
-        $payment_note = $this->input->post('payment_note');
-        $amount = (float) $this->input->post('amount');
+		$payment_note = $this->input->post('payment_note');
+		$amount = (float) $this->input->post('amount');
 
 		$user_account_details = $this->custom_model->my_where('account_details', "*", array('user_id' => $this->uid))[0];
 
@@ -837,8 +843,8 @@ class My_account extends MY_Controller
 		}
 
 
-        // Send the response as JSON
-        header('Content-Type: application/json');
-        echo json_encode($data);
+		// Send the response as JSON
+		header('Content-Type: application/json');
+		echo json_encode($data);
 	}
 }

@@ -104,7 +104,7 @@ class Place_order
 				// die;
 
 				if ($post_arr['payment_mode'] == 'va_transfer') {
-					$post_arr['payment_status'] = 'Unpaid';
+					$post_arr['payment_status'] = 'Paid';
 					$post_arr['is_show'] = '1';
 				} else {
 					$post_arr['payment_status'] = 'Unpaid';
@@ -367,6 +367,7 @@ class Place_order
 
 				$this->CI->custom_model->my_update(array('display_order_id' => $display_order_id, "shipping_charge" => $shipping_charge, "sub_total" => $sub_total1, "net_total" => $final_net_total, "tax" => $tax1, "commission" => $total_commission, 'currency' => $currency, 'transfer_fees' => $transfer_fees, 'bank_fees' => $bank_fees, 'transaction_id' => $transaction_id), array('order_master_id' => $oid), 'order_master');
 
+				if ($post_arr['payment_mode'] == 'va_transfer') {
 				// data to be inserted in the va_transactions table @ap@
 				$va_data = array([
 					'user_id' => $uid,
@@ -386,6 +387,7 @@ class Place_order
 
 				// insert transaction details in db @ap@
 				$va_transaction_id = $this->CI->custom_model->my_insert($va_data[0], 'va_transactions');
+			}
 
 				$data['display_order_id'] = $display_order_id;
 				$data['order_date'] = date('j F Y, g:i a');

@@ -151,7 +151,7 @@ class Custom_model extends CI_Model
 		$this->db->select('*,va_transactions.id as va_transactions_id');
         $this->db->from('va_transactions');
         $this->db->join('admin_users', 'va_transactions.user_id = admin_users.id');
-        $this->db->where('va_transactions.created_at >=', date('Y-m-d', strtotime('-30 days')));
+        $this->db->where('va_transactions.created_at >=', date('Y-m-d', strtotime('-90 days')));
         $query = $this->db->get();
         return $query->result();
 	}
