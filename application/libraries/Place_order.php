@@ -368,26 +368,26 @@ class Place_order
 				$this->CI->custom_model->my_update(array('display_order_id' => $display_order_id, "shipping_charge" => $shipping_charge, "sub_total" => $sub_total1, "net_total" => $final_net_total, "tax" => $tax1, "commission" => $total_commission, 'currency' => $currency, 'transfer_fees' => $transfer_fees, 'bank_fees' => $bank_fees, 'transaction_id' => $transaction_id), array('order_master_id' => $oid), 'order_master');
 
 				if ($post_arr['payment_mode'] == 'va_transfer') {
-				// data to be inserted in the va_transactions table @ap@
-				$va_data = array([
-					'user_id' => $uid,
-					'order_id' => $oid,
-					'recepient_id' => $ikey,
-					'amount' => $final_net_total,
-					'transaction_type' => 'debit',
-					'payment_note' => 'success',
-					'status' => 1,
-					'created_at' => date("Y-m-d H:i:s"),
-					'transaction_id' => $transaction_id,
-				]);
+					// data to be inserted in the va_transactions table @ap@
+					$va_data = array([
+						'user_id' => $uid,
+						'order_id' => $oid,
+						'recepient_id' => $ikey,
+						'amount' => $final_net_total,
+						'transaction_type' => 'debit',
+						'payment_note' => 'success',
+						'status' => 1,
+						'created_at' => date("Y-m-d H:i:s"),
+						'transaction_id' => $transaction_id,
+					]);
 
-				// print_r($va_data);
-				// die;
-				// exit();
+					// print_r($va_data);
+					// die;
+					// exit();
 
-				// insert transaction details in db @ap@
-				$va_transaction_id = $this->CI->custom_model->my_insert($va_data[0], 'va_transactions');
-			}
+					// insert transaction details in db @ap@
+					$va_transaction_id = $this->CI->custom_model->my_insert($va_data[0], 'va_transactions');
+				}
 
 				$data['display_order_id'] = $display_order_id;
 				$data['order_date'] = date('j F Y, g:i a');
