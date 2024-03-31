@@ -1,20 +1,20 @@
-
 <div class="col-md-12" style="float: right;">
     <div class="button  ">
-      <a href="<?php echo  $back_link; ?>" class=" back_to_list btn btn-primary">Back to list</a>
+        <a href="<?php echo $back_link; ?>" class=" back_to_list btn btn-primary">Back
+            to list</a>
     </div>
 </div>
 
 
 <?php echo $form->messages();
-$myimage  = $seller_id= $brand_id= $product_id='' ;
-$image_folder_name='solution';
+$myimage = $seller_id = $brand_id = $product_id = '';
+$image_folder_name = 'solution';
 
-if (isset($edit) && !empty($edit)){
+if (isset($edit) && !empty($edit)) {
     $seller_id = $edit[0]['seller_id'];
     $brand_id = $edit[0]['brand_id'];
     $product_id = $edit[0]['product_id'];
-    // $interest_rate_per = $edit['interest_rate_per'];    
+    // $interest_rate_per = $edit['interest_rate_per'];
     // $myimage = $edit['image'];
 }
 ?>
@@ -27,107 +27,104 @@ if (isset($edit) && !empty($edit)){
                     <?php echo $page_title; ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $form->open(); ?> 
-                       <!-- <div class="col-md-12" > 
+                    <?php echo $form->open(); ?>
+                    <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label for="description"> Description</label>
                                 <input class="form-control space" id="description" name="description" placeholder="Enter description" type="text" value="<?php //echo $description ?>" required="" autocomplete="off" >
                             </div>
                         </div> -->
-                        <div class="col-md-4" >
+                    <div class="col-md-4">
 
-                            <div class="form-group">
-                                <label for="aseller_id"> Select Seller </label>
-                               <select id="aseller_id" name="seller_id" class="get_sub_category" >
-                                  <?php
-                                     if(!isset($edit)){ ?>
-                                  <option value="0">Select Seller</option>
-                                  <?php }  ?>
-                                  <?php
-                                     if (!empty($users_data))
-                                     {
-                                        // echo "<pre>";
-                                        // print_r($category);
-                                        foreach ($users_data as $ckey => $cvalue)
-                                        {
-                                           $selected = ($seller_id == $cvalue['id'] ) ? "selected" : "";
+                        <div class="form-group">
+                            <label for="aseller_id"> Select Seller </label>
+                            <select id="aseller_id" name="seller_id"
+                                    class="get_sub_category">
+                                <?php
+                                if (!isset($edit)) { ?>
+                                    <option value="0">Select Seller</option>
+                                <?php } ?>
+                                <?php
+                                if (!empty($users_data)) {
+                                    // echo "<pre>";
+                                    // print_r($category);
+                                    foreach ($users_data as $ckey => $cvalue) {
+                                        $selected = ($seller_id == $cvalue['id']) ? "selected" : "";
                                         ?>
-                                  <option value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?>  ><?php echo $cvalue['first_name']; ?></option>
-                                  <?php
-                                     }
-                                     } ?>
-                               </select>                       
-                                
-                            </div>  
-                        </div>  
+                                        <option
+                                            value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?> ><?php echo $cvalue['first_name']; ?></option>
+                                        <?php
+                                    }
+                                } ?>
+                            </select>
 
-                        <div class="col-md-4" >
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label for="seller_brand"> Select Seller brand</label>
-                               <select id="seller_brand" name="brand_id" class="" >
-                                  <?php
-                                     if(!isset($edit)){ ?>
-                                  <option value="0">Select Seller brand</option>
-                                  <?php }  ?>
-                                  <?php
-                                     if (!empty($brand_data))
-                                     {
-                                        // echo "<pre>";
-                                        // print_r($category);
-                                        foreach ($brand_data as $ckey => $cvalue)
-                                        {
-                                           $selected = ($brand_id == $cvalue['id'] ) ? "selected" : "";
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label for="seller_brand"> Select Seller brand</label>
+                            <select id="seller_brand" name="brand_id" class="">
+                                <?php
+                                if (!isset($edit)) { ?>
+                                    <option value="0">Select Seller brand</option>
+                                <?php } ?>
+                                <?php
+                                if (!empty($brand_data)) {
+                                    // echo "<pre>";
+                                    // print_r($category);
+                                    foreach ($brand_data as $ckey => $cvalue) {
+                                        $selected = ($brand_id == $cvalue['id']) ? "selected" : "";
                                         ?>
-                                  <option value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?>  ><?php echo $cvalue['brand_name']; ?></option>
-                                  <?php
-                                     }
-                                     } ?>
-                               </select>                       
-                                
-                            </div>  
-                        </div>  
+                                        <option
+                                            value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?> ><?php echo $cvalue['brand_name']; ?></option>
+                                        <?php
+                                    }
+                                } ?>
+                            </select>
 
-                        <div class="col-md-4" >
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label for="seller_product"> Select Seller Product</label>
-                               <select id="seller_product" name="product_id" class="" >
-                                  <?php
-                                     if(!isset($edit)){ ?>
-                                  <option value="0">Select Seller Product</option>
-                                  <?php }  ?>
-                                  <?php
-                                     if (!empty($product_data))
-                                     {
-                                        // echo "<pre>";
-                                        // print_r($category);
-                                        foreach ($product_data as $ckey => $cvalue)
-                                        {
-                                           $selected = ($product_id == $cvalue['id'] ) ? "selected" : "";
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label for="seller_product"> Select Seller Product</label>
+                            <select id="seller_product" name="product_id" class="">
+                                <?php
+                                if (!isset($edit)) { ?>
+                                    <option value="0">Select Seller Product</option>
+                                <?php } ?>
+                                <?php
+                                if (!empty($product_data)) {
+                                    // echo "<pre>";
+                                    // print_r($category);
+                                    foreach ($product_data as $ckey => $cvalue) {
+                                        $selected = ($product_id == $cvalue['id']) ? "selected" : "";
                                         ?>
-                                  <option value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?>  ><?php echo $cvalue['product_name']; ?></option>
-                                  <?php
-                                     }
-                                     } ?>
-                               </select>                       
-                                
-                            </div>  
-                        </div>                       
+                                        <option
+                                            value="<?php echo $cvalue['id']; ?>" <?php echo $selected; ?> ><?php echo $cvalue['product_name']; ?></option>
+                                        <?php
+                                    }
+                                } ?>
+                            </select>
 
-                     
+                        </div>
+                    </div>
 
-                        <!-- <div class="form-group"> -->
-                            <!-- <label for="exampleInputPassword1"> Image </label> -->
-                            
-                            <!-- Hidden records -->
-                           <!--  <input type="hidden" id="photo_url" value="<?php //echo base_url('admin/file_handling/uploadFiless'); ?>" />
+
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="exampleInputPassword1"> Image </label> -->
+
+                    <!-- Hidden records -->
+                    <!--  <input type="hidden" id="photo_url" value="<?php //echo base_url('admin/file_handling/uploadFiless'); ?>" />
                             <input type="hidden" id="img_url" value="admin/<?php //echo $image_folder_name; ?>/" />
                             <input type="hidden" name="image" id="file_name" value="<?php //echo $myimage; ?>" required="required"> -->
-                               
-                            <!-- <br> -->
-                            <!-- <div class="col-inner">
-                                
+
+                    <!-- <br> -->
+                    <!-- <div class="col-inner">
+
                                 <input type="file" id="file" value="<?php //echo $myimage; ?>" />
                                 <label for="file" class="file__drop" data-image-uploader>
                                     <span class="text">&nbsp;</span>
@@ -145,23 +142,24 @@ if (isset($edit) && !empty($edit)){
                                         </div>
                                     </div>
                                     <?php
-                                    // if (!isset($edit))
-                                    { ?>
-                                        <span class="choose-image "><?php //echo "Choose Image for <br> banner"; ?>
+                    // if (!isset($edit))
+                    { ?>
+                                        <span class="choose-image "><?php //echo "Choose Image for <br> banner";
+                        ?>
                                         </span>
                                     <?php } ?>
-                                    
+
                                 </label>
                             </div> -->
 
-                        <!-- </div> -->
-                            <!-- <p>Image size must be ( width-211px * height-209px ) </p> -->
+                    <!-- </div> -->
+                    <!-- <p>Image size must be ( width-211px * height-209px ) </p> -->
 
-                        <?php echo $form->bs3_submit(); ?>
-                    
-                        <?php echo $form->close(); ?>
+                    <?php echo $form->bs3_submit(); ?>
 
-                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                    <?php echo $form->close(); ?>
+
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                     </form>
                 </div>
             </div>
@@ -170,32 +168,31 @@ if (isset($edit) && !empty($edit)){
 </section>
 
 
-
 <script type="text/javascript">
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         $('#img_loader').hide();
-        
 
-            <?php if (isset($edit)) { ?>
 
-            $('#img_div').show();
-            $('#dis_image').show();
-            <?php    }
-            else{ ?>
-            $('#img_div').hide();
-            $('#dis_image').hide();
-            <?php   } ?>
+        <?php if (isset($edit)) { ?>
+
+        $('#img_div').show();
+        $('#dis_image').show();
+        <?php    }
+        else{ ?>
+        $('#img_div').hide();
+        $('#dis_image').hide();
+        <?php   } ?>
     });
 
     jQuery('body').on({'drop dragover dragenter': dropHandler}, '[data-image-uploader]');
     jQuery('body').on({'change': regularImageUpload}, '#file');
 
     function regularImageUpload(e) {
-        var file =jQuery(this)[0],
+        var file = jQuery(this)[0],
             type = file.files[0].type.toLocaleLowerCase();
 
-        if(type.match(/jpg/) !== null ||
+        if (type.match(/jpg/) !== null ||
             type.match(/jpeg/) !== null ||
             type.match(/png/) !== null ||
             type.match(/gif/) !== null) {
@@ -207,12 +204,12 @@ if (isset($edit) && !empty($edit)){
     function dropHandler(e) {
         e.preventDefault();
 
-        if(e.type === 'drop' && e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+        if (e.type === 'drop' && e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
 
             var files = e.originalEvent.dataTransfer.files,
                 type = files[0].type.toLocaleLowerCase();
 
-            if(type.match(/jpg/) !== null ||
+            if (type.match(/jpg/) !== null ||
                 type.match(/jpeg/) !== null ||
                 type.match(/png/) !== null ||
                 type.match(/gif/) !== null) {
@@ -229,12 +226,12 @@ if (isset($edit) && !empty($edit)){
     function readUploadedImage(img) {
         var reader;
 
-        if(window.FileReader) {
+        if (window.FileReader) {
             reader = new FileReader();
             reader.readAsDataURL(img);
 
             reader.onload = function (file) {
-                if(file.target && file.target.result) {
+                if (file.target && file.target.result) {
                     imageLoader(file.target.result, displayImage);
                 }
 
@@ -257,7 +254,7 @@ if (isset($edit) && !empty($edit)){
 
         img.src = src;
 
-        img.onload = function() {
+        img.onload = function () {
             imageResizer(img, callback);
         }
 
@@ -268,44 +265,44 @@ if (isset($edit) && !empty($edit)){
         canvas.width = 50;
         canvas.height = 50;
         context = canvas.getContext('2d');
-        context.drawImage( img, 0, 0, 50, 50 );
+        context.drawImage(img, 0, 0, 50, 50);
         callback(canvas.toDataURL());
 
     }
 
     function displayImage(img) {
-        
+
         $('#img_div').show();
         $('#img_loader').show();
         $('#dis_image').hide();
         $('.choose-image').hide();
 
-        file =jQuery("#file")[0];
+        file = jQuery("#file")[0];
         fd = new FormData();
         console.log(file.files[0]);
         individual_capt = "My logo";
-        fd.append("caption", individual_capt);  
-        fd.append('action', 'fiu_upload_file'); 
+        fd.append("caption", individual_capt);
+        fd.append('action', 'fiu_upload_file');
         fd.append("file", file.files[0]);
         fd.append("path", $('#img_url').val());
 
         jQuery.ajax({
-           type: 'POST',
-           url: $('#photo_url').val(),
-           data: fd,
-           contentType: false,
-           cache: false,
-           processData: false,
-           success: function(response){
-            $('#img_loader').hide();
-            $('#dis_image').show();
-            if(response == "false"){
-                alert("Something went wrong, Please try again...");
-            }else{
-                jQuery('[data-image]').attr('src', img);
-                jQuery('#file_name').val(response);
+            type: 'POST',
+            url: $('#photo_url').val(),
+            data: fd,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                $('#img_loader').hide();
+                $('#dis_image').show();
+                if (response == "false") {
+                    alert("Something went wrong, Please try again...");
+                } else {
+                    jQuery('[data-image]').attr('src', img);
+                    jQuery('#file_name').val(response);
+                }
             }
-           }
         });
     }
 </script>
@@ -313,95 +310,100 @@ if (isset($edit) && !empty($edit)){
 
 <style type="text/css">
     button.btn.btn-primary {
-    clear: both;
-    float: left;
-    margin-left: 10px;
+        clear: both;
+        float: left;
+        margin-left: 10px;
     }
 
     .alert-danger {
-    background-color: #fb483a !important;
-    clear: both;
-    margin-bottom: -73px;
+        background-color: #fb483a !important;
+        clear: both;
+        margin-bottom: -73px;
     }
 
     .main_wrap_form .form-group label {
-    font-weight: 500;
-    font-size: 15px;
+        font-weight: 500;
+        font-size: 15px;
     }
 
-    .margin_20{
-    margin-top: 14px;
+    .margin_20 {
+        margin-top: 14px;
     }
-    .main_wrap_form .panel-heading{
-    font-weight: 500;
-    font-size: 16px;
+
+    .main_wrap_form .panel-heading {
+        font-weight: 500;
+        font-size: 16px;
     }
-    .main_wrap_form .form-group label{
-    font-weight: 500;
-    font-size: 15px;
+
+    .main_wrap_form .form-group label {
+        font-weight: 500;
+        font-size: 15px;
     }
+
     .main_wrap_form .form-control {
-    box-shadow: 0px 0px 0px #fff;
-    border-radius: 3px;
-    font-size: 13px;
-    padding: 6px 12px;
-    border: 1px solid #e0e0e0;
+        box-shadow: 0px 0px 0px #fff;
+        border-radius: 3px;
+        font-size: 13px;
+        padding: 6px 12px;
+        border: 1px solid #e0e0e0;
     }
-    .main_wrap_form .form-control:focus{
-    border: 1px solid #bdbcbc;
+
+    .main_wrap_form .form-control:focus {
+        border: 1px solid #bdbcbc;
     }
 
     .btn-primary {
-    float: right;
-    font-weight: 500;
-    font-size: 15px!important;
-    padding: 9px 20px;
-    margin-top: 10px;
-    border-radius: 3px !important;
-    margin-bottom: 30px;
-    border: 1px solid #14a988 !important;
-    color: #14a988;
-    background-color: white !important;
-    transition-duration: 0.2s;
+        float: right;
+        font-weight: 500;
+        font-size: 15px !important;
+        padding: 9px 20px;
+        margin-top: 10px;
+        border-radius: 3px !important;
+        margin-bottom: 30px;
+        border: 1px solid #14a988 !important;
+        color: #14a988;
+        background-color: white !important;
+        transition-duration: 0.2s;
     }
 
 
-   /* button.btn.btn-primary:hover {
-    background-color: #2c3741!important;
-    border: 1px solid #2c3741!important;
-    color: #fff;
-    padding: 9px 20px;
-    float: right;
-    font-weight: 500;
-    font-size: 15px!important;
-    margin-top: 10px;
-    border-radius: 3px !important;
-    margin-bottom: 30px;
+    /* button.btn.btn-primary:hover {
+     background-color: #2c3741!important;
+     border: 1px solid #2c3741!important;
+     color: #fff;
+     padding: 9px 20px;
+     float: right;
+     font-weight: 500;
+     font-size: 15px!important;
+     margin-top: 10px;
+     border-radius: 3px !important;
+     margin-bottom: 30px;
+     }
+     .btn:not(.btn-link):not(.btn-circle):hover {
+     outline: none;
+     background-color: #2c3741!important;
+     border: 1px solid #2c3741!important;
+     }*/
+    .alert.alert-success {
+        clear: both;
     }
-    .btn:not(.btn-link):not(.btn-circle):hover {
-    outline: none;
-    background-color: #2c3741!important;
-    border: 1px solid #2c3741!important;
-    }*/
-    .alert.alert-success{
-    clear: both;
-    }
+
     .header {
-    display: none;
+        display: none;
     }
 
     .form-group {
-    width: 49%;
-    margin-bottom: 20px;
-    float: left;
-    margin-left: 10px;
-}
+        width: 49%;
+        margin-bottom: 20px;
+        float: left;
+        margin-left: 10px;
+    }
 
 
 </style>
 
 <script type="text/javascript">
-    // $(function () 
+    // $(function ()
     // {
     //     //CKEditor
     //     CKEDITOR.replace('description');
@@ -411,137 +413,129 @@ if (isset($edit) && !empty($edit)){
 </script>
 <script type="text/javascript">
     // this for only decimal
-// setInputFilter(document.getElementById("interest_rate_per"), function(value) {
-//   return /^-?\d*[.,]?\d{0,2}$/.test(value); });
-// this for float point number
-// setInputFilter(document.getElementById("interest_rate_per"), function(value) {
-//   return /^-?\d*[.,]?\d*$/.test(value); });
+    // setInputFilter(document.getElementById("interest_rate_per"), function(value) {
+    //   return /^-?\d*[.,]?\d{0,2}$/.test(value); });
+    // this for float point number
+    // setInputFilter(document.getElementById("interest_rate_per"), function(value) {
+    //   return /^-?\d*[.,]?\d*$/.test(value); });
 
-$(document).on("submit","form",function(e){
-     e.preventDefault(); 
-     var aseller_id= $("#aseller_id").val();
-     var seller_brand= $("#seller_brand").val();
-     var seller_product= $("#seller_product").val();
-     var error=1;
+    $(document).on("submit", "form", function (e) {
+        e.preventDefault();
+        var aseller_id = $("#aseller_id").val();
+        var seller_brand = $("#seller_brand").val();
+        var seller_product = $("#seller_product").val();
+        var error = 1;
 
-      if(aseller_id==0)
-      {
-         error=0;
-         swal("","Please select seller name","warning");
-         return false;
-      }
+        if (aseller_id == 0) {
+            error = 0;
+            swal("", "Please select seller name", "warning");
+            return false;
+        }
 
-      if(seller_brand==0)
-      {
-         error=0;
-         swal("","Please select seller brand","warning");
-         return false;
-      }
+        if (seller_brand == 0) {
+            error = 0;
+            swal("", "Please select seller brand", "warning");
+            return false;
+        }
 
-      if(seller_product==0)
-      {
-         error=0;
-         swal("","Please select seller product","warning");
-         return false;
-      }
-      if(error==1)
-        {
+        if (seller_product == 0) {
+            error = 0;
+            swal("", "Please select seller product", "warning");
+            return false;
+        }
+        if (error == 1) {
             $("#loading").show();
             $.ajax({
-                    type: 'POST',
-                    url: "<?php echo $ajax_url; ?>",
-                    data: new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData:false,
-                    success: function(response)
-                    { 
-                        $("#loading").hide();
-                        response=$.trim(response);
-                        var response = $.parseJSON(response);
-                        if (response.status==true)
-                        {                                  
-                         swal("",response.message,'success');                                
-                        }else{
-                          swal("",response.message,'warning');   
-                        }
+                type: 'POST',
+                url: "<?php echo $ajax_url; ?>",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response) {
+                    $("#loading").hide();
+                    response = $.trim(response);
+                    var response = $.parseJSON(response);
+                    if (response.status == true) {
+                        swal("", response.message, 'success');
+                    } else {
+                        swal("", response.message, 'warning');
                     }
-            });        
+                }
+            });
         }
-});
+    });
 
-   $(document).on("change","#aseller_id",function(){
-       var seller_id=$(this).val();              
-       if(seller_id!=0){
-        $("#loading").show();
-         $.ajax({
-                 type: 'POST',
-                 url: "<?php echo base_url(); ?>admin/home_data/seller_brand",
-                 data: {seller_id:seller_id},
-                 success:function(response)
-                 {    
+    $(document).on("change", "#aseller_id", function () {
+        var seller_id = $(this).val();
+        if (seller_id != 0) {
+            $("#loading").show();
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url(); ?>admin/home_data/seller_brand",
+                data: {seller_id: seller_id},
+                success: function (response) {
                     $("#loading").hide();
-                   var html='';                   
-                   if(response==0) {
-                     swal("","Something went worng","warning");
-                   }else if(response=="not_found") {
-                     // alert("yes2");
-                     $('#seller_brand').prop('disabled', true).trigger("chosen:updated");
-                     $('#seller_product').prop('disabled', true).trigger("chosen:updated");
-                     // $('#seller_brand').prop('disabled', false).trigger("chosen:updated"); 
-                   }else {
-                     var response = $.parseJSON(response);
-                     // alert("yes");
-                    html+="<option value='0'>Select Brand</option>";              
-                     $.each(response, function( k, v ) {           
-                       html+="<option   value='"+v.id+"'>"+v.brand_name+"</option>";          
-                     }); 
-                     $('#seller_brand').prop('disabled', false).trigger("chosen:updated");                                
-                     $("#seller_brand").html(html);
-                     $('#seller_brand').trigger('chosen:updated'); 
-                   } 
-                 }
-         });        
-       } else {
-           $('#seller_brand').prop('disabled', true).trigger("chosen:updated");
-           $('#seller_product').prop('disabled', true).trigger("chosen:updated");
-       }    
-     });
+                    var html = '';
+                    if (response == 0) {
+                        swal("", "Something went worng", "warning");
+                    } else if (response == "not_found") {
+                        // alert("yes2");
+                        $('#seller_brand').prop('disabled', true).trigger("chosen:updated");
+                        $('#seller_product').prop('disabled', true).trigger("chosen:updated");
+                        // $('#seller_brand').prop('disabled', false).trigger("chosen:updated");
+                    } else {
+                        var response = $.parseJSON(response);
+                        // alert("yes");
+                        html += "<option value='0'>Select Brand</option>";
+                        $.each(response, function (k, v) {
+                            html += "<option   value='" + v.id + "'>" + v.brand_name + "</option>";
+                        });
+                        $('#seller_brand').prop('disabled', false).trigger("chosen:updated");
+                        $("#seller_brand").html(html);
+                        $('#seller_brand').trigger('chosen:updated');
+                    }
+                }
+            });
+        } else {
+            $('#seller_brand').prop('disabled', true).trigger("chosen:updated");
+            $('#seller_product').prop('disabled', true).trigger("chosen:updated");
+        }
+    });
 
-   $(document).on("change","#seller_brand",function(){
-       var seller_id=$(this).val();              
-       if(seller_id!=0){
-        $("#loading").show();
-         $.ajax({
-                 type: 'POST',
-                 url: "<?php echo base_url(); ?>admin/home_data/seller_product",
-                 data: {seller_id:seller_id},
-                 success:function(response)
-                 {    
+    $(document).on("change", "#seller_brand", function () {
+        var seller_id = $(this).val();
+        if (seller_id != 0) {
+            $("#loading").show();
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url(); ?>admin/home_data/seller_product",
+                data: {seller_id: seller_id},
+                success: function (response) {
                     $("#loading").hide();
-                   var html='';                   
-                   if(response==0) {
-                     swal("","Something went worng","warning");
-                   }else if(response=="not_found") {
-                     // alert("yes2");
-                     $('#seller_product').prop('disabled', true).trigger("chosen:updated");
-                     // $('#seller_brand').prop('disabled', false).trigger("chosen:updated"); 
-                   }else {
-                     var response = $.parseJSON(response);
-                     // alert("yes");
-                    html+="<option value='0'>Select Brand</option>";              
-                     $.each(response, function( k, v ) {           
-                       html+="<option   value='"+v.id+"'>"+v.product_name+"</option>";          
-                     }); 
-                     $('#seller_product').prop('disabled', false).trigger("chosen:updated");                                
-                     $("#seller_product").html(html);
-                     $('#seller_product').trigger('chosen:updated'); 
-                   } 
-                 }
-         });        
-       } else {
-           $('#seller_product').prop('disabled', true).trigger("chosen:updated");
-       }    
-     });
+                    var html = '';
+                    if (response == 0) {
+                        swal("", "Something went worng", "warning");
+                    } else if (response == "not_found") {
+                        // alert("yes2");
+                        $('#seller_product').prop('disabled', true).trigger("chosen:updated");
+                        // $('#seller_brand').prop('disabled', false).trigger("chosen:updated");
+                    } else {
+                        var response = $.parseJSON(response);
+                        // alert("yes");
+                        html += "<option value='0'>Select Brand</option>";
+                        $.each(response, function (k, v) {
+                            html += "<option   value='" + v.id + "'>" + v.product_name + "</option>";
+                        });
+                        $('#seller_product').prop('disabled', false).trigger("chosen:updated");
+                        $("#seller_product").html(html);
+                        $('#seller_product').trigger('chosen:updated');
+                    }
+                }
+            });
+        } else {
+            $('#seller_product').prop('disabled', true).trigger("chosen:updated");
+        }
+    });
 </script>
 

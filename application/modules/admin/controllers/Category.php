@@ -1,26 +1,27 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category extends Admin_Controller {
+class Category extends Admin_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
         $this->load->library('form_builder');
         $this->load->model('custom_model');
-        $this->load->model('category_model');   
-        $language= $this->uri->segment(1);
-        $this->is_admin($language);    
+        $this->load->model('category_model');
+        $language = $this->uri->segment(1);
+        $this->is_admin($language);
     }
 
     // Frontend Category CRUD
     public function index()
     {
-        $udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
+        $udata = $this->custom_model->my_where('admin_users_groups', '*', array('user_id' => $this->mUser->id), array(), "", "", "", "", "", array(), "", false);
         $this->mViewData['vendor'] = 0;
 
 
-        $acategories = $this->custom_model->my_where('category','*',array(),array(),"id","asc","","",array(),"object");
+        $acategories = $this->custom_model->my_where('category', '*', array(), array(), "id", "asc", "", "", array(), "object");
 
         // echo  $this->db->last_query();
         // die;
@@ -28,7 +29,7 @@ class Category extends Admin_Controller {
         // print_r($acategories);
         // die;
         $acatp = array();
-        if(!empty($acategories)){
+        if (!empty($acategories)) {
             foreach ($acategories as $ckey => $cvalue) {
                 $parent = $cvalue->parent;
                 $acatp[$parent][] = $cvalue;
@@ -48,7 +49,7 @@ class Category extends Admin_Controller {
         // $this->load->library('place_order');
         // $this->place_order->check_pro_available_or_not();
 
-        
+
         $this->mViewData['acatp'] = $acatp;
 
         $this->mPageTitle = 'Category List';
@@ -56,74 +57,74 @@ class Category extends Admin_Controller {
     }
 
     // Create Frontend Category
-    public function create($type="",$catid="")
-    {   $parent1 = array();
-        $udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
+    public function create($type = "", $catid = "")
+    {
+        $parent1 = array();
+        $udata = $this->custom_model->my_where('admin_users_groups', '*', array('user_id' => $this->mUser->id), array(), "", "", "", "", "", array(), "", false);
 
 
         $this->mViewData['vendor'] = 0;
-    
 
-        $acategories = $this->custom_model->my_where('category','*',array(),array(),"parent","asc","","",array(),"object");
+
+        $acategories = $this->custom_model->my_where('category', '*', array(), array(), "parent", "asc", "", "", array(), "object");
 
         // echo "<pre>";
         // print_r($acategories);
         // die;
 
-        
+
         $acatp = array();
-        if(!empty($acategories)){
+        if (!empty($acategories)) {
             foreach ($acategories as $ckey => $cvalue) {
                 $parent = $cvalue->parent;
                 $acatp[$parent][] = $cvalue;
             }
         }
-        if( $udata[0]['group_id'] == 5 ){
+        if ($udata[0]['group_id'] == 5) {
             foreach ($acatp[0] as $ckey => $cvalue) {
-                if( $catdslug != $cvalue->slug ){
+                if ($catdslug != $cvalue->slug) {
                     unset($acatp[0][$ckey]);
                 }
             }
         }
-        
-        if(!empty($acatp) && !empty($acatp[0])){ 
-            $parent = $acatp[0]; 
-            if(!empty($parent)){
-                
+
+        if (!empty($acatp) && !empty($acatp[0])) {
+            $parent = $acatp[0];
+            if (!empty($parent)) {
+
                 foreach ($parent as $pkey => $pvalue) {
-                    
+
                     $id = $pvalue->id;
                     $display_name = $pvalue->display_name;
                     $slug = $pvalue->slug;
-                    $parent1[]= array("display_name" => $display_name, "id" => $id);
-                    @$sparent = $acatp[$id]; 
-                    if(!empty($sparent)){
-                        
+                    $parent1[] = array("display_name" => $display_name, "id" => $id);
+                    @$sparent = $acatp[$id];
+                    if (!empty($sparent)) {
+
                         foreach ($sparent as $skey => $svalue) {
-                            
+
                             $sid = $svalue->id;
                             $sdisplay_name = $svalue->display_name;
                             $slug = $svalue->slug;
-                            $parent1[]= array("display_name" => $sdisplay_name, "id" => $sid);
+                            $parent1[] = array("display_name" => $sdisplay_name, "id" => $sid);
                         }
                     }
                 }
             }
         }
 
-        $form = $this->form_builder->create_form($url = NULL, $multipart =TRUE);
+        $form = $this->form_builder->create_form($url = NULL, $multipart = TRUE);
 
         $post_data = $this->input->post();
-        if ( !empty($post_data) )
-        {
+        if (!empty($post_data)) {
             // echo "<pre>";
             // print_r($post_data);
             // print_r($_FILES);
             // die;
-            $post_data['slug'] = $this->generate_slug($post_data['display_name'],'category');
+            $post_data['slug'] = $this->generate_slug($post_data['display_name'], 'category');
 
-            $count = $this->custom_model->record_count('category',array('display_name' => $post_data['display_name']));
-            
+            $count = $this->custom_model->record_count('category', array('display_name' => $post_data['display_name']));
+
             /*if ($count)
             {
                 // failed
@@ -131,38 +132,33 @@ class Category extends Admin_Controller {
             }
             else
             {*/
-                $check = $this->custom_model->my_where('category','*',array('parent' => 0, 'id' => @$post_data['parent']));
-                
-                if (empty($check)) {
-                    $post_data['has_product'] = 1;
-                }
-                else{
-                    $post_data['has_product'] = 0;
-                }
-                if(isset($_FILES) and $_FILES['banner_image']['name']!='')
-                {
-                    @$FILES = $_FILES["banner_image"];
-                    $folder_name='admin/category/';
-                    @$image_name = $this->uploads($FILES,$folder_name);
-                    $post_data['banner_image']=$image_name;
-                }
-                $response = $this->custom_model->my_insert($post_data,'category');
-                $this->custom_model->my_insert($post_data,'category_trans');
-                
-                if ($response)
-                {
-                    $this->system_message->set_success('Category created successfully');
-                }
-                else
-                {
-                    $this->system_message->set_error('Something went wrong');
-                }
+            $check = $this->custom_model->my_where('category', '*', array('parent' => 0, 'id' => @$post_data['parent']));
+
+            if (empty($check)) {
+                $post_data['has_product'] = 1;
+            } else {
+                $post_data['has_product'] = 0;
+            }
+            if (isset($_FILES) and $_FILES['banner_image']['name'] != '') {
+                @$FILES = $_FILES["banner_image"];
+                $folder_name = 'admin/category/';
+                @$image_name = $this->uploads($FILES, $folder_name);
+                $post_data['banner_image'] = $image_name;
+            }
+            $response = $this->custom_model->my_insert($post_data, 'category');
+            $this->custom_model->my_insert($post_data, 'category_trans');
+
+            if ($response) {
+                $this->system_message->set_success('Category created successfully');
+            } else {
+                $this->system_message->set_error('Something went wrong');
+            }
             // }
         }
-        
+
         $select_parent = array();
         foreach ($parent1 as $key => $value) {
-            $select_parent[$value['id']] =  $value['display_name'];
+            $select_parent[$value['id']] = $value['display_name'];
         }
 
         // echo "<pre>";
@@ -174,7 +170,7 @@ class Category extends Admin_Controller {
 
         $this->mViewData['catid'] = $catid;
         $this->mPageTitle = 'Create Category';
-        if($type == "vendor"){
+        if ($type == "vendor") {
             $this->mPageTitle = 'Create Category Type';
         }
         $this->mViewData['form'] = $form;
@@ -183,17 +179,18 @@ class Category extends Admin_Controller {
 
     // Edit Frontend Category
     public function edit($cate_id)
-    {   $parent1 = array();
-        $udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
+    {
+        $parent1 = array();
+        $udata = $this->custom_model->my_where('admin_users_groups', '*', array('user_id' => $this->mUser->id), array(), "", "", "", "", "", array(), "", false);
         $this->mViewData['vendor'] = 0;
-        if( $udata[0]['group_id'] == 5 ){
-            $this->mViewData['vendor'] = 1;     
-            $usrdata = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","",array(),"",false);
+        if ($udata[0]['group_id'] == 5) {
+            $this->mViewData['vendor'] = 1;
+            $usrdata = $this->custom_model->my_where('admin_users', '*', array('id' => $this->mUser->id), array(), "", "", "", "", array(), "", false);
             $catdslug = $usrdata[0]['category'];
-            $acategories = $this->custom_model->my_where('category','*',array('status' => 'active'),array(),"parent","asc","","",array(),"object");
+            $acategories = $this->custom_model->my_where('category', '*', array('status' => 'active'), array(), "parent", "asc", "", "", array(), "object");
 
             $acatp = array();
-            if(!empty($acategories)){
+            if (!empty($acategories)) {
                 foreach ($acategories as $ckey => $cvalue) {
                     $parent = $cvalue->parent;
                     $acatp[$parent][] = $cvalue;
@@ -201,92 +198,86 @@ class Category extends Admin_Controller {
             }
 
             foreach ($acatp[0] as $ckey => $cvalue) {
-                if( $catdslug != $cvalue->slug ){
+                if ($catdslug != $cvalue->slug) {
                     unset($acatp[0][$ckey]);
                 }
             }
-        }   
-        if(!empty($acatp)){
+        }
+        if (!empty($acatp)) {
             foreach ($acatp as $kcsey => $vacslue) {
                 foreach ($vacslue as $ksdey => $vsdalue) {
-                    $parent1[]= array("display_name" => $vsdalue->display_name, "id" => $vsdalue->id);
+                    $parent1[] = array("display_name" => $vsdalue->display_name, "id" => $vsdalue->id);
                 }
             }
-        }   
-    
-        $form = $this->form_builder->create_form($url = NULL, $multipart =TRUE);
+        }
+
+        $form = $this->form_builder->create_form($url = NULL, $multipart = TRUE);
 
         $post_data = $this->input->post();
-        
-        if ( !empty($post_data) )
-        {
+
+        if (!empty($post_data)) {
             // echo "<pre>";
             // print_r($post_data);
             // die;
 
-            if ($post_data['status'])
-            {
+            if ($post_data['status']) {
                 $p_data['status'] = $post_data['status'];
-                $response = $this->custom_model->my_update($p_data,array('id' => $cate_id),'category_trans');
+                $response = $this->custom_model->my_update($p_data, array('id' => $cate_id), 'category_trans');
             }
 
 
-            $cate_data = $this->custom_model->my_where('category','*',array('id' => $cate_id));
-            if($post_data['display_name'] != $cate_data[0]['display_name']){
+            $cate_data = $this->custom_model->my_where('category', '*', array('id' => $cate_id));
+            if ($post_data['display_name'] != $cate_data[0]['display_name']) {
                 //$post_data['slug'] = $this->generate_slug($post_data['display_name'],'category');
             }
-            
-            $count = $this->custom_model->record_count('category',array('display_name' => $post_data['display_name'], 'id !=' => $cate_id));
+
+            $count = $this->custom_model->record_count('category', array('display_name' => $post_data['display_name'], 'id !=' => $cate_id));
             // $count = 0;
             /*if ($count)
             {
-                // failed 
+                // failed
                 $this->system_message->set_error('Category Already present<br>Unable to Create Category');
             }
             else
             {*/
-                // proceed to create Category
-                if(isset($_FILES) and $_FILES['banner_image']['name']!='')
-                {
-                    @$FILES = $_FILES["banner_image"];
-                    $folder_name='admin/category/';
-                    @$image_name = $this->uploads($FILES,$folder_name);
-                    $post_data['banner_image']=$image_name;
-                }
-                $response = $this->custom_model->my_update($post_data,array('id' => $cate_id),'category');
-                
-                if ($response)
-                {
-                    // success
-                    $this->system_message->set_success('Category edited successfully');
-                }
-                else
-                {
-                    // failed
-                    $this->system_message->set_error('Something went wrong');
-                }
+            // proceed to create Category
+            if (isset($_FILES) and $_FILES['banner_image']['name'] != '') {
+                @$FILES = $_FILES["banner_image"];
+                $folder_name = 'admin/category/';
+                @$image_name = $this->uploads($FILES, $folder_name);
+                $post_data['banner_image'] = $image_name;
+            }
+            $response = $this->custom_model->my_update($post_data, array('id' => $cate_id), 'category');
+
+            if ($response) {
+                // success
+                $this->system_message->set_success('Category edited successfully');
+            } else {
+                // failed
+                $this->system_message->set_error('Something went wrong');
+            }
             // }
-            
+
             refresh();
         }
 
-        // Parent category 
+        // Parent category
         /*$parent = $this->category_model->get_parent_category();
         $select_parent = array(0 => 'Select parent category');
         foreach ($parent as $key => $value) {
             $select_parent[] = array($value->id => $value->display_name);
         }*/
-        if( $udata[0]['group_id'] != 5 ){
-            $parent1 = $this->custom_model->my_where('category','*',array('status' => 'active'));
+        if ($udata[0]['group_id'] != 5) {
+            $parent1 = $this->custom_model->my_where('category', '*', array('status' => 'active'));
         }
         $select_parent = array();
         foreach ($parent1 as $key => $value) {
-            $select_parent[$value['id']] =  $value['display_name'];
+            $select_parent[$value['id']] = $value['display_name'];
             // $select_parent[] = array($value->id => $value->display_name);
         }
         $this->mViewData['parent'] = $select_parent;
 
-        $cate_data = $this->custom_model->my_where('category','*',array('id' => $cate_id));
+        $cate_data = $this->custom_model->my_where('category', '*', array('id' => $cate_id));
         $this->mViewData['edit'] = $cate_data[0];
 
         $this->mPageTitle = 'Edit Category';
@@ -296,19 +287,20 @@ class Category extends Admin_Controller {
     }
 
     public function tedit($cate_id)
-    {   ini_set('default_charset', 'UTF-8');
-        
+    {
+        ini_set('default_charset', 'UTF-8');
+
         $parent1 = array();
-        $udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
+        $udata = $this->custom_model->my_where('admin_users_groups', '*', array('user_id' => $this->mUser->id), array(), "", "", "", "", "", array(), "", false);
         $this->mViewData['vendor'] = 0;
-        if( $udata[0]['group_id'] == 5 ){
-            $this->mViewData['vendor'] = 1;     
-            $usrdata = $this->custom_model->my_where('admin_users','*',array('id' => $this->mUser->id),array(),"","","","",array(),"",false);
+        if ($udata[0]['group_id'] == 5) {
+            $this->mViewData['vendor'] = 1;
+            $usrdata = $this->custom_model->my_where('admin_users', '*', array('id' => $this->mUser->id), array(), "", "", "", "", array(), "", false);
             $catdslug = $usrdata[0]['category'];
-            $acategories = $this->custom_model->my_where('category','*',array('status' => 'active'),array(),"parent","asc","","",array(),"object");
+            $acategories = $this->custom_model->my_where('category', '*', array('status' => 'active'), array(), "parent", "asc", "", "", array(), "object");
 
             $acatp = array();
-            if(!empty($acategories)){
+            if (!empty($acategories)) {
                 foreach ($acategories as $ckey => $cvalue) {
                     $parent = $cvalue->parent;
                     $acatp[$parent][] = $cvalue;
@@ -316,77 +308,71 @@ class Category extends Admin_Controller {
             }
 
             foreach ($acatp[0] as $ckey => $cvalue) {
-                if( $catdslug != $cvalue->slug ){
+                if ($catdslug != $cvalue->slug) {
                     unset($acatp[0][$ckey]);
                 }
             }
-        }   
-        if(!empty($acatp)){
+        }
+        if (!empty($acatp)) {
             foreach ($acatp as $kcsey => $vacslue) {
                 foreach ($vacslue as $ksdey => $vsdalue) {
-                    $parent1[]= array("display_name" => $vsdalue->display_name, "id" => $vsdalue->id);
+                    $parent1[] = array("display_name" => $vsdalue->display_name, "id" => $vsdalue->id);
                 }
             }
-        }   
+        }
 
-        $form = $this->form_builder->create_form($url = NULL, $multipart =TRUE);
-        $cate_data = $this->custom_model->my_where('category_trans','*',array('id' => $cate_id));
-        if(!isset($cate_data[0]['display_name'])){
-            $cate_data = $this->custom_model->my_where('category','*',array('id' => $cate_id));
-             $this->custom_model->my_insert($cate_data[0],'category_trans');
+        $form = $this->form_builder->create_form($url = NULL, $multipart = TRUE);
+        $cate_data = $this->custom_model->my_where('category_trans', '*', array('id' => $cate_id));
+        if (!isset($cate_data[0]['display_name'])) {
+            $cate_data = $this->custom_model->my_where('category', '*', array('id' => $cate_id));
+            $this->custom_model->my_insert($cate_data[0], 'category_trans');
         }
         $post_data = $this->input->post();
-        
-        if ( !empty($post_data) )
-        {
-            if ($post_data['status'])
-            {
+
+        if (!empty($post_data)) {
+            if ($post_data['status']) {
                 $p_data['status'] = $post_data['status'];
-                $response = $this->custom_model->my_update($p_data,array('id' => $cate_id),'category');
+                $response = $this->custom_model->my_update($p_data, array('id' => $cate_id), 'category');
             }
 
             // unset($post_data['status']);
-                // proceed to create Category
-            if(isset($_FILES) and $_FILES['banner_image']['name']!='')
-            {
+            // proceed to create Category
+            if (isset($_FILES) and $_FILES['banner_image']['name'] != '') {
                 @$FILES = $_FILES["banner_image"];
-                $folder_name='admin/category/';
-                @$image_name = $this->uploads($FILES,$folder_name);
-                $post_data['banner_image']=$image_name;
+                $folder_name = 'admin/category/';
+                @$image_name = $this->uploads($FILES, $folder_name);
+                $post_data['banner_image'] = $image_name;
             }
-            $response = $this->custom_model->my_update($post_data,array('id' => $cate_id),'category_trans');
-            
-            if ($response)
-            {
+            $response = $this->custom_model->my_update($post_data, array('id' => $cate_id), 'category_trans');
+
+            if ($response) {
                 // success
                 $this->system_message->set_success('Category edited successfully');
-            }
-            else
-            {
+            } else {
                 // failed
                 $this->system_message->set_error('Something went wrong');
             }
-            
+
             refresh();
         }
 
-        // Parent category 
+        // Parent category
         /*$parent = $this->category_model->get_parent_category();
         $select_parent = array(0 => 'Select parent category');
         foreach ($parent as $key => $value) {
             $select_parent[] = array($value->id => $value->display_name);
         }*/
-        if( $udata[0]['group_id'] != 5 ){
-        $parent1 = $this->custom_model->my_where('category_trans','*',array('status' => 'active'));
+        if ($udata[0]['group_id'] != 5) {
+            $parent1 = $this->custom_model->my_where('category_trans', '*', array('status' => 'active'));
         }
         $select_parent = array();
         foreach ($parent1 as $key => $value) {
-            $select_parent[$value['id']] =  $value['display_name'];
+            $select_parent[$value['id']] = $value['display_name'];
             // $select_parent[] = array($value->id => $value->display_name);
         }
         $this->mViewData['parent'] = $select_parent;
 
-        $cate_data = $this->custom_model->my_where('category_trans','*',array('id' => $cate_id));
+        $cate_data = $this->custom_model->my_where('category_trans', '*', array('id' => $cate_id));
         $this->mViewData['edit'] = $cate_data[0];
 
         $this->mPageTitle = 'Edit Category';
@@ -401,18 +387,18 @@ class Category extends Admin_Controller {
         // echo "<pre>";
         // print_r($id);
         // die;
-        
-        if ($id)
-        {
+
+        if ($id) {
             $p_data['category_status'] = 'deactive';
-            $response = $this->custom_model->my_update($p_data,array('category' => $id),'product');
-            $response = $this->custom_model->my_update($p_data,array('category' => $id),'product_trans');
+            $response = $this->custom_model->my_update($p_data, array('category' => $id), 'product');
+            $response = $this->custom_model->my_update($p_data, array('category' => $id), 'product_trans');
         }
 
 
-        $this->custom_model->my_delete(array("id" => $id),"category",false);
-        $this->custom_model->my_delete(array("id" => $id),"category_trans",false);
-        header( "Location: ".base_url()."admin/category/" );die;
+        $this->custom_model->my_delete(array("id" => $id), "category", false);
+        $this->custom_model->my_delete(array("id" => $id), "category_trans", false);
+        header("Location: " . base_url() . "admin/category/");
+        die;
     }
 
 }

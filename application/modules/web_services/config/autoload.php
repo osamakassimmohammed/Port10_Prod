@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -22,6 +22,6 @@ $autoload['config'] = array();
 $autoload['language'] = array();
 
 $autoload['model'] = array(
-	'api_key_model'		=> 'api_keys',
-	'user_model'		=> 'users'
+    'api_key_model' => 'api_keys',
+    'user_model' => 'users'
 );

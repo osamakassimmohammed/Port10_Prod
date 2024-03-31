@@ -59,7 +59,7 @@ abstract class Operation extends AbstractAnnotation
      * Tools and libraries MAY use the operation id to uniquely identify an operation.
      * @var string
      */
-    public $operationId;
+    public $operationId = UNDEFINED;
 
     /**
      * A list of MIME types the operation can consume.
@@ -141,16 +141,22 @@ abstract class Operation extends AbstractAnnotation
         'Swagger\Annotations\ExternalDocumentation' => 'externalDocs'
     ];
 
-    /** @inheritdoc */
+    /**
+     * @return mixed
+     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $data = parent::jsonSerialize();
         unset($data->method);
         unset($data->path);
+        if (isset($data->operationId) && $data->operationId === null) {
+            unset($data->operationId);
+        }
         return $data;
     }
 
-    public function validate($parents = [], $skip = [])
+    public function validate($parents = [], $skip = [], $ref = '')
     {
         if (in_array($this, $skip, true)) {
             return true;

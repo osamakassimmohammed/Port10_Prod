@@ -1,10 +1,10 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Changes by CI Bootstrap 3 (https://github.com/waifung0207/ci_bootstrap_3).
- * 
+ *
  * The following values are changed to fit with CI Bootstrap:
  *  - $config['rest_keys_table'] = 'api_keys'; (default: 'keys')
  *  - $config['rest_logs_table'] = 'api_logs'; (default: 'logs')

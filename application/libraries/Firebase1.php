@@ -1,46 +1,55 @@
 <?php
 
 /**
- * fire base notification 
+ * fire base notification
  */
 
-class Firebase1{
+class Firebase1
+{
     private $title;
     private $message;
     private $image_url;
     private $action;
     private $action_destination;
     private $data;
-    
-    function __construct(){
-         
+
+    function __construct()
+    {
+
     }
- 
-    public function setTitle($title){
+
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
- 
-    public function setMessage($message){
+
+    public function setMessage($message)
+    {
         $this->message = $message;
     }
- 
-    public function setImage($imageUrl){
+
+    public function setImage($imageUrl)
+    {
         $this->image_url = $imageUrl;
     }
 
-    public function setAction($action){
+    public function setAction($action)
+    {
         $this->action = $action;
     }
- 
-    public function setActionDestination($actionDestination){
+
+    public function setActionDestination($actionDestination)
+    {
         $this->action_destination = $actionDestination;
     }
- 
-    public function setPayload($data){
+
+    public function setPayload($data)
+    {
         $this->data = $data;
     }
-    
-    public function getNotificatin(){
+
+    public function getNotificatin()
+    {
         $notification = array();
         $notification['title'] = $this->title;
         $notification['message'] = $this->message;
@@ -50,4 +59,5 @@ class Firebase1{
         return $notification;
     }
 }
+
 ?>

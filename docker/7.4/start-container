@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+#
+# -*- tab-width: 2; encoding: utf-8; mode: sh; -*-
+#
+# Copyright (c) 2023 Xeriab Nabil <xeriab@tuta.io>
+#
+# SPDX-License-Identifier: MIT
+#
+# shellcheck disable=SC3043,SC2059,SC2154,SC1090,SC1091,SC2034,SC2086,SC2039
+#
+
+set -e
+
+if [ -n "$WWWUSER" ]; then
+  usermod -u $WWWUSER sail
+fi
+
+if ! [ -d /.composer ]; then
+  mkdir /.composer
+fi
+
+chmod -R ugo+rw /.composer
+
+if [ $# -gt 0 ]; then
+  exec gosu $WWWUSER "$@"
+else
+  exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+fi
+
+# vim: set ts=2 sw=2 tw=80 noet :

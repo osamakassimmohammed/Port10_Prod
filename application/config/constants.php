@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | of this setting
 |
 */
-defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
+defined('SHOW_DEBUG_BACKTRACE') or define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,10 @@ defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 | always be used to set the mode correctly.
 |
 */
-defined('FILE_READ_MODE')  OR define('FILE_READ_MODE', 0644);
-defined('FILE_WRITE_MODE') OR define('FILE_WRITE_MODE', 0666);
-defined('DIR_READ_MODE')   OR define('DIR_READ_MODE', 0755);
-defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
+defined('FILE_READ_MODE') or define('FILE_READ_MODE', 0644);
+defined('FILE_WRITE_MODE') or define('FILE_WRITE_MODE', 0666);
+defined('DIR_READ_MODE') or define('DIR_READ_MODE', 0755);
+defined('DIR_WRITE_MODE') or define('DIR_WRITE_MODE', 0755);
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +39,14 @@ defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 | These modes are used when working with fopen()/popen()
 |
 */
-defined('FOPEN_READ')                           OR define('FOPEN_READ', 'rb');
-defined('FOPEN_READ_WRITE')                     OR define('FOPEN_READ_WRITE', 'r+b');
-defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       OR define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
-defined('FOPEN_READ_WRITE_CREATE_DESCTRUCTIVE') OR define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
-defined('FOPEN_WRITE_CREATE')                   OR define('FOPEN_WRITE_CREATE', 'ab');
-defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREATE', 'a+b');
-defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
-defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
+defined('FOPEN_READ') or define('FOPEN_READ', 'rb');
+defined('FOPEN_READ_WRITE') or define('FOPEN_READ_WRITE', 'r+b');
+defined('FOPEN_WRITE_CREATE_DESTRUCTIVE') or define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
+defined('FOPEN_READ_WRITE_CREATE_DESCTRUCTIVE') or define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
+defined('FOPEN_WRITE_CREATE') or define('FOPEN_WRITE_CREATE', 'ab');
+defined('FOPEN_READ_WRITE_CREATE') or define('FOPEN_READ_WRITE_CREATE', 'a+b');
+defined('FOPEN_WRITE_CREATE_STRICT') or define('FOPEN_WRITE_CREATE_STRICT', 'xb');
+defined('FOPEN_READ_WRITE_CREATE_STRICT') or define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 /*
 |--------------------------------------------------------------------------
@@ -73,16 +73,16 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREA
 |       http://tldp.org/LDP/abs/html/exitcodes.html
 |
 */
-defined('EXIT_SUCCESS')        OR define('EXIT_SUCCESS', 0); // no errors
-defined('EXIT_ERROR')          OR define('EXIT_ERROR', 1); // generic error
-defined('EXIT_CONFIG')         OR define('EXIT_CONFIG', 3); // configuration error
-defined('EXIT_UNKNOWN_FILE')   OR define('EXIT_UNKNOWN_FILE', 4); // file not found
-defined('EXIT_UNKNOWN_CLASS')  OR define('EXIT_UNKNOWN_CLASS', 5); // unknown class
-defined('EXIT_UNKNOWN_METHOD') OR define('EXIT_UNKNOWN_METHOD', 6); // unknown class member
-defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user input
-defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
-defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
-defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+defined('EXIT_SUCCESS') or define('EXIT_SUCCESS', 0); // no errors
+defined('EXIT_ERROR') or define('EXIT_ERROR', 1); // generic error
+defined('EXIT_CONFIG') or define('EXIT_CONFIG', 3); // configuration error
+defined('EXIT_UNKNOWN_FILE') or define('EXIT_UNKNOWN_FILE', 4); // file not found
+defined('EXIT_UNKNOWN_CLASS') or define('EXIT_UNKNOWN_CLASS', 5); // unknown class
+defined('EXIT_UNKNOWN_METHOD') or define('EXIT_UNKNOWN_METHOD', 6); // unknown class member
+defined('EXIT_USER_INPUT') or define('EXIT_USER_INPUT', 7); // invalid user input
+defined('EXIT_DATABASE') or define('EXIT_DATABASE', 8); // database error
+defined('EXIT__AUTO_MIN') or define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
+defined('EXIT__AUTO_MAX') or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 /*
 |--------------------------------------------------------------------------
@@ -91,28 +91,34 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | Constants to be used in both Frontend and other modules
 |
 */
-if (!(PHP_SAPI === 'cli' OR defined('STDIN')))
-{
-	// Base URL with directory support
-	$protocol = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])!== 'off') ? 'https' : 'http';
-	$base_url = $protocol.'://'.$_SERVER['HTTP_HOST'];
-	$base_url.= dirname($_SERVER['SCRIPT_NAME']);
-	define('BASE_URL', $base_url);
-	
-	// For API prefix in Swagger annotation (/application/modules/api/swagger/info.php)
-	define('API_PROTOCOL', $protocol);
-	define('API_HOST', $_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']));
+if (!(PHP_SAPI === 'cli' or defined('STDIN'))) {
+    // Base URL with directory support
+    $protocol = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') ? 'https' : 'http';
+    $base_url = $protocol . '://' . $_SERVER['HTTP_HOST'];
+    $base_url .= dirname($_SERVER['SCRIPT_NAME']);
+    define('BASE_URL', $base_url);
+
+    // For API prefix in Swagger annotation (/application/modules/api/swagger/info.php)
+    define('API_PROTOCOL', $protocol);
+    define('API_HOST', $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']));
 }
 
-define('CI_BOOTSTRAP_REPO',			'#');
-define('CI_BOOTSTRAP_VERSION',		'Build 2017');	// will follow semantic version (e.g. v1.x.x) after first stable launch
-
+define('CI_BOOTSTRAP_REPO', '#');
+define('CI_BOOTSTRAP_VERSION', 'Build 2017');    // will follow semantic version (e.g. v1.x.x) after first stable launch
+// C:\wamp64\www\port10-master\application\modules\admin\views\product\create_product.php
 // Upload paths
-define('ASSETS_PATH', $_SERVER['DOCUMENT_ROOT'].'/assets/' );
-define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/' );
-define('BANNER_PATH',		'assets/admin/banner/');
-define('UPLOAD_BLOG_POST',		'assets/frontend/images/');
-define('UPLOAD_BLOG_PDF_POST',		'assets/frontend/images/pdf/');
+// echo "<pre>";
+// print_r( $_SERVER);
+if($_SERVER['DOCUMENT_ROOT'] == 'C:/wamp64/www'){
+    define('ASSETS_PATH', $_SERVER['DOCUMENT_ROOT'] . '/port10-master/assets/'); // port10-master//assets
+}else{
+    define('ASSETS_PATH', $_SERVER['DOCUMENT_ROOT'] . '/assets/');
+
+}
+define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/');
+define('BANNER_PATH', 'assets/admin/banner/');
+define('UPLOAD_BLOG_POST', 'assets/frontend/images/');
+define('UPLOAD_BLOG_PDF_POST', 'assets/frontend/images/pdf/');
 
 // define("CI_CURRENCY_SYMBOL", "KD");
 // define("CI_CURRENCY_CODE", "KD");
@@ -124,44 +130,47 @@ define('UPLOAD_BLOG_PDF_POST',		'assets/frontend/images/pdf/');
 return array( );
 }*/
 
-function store_push($a){
-// return array_merge($a,get_store_type());
-return $a;
-
-}
-function get_percentage($sale_price,$price){
-	if($price  > $sale_price ){
-		return round( ( ( $price - $sale_price ) / $price ) * 100 );
-	}else{
-		return 0;
-	}
-	
-}
-
-function send_email($emails,$subject,$message,$includes = true)
+function store_push($a)
 {
-	if(!empty($message)){
-		if($includes){
-			$header = email_header();
-			$footer = email_footer();
-			$message = $header.$message.$footer;
-		}
-		
-		$headers = "From: quamer313@gmail.com\r\n";
+// return array_merge($a,get_store_type());
+    return $a;
+
+}
+
+function get_percentage($sale_price, $price)
+{
+    if ($price > $sale_price) {
+        return round((($price - $sale_price) / $price) * 100);
+    } else {
+        return 0;
+    }
+
+}
+
+function send_email($emails, $subject, $message, $includes = true)
+{
+    if (!empty($message)) {
+        if ($includes) {
+            $header = email_header();
+            $footer = email_footer();
+            $message = $header . $message . $footer;
+        }
+
+        $headers = "From: quamer313@gmail.com\r\n";
         $headers .= "Reply-To: quamer313@gmail.com\r\n";
         $headers .= "CC:quamer313@gmail.com\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-		$headers .= "X-Mailer: PHP/" . phpversion();
+        $headers .= "X-Mailer: PHP/" . phpversion();
 
-		return @mail($emails, $subject, $message, $headers);
-	}
+        return @mail($emails, $subject, $message, $headers);
+    }
 }
 
 
-
-function email_header(){
-	$template = '<table cellspacing="0" cellpadding="5" width="100%" bgcolor="#f3f1ed">
+function email_header()
+{
+    $template = '<table cellspacing="0" cellpadding="5" width="100%" bgcolor="#f3f1ed">
 					    <tbody>
 					    <tr>
 					        <td width="1000" style="padding-top:;">
@@ -175,7 +184,7 @@ function email_header(){
 					                                <tr>
 					                                    <td align="center" valign="middle"
 					                                        style="padding: 10px;border-bottom: 1px solid #cdcdcd;">
-					                                        <img height="80" src="'.base_url().'assets/frontend/images/icon/logo.png">
+					                                        <img height="80" src="' . base_url() . 'assets/frontend/images/icon/logo.png">
 					                                    </td>
 					                                </tr>
 					                                </tbody>
@@ -184,21 +193,22 @@ function email_header(){
 					                    </tr>
 					                    <tr>
 					                    <td bgcolor="white" style="padding:25px;">';
-	return $template;
+    return $template;
 }
 
-function email_footer(){
-	$template = ' 
+function email_footer()
+{
+    $template = '
 					                        </td>
 					                    </tr>
 					                    </tbody>
 					                </table>
 					            </div>
 					        </td>
-					        
+
 					    </tr>
 					    <tr style="background: white;">
-					       
+
 					        <td>
 					            <div style="max-width:760px;margin:0 auto;">
 					                <table cellspacing="0" cellpadding="0" align="right"
@@ -216,40 +226,39 @@ function email_footer(){
 					                </div>
 					            </div>
 					        </td>
-					       
+
 					    </tr>
 					    </tbody>
 					</table>';
-	return $template;
+    return $template;
 }
 
 
-
-function forgetpass_content($name,$link)
+function forgetpass_content($name, $link)
 {
 
-	$message = "<div style='
+    $message = "<div style='
     width: 80%;
     margin: 0px auto;
     padding: 10px;'>
 				<p style='font-size: 12px;'>Hi $name,</p>
 				<br/><p style='font-size: 12px; color:#696969; margin-top: -15px;'>We've received a request to reset your password. If you didn't make the request,just ignore this email. <br/> Otherwise, you can reset your password using this link.</p><br/>
-				<a href='".$link."' style='margin-left: 104px; margin-top: 20px; width: 100% !important;padding: 10px 0px;background: #3c4043;border: none;color: #fff;font-size: 14px;text-transform: uppercase;text-decoration: none;border-radius: 3px;margin: 15px 0 15px 0; cursor: pointer;clear: both; overflow: hidden;margin: auto;display: block;font-weight: 500;text-align: center;'>Reset Password</a>
+				<a href='" . $link . "' style='margin-left: 104px; margin-top: 20px; width: 100% !important;padding: 10px 0px;background: #3c4043;border: none;color: #fff;font-size: 14px;text-transform: uppercase;text-decoration: none;border-radius: 3px;margin: 15px 0 15px 0; cursor: pointer;clear: both; overflow: hidden;margin: auto;display: block;font-weight: 500;text-align: center;'>Reset Password</a>
 				</div>";
-	return $message;
+    return $message;
 }
 
-function registration_content($name,$link='')
+function registration_content($name, $link = '')
 {
-	// $link=base_url();
-	$message = "<div style='
+    // $link=base_url();
+    $message = "<div style='
     width: 80%;
     margin: 0px auto;
     padding: 10px;'>
 				<p style='font-size: 12px;'>Dear $name,</p>
 				<br/><p style='font-size: 12px; color:#696969; margin-top: -15px;'>Thank you for registering the business entity (Enter Business Entity Name) on Port10! We have received your registration and your payment.</p><br/>
-				<p style='font-size: 12px; color:#696969; margin-top: -15px;'>Please click  
-				<a href='".$link."' style='margin-left: 104px; margin-top: 20px; width: 100% !important;padding: 10px 0px;background: #3c4043;border: none;color: #fff;font-size: 14px;text-transform: uppercase;text-decoration: none;border-radius: 3px;margin: 15px 0 15px 0; cursor: pointer;clear: both; overflow: hidden;margin: auto;font-weight: 500;text-align: center;'>HERE</a>to activate your account</p><br/>
+				<p style='font-size: 12px; color:#696969; margin-top: -15px;'>Please click
+				<a href='" . $link . "' style='margin-left: 104px; margin-top: 20px; width: 100% !important;padding: 10px 0px;background: #3c4043;border: none;color: #fff;font-size: 14px;text-transform: uppercase;text-decoration: none;border-radius: 3px;margin: 15px 0 15px 0; cursor: pointer;clear: both; overflow: hidden;margin: auto;font-weight: 500;text-align: center;'>HERE</a>to activate your account</p><br/>
 				<p style='font-size: 12px; color:#696969; margin-top: -15px;'>On your dashboard page, you will be able to control your account, upload products, contact buyers and much more! </p><br/>
 				<p style='font-size: 12px; color:#696969; margin-top: -15px;'>To have a better understanding on using the platform, please go through the step-by-step tutorials  found HERE.</p><br/>
 				<p style='font-size: 12px; color:#696969; margin-top: -15px;'>Having you part of Port10’s growing business community is our pleasure. We’d love it if you could SPREAD THE WORD about Port10 with your business partners! You can find links to our Facebook and Twitter pages below.</p><br/>
@@ -259,7 +268,7 @@ function registration_content($name,$link='')
 				<p style='font-size: 12px; color:#696969; margin-top: -30px;'>Facebook</p><br/>
 				<p style='font-size: 12px; color:#696969; margin-top: -30px;'>Twitter</p><br/>
 				</div>";
-	return $message;
+    return $message;
 }
 
 /**
@@ -268,37 +277,38 @@ function registration_content($name,$link='')
  * @param string $action what to do with this? e for encrypt, d for decrypt
  */
 
-function en_de_crypt( $string, $action = 'e' ) {
+function en_de_crypt($string, $action = 'e')
+{
     $secret_key = 'a1s3er1n5n7m3f3e45o5p9w3k2x3q32x';
     $secret_iv = 'a1snsd5nm3fssddsdgrkjlpdf9llkw22x';
     $output = false;
     $encrypt_method = "AES-256-CBC";
-    $key = hash( 'sha256', $secret_key );
-    $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
-    if( $action == 'e' ) {
-        $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-    }
-    else if( $action == 'd' ){
-        $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+    $key = hash('sha256', $secret_key);
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+    if ($action == 'e') {
+        $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    } else if ($action == 'd') {
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
     }
     return $output;
 }
 
-function getLocationInfoByIp(){
+function getLocationInfoByIp()
+{
 
-    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $client = @$_SERVER['HTTP_CLIENT_IP'];
     $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-    $remote  = @$_SERVER['REMOTE_ADDR'];
-    $result  = array('country'=>'', 'city'=>'');
-    if(filter_var($client, FILTER_VALIDATE_IP)){
+    $remote = @$_SERVER['REMOTE_ADDR'];
+    $result = array('country' => '', 'city' => '');
+    if (filter_var($client, FILTER_VALIDATE_IP)) {
         $ip = $client;
-    }elseif(filter_var($forward, FILTER_VALIDATE_IP)){
+    } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
         $ip = $forward;
-    }else{
+    } else {
         $ip = $remote;
     }
-    $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));    
-    if($ip_data && $ip_data->geoplugin_countryName != null){
+    $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+    if ($ip_data && $ip_data->geoplugin_countryName != null) {
         $result['country'] = $ip_data->geoplugin_countryName;
         $result['country_code'] = $ip_data->geoplugin_countryCode;
         $result['city'] = $ip_data->geoplugin_city;
@@ -306,16 +316,17 @@ function getLocationInfoByIp(){
     return $result;
 }
 
-function decnum($number){
-	$number = round($number,2);
-	return number_format((float)$number, 2, '.', '');
+function decnum($number)
+{
+    $number = round($number, 2);
+    return number_format((float)$number, 2, '.', '');
 }
 
-function date_compare($element1, $element2) 
-{ 
-    $datetime1 = strtotime($element1['add_date']); 
-    $datetime2 = strtotime($element2['add_date']); 
-    return $datetime1 - $datetime2; 
+function date_compare($element1, $element2)
+{
+    $datetime1 = strtotime($element1['add_date']);
+    $datetime2 = strtotime($element2['add_date']);
+    return $datetime1 - $datetime2;
 }
 
 

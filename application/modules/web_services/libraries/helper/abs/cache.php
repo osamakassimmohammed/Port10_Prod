@@ -1,7 +1,9 @@
 <?php
+
 namespace MatchMovePay\Helper\Abs;
 
-interface Cache {
+interface Cache
+{
 
     public static function set($key, $value, $expire = 900);
 

@@ -1,68 +1,68 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class ProductAttribute extends Admin_Controller {
+class ProductAttribute extends Admin_Controller
+{
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->library('form_builder');
-		$this->load->model('custom_model');
-		$this->load->model('category_model');		
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_builder');
+        $this->load->model('custom_model');
+        $this->load->model('category_model');
+    }
 
-	// Frontend Category CRUD
-	public function index()
-	{
-
-	
-		$udata = $this->custom_model->my_where('admin_users_groups','*',array('user_id' => $this->mUser->id),array(),"","","","","",array(),"",false);
-		$this->mViewData['vendor'] = 0;
+    // Frontend Category CRUD
+    public function index()
+    {
 
 
-		// $acategories = $this->custom_model->my_where('category','*',array(),array(),"parent","asc","","",array(),"object");
-
-		// // echo  $this->db->last_query();
-		// // die;
-		// // echo "<pre>";
-		// // print_r($acategories);
-		// // die;
-		// $acatp = array();
-		// if(!empty($acategories)){
-		// 	foreach ($acategories as $ckey => $cvalue) {
-		// 		$parent = $cvalue->parent;
-		// 		$acatp[$parent][] = $cvalue;
-		// 	}
-		// }
-		// asort($acatp);
-
-		// // echo "<pre>";
-		// // print_r($actap);
-		// // die;
-
-		// // echo "<pre>";
-		// // print_r($acategories);
-		// // die;
-		// $this->mViewData['acatp'] = $acatp;
+        $udata = $this->custom_model->my_where('admin_users_groups', '*', array('user_id' => $this->mUser->id), array(), "", "", "", "", "", array(), "", false);
+        $this->mViewData['vendor'] = 0;
 
 
-		$this->mPageTitle = 'Product Attribute';
-		$this->render('Product_attribute/view');
-	}
+        // $acategories = $this->custom_model->my_where('category','*',array(),array(),"parent","asc","","",array(),"object");
+
+        // // echo  $this->db->last_query();
+        // // die;
+        // // echo "<pre>";
+        // // print_r($acategories);
+        // // die;
+        // $acatp = array();
+        // if(!empty($acategories)){
+        // 	foreach ($acategories as $ckey => $cvalue) {
+        // 		$parent = $cvalue->parent;
+        // 		$acatp[$parent][] = $cvalue;
+        // 	}
+        // }
+        // asort($acatp);
+
+        // // echo "<pre>";
+        // // print_r($actap);
+        // // die;
+
+        // // echo "<pre>";
+        // // print_r($acategories);
+        // // die;
+        // $this->mViewData['acatp'] = $acatp;
 
 
-	public function create()
-	{
+        $this->mPageTitle = 'Product Attribute';
+        $this->render('Product_attribute/view');
+    }
+
+
+    public function create()
+    {
         $form = $this->form_builder->create_form();
-
 
 
         $this->mPageTitle = 'Product Attribute';
 
-		$this->mViewData['form'] = $form;
-		$this->render('Product_attribute/create');
+        $this->mViewData['form'] = $form;
+        $this->render('Product_attribute/create');
 
-	}
-	
+    }
+
 
 }

@@ -1,252 +1,268 @@
 <style type="text/css">
-   span.remove_att {
-    border-radius: 10px;
-    position: relative;
-    margin-bottom: 11px;
-    overflow: hidden;
-    padding: 10px!important;
-    color: white;
-    top: -4px;
-    left: 10px;
-    font-size: 12px;
-    cursor: pointer;
-}
+    span.remove_att {
+        border-radius: 10px;
+        position: relative;
+        margin-bottom: 11px;
+        overflow: hidden;
+        padding: 10px !important;
+        color: white;
+        top: -4px;
+        left: 10px;
+        font-size: 12px;
+        cursor: pointer;
+    }
 </style>
 <?php
 
-   if($pcustomize_data[0]['type']=='1' || $pcustomize_data[0]['type']=='2' )
+if ($pcustomize_data[0]['type'] == '1' || $pcustomize_data[0]['type'] == '2') {
 
-   {
+    $radio_selected = 'selected';
 
-      $radio_selected='selected';
+    $check_selected = '';
 
-      $check_selected='';
+    $limit_flag = 0;
 
-      $limit_flag=0;
+    // this flage for radio or check free
 
-      // this flage for radio or check free
+    $type_flat = 1;
 
-      $type_flat=1;      
+} else {
 
-   }else{
+    $check_selected = 'selected';
 
-      $check_selected='selected';
+    $radio_selected = '';
 
-      $radio_selected='';
+    $limit_flag = 1;
 
-      $limit_flag=1;
+    $type_flat = 0;
 
-      $type_flat=0;
+}
 
-   }
+$select_val = $pcustomize_data[0]['type'];
 
-   $select_val=$pcustomize_data[0]['type'];
+if ($pcustomize_data[0]['status'] == '1') {
 
-   if($pcustomize_data[0]['status']=='1')
+    $status_active = 'checked';
 
-   {
+    $status_deactive = '';
 
-      $status_active='checked';
+} else {
 
-      $status_deactive='';
+    $status_deactive = 'checked';
 
-   }else{
+    $status_active = '';
 
-      $status_deactive='checked';
-
-      $status_active='';
-
-   }
+}
 
 ?>
 
 <div class="row clearfix">
 
-   <div class="col-md-12">
+    <div class="col-md-12">
 
-      <div class="demo-masked-input">
+        <div class="demo-masked-input">
 
-         <form action="" method="post" id="Pcustomize">
+            <form action="" method="post" id="Pcustomize">
 
-      	<div class="row">
+                <div class="row">
 
-            <div class="col-sm-4">
+                    <div class="col-sm-4">
 
-               <label for="category">Customize</label>
+                        <label for="category">Customize</label>
 
-               <div class="form-group form-float form-group-lg">
+                        <div class="form-group form-float form-group-lg">
 
-                  <div class="form-line">
+                            <div class="form-line">
 
-                     <input type="text" name="title" value="<?php echo $pcustomize_data[0]['title']; ?>" placeholder="Product Name" id="title" autocomplete="off"  class="form-control space ">
+                                <input type="text" name="title"
+                                       value="<?php echo $pcustomize_data[0]['title']; ?>"
+                                       placeholder="Product Name" id="title"
+                                       autocomplete="off" class="form-control space ">
 
-                  </div>
+                            </div>
 
-               </div>            
+                        </div>
 
-            </div>                     
+                    </div>
 
-            <div class="col-sm-4">
+                    <div class="col-sm-4">
 
-               <label for="category">Type</label>
+                        <label for="category">Type</label>
 
-               <select  placeholder="" id="cus_type" name="type" disabled>        
+                        <select placeholder="" id="cus_type" name="type" disabled>
 
-                  <option value="">Select Type</option>
+                            <option value="">Select Type</option>
 
-               <?php if($type_flat=='1') { 
+                            <?php if ($type_flat == '1') {
 
-                        if($select_val==1){ ?>
+                                if ($select_val == 1) { ?>
 
-                     <option value="1" selected >Radio</option>
+                                    <option value="1" selected>Radio</option>
 
-                        <?php }else{ ?>
+                                <?php } else { ?>
 
-                     <option value="2" selected>>check box free</option>
+                                    <option value="2" selected>>check box free</option>
 
-                  <?php } }else{ ?>
+                                <?php }
+                            } else { ?>
 
-                     <option value="3" selected>check box paid</option>
+                                <option value="3" selected>check box paid</option>
 
-                  <?php }  ?>   
+                            <?php } ?>
 
-               </select>
+                        </select>
 
-            </div>
+                    </div>
 
-            <input type="hidden" name="type" value="<?php echo $select_val; ?>">
+                    <input type="hidden" name="type" value="<?php echo $select_val; ?>">
 
-            <?php
+                    <?php
 
-               if($pcustomize_data[0]['type']=='3')
+                    if ($pcustomize_data[0]['type'] == '3') { ?>
 
-               { ?>
+                        <div class="col-sm-2" id="check_paid">
 
-               <div class="col-sm-2" id="check_paid"> 
+                            <label for="category">Limit</label>
 
-                  <label for="category">Limit</label> 
+                            <div class="form-group form-float form-group-lg">
 
-                  <div class="form-group form-float form-group-lg"> 
+                                <div class="form-line">
 
-                     <div class="form-line"> 
+                                    <input type="text" name="add_limit"
+                                           value="<?php echo $pcustomize_data[0]['add_limit'] ?>"
+                                           placeholder="Limit" id="add_limit"
+                                           autocomplete="off" class="form-control"
+                                           onkeypress="return isNumberKey(event)">
 
-                        <input type="text" name="add_limit" value="<?php echo $pcustomize_data[0]['add_limit'] ?>" placeholder="Limit" id="add_limit" autocomplete="off" class="form-control" onkeypress="return isNumberKey(event)"> 
+                                </div>
 
-                     </div> 
+                            </div>
 
-                  </div> 
+                        </div>
 
-               </div>   
+                    <?php } ?>
 
-            <?php } ?>
+                    <div class="col-sm-2">
 
-            <div class="col-sm-2">
+                        <div class="form-group">
 
-               <div class="form-group">
+                            <label for="groups">Status</label>
 
-                  <label for="groups">Status</label>
+                            <div>
 
-                  <div>
+                                <input type="radio" name="status" value="1" id="active"
+                                       class="with-gap radio-col-green" <?php echo $status_active; ?> >
 
-                     <input type="radio" name="status" value="1" id="active" class="with-gap radio-col-green" <?php echo $status_active; ?> >
+                                <label for="active">Active</label>
 
-                     <label for="active">Active</label>                     
+                                <input type="radio" name="status" value="0"
+                                       id="deactive"
+                                       class="with-gap radio-col-green" <?php echo $status_deactive; ?>>
 
-                     <input type="radio" name="status" value="0" id="deactive" class="with-gap radio-col-green" <?php echo $status_deactive; ?>>
+                                <label for="deactive">Deactive</label>
 
-                     <label for="deactive">Deactive</label>                  
+                            </div>
 
-                  </div>
+                        </div>
 
-               </div>
+                    </div>
 
-            </div>
+                </div>
 
-         </div>
+                <?php if (!empty($pcustomize_data[0]['pcustomize_attr'])) {
 
-         <?php if(!empty($pcustomize_data[0]['pcustomize_attr'])) {
+                $att_count = count($pcustomize_data[0]['pcustomize_attr']);
 
-                  $att_count=count($pcustomize_data[0]['pcustomize_attr']); 
+                $i = 1;
 
-               $i=1;
+                if ($type_flat == '1') { ?>
 
-                if($type_flat=='1') { ?>
+                <div class="row" class="append_custom">
 
-                  <div class="row" class="append_custom">
+                    <?php } ?>
 
-                <?php } ?>
+                    <?php foreach ($pcustomize_data[0]['pcustomize_attr'] as $pcus_key => $pcus_val) {
 
-               <?php   foreach ($pcustomize_data[0]['pcustomize_attr'] as $pcus_key => $pcus_val) {          
+                        ?>
 
-            ?>
+                        <!-- this for to get customize id -->
 
-          <!-- this for to get customize id -->
+                        <div style="display:none"
+                             class="col-sm-4 remove<?php echo $pcus_val['id']; ?>">
 
-            <div style="display:none" class="col-sm-4 remove<?php echo $pcus_val['id']; ?>">
+                            <label for="category">Name</label>
 
-               <label for="category">Name</label>
+                            <div class="form-group form-float form-group-lg">
 
-               <div class="form-group form-float form-group-lg">
+                                <div class="form-line">
 
-                  <div class="form-line">
+                                    <input type="hidden" name="a_id[]"
+                                           value="<?php echo $pcus_val['id']; ?>"
+                                           placeholder="Product Name" id=""
+                                           autocomplete="off" class="form-control">
 
-                     <input type="hidden" name="a_id[]"  value="<?php echo $pcus_val['id']; ?>" placeholder="Product Name" id="" autocomplete="off"  class="form-control">
+                                </div>
 
-                  </div>
+                            </div>
 
-               </div>            
+                        </div>
 
-            </div>
 
-         
+                        <?php if ($type_flat == '1') { ?>
 
-            <?php if($type_flat=='1') { ?>   
+                            <div class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
 
-            <div class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
+                                <label for="category">Name</label>
 
-               <label for="category">Name</label>
+                                <span class="remove_att" data-value=""
+                                      data-id="<?php echo $pcus_val['id']; ?>"
+                                      style="padding: 10px; background-color: #e46767;">Remove</span>
 
-               <span class="remove_att" data-value="" data-id="<?php echo $pcus_val['id']; ?>" style="padding: 10px; background-color: #e46767;">Remove</span>
+                                <div class="form-group form-float form-group-lg">
 
-               <div class="form-group form-float form-group-lg">
+                                    <div class="form-line">
 
-                  <div class="form-line">
+                                        <input type="text" name="name[]"
+                                               value="<?php echo $pcus_val['name']; ?>"
+                                               placeholder="Product Name" id="title"
+                                               autocomplete="off"
+                                               class="form-control att_name space">
 
-                     <input type="text" name="name[]"  value="<?php echo $pcus_val['name']; ?>" placeholder="Product Name" id="title" autocomplete="off"  class="form-control att_name space">
+                                    </div>
 
-                  </div>
+                                </div>
 
-               </div>            
+                            </div>
 
-            </div>
+                        <?php } else { ?>
 
-         <?php }else {  ?>
 
+                            <div class="row" class="append_custom">
 
 
-            <div class="row" class="append_custom">
+                                <div
+                                    class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
 
+                                    <label for="category">Name</label>
 
+                                    <div class="form-group form-float form-group-lg">
 
-            <div class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
+                                        <div class="form-line">
 
-               <label for="category">Name</label>               
+                                            <input type="text" name="name[]"
+                                                   value="<?php echo $pcus_val['name']; ?>"
+                                                   placeholder="Product Name" id="title"
+                                                   autocomplete="off"
+                                                   class="form-control att_name space">
 
-               <div class="form-group form-float form-group-lg">
+                                        </div>
 
-                  <div class="form-line">
+                                    </div>
 
-                     <input type="text" name="name[]"  value="<?php echo $pcus_val['name']; ?>" placeholder="Product Name" id="title" autocomplete="off"  class="form-control att_name space">
+                                </div>
 
-                  </div>
 
-               </div>            
-
-            </div>
-
-
-
-            <!-- <div class="col-sm-4 remove<?php echo $pcus_val['id']; ?>">
+                                <!-- <div class="col-sm-4 remove<?php echo $pcus_val['id']; ?>">
 
                <label for="category">Price Bahrain</label>
 
@@ -258,446 +274,396 @@
 
                   </div>
 
-               </div>            
+               </div>
 
-            </div> -->  
+            </div> -->
 
-            <div class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
+                                <div
+                                    class="col-sm-6 remove<?php echo $pcus_val['id']; ?>">
 
-               <label for="category">Price</label>
+                                    <label for="category">Price</label>
 
-               <span class="remove_att" data-value="" data-id="<?php echo $pcus_val['id']; ?>" style="padding: 10px; background-color: #e46767;">Remove</span>
+                                    <span class="remove_att" data-value=""
+                                          data-id="<?php echo $pcus_val['id']; ?>"
+                                          style="padding: 10px; background-color: #e46767;">Remove</span>
 
-               <div class="form-group form-float form-group-lg">
+                                    <div class="form-group form-float form-group-lg">
 
-                  <div class="form-line">
+                                        <div class="form-line">
 
-                     <input type="text" name="price[]" value="<?php echo $pcus_val['price']; ?>" placeholder="Product Name" id="title" autocomplete="off"  class="form-control att_price " >
+                                            <input type="text" name="price[]"
+                                                   value="<?php echo $pcus_val['price']; ?>"
+                                                   placeholder="Product Name" id="title"
+                                                   autocomplete="off"
+                                                   class="form-control att_price ">
 
-                  </div>
+                                        </div>
 
-               </div>            
+                                    </div>
 
-            </div> 
+                                </div>
 
 
+                            </div>
 
-         </div> 
+                        <?php } ?>
 
-         <?php } ?>
+                        <?php $i++;
+                    }
+                    if ($type_flat == '1') {
+                        echo "</div>";
+                    } ?>
 
-         <?php $i++; } if($type_flat=='1'){ echo "</div>"; }  ?>
+                    <?php } else {
+                        $att_count = 0;
+                    } ?>
 
-         <?php } else{  $att_count=0; } ?>
+                    <div class="row" id="append_custom">
 
-         <div class="row" id="append_custom">
+                    </div>
 
-         </div>        
+                    <button type="button" id="add_att" class="btn btn-primary">Add
+                    </button>
 
-         <button type="button" id="add_att" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
 
-         <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
 
-      </form>
-
-      </div>
+        </div>
 
     </div>
 
-</div>   
+</div>
 
 <script type="text/javascript">
 
-      var check_flag=0;
+    var check_flag = 0;
 
-      var count=<?php echo $att_count ?>;
+    var count =<?php echo $att_count ?>;
 
-      var limit_flag=<?php echo $limit_flag ?>;
+    var limit_flag =<?php echo $limit_flag ?>;
 
-      var select_val=<?php echo $select_val ?>;
+    var select_val =<?php echo $select_val ?>;
 
-   $(document).on("click","#add_att",function()
+    $(document).on("click", "#add_att", function () {
 
-   {
+        // alert("fasdf");
 
-      // alert("fasdf");
+        var error = 1;
 
-      var error=1;
+        if (select_val == 1) {
 
-      if(select_val==1)
+            var att_name = $(".att_name").val();
 
-      {
+            if (att_name == '') {
 
-         var att_name=$(".att_name").val(); 
+                swal("", "Plese Enrer name ", "warning");
 
-         if(att_name=='')
+                error = 0;
 
-         {
+                return false;
 
-            swal("","Plese Enrer name ","warning");
+            }
 
-            error=0;
+            if (error == 1) {
+
+                count++;
+
+                $("#append_custom").append('<div class="col-sm-4 remove_radioall remove' + count + '"> <label for="category">Name</label><span class="remove_att" data-value="jquery" data-id="' + count + '" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div>');
+
+            }
+
+        } else if (select_val == 2) {
+
+            var att_name = $(".att_name").val();
+
+            if (att_name == '') {
+
+                swal("", "Plese Enrer name ", "warning");
+
+                error = 0;
+
+                return false;
+
+            }
+
+            if (error == 1) {
+
+                count++;
+
+                $("#append_custom").append('<div class="col-sm-4 remove_freeall remove' + count + '"> <label for="category">Name</label> <span class="remove_att" data-value="jquery" data-id="' + count + '" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div>');
+
+            }
+
+        } else if (select_val == 3) {
+
+
+            // var att_priceb=$(".att_priceb").val();
+
+            var att_pricea = $(".att_price").val();
+
+            if (att_pricea == '') {
+
+                swal("", "Plese Enter price  ", "warning");
+
+                error = 0;
+
+                return false;
+
+            }
+
+            if (att_pricea == '') {
+
+                swal("", "Plese Enrer price ", "warning");
+
+                error = 0;
+
+                return false;
+
+            }
+
+            if (error == 1) {
+
+                count++;
+
+
+                var chebox_paid = '';
+
+                chebox_paid += '<div class="col-sm-6 remove_paidall remove' + count + '"> <label for="category">Name</label> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div> ';
+
+
+                // chebox_paid+='<div class="col-sm-4 remove_paidall remove'+count+'" > <label for="category">Price Bahrain</label> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="price_bh[]"  value="" placeholder="Price Bahrain" id="title" autocomplete="off" class="form-control att_priceb att_p" onkeypress="return isNumberKey(event)" required> </div> </div> </div> ';
+
+
+                chebox_paid += '<div class="col-sm-6 remove_paidall remove' + count + '"> <label for="category">Price </label> <span class="remove_att" data-value="jquery" data-id="' + count + '" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="price[]"  value="" placeholder="Price " id="title" autocomplete="off" class="form-control att_price att_p" onkeypress="return isNumberKey(event)" required> </div> </div> ';
+
+                $("#append_custom").append(chebox_paid);
+
+            }
+
+        } else {
+
+            alert("else");
+
+        }
+
+    });
+
+    $(document).on("submit", "#Pcustomize", function (e) {
+
+        e.preventDefault();
+
+        var title = $("#title").val();
+
+        var type = $("#cus_type").val();
+
+        var error = 1;
+
+        if (title == '') {
+
+            swal("", "Plese Enrer Customize Title", "warning");
+
+            error = 0;
 
             return false;
 
-         }
+        }
 
-         if(error==1)
+        if (type == '') {
 
-         {            
+            swal("", "Plese Select type", "warning");
 
-            count++;                        
-
-            $("#append_custom").append('<div class="col-sm-4 remove_radioall remove'+count+'"> <label for="category">Name</label><span class="remove_att" data-value="jquery" data-id="'+count+'" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div>');
-
-         }
-
-      }else if(select_val==2)
-
-      {
-
-         var att_name=$(".att_name").val(); 
-
-         if(att_name=='')
-
-         {
-
-            swal("","Plese Enrer name ","warning");
-
-            error=0;
+            error = 0;
 
             return false;
 
-         }
+        }
 
-         if(error==1)
+        if (limit_flag == 1) {
 
-         {
+            var add_limit = $("#add_limit").val();
 
-            count++;            
+            if (add_limit == '') {
 
-            $("#append_custom").append('<div class="col-sm-4 remove_freeall remove'+count+'"> <label for="category">Name</label> <span class="remove_att" data-value="jquery" data-id="'+count+'" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div>');
+                swal("", "Plese Enrer Limit", "warning");
 
-         }
+                error = 0;
 
-      }
+                return false;
 
-      else if(select_val==3)
+            }
 
-      {
+            if (add_limit <= 0) {
 
-         
+                swal("", "Please Enter Limit Value Grater Than Zero", "warning");
 
-         // var att_priceb=$(".att_priceb").val();   
+                error = 0;
 
-         var att_pricea=$(".att_price").val();    
+                return false;
 
-         if(att_pricea=='')
+            }
 
-         {
+        }
 
-            swal("","Plese Enter price  ","warning");
+        if (error == 1) {
 
-            error=0;
+            $("#loading").show();
 
-            return false;
+            $.ajax({
 
-         }
+                type: 'POST',
 
-         if(att_pricea=='')
+                url: "<?php echo base_url('admin/pcustomize/edit/') . $pcustomize_data[0]['id']; ?>",
 
-         {
+                data: new FormData(this),
 
-            swal("","Plese Enrer price ","warning");
+                contentType: false,
 
-            error=0;
+                cache: false,
 
-            return false;
+                processData: false,
 
-         }
+                success: function (response) {
 
-         if(error==1)
+                    // response);
 
-         {
+                    $("#loading").hide();
 
-            count++;  
+                    response = response.replace(/\s/g, '')
 
+                    if (response == 'att_error') {
 
+                        swal("", "Please Add Attribute", "warning");
 
-            var chebox_paid='';
+                    } else if (response == 'already') {
 
-            chebox_paid+='<div class="col-sm-6 remove_paidall remove'+count+'"> <label for="category">Name</label> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="name[]"  value="" placeholder="Name" id="title" autocomplete="off" class="form-control att_name space" required> </div> </div> </div> ';
+                        swal("", "Customize title already added", "warning");
 
+                    } else if (response == 1) {
 
+                        swal("", "Customize added successfully", "success");
 
-            // chebox_paid+='<div class="col-sm-4 remove_paidall remove'+count+'" > <label for="category">Price Bahrain</label> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="price_bh[]"  value="" placeholder="Price Bahrain" id="title" autocomplete="off" class="form-control att_priceb att_p" onkeypress="return isNumberKey(event)" required> </div> </div> </div> ';
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
 
+                    } else {
 
+                        swal("", "something went wrong", "warning");
 
-            chebox_paid+='<div class="col-sm-6 remove_paidall remove'+count+'"> <label for="category">Price </label> <span class="remove_att" data-value="jquery" data-id="'+count+'" style="padding: 10px; background-color: #e46767;">Remove</span> <div class="form-group form-float form-group-lg"> <div class="form-line"> <input type="text" name="price[]"  value="" placeholder="Price " id="title" autocomplete="off" class="form-control att_price att_p" onkeypress="return isNumberKey(event)" required> </div> </div> ';           
+                    }
 
-            $("#append_custom").append(chebox_paid);
 
-         }            
+                }
 
-      }else{
+            });
 
-         alert("else");
+        }
 
-      }
+        // alert("fasdf");
 
-   });
+    });
 
-   $(document).on("submit","#Pcustomize",function(e)
 
-    {
-
-      e.preventDefault(); 
-
-      var title=$("#title").val();
-
-      var type=$("#cus_type").val();
-
-      var error=1;
-
-      if(title=='')
-
-      {
-
-         swal("","Plese Enrer Customize Title","warning");
-
-         error=0;
-
-         return false;
-
-      }
-
-      if(type=='')
-
-      {
-
-         swal("","Plese Select type","warning");
-
-         error=0;
-
-         return false;
-
-      }
-
-      if(limit_flag==1)
-
-      {
-
-         var add_limit=$("#add_limit").val();
-
-         if(add_limit=='')
-
-         {
-
-            swal("","Plese Enrer Limit","warning");
-
-            error=0;
-
-            return false;
-
-         }
-
-         if(add_limit<=0)
-
-         {
-
-            swal("","Please Enter Limit Value Grater Than Zero","warning");
-
-            error=0;
-
-            return false;  
-
-         }
-
-      }
-
-      if(error==1){
-
-         $("#loading").show();
-
-         $.ajax({
-
-               type: 'POST',
-
-               url: "<?php echo base_url('admin/pcustomize/edit/').$pcustomize_data[0]['id']; ?>",
-
-               data: new FormData(this),
-
-               contentType: false,
-
-               cache: false,
-
-               processData:false,
-
-               success: function(response)
-
-               { 
-
-                  // response);
-
-                  $("#loading").hide();
-
-                  response=response.replace(/\s/g, '')         
-
-                  if(response=='att_error')
-
-                  {
-
-                     swal("","Please Add Attribute","warning");
-
-                  }else if(response=='already')
-
-                  {
-
-                     swal("","Customize title already added","warning");
-
-                  }else if(response==1)
-
-                  {
-
-                     swal("","Customize added successfully","success");
-
-                     setTimeout(function(){ location.reload(); }, 1500);
-
-                  }else{
-
-                     swal("","something went wrong","warning");
-
-                  }
-
-                  
-
-               }  
-
-         });
-
-      }             
-
-      // alert("fasdf");
-
-    });  
-
-
-
-</script>   
+</script>
 
 <script type="text/javascript">
 
-   // $(document).on("click",".remove_att",function(){
+    // $(document).on("click",".remove_att",function(){
 
-   //    id=$(this).attr("data-id"); 
+    //    id=$(this).attr("data-id");
 
-   //    $(".remove"+id).remove();
+    //    $(".remove"+id).remove();
 
-   // });
+    // });
 
 </script>
 
 
-
 <script type="text/javascript">
 
-  $(document).on('click',".remove_att",function(){
+    $(document).on('click', ".remove_att", function () {
 
-    var pid=$(this).data('id');
+        var pid = $(this).data('id');
 
-    var value=$(this).data('value');
+        var value = $(this).data('value');
 
 
+        if (pid != '') {
 
-    
+            swal({
 
-    if(pid!='')
+                    title: "",
 
-    {
+                    text: "Are you sure you want to delete this product!!",
 
-      swal({
+                    type: "warning",
 
-            title: "",
+                    showCancelButton: true,
 
-            text: "Are you sure you want to delete this product!!",
+                    confirmButtonText: "OK",
 
-            type:"warning",                                  
+                    cancelButtonText: "CANCEL",
 
-            showCancelButton: true,                  
+                    closeOnConfirm: true,
 
-            confirmButtonText: "OK",
+                    closeOnCancel: true
 
-            cancelButtonText: "CANCEL",
+                },
 
-            closeOnConfirm: true,
+                function (inputValue) {
 
-            closeOnCancel: true
+                    if (inputValue === true) {
 
-          },
+                        if (value == '') {
 
-          function(inputValue){         
+                            $.ajax({
 
-            if (inputValue===true) 
+                                type: 'POST',
 
-            { 
+                                url: '<?php echo base_url('admin/pcustomize/detete_pcustomize'); ?>',
 
-               if(value=='')
+                                data: {pid: pid},
 
-               {                  
+                                success: function (response) {
 
-                 $.ajax({
+                                    if (response) {
 
-                    type: 'POST',
+                                        swal("", "Product Delete successfully", 'success');
 
-                    url: '<?php echo base_url('admin/pcustomize/detete_pcustomize'); ?>',
+                                        $(".remove" + pid).remove();
 
-                    data: {pid:pid},
+                                        // setTimeout(function(){ location.reload(); }, 2000);
 
-                    success: function(response)
+                                    } else {
 
-                    {                               
+                                        swal("", "Some thing want worng!!", "warning");
 
-                     if(response)
+                                    }
 
-                     {
+                                }
 
-                      swal("","Product Delete successfully",'success');
+                            });
 
-                         $(".remove"+pid).remove();
+                        } else {
 
-                      // setTimeout(function(){ location.reload(); }, 2000);
+                            swal("", "Product Delete successfully", 'success');
 
-                     }else {
+                            $(".remove" + pid).remove();
 
-                      swal("","Some thing want worng!!","warning");
-
-                     }
+                        }
 
                     }
 
-                  });
+                });
 
-               }else{
+        } else {
 
-                  swal("","Product Delete successfully",'success');
+            swal("", "Some thing want worng!!", "warning");
 
-                  $(".remove"+pid).remove();
+        }
 
-               }               
 
-            } 
-
-      });
-
-    } else {
-
-      swal("","Some thing want worng!!","warning");
-
-    }
-
-     
-
-  });    
+    });
 
 </script>

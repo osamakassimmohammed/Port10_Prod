@@ -1,4 +1,5 @@
-<?php 
+<?php
 
-class Admin_user_model extends MY_Model {
+class Admin_user_model extends MY_Model
+{
 }

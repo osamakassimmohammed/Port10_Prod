@@ -82,4 +82,14 @@ class SecurityScheme extends AbstractAnnotation
     public static $_parents = [
         'Swagger\Annotations\Swagger',
     ];
+
+    /** {@inheritdoc} */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+        if (is_array($this->scopes) && empty($this->scopes)) {
+            $this->scopes = new \StdClass();
+        }
+        return parent::jsonSerialize();
+    }
 }

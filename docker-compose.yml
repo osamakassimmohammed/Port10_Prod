@@ -1,0 +1,219 @@
+#
+# -*- tab-width: 2; encoding: utf-8; mode: dockercompose; -*-
+#
+# Copyright (c) 2023 Xeriab Nabil <xeriab@tuta.io>
+#
+# SPDX-License-Identifier: MIT
+#
+
+#
+# Run the following command to deploy
+#
+# ```shell
+# podman-compose up -d
+# ```
+#
+
+#region Development
+#
+
+version: "3.7"
+
+services:
+  port10.test:
+    build:
+      context: ./docker/7.4
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP:-1000}'
+    # image: beltranbot/sail-7.4
+    # image: ubuntu:20.04
+    image: port10/app
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '${APP_PORT:-80}:80'
+    environment:
+      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+      NODE_VERSION: '${NODE_VERSION:-20}'
+      SHELL: /bin/bash
+      TZ: '${PHP_TZ:-UTC}'
+      WWWUSER: '${WWWUSER:-1000}'
+      XDEBUG_CONFIG: '${PORT10_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+      XDEBUG_MODE: '${PORT10_XDEBUG_MODE:-off}'
+    volumes:
+      - port10-test-conf:/etc/php/7.4/cli/conf.d:Z
+      - .:/var/www/html:Z
+    networks:
+      - devserver
+    depends_on:
+      - mysql
+      - adminer
+      - redis
+      - mailpit
+    hostname: port10.moon.test
+    container_name: port10-test
+    working_dir: /var/www/html
+
+  # MySQL
+  #
+  mysql:
+    image: 'mysql/mysql-server:8.0'
+    ports:
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: '${MYSQL_ALLOW_EMPTY_PASSWORD:-yes}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '${MYSQL_ROOT_HOST}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_TCP_PORT: '${DB_PORT}'
+      MYSQL_USER: '${DB_USERNAME}'
+    volumes:
+      - mysql-conf:/etc/mysql/conf.d:Z
+      - mysql-data:/var/lib/mysql:Z
+      # - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+    restart: always
+    hostname: mysql.moon.test
+    container_name: port10-mysql
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    networks:
+      - devserver
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", '-p${DB_PASSWORD}' ]
+      retries: 3
+      timeout: 5s
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  # Adminer
+  #
+  adminer:
+    image: adminer:latest
+    volumes:
+      - adminer-data:/var/www/html:Z
+    ports:
+      - '8080:8080'
+    restart: always
+    networks:
+      - devserver
+    hostname: adminer.moon.test
+    container_name: port10-adminer
+    expose:
+      - 8080
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  # # Memcached
+  # #
+  # memcached:
+  #   image: memcached:alpine
+  #   environment:
+  #     MEMCACHED_HOST: '${MEMCACHED_HOST:-127.0.0.1}'
+  #     MEMCACHED_PORT: '${MEMCACHED_PORT:-11211}'
+  #     MEMCACHED_USER: '${MEMCACHED_USER:-nobody}'
+  #   ports:
+  #     - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
+  #   restart: always
+  #   networks:
+  #     - devserver
+  #   hostname: memcached.moon.test
+  #   container_name: port10-memcached
+  #   deploy:
+  #     restart_policy:
+  #       condition: on-failure
+
+  # Redis
+  #
+  redis:
+    image: redis:alpine
+    ports:
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
+    volumes:
+      - redis-conf:/usr/local/etc/redis:Z
+      - redis-data:/data:Z
+    environment:
+      REDIS_HOST: '${REDIS_HOST:-127.0.0.1}'
+      REDIS_PASSWORD: '${REDIS_PASSWORD:-null}'
+      REDIS_PORT: '${REDIS_PORT:-6379}'
+    restart: always
+    networks:
+      - devserver
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      retries: 3
+      timeout: 5s
+    hostname: redis.moon.test
+    container_name: port10-redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  # MailPit
+  #
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+      - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+    volumes:
+      - mailpit-data:/data:Z
+    environment:
+      MP_DATA_FILE: '${MAILPIT_DATA_FILE:-/data/mailpit.db}'
+      MP_UI_AUTH_FILE: '${MAILPIT_UI_AUTH_FILE:-/data/authfile}'
+    restart: unless-stopped
+    networks:
+      - devserver
+    hostname: mailpit.moon.test
+    container_name: port10-mailpit
+
+  # # Soketi
+  # #
+  # soketi:
+  #   image: 'quay.io/soketi/soketi:latest-16-alpine'
+  #   ports:
+  #     - '${PUSHER_PORT:-6001}:6001'
+  #     - '${PUSHER_METRICS_PORT:-9601}:9601'
+  #   environment:
+  #     SOKETI_DEBUG: '${SOKETI_DEBUG:-1}'
+  #     SOKETI_METRICS_SERVER_PORT: '${SOKETI_METRICS_SERVER_PORT:-9601}'
+  #     SOKETI_DEFAULT_APP_ID: '${PUSHER_APP_ID}'
+  #     SOKETI_DEFAULT_APP_KEY: '${PUSHER_APP_KEY}'
+  #     SOKETI_DEFAULT_APP_SECRET: '${PUSHER_APP_SECRET}'
+  #   restart: always
+  #   networks:
+  #     - devserver
+  #   hostname: soketi.moon.test
+  #   container_name: port10-soketi
+
+networks:
+  devserver:
+    driver: bridge
+  podman:
+    driver: bridge
+  xeriab_default:
+    driver: bridge
+
+volumes:
+  adminer-data:
+    driver: local
+  mysql-conf:
+    driver: local
+  mysql-data:
+    driver: local
+  redis-conf:
+    driver: local
+  redis-data:
+    driver: local
+  port10-test-conf:
+    driver: local
+  mailpit-data:
+    driver: local
+
+#
+#endregion Development
+
+# vim: set ts=2 sw=2 tw=80 noet :
